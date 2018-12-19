@@ -21,7 +21,7 @@ namespace BL
         }
         #endregion
 
-        static IDAL MyDal;
+        static IDAL MyDal=DAL.FactoryDAL.getDAL("List");
 
         #region Constructor
 
@@ -29,20 +29,18 @@ namespace BL
 
         static MyBL()
         {
-            string TypeDAL = ConfigurationSettings.AppSettings.Get("TypeDS");
-            //string TypeDAL = "List";
-            MyDal = FactoryDAL.getDAL(TypeDAL);
+            MyDal = FactoryDAL.getDAL(Configuration.DALType);
         }
 
         public int getMinimumAge()
         {
-            return -1 * Int32.Parse(ConfigurationSettings.AppSettings.Get("MinimumTesterAge"));
-            //return -40;
+           
+            return Configuration.MinAgeTrainee;
         }
 
         public int getMaximumAge()
         {
-            return -1 * Int32.Parse(ConfigurationSettings.AppSettings.Get("MaximumTesterAge"));
+            return Configuration.MaxAgeTester;
         }
 
         #endregion
