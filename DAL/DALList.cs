@@ -45,7 +45,8 @@ namespace DAL
         }
         public List<Tester> getAllTesters()
         {
-            return DataSource.testers.Clone().ToList();
+            throw new NotImplementedException();
+        //    return DataSource.testers.Clone().ToList();
         }
         #endregion
 

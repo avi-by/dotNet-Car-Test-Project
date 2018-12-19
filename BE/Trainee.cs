@@ -20,6 +20,15 @@ namespace BE
         private string schoolName;
         private string teacherName;
         private int numberOfLesson;
+        private string name;
+        private int age;
+
+        public Trainee(string id, string name, int age)
+        {
+            this.id = id;
+            this.name = name;
+            this.age = age;
+        }
 
         public Trainee(string id, string firstName, string lastName, DateTime birthDay, Gender gender, string phoneNumber, Address address, CarType carType, GearBox gearBox, string schoolName, string teacherName, int numberOfLesson)
         {

@@ -21,6 +21,21 @@ namespace BE
         private GearBox gearBox;
         private bool[,] workHour;
         private double distance;
+        private string name;
+        private int age;
+        private DateTime dateTime;
+
+        public Tester(string name, int age)
+        {
+            this.name = name;
+            this.age = age;
+        }
+
+        public Tester(string name, DateTime dateTime)
+        {
+            this.name = name;
+            this.dateTime = dateTime;
+        }
 
         public Tester(string id, string firstName, string lastName, DateTime birthDay, Gender gender, string phoneNumber, Address address, int expYears, int maxTestInWeek, CarType carType, GearBox gearBox, bool[,] workHour, double distance)
         {
