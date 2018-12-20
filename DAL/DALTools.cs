@@ -12,7 +12,7 @@ namespace DAL
         {
             return listToClone.Select(item => (T)item.Clone()).ToList();
         }
-
+        // list clone
 
 
         //public static IList<T> Clone<T>(this IList<T> listToClone) where T : ICloneable
