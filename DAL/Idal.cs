@@ -20,6 +20,7 @@ namespace DAL
         #region Trainee
 
         void addTrainee(String id, String name, int age);
+        List<Test> GetTesterList(Func<object, object> p);
         #endregion
 
 

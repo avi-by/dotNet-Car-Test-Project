@@ -54,6 +54,12 @@ namespace DAL
             Trainee t = new Trainee(id, name, age);
         }
 
-
+        public List<Test> GetTesterList(Func<Test, bool> p)
+        {
+            var x = from item in DataSource.tests
+                    where p(item)
+                    select item;
+            var y = x.ToList<Test>;
+        }
     }
 }

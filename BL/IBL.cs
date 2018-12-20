@@ -9,7 +9,12 @@ namespace BL
 {
     interface IBL
     {
+        #region test
+        void AddTest(Test test);
+        void DeleteTest(Test test);
+        List<Test> GetTesterList();
 
+#endregion
         #region trainee
         void addTrainee(Trainee trainee);
         void deleteTrainee(Trainee trainee);

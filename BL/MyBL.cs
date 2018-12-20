@@ -21,7 +21,7 @@ namespace BL
         }
         #endregion
 
-        static IDAL MyDal=DAL.FactoryDAL.getDAL("List");
+        static IDAL MyDal;
 
         #region Constructor
 
@@ -48,7 +48,20 @@ namespace BL
         #region Tester
         public void addTester(Tester tester)
         {
-            MyDal.AddTester(tester);
+            try
+            {
+                if (tester.Age<BE.Configuration.MinAgeTrainee)
+                {
+                    throw new Exception("too young, cant be a tester");
+                }
+                MyDal.AddTester(tester);
+            }
+            catch (Exception msg)
+            {
+
+                throw;
+            }
+            
         }
 
         public void deleteTester(Tester tester)
@@ -75,6 +88,8 @@ namespace BL
         {
             throw new NotImplementedException();
         }
+        #endregion
+
 
         public void addTrainee(Trainee trainee)
         {
@@ -100,6 +115,32 @@ namespace BL
         {
             throw new NotImplementedException();
         }
-        #endregion
+#region test
+        public void AddTest(Test test)
+        {
+            try
+            {
+                List<Test> arr = MyDal.GetTesterList(item => ((Test)item).Date == test.Date && (((Test)item).TesterId == test.TesterId || ((Test)item).TraineeId == test.TraineeId));
+                if (arr != null)
+                    throw new Exception("cant regist, the traniee do another test at the same time");
+                AddTest(test);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public void DeleteTest(Test test)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Test> GetTesterList()
+        {
+            throw new NotImplementedException();
+        }
+#endregion
     }
 }
