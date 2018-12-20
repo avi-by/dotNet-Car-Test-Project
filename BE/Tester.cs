@@ -73,6 +73,7 @@ namespace BE
             MaxTestInWeek = maxTestInWeek;
             CarType = carType;
             GearBox = gearBox;
+            this.workHour = new bool[5, 6];
             initilazeSchedule();
             Distance = distance;
         }

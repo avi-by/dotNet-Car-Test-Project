@@ -18,6 +18,7 @@ namespace DS
         {
             testers = new List<Tester>();
             trainees = new List<Trainee>();
+            tests = new List<Test>();
             CreateDemoEntites();
         }
 
@@ -27,6 +28,7 @@ namespace DS
             foreach (string name in idArray)
             {
                 testers.Add(new Tester("111111", name, " ", new DateTime(1960, 12, 12), new Address()));
+                
             }
 
         }

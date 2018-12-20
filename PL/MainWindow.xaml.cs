@@ -27,10 +27,10 @@ namespace PL
         {
             InitializeComponent();
             bl = MyBL.Instance;
-            //      CreateDemoEntites();
+                  CreateDemoEntites();
          //   bl.addTester(new Tester("Nadav", new DateTime(1978, 11, 1)));
-            lbTesters.DataContext = bl.getAllTester();
-            testerDataGrid.DataContext = bl.getAllTester();
+      //      lbTesters.DataContext = bl.getAllTester();
+        //    testerDataGrid.DataContext = bl.getAllTester();
         }
 
         private void CreateDemoEntites()
@@ -38,7 +38,7 @@ namespace PL
             int[] idArray = new int[] { 1, 2, 3, 4, 5 };
             foreach (int i in idArray)
             {
-           //     bl.addTester(new Tester(i.ToString(), 20));
+               bl.addTester(new Tester(i.ToString(),i.ToString(),i.ToString(), new DateTime(1990,10,1),new Address (" ",0," sd")));
             }
 
         }
