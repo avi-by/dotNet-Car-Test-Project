@@ -53,5 +53,10 @@ namespace PL
         {
             
         }
+
+        private void genderComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

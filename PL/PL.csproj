@@ -84,6 +84,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Class1.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -107,6 +108,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Properties\DataSources\BE.Address.datasource" />
+    <None Include="Properties\DataSources\BE.Class1.datasource" />
+    <None Include="Properties\DataSources\BE.Configuration.datasource" />
+    <None Include="Properties\DataSources\BE.Test.datasource" />
+    <None Include="Properties\DataSources\BE.Tester.datasource" />
+    <None Include="Properties\DataSources\BE.Trainee.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
