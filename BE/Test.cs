@@ -13,27 +13,26 @@ namespace BE
         private string traineeId;
         private DateTime date;
         private Address address;
-        private bool signals;
-        private bool keepDistance;
-        private bool mirrorCheck;
-        private bool test4;
-        private bool test5;
+        private bool test1_ReverseParking;
+        private bool test2_KeepingSafeDistance;
+        private bool test3_UsingMirrors;
+        private bool test4_UsingTurnSignals;
+        private bool test5_LegalSpeed;
         //...
         private bool succeeded;
         private string notes;
 
-        public Test(string id, string testerId, string traineeId, DateTime date, Address address, bool test1, bool test2, bool test3, bool test4, bool test5, bool succeeded, string notes)
+        public Test(string testerId, string traineeId, DateTime date, DateTime hour, Address address, bool test1_ReverseParking, bool test2_KeepingSafeDistance, bool test3_UsingMirrors, bool test4_UsingTurnSignals, bool test5_LegalSpeed, bool succeeded, string notes)
         {
-            this.id = id;
             this.testerId = testerId;
             this.traineeId = traineeId;
             this.date = date;
             this.address = address;
-            this.signals = test1;
-            this.keepDistance = test2;
-            this.mirrorCheck = test3;
-            this.test4 = test4;
-            this.test5 = test5;
+            this.test1_ReverseParking = test1_ReverseParking;
+            this.test2_KeepingSafeDistance = test2_KeepingSafeDistance;
+            this.test3_UsingMirrors = test3_UsingMirrors;
+            this.test4_UsingTurnSignals = test4_UsingTurnSignals;
+            this.test5_LegalSpeed = test5_LegalSpeed;
             this.succeeded = succeeded;
             this.notes = notes;
         }
@@ -43,11 +42,11 @@ namespace BE
         public string TraineeId { get => traineeId; set => traineeId = value; }
         public DateTime Date { get => date; set => date = value; }
         public Address Address { get => address; set => address = value; }
-        public bool Signals { get => signals; set => signals = value; }
-        public bool KeepDistance { get => keepDistance; set => keepDistance = value; }
-        public bool MirrorCheck { get => mirrorCheck; set => mirrorCheck = value; }
-        public bool Test4 { get => test4; set => test4 = value; }
-        public bool Test5 { get => test5; set => test5 = value; }
+        public bool Test1_ReverseParking { get => test1_ReverseParking; set => test1_ReverseParking = value; }
+        public bool Test2_KeepingSafeDistance { get => test2_KeepingSafeDistance; set => test2_KeepingSafeDistance = value; }
+        public bool Test3_UsingMirrors { get => test3_UsingMirrors; set => test3_UsingMirrors = value; }
+        public bool Test4_UsingTurnSignals { get => test4_UsingTurnSignals; set => test4_UsingTurnSignals = value; }
+        public bool Test5_LegalSpeed { get => test5_LegalSpeed; set => test5_LegalSpeed = value; }
         public bool Succeeded { get => succeeded; set => succeeded = value; }
         public string Notes { get => notes; set => notes = value; }
 

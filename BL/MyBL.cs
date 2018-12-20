@@ -32,6 +32,7 @@ namespace BL
             MyDal = FactoryDAL.getDAL(Configuration.DALType);
         }
 
+        #endregion
         public int getMinimumAge()
         {
            
@@ -43,103 +44,104 @@ namespace BL
             return Configuration.MaxAgeTester;
         }
 
-        #endregion
+       
 
         #region Tester
         public void addTester(Tester tester)
         {
-            try
-            {
                 if (tester.Age<BE.Configuration.MinAgeTrainee)
                 {
                     throw new Exception("too young, cant be a tester");
                 }
                 MyDal.AddTester(tester);
-            }
-            catch (Exception msg)
-            {
-
-                throw;
-            }
             
         }
 
         public void deleteTester(Tester tester)
         {
-            throw new NotImplementedException();
+            MyDal.DeleteTester(tester);
         }
 
-        public List<Tester> getTestersList()
+        public List<Tester> getAllTester()
         {
             return MyDal.getAllTesters();
         }
 
-        public void updateTester(Tester tester, string name)
-        {
-            throw new NotImplementedException();
-        }
+        //public void updateTester(Tester tester, string name)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public void updateTester(Tester tester, Tester newtester)
-        {
-            throw new NotImplementedException();
-        }
+        //void updateTester(Tester tester, Tester newtester)
+        //{
+        //    MyDal.UpdateTester(tester, newtester);
+        //}
+        //public void updateTester(Tester tester, Tester newtester)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public void updateTester(Tester tester, int cost, string minmax)
+        public void updateTester(Tester tester)
         {
-            throw new NotImplementedException();
+            MyDal.UpdateTester(tester);
         }
         #endregion
 
-
+        #region trainee
         public void addTrainee(Trainee trainee)
         {
-            throw new NotImplementedException();
+           
+            if (trainee.Age > Configuration.MinAgeTrainee)
+                MyDal.AddTrainee(trainee);
+            else
+                throw new Exception("cannot add a trainee too young");
         }
 
         public void deleteTrainee(Trainee trainee)
         {
-            throw new NotImplementedException();
+            MyDal.DeleteTrainee(trainee);
         }
 
-        public void updateTrainee(Tester tester, string name)
+        public void updateTrainee(Trainee trainee)
         {
-            throw new NotImplementedException();
+            MyDal.UpdateTrainee(trainee);
         }
 
-        public void updateTrainee(Trainee trainee, Trainee newTrainee)
+        //public void updateTrainee(Trainee trainee, Trainee newTrainee)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        public List<Trainee> getAllTrainees()
         {
-            throw new NotImplementedException();
+            return MyDal.getAllTrainees();
         }
 
-        public List<Trainee> getTraineesList()
-        {
-            throw new NotImplementedException();
-        }
-#region test
+      
+
+#endregion trainee
+        #region test
         public void AddTest(Test test)
         {
-            try
-            {
-                List<Test> arr = MyDal.GetTesterList(item => ((Test)item).Date == test.Date && (((Test)item).TesterId == test.TesterId || ((Test)item).TraineeId == test.TraineeId));
+            
+                List<Test> arr = MyDal.GetTestList(item => ((Test)item).Date == test.Date && (((Test)item).TraineeId == test.TraineeId));
                 if (arr != null)
                     throw new Exception("cant regist, the traniee do another test at the same time");
-                AddTest(test);
-            }
-            catch (Exception)
-            {
+                arr = MyDal.GetTestList(item => ((Test)item).Date == test.Date && ((Test)item).TesterId == test.TesterId);
+                if (arr != null)
+                    throw new Exception("cant regist, the tester do another test at the same time");
 
-                throw;
-            }
+                AddTest(test);
         }
 
         public void DeleteTest(Test test)
         {
-            throw new NotImplementedException();
+            MyDal.DeleteTest(test);
         }
 
-        public List<Test> GetTesterList()
+        public List<Test> getAllTests()
         {
-            throw new NotImplementedException();
+            return MyDal.getAllTests();
         }
 #endregion
     }

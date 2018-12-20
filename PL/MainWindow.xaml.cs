@@ -28,9 +28,9 @@ namespace PL
             InitializeComponent();
             bl = MyBL.Instance;
             //      CreateDemoEntites();
-            bl.addTester(new Tester("Nadav", new DateTime(1978, 11, 1)));
-            lbTesters.DataContext = bl.getTestersList();
-            testerDataGrid.DataContext = bl.getTestersList();
+         //   bl.addTester(new Tester("Nadav", new DateTime(1978, 11, 1)));
+            lbTesters.DataContext = bl.getAllTester();
+            testerDataGrid.DataContext = bl.getAllTester();
         }
 
         private void CreateDemoEntites()
@@ -38,7 +38,7 @@ namespace PL
             int[] idArray = new int[] { 1, 2, 3, 4, 5 };
             foreach (int i in idArray)
             {
-                bl.addTester(new Tester(i.ToString(), 20));
+           //     bl.addTester(new Tester(i.ToString(), 20));
             }
 
         }
@@ -51,8 +51,8 @@ namespace PL
 
         private void Window_Activated(object sender, EventArgs e)
         {
-            lbTesters.DataContext = bl.getTestersList();
-            testerDataGrid.DataContext = bl.getTestersList();
+            lbTesters.DataContext = bl.getAllTester();
+            testerDataGrid.DataContext = bl.getAllTester();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

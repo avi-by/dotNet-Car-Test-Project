@@ -12,25 +12,25 @@ namespace BL
         #region test
         void AddTest(Test test);
         void DeleteTest(Test test);
-        List<Test> GetTesterList();
+        List<Test> getAllTests();
 
-#endregion
+        #endregion
         #region trainee
         void addTrainee(Trainee trainee);
         void deleteTrainee(Trainee trainee);
-        void updateTrainee(Tester tester, string name);
-        void updateTrainee(Trainee trainee, Trainee newTrainee);
-        List<Trainee> getTraineesList();
+        //void updateTrainee(Tester tester, string name);
+        //void updateTrainee(Trainee trainee, Trainee newTrainee);
+        List<Trainee> getAllTrainees();
 
         #endregion
 
         #region Tester
         void addTester(Tester tester);
         void deleteTester(Tester tester);
-        void updateTester(Tester tester, string name);
-        void updateTester(Tester tester, Tester newtester);
-        void updateTester(Tester tester, int cost, string minmax);
-        List<Tester> getTestersList();
+        //void updateTester(Tester tester, string name);
+        //void updateTester(Tester tester, Tester newtester);
+        List<Tester> getAllTester();
+        
         #endregion
     }
 }
