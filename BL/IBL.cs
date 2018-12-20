@@ -7,15 +7,33 @@ using BE;
 
 namespace BL
 {
-    interface IBL
+    public interface IBL
     {
-        #region Tester
-        void addTester(Tester tester);
-        void deleteTester(Tester tester);
-        void updateTester(Tester tester, string name);
-        void updateTester(Tester tester, Tester newtester);
-        void updateTester(Tester tester, int cost, string minmax);
-        List<Tester> getTestersList();
+
+        {
+            #region Tester
+
+            void AddTester(Tester t);
+        void DeleteTester(Tester t);
+        void UpdateTester(Tester t);
+        List<Tester> getAllTesters();
         #endregion
+
+        #region Trainee
+
+        void AddTrainee(Trainee t);
+        void DeleteTrainee(Trainee t);
+        void UpdateTrainee(Trainee t);
+        List<Trainee> getAllTrainees();
+        #endregion
+
+        #region Test
+
+        void AddTest(Test t);
+        void DeleteTest(Test t);
+        void UpdateTest(Test t);
+        List<Test> getAllTests();
+        #endregion
+
     }
 }

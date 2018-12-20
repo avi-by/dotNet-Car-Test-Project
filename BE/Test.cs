@@ -23,9 +23,9 @@ namespace BE
         private bool succeeded;
         private string notes;
 
-        public Test(string id, string testerId, string traineeId, DateTime date, DateTime hour, Address address, bool test1_ReverseParking, bool test2_KeepingSafeDistance, bool test3_UsingMirrors, bool test4_UsingTurnSignals, bool test5_LegalSpeed, bool succeeded, string notes)
+        public Test(string testerId, string traineeId, DateTime date, DateTime hour, Address address, bool test1_ReverseParking, bool test2_KeepingSafeDistance, bool test3_UsingMirrors, bool test4_UsingTurnSignals, bool test5_LegalSpeed, bool succeeded, string notes)
         {
-            this.id = id;
+            this.
             this.testerId = testerId;
             this.traineeId = traineeId;
             this.date = date;
@@ -57,10 +57,10 @@ namespace BE
                 public string Notes { get => notes; set => notes = value; }
 
 
-              public override string ToString()
-{
-return Id+" tester id: "+TesterId+" treainee id: "+TraineeId+" ";
-}
+    public override string ToString()
+        {
+            return Id + " tester id: " + TesterId + " treainee id: " + TraineeId + " ";
+        }
 
     }
 }

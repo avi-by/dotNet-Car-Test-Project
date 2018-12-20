@@ -11,7 +11,7 @@ namespace BL
 {
     public class MyBL : IBL
     {
-
+        
         #region Singleton
         private static readonly MyBL instance = new MyBL();
 
@@ -20,8 +20,10 @@ namespace BL
             get { return instance; }
         }
         #endregion
+       
+      
 
-        static IDAL MyDal=DAL.FactoryDAL.getDAL("List");
+        static IDAL MyDal = DAL.FactoryDAL.getDAL("List");
 
         #region Constructor
 
@@ -45,36 +47,104 @@ namespace BL
 
         #endregion
 
+       
         #region Tester
-        public void addTester(Tester tester)
+        
+
+        public void AddTester(Tester t)
         {
-            MyDal.AddTester(tester);
+            
+            DateTime fourtyYearsOld = t.BirthDay.AddYears(40);
+            DateTime currentDate = DateTime.Now;
+            if (currentDate < fourtyYearsOld)
+                MyDal.AddTester(t);
+            else
+                throw new Exception ("cannot add a tester over the age of 40");
         }
 
-        public void deleteTester(Tester tester)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Tester> getTestersList()
+        public List<Tester> getAllTesters()
         {
             return MyDal.getAllTesters();
         }
 
-        public void updateTester(Tester tester, string name)
+
+        public void DeleteTester(Tester tester)
         {
-            throw new NotImplementedException();
+            MyDal.DeleteTester(tester);
         }
 
-        public void updateTester(Tester tester, Tester newtester)
+        public void UpdateTester(Tester tester)
         {
-            throw new NotImplementedException();
+            MyDal.UpdateTester(tester);
         }
 
-        public void updateTester(Tester tester, int cost, string minmax)
-        {
-            throw new NotImplementedException();
-        }
         #endregion
+        #region trainee
+        public void AddTrainee(Trainee trainee)
+        {
+            DateTime eighteenYearsOld = trainee.BirthDay.AddYears(18);
+            DateTime currentDate = DateTime.Now;
+            if (currentDate > eighteenYearsOld)
+                MyDal.AddTrainee(trainee);
+            else
+                throw new Exception("cannot add a trainee under the age of 40");
+        }
+
+        public void DeleteTrainee(Trainee trainee)
+        {
+            MyDal.DeleteTrainee(trainee);
+        }
+
+        public void UpdateTrainee(Trainee trainee)
+        {
+            MyDal.UpdateTrainee(trainee);
+        }
+
+
+        public List<Trainee> getAllTrainees()
+        {
+            return MyDal.getAllTrainees();
+        }
+
+        #endregion 
+
+        public void AddTest(Test test)
+        {
+          
+        }
+
+        public void DeleteTest(Test test)
+        {
+            foreach (Test item in DataSource.tests)
+            {
+                if (item.Id == test.Id)
+                {
+                    DataSource.tests.Remove(item);
+                    return;
+                }
+                throw new Exception("failed to remove, test with the same ID not found");
+
+            }
+        }
+
+        public void UpdateTest(Test test)
+        {
+            int index = 0; ;
+            foreach (Test item in DataSource.tests)
+            {
+                if (item.Id == test.Id)
+                {
+                    DataSource.tests[index] = test;
+                    break;
+                }
+                index++;
+            }
+            throw new Exception("failed to update, test with the same ID not found");
+        }
+
+        public List<Test> getAllTests()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
