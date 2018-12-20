@@ -51,7 +51,7 @@ namespace PL
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            int a;
+            
         }
     }
 }

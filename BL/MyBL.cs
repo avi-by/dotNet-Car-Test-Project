@@ -75,6 +75,31 @@ namespace BL
         {
             throw new NotImplementedException();
         }
+
+        public void addTrainee(Trainee trainee)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void deleteTrainee(Trainee trainee)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void updateTrainee(Tester tester, string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void updateTrainee(Trainee trainee, Trainee newTrainee)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Trainee> getTraineesList()
+        {
+            throw new NotImplementedException();
+        }
         #endregion
     }
 }

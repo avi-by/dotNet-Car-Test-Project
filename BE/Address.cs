@@ -8,8 +8,15 @@ namespace BE
 {
     public struct Address
     {
-        string street;
-        int houseNumber;
-        string city;
+        public string street;
+        public int houseNumber;
+        public string city;
+
+        public Address(string street, int houseNumber, string city)
+        {
+            this.street = street;
+            this.houseNumber = houseNumber;
+            this.city = city;
+        }
     }
 }

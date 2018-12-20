@@ -12,6 +12,7 @@ namespace DS
         public static List<Tester> testers;
         public static List<Trainee> trainees;
         public static List<Test> tests;
+        
 
         static DataSource()
         {
@@ -25,7 +26,7 @@ namespace DS
             string[] idArray = new string[] { "aaa", "bbb", "ccc", "ddd", "eee" };
             foreach (string name in idArray)
             {
-                testers.Add(new Tester(name, new DateTime(1960, 12, 12)));
+                testers.Add(new Tester("111111", name, " ", new DateTime(1960, 12, 12), new Address()));
             }
 
         }

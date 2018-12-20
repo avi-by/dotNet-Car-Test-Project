@@ -35,8 +35,8 @@ namespace DAL
 
         public void AddTester(string name, int age)
         {
-            Tester t = new Tester(name, age);
-            DataSource.testers.Add(t);
+            //Tester t = new Tester(name, age);
+            //DataSource.testers.Add(t);
         }
 
         public void AddTester(Tester t)
@@ -45,8 +45,7 @@ namespace DAL
         }
         public List<Tester> getAllTesters()
         {
-            throw new NotImplementedException();
-        //    return DataSource.testers.Clone().ToList();
+            return DataSource.testers.Clone().ToList();
         }
         #endregion
 

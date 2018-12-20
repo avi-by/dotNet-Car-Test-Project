@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace BE
 {
-    public class Tester
+    public class Tester :ICloneable
     {
         private string id;
         private string firstName;
         private string lastName;
-        private DateTime birthDay;
+        private DateTime birthDate;
         private Gender gender;
         private string phoneNumber;
         private Address address;
@@ -21,43 +21,66 @@ namespace BE
         private GearBox gearBox;
         private bool[,] workHour;
         private double distance;
-        private string name;
-        private int age;
-        private DateTime dateTime;
 
-        public Tester(string name, int age)
+        public Tester(string name, int age, Gender gender, string phoneNumber, Address address, int expYears, int maxTestInWeek, CarType carType, GearBox gearBox, bool[,] workHour, double distance)
         {
-            this.name = name;
-            this.age = age;
+            //make from one string first and last name, if there are only one word enter " " to the last name
+            string[] seperator = { " " };
+            string[] names = name.Split(seperator, 2, StringSplitOptions.RemoveEmptyEntries);
+            FirstName = names[0];
+            LastName = names[1] != null ? names[1] : " ";
+            Age = age;
+            Gender = gender;
+            PhoneNumber = phoneNumber;
+            Address = address;
+            ExpYears = expYears;
+            MaxTestInWeek = maxTestInWeek;
+            CarType = carType;
+            GearBox = gearBox;
+            WorkHour = workHour;
+            Distance = distance;
+            
         }
 
-        public Tester(string name, DateTime dateTime)
+        private void initilazeSchedule()
         {
-            this.name = name;
-            this.dateTime = dateTime;
+            for (var day = DayOfWeek.Sunday; day < DayOfWeek.Friday; day++)
+                for (int hour = 0; hour < 6; hour++)
+                    WorkHour[(int)day, hour] = false;
         }
 
-        public Tester(string id, string firstName, string lastName, DateTime birthDay, Gender gender, string phoneNumber, Address address, int expYears, int maxTestInWeek, CarType carType, GearBox gearBox, bool[,] workHour, double distance)
+        //public Tester(string name, DateTime dateTime)
+        //{
+        //    //make from one string first and last name, if there are only one word enter " " to the last name
+        //    string[] seperator = { " " };
+        //    string[] names = name.Split(seperator, 2, StringSplitOptions.RemoveEmptyEntries);
+        //    FirstName = names[0];
+        //    LastName = names[1] != null ? names[1] : " ";
+        //    BirthDate = dateTime;
+        //    initilazeSchedule();
+        //}
+
+        public Tester(string id, string firstName, string lastName, DateTime birthDay, Address address, Gender gender=Gender.MALE, string phoneNumber=" ", int expYears=0, int maxTestInWeek=0, CarType carType=CarType.PrivetCar, GearBox gearBox=GearBox.Manual, bool[,] workHour=null, double distance=0)
         {
-            this.id = id;
-            this.firstName = firstName;
-            this.lastName = lastName;
-            this.birthDay = birthDay;
-            this.gender = gender;
-            this.phoneNumber = phoneNumber;
-            this.address = address;
-            this.expYears = expYears;
-            this.maxTestInWeek = maxTestInWeek;
-            this.carType = carType;
-            this.gearBox = gearBox;
-            this.workHour = workHour;
-            this.distance = distance;
+            Id = id;
+            FirstName = firstName;
+            LastName = lastName;
+            BirthDate = birthDay;
+            Gender = gender;
+            PhoneNumber = phoneNumber;
+            Address = address;
+            ExpYears = expYears;
+            MaxTestInWeek = maxTestInWeek;
+            CarType = carType;
+            GearBox = gearBox;
+            initilazeSchedule();
+            Distance = distance;
         }
 
         public string Id { get => id; set => id = value; }
         public string FirstName { get => firstName; set => firstName = value; }
         public string LastName { get => lastName; set => lastName = value; }
-        public DateTime BirthDay { get => birthDay; set => birthDay = value; }
+        public DateTime BirthDate { get => birthDate; set => birthDate = value; }
         public Gender Gender { get => gender; set => gender = value; }
         public string PhoneNumber { get => phoneNumber; set => phoneNumber = value; }
         public Address Address { get => address; set => address = value; }
@@ -67,6 +90,28 @@ namespace BE
         public GearBox GearBox { get => gearBox; set => gearBox = value; }
         public bool[,] WorkHour { get => workHour; set => workHour = value; }
         public double Distance { get => distance; set => distance = value; }
+        public int Age
+        {
+            get
+            {
+                // Save today's date.
+                var today = DateTime.Today;
+                // Calculate the age.
+                var age = today.Year - BirthDate.Year;
+                // Go back to the year the person was born in case of a leap year
+                if (BirthDate > today.AddYears(-age)) age--;
+                return age;
+            }
+            set => BirthDate = new DateTime(DateTime.Now.Year - value, 1, 1);//default month and day if enter only age
+        }
+
+        public object Clone()
+        {
+            Tester temp = (Tester)MemberwiseClone();
+            temp.Address = new Address(address.street, address.houseNumber, address.city);
+            temp.BirthDate = new DateTime(BirthDate.Year, BirthDate.Month, BirthDate.Day);
+            return temp;
+        }
 
         public override string ToString()
         {

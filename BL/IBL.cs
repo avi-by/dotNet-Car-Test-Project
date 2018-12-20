@@ -9,6 +9,16 @@ namespace BL
 {
     interface IBL
     {
+
+        #region trainee
+        void addTrainee(Trainee trainee);
+        void deleteTrainee(Trainee trainee);
+        void updateTrainee(Tester tester, string name);
+        void updateTrainee(Trainee trainee, Trainee newTrainee);
+        List<Trainee> getTraineesList();
+
+        #endregion
+
         #region Tester
         void addTester(Tester tester);
         void deleteTester(Tester tester);
