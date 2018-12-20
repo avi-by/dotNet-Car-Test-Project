@@ -25,6 +25,7 @@ namespace DAL
         #region Tester
 
 
+
         public void AddTester(Tester t)
         {
             DataSource.testers.Add(t);
@@ -121,16 +122,10 @@ namespace DAL
 
         public void DeleteTest(Test test)
         {
-            foreach (Test item in DataSource.tests)
-            {
-                if (item.Id == test.Id)
-                {
-                    DataSource.tests.Remove(item);
-                    return;
-                }
+            if(DataSource.tests.RemoveAll(item => item.Id == test.Id)==0)
                 throw new Exception("failed to remove, test with the same ID not found");
 
-            }
+            //}
         }
 
         public void UpdateTest(Test test)

@@ -110,11 +110,22 @@ namespace BL
 
         public void AddTest(Test test)
         {
-          
-        }
+            List<Test> listOfTests = MyDal.getAllTests();
+            
+            foreach (Test item in listOfTests)
+            {
+                if (item.TraineeId == test.TraineeId)
+                {
+                    if (test.Date - item.Date < Configuration.IntervalBetweenTest)
+                        throw new Exception("cannot add a test for trainee before 7 days from his last test");
+                    if ()
+                }
+
+            }
 
         public void DeleteTest(Test test)
         {
+            bool flag = true;
             foreach (Test item in DataSource.tests)
             {
                 if (item.Id == test.Id)
