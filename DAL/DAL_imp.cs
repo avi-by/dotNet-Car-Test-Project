@@ -73,6 +73,27 @@ namespace DAL
         {
             return DataSource.testers.Clone().ToList();
         }
+
+        public IEnumerable<object> testerGrouping(string property)
+        {
+            IEnumerable<object> groupOfTesters = null;
+            List<Trainee> listOfTesters = null;
+            switch (property)
+            {
+                case "carType":
+
+                    groupOfTesters = from tester in DataSource.testers
+                            group tester by tester.CarType;
+                    listOfTesters = (groupOfTesters as List<Trainee>).Clone();
+                    break;
+
+                
+
+            }
+            return listOfTesters;
+
+        }
+
         #endregion
 
         #region trainee
@@ -108,6 +129,36 @@ namespace DAL
         public List<Trainee> getAllTrainees()
         {
             return DataSource.trainees.Clone().ToList();
+        }
+
+        public IEnumerable<object> traineeGrouping(string property)
+        {
+            IEnumerable<object> group = null;
+            List<Trainee> listOfTrainees = null;
+            switch (property)
+            {
+                case "schoolName":
+
+                    group = from trainee in DataSource.trainees
+                            group trainee by trainee.SchoolName;
+                    listOfTrainees = (group as List<Trainee>).Clone();
+                    break;
+
+                case "teacherName":
+                    group = from trainee in DataSource.trainees
+                            group trainee by trainee.TeacherName;
+                    listOfTrainees = (group as List<Trainee>).Clone();
+                    break;
+
+                case "amountOfTests":
+                    group = from trainee in DataSource.trainees
+                            group trainee by trainee.AmountOfTests;
+                    listOfTrainees = (group as List<Trainee>).Clone();
+                    break;
+
+            }
+            return listOfTrainees;
+
         }
 
         #endregion
