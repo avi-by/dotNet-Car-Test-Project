@@ -39,6 +39,13 @@ namespace BL
             return Configuration.MinAgeTrainee;
         }
 
+        public int getMinimumAgeOfTester()
+        {
+
+            return Configuration.MinAgeTester;
+        }
+
+
         public int getMaximumAge()
         {
             return Configuration.MaxAgeTester;

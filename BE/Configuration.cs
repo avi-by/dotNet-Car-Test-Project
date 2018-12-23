@@ -10,10 +10,13 @@ namespace BE
     {
         public static string DALType = "List";
         public static int MaxAgeTester = 40;
+        public static int MinAgeTester = 20;
+
         public static int MinNumLessons = 20;
         public static int MinAgeTrainee = 18;
         public static TimeSpan IntervalBetweenTest = new TimeSpan(7, 0, 0, 0, 0);
         public static int test_id = 0;
 
+        
     }
 }

@@ -21,13 +21,15 @@ namespace PL
     /// </summary>
     public partial class AddTesterWindow : Window
     {
+       
         public AddTesterWindow()
         {
 
 
             InitializeComponent();
-            birthdayDatePicker.DisplayDateEnd = DateTime.Now.AddYears(BL.MyBL.Instance.getMinimumAge());
-            birthdayDatePicker.DisplayDateStart = DateTime.Now.AddYears(BL.MyBL.Instance.getMaximumAge());
+            
+            birthdayDatePicker.DisplayDateStart = DateTime.Now.AddYears(-BL.MyBL.Instance.getMaximumAge());
+            birthdayDatePicker.DisplayDateEnd = DateTime.Now.AddYears(-BL.MyBL.Instance.getMinimumAgeOfTester());
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -45,7 +47,9 @@ namespace PL
 
         private void pbAddTester_Click(object sender, RoutedEventArgs e)
         {
-           // MyBL.Instance.addTester(new Tester(nameTextBox.Text, birthdayDatePicker.DisplayDate));
+            
+             MyBL.Instance.addTester(new Tester(firstNameTextBox.Text,lastNameTextBox.Text, birthdayDatePicker.DisplayDate));
+          
             this.Close();
         }
 
@@ -58,5 +62,7 @@ namespace PL
         {
 
         }
+
+
     }
 }
