@@ -21,9 +21,7 @@ namespace BE
         private GearBox gearBox;
         private bool[,] workHour;
         private double distance;
-        private string text1;
-        private string text2;
-        private DateTime displayDate;
+       
 
         public Tester(string name, int age, Gender gender, string phoneNumber, Address address, int expYears, int maxTestInWeek, CarType carType, GearBox gearBox, bool[,] workHour, double distance)
         {
@@ -81,11 +79,13 @@ namespace BE
             Distance = distance;
         }
 
-        public Tester(string firstName, string lastName, DateTime birthDay)
+        public Tester(string firstName, DateTime birthDay, string lastName)
         {
+ 
             FirstName = firstName;
             LastName = lastName;
             BirthDate = birthDay;
+            
         }
 
         public string Id { get => id; set => id = value; }
