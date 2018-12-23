@@ -81,7 +81,7 @@ namespace BE
 
         public Tester(string firstName, DateTime birthDay, string lastName)
         {
- 
+            
             FirstName = firstName;
             LastName = lastName;
             BirthDate = birthDay;

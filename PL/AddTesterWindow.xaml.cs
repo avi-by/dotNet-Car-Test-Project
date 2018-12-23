@@ -28,6 +28,9 @@ namespace PL
 
             InitializeComponent();
             
+            genderComboBox.Items.Add(BE.Gender.MALE);
+            genderComboBox.Items.Add(BE.Gender.FEMALE);
+
             birthdayDatePicker.DisplayDateStart = DateTime.Now.AddYears(-BL.MyBL.Instance.getMaximumAge());
             birthdayDatePicker.DisplayDateEnd = DateTime.Now.AddYears(-BL.MyBL.Instance.getMinimumAgeOfTester());
         }
@@ -47,9 +50,12 @@ namespace PL
 
         private void pbAddTester_Click(object sender, RoutedEventArgs e)
         {
-            
-             MyBL.Instance.addTester(new Tester(firstNameTextBox.Text, birthdayDatePicker.DisplayDate, lastNameTextBox.Text ));
-          
+
+            // MyBL.Instance.addTester(new Tester(firstNameTextBox.Text, birthdayDatePicker.DisplayDate, lastNameTextBox.Text ));
+            MyBL.Instance.addTester(new Tester("111", firstNameTextBox.Text,lastNameTextBox.Text, birthdayDatePicker.DisplayDate, new Address(" ", 0, " sd"), (BE.Gender)genderComboBox.SelectedValue ));
+
+
+
             this.Close();
         }
 
