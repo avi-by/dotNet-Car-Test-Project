@@ -5,13 +5,18 @@ using System.Text;
 using System.Threading.Tasks;
 using BE;
 using DS;
+using System.Collections.Specialized;
 
 namespace DAL
 {
-    public class DAL_imp : IDAL
+
+    public class DAL_imp : IDAL, INotifyCollectionChanged
     {
         #region Singleton
         private static readonly DAL_imp instance = new DAL_imp();
+
+        
+
         public static DAL_imp Instance
         {
             get { return instance; }
@@ -21,6 +26,16 @@ namespace DAL
         static DAL_imp() { }
 
         #endregion
+
+        public event NotifyCollectionChangedEventHandler CollectionChanged;
+
+        private void OnNotifyCollectionChanged(NotifyCollectionChangedEventArgs args)
+        {
+            if (this.CollectionChanged != null)
+            {
+                this.CollectionChanged(this, args);
+            }
+        }
 
         #region Tester
         //public void AddTester(Tester t)
@@ -33,7 +48,7 @@ namespace DAL
         //    throw new NotImplementedException();
         //}
 
-      
+
         public void DeleteTester(Tester tester)
         {
             if (DataSource.testers.RemoveAll(item => item.Id == tester.Id) == 0)
@@ -49,6 +64,9 @@ namespace DAL
                 if (item.Id == tester.Id)
                 {
                     DataSource.testers[index] = tester;
+                    this.OnNotifyCollectionChanged(
+        new NotifyCollectionChangedEventArgs(
+          NotifyCollectionChangedAction.Replace, tester));
                     break;
                 }
                 index++;
@@ -65,9 +83,14 @@ namespace DAL
             return (y.Clone().ToList());
         }
 
-        public void AddTester(Tester t)
+        public void AddTester(Tester tester)
         {
-            DataSource.testers.Add(t);
+            DataSource.testers.Add(tester);
+
+            this.OnNotifyCollectionChanged(
+        new NotifyCollectionChangedEventArgs(
+          NotifyCollectionChangedAction.Add, tester)); 
+
         }
         public List<Tester> getAllTesters()
         {
