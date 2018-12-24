@@ -39,43 +39,36 @@
         <TextBlock x:Name="tbk10" Text=" wednesday" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="4"/>
         <TextBlock x:Name="tbk11" Text=" thursday" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="5"/>
 
-        <CheckBox Name="cb_sun_9" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <CheckBox.IsChecked>
-                <MultiBinding Converter="{StaticResource MultiDimensionalCoverter}">
-                    <Binding Path="workHour"/>
-                </MultiBinding>
-            </CheckBox.IsChecked>
-        </CheckBox>
-
-        <CheckBox Name="cb_sun_10" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <CheckBox Name="cb_sun_11" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" />
-        <CheckBox Name="cb_sun_12" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" />
-        <CheckBox Name="cb_sun_13" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" />
-        <CheckBox Name="cb_sun_14" Grid.Row="6" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" />
-        <CheckBox Name="cb_mon_9" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" />
-        <CheckBox Name="cb_mon_10" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" />
-        <CheckBox Name="cb_mon_11" Grid.Row="3" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" />
-        <CheckBox Name="cb_mon_12" Grid.Row="4" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" />
-        <CheckBox Name="cb_mon_13" Grid.Row="5" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" />
-        <CheckBox Name="cb_mon_14" Grid.Row="6" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" />
-        <CheckBox Name="cb_tue_9" Grid.Row="1" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" />
-        <CheckBox Name="cb_tue_10" Grid.Row="2" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" />
-        <CheckBox Name="cb_tue_11" Grid.Row="3" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" />
-        <CheckBox Name="cb_tue_12" Grid.Row="4" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" />
-        <CheckBox Name="cb_tue_13" Grid.Row="5" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" />
-        <CheckBox Name="cb_tue_14" Grid.Row="6" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" />
-        <CheckBox Name="cb_wed_9" Grid.Row="1" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" />
-        <CheckBox Name="cb_wed_10" Grid.Row="2" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" />
-        <CheckBox Name="cb_wed_11" Grid.Row="3" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" />
-        <CheckBox Name="cb_wed_12" Grid.Row="4" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" />
-        <CheckBox Name="cb_wed_13" Grid.Row="5" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" />
-        <CheckBox Name="cb_wed_14" Grid.Row="6" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" />
-        <CheckBox Name="cb_thu_9" Grid.Row="1" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" />
-        <CheckBox Name="cb_thu_10" Grid.Row="2" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" />
-        <CheckBox Name="cb_thu_11" Grid.Row="3" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" />
-        <CheckBox Name="cb_thu_12" Grid.Row="4" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" />
-        <CheckBox Name="cb_thu_13" Grid.Row="5" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" />
-        <CheckBox Name="cb_thu_14" Grid.Row="6" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <CheckBox Name="cb_sun_9" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding workHour[0][0] ,Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+        <CheckBox Name="cb_sun_10" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding workHour[0][1] ,Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+        <CheckBox Name="cb_sun_11" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding workHour[0][2] ,Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+        <CheckBox Name="cb_sun_12" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding workHour[0][3] ,Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+        <CheckBox Name="cb_sun_13" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding workHour[0][4] ,Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+        <CheckBox Name="cb_sun_14" Grid.Row="6" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding workHour[0][5] ,Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+        <CheckBox Name="cb_mon_9" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding workHour[1][0] ,Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+        <CheckBox Name="cb_mon_10" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding workHour[1][1] ,Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+        <CheckBox Name="cb_mon_11" Grid.Row="3" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding workHour[1][2] ,Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+        <CheckBox Name="cb_mon_12" Grid.Row="4" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding workHour[1][3] ,Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+        <CheckBox Name="cb_mon_13" Grid.Row="5" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding workHour[1][4] ,Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+        <CheckBox Name="cb_mon_14" Grid.Row="6" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding workHour[1][5] ,Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+        <CheckBox Name="cb_tue_9" Grid.Row="1" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding workHour[2][0] ,Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+        <CheckBox Name="cb_tue_10" Grid.Row="2" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding workHour[2][1] ,Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+        <CheckBox Name="cb_tue_11" Grid.Row="3" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding workHour[2][2] ,Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+        <CheckBox Name="cb_tue_12" Grid.Row="4" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding workHour[2][3] ,Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+        <CheckBox Name="cb_tue_13" Grid.Row="5" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding workHour[2][4] ,Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+        <CheckBox Name="cb_tue_14" Grid.Row="6" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding workHour[2][5] ,Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+        <CheckBox Name="cb_wed_9" Grid.Row="1" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding workHour[3][0] ,Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+        <CheckBox Name="cb_wed_10" Grid.Row="2" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding workHour[3][1] ,Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+        <CheckBox Name="cb_wed_11" Grid.Row="3" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding workHour[3][2] ,Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+        <CheckBox Name="cb_wed_12" Grid.Row="4" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding workHour[3][3] ,Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+        <CheckBox Name="cb_wed_13" Grid.Row="5" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding workHour[3][4] ,Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+        <CheckBox Name="cb_wed_14" Grid.Row="6" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding workHour[3][5] ,Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+        <CheckBox Name="cb_thu_9" Grid.Row="1" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding workHour[4][0] ,Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+        <CheckBox Name="cb_thu_10" Grid.Row="2" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding workHour[4][1] ,Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+        <CheckBox Name="cb_thu_11" Grid.Row="3" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding workHour[4][2] ,Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+        <CheckBox Name="cb_thu_12" Grid.Row="4" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding workHour[4][3] ,Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+        <CheckBox Name="cb_thu_13" Grid.Row="5" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding workHour[4][4] ,Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+        <CheckBox Name="cb_thu_14" Grid.Row="6" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding workHour[4][5] ,Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
 
 
     </Grid>

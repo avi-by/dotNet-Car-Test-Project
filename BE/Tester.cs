@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel;
+
 
 namespace BE
 {
@@ -19,11 +21,13 @@ namespace BE
         private int maxTestInWeek;
         private CarType carType;
         private GearBox gearBox;
-        private bool[,] workHour;
+        private bool[][] workHour;
         private double distance;
+        
        
+        
 
-        public Tester(string name, int age, Gender gender, string phoneNumber, Address address, int expYears, int maxTestInWeek, CarType carType, GearBox gearBox, bool[,] workHour, double distance)
+        public Tester(string name, int age, Gender gender, string phoneNumber, Address address, int expYears, int maxTestInWeek, CarType carType, GearBox gearBox, bool[][] workHour, double distance)
         {
             //make from one string first and last name, if there are only one word enter " " to the last name
             string[] seperator = { " " };
@@ -40,14 +44,14 @@ namespace BE
             GearBox = gearBox;
             WorkHour = workHour;
             Distance = distance;
-            
+   
         }
 
         private void initilazeSchedule()
         {
             for (var day = DayOfWeek.Sunday; day < DayOfWeek.Friday; day++)
                 for (int hour = 0; hour < 6; hour++)
-                    WorkHour[(int)day, hour] = false;
+                    WorkHour[(int)day][hour] = false;
         }
 
         //public Tester(string name, DateTime dateTime)
@@ -61,7 +65,7 @@ namespace BE
         //    initilazeSchedule();
         //}
 
-        public Tester(string id, string firstName, string lastName, DateTime birthDay, Address address, Gender gender=Gender.MALE, string phoneNumber=" ", int expYears=0, int maxTestInWeek=0, CarType carType=CarType.PrivetCar, GearBox gearBox=GearBox.Manual, bool[,] workHour=null, double distance=0)
+        public Tester(string id, string firstName, string lastName, DateTime birthDay, Address address, Gender gender=Gender.MALE, string phoneNumber=" ", int expYears=0, int maxTestInWeek=0, CarType carType=CarType.PrivetCar, GearBox gearBox=GearBox.Manual, bool[][] workHour=null, double distance=0)
         {
             Id = id;
             FirstName = firstName;
@@ -74,8 +78,22 @@ namespace BE
             MaxTestInWeek = maxTestInWeek;
             CarType = carType;
             GearBox = gearBox;
-            this.workHour = new bool[5, 6];
-            initilazeSchedule();
+            //judjed array (2 dimensional array is difficult to binding)
+            this.workHour = new bool[5][];
+            for (int i = 0; i < this.workHour.Length; i++)
+            {
+                this.workHour[i] = new bool[6];
+            }
+
+            if (workHour == null)
+                initilazeSchedule();
+            else
+            {
+                for (var day = DayOfWeek.Sunday; day < DayOfWeek.Friday; day++)
+                    for (int hour = 0; hour < 6; hour++)
+                        WorkHour[(int)day][hour] = workHour[(int)day][hour];
+            }
+
             Distance = distance;
         }
 
@@ -99,7 +117,7 @@ namespace BE
         public int MaxTestInWeek { get => maxTestInWeek; set => maxTestInWeek = value; }
         public CarType CarType { get => carType; set => carType = value; }
         public GearBox GearBox { get => gearBox; set => gearBox = value; }
-        public bool[,] WorkHour { get => workHour; set => workHour = value; }
+        public bool[][] WorkHour { get => workHour; set => workHour = value; }
         public double Distance { get => distance; set => distance = value; }
         public int Age
         {
