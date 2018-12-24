@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
-
+using System.Windows.Data;
+using System.Globalization;
 
 namespace BE
 {
@@ -142,9 +143,6 @@ namespace BE
             return temp;
         }
 
-        public override string ToString()
-        {
-            return FirstName + " " + LastName + " id:" + Id;
-        }
+     
     }
 }

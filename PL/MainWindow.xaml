@@ -9,15 +9,16 @@
         Title="MainWindow" Height="450" Width="800" Activated="Window_Activated" Loaded="Window_Loaded">
     <Window.Resources>
         <CollectionViewSource x:Key="testerViewSource" d:DesignSource="{d:DesignInstance {x:Type BE:Tester}, CreateList=True}"/>
+
     </Window.Resources>
     <Grid DataContext="{StaticResource testerViewSource}">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="413*"/>
-            <ColumnDefinition Width="379*"/>
+            <ColumnDefinition Width="477*"/>
+            <ColumnDefinition Width="316*"/>
         </Grid.ColumnDefinitions>
-        <ListBox x:Name="lbTesters" HorizontalAlignment="Left" Height="210" Margin="135.773,62,0,0" VerticalAlignment="Top" Width="157" ItemsSource="{Binding}" Grid.Column="1"/>
-        <Button x:Name="pbTester" Content="Add Tetser" HorizontalAlignment="Left" Margin="55,15,0,0" VerticalAlignment="Top" Width="75" Click="pbTester_Click"/>
-        <DataGrid x:Name="testerDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="8,42" RowDetailsVisibilityMode="VisibleWhenSelected">
+        <Button x:Name="pbTester" Content="Add Tetser" HorizontalAlignment="Left" Margin="55,15,0,0" VerticalAlignment="Top" Width="75" Click="pbTester_Click" Height="19"/>
+        <DataGrid x:Name="testerDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}"  RowDetailsVisibilityMode="VisibleWhenSelected" Margin="10,39,21.333,163.667" MouseDoubleClick="TesterDataGrid_MouseDoubleClick" HorizontalContentAlignment="Center" SelectionChanged="TesterDataGrid_SelectionChanged">
+          
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="IdColumn" Binding="{Binding Id}" Header="Id" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="ageColumn" Binding="{Binding Age}" Header="Age" IsReadOnly="True" Width="SizeToHeader"/>
@@ -26,9 +27,15 @@
                 <DataGridTextColumn x:Name="genderColumn" Binding="{Binding Gender}" Header="Gender" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="phoneNumberColumn" Binding="{Binding PhoneNumber}" Header="Phone number" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="adressColumn" Binding="{Binding Adress}" Header="Adress" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="ExpYears" Binding="{Binding ExpYears}" Header="ExpYears" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="MaxTestInWeek" Binding="{Binding MaxTestInWeek}" Header="MxTestsWeek" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="CarType" Binding="{Binding CarType}" Header="CarType" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="GearBox" Binding="{Binding GearBox}" Header="GearBox" Width="SizeToHeader"/>
+
 
             </DataGrid.Columns>
         </DataGrid>
+        <local:UserControl1  x:Name="matrix1" Margin="477,21,4.333,-21.333" Grid.ColumnSpan="2" />
 
     </Grid>
 </Window>

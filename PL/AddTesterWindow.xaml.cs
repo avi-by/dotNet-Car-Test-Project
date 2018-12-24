@@ -44,7 +44,7 @@ namespace PL
         private void Window_Loaded_1(object sender, RoutedEventArgs e)
         {
 
-            System.Windows.Data.CollectionViewSource testerViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("testerViewSource")));
+            System.Windows.Data.CollectionViewSource testerDataGrid = ((System.Windows.Data.CollectionViewSource)(this.FindResource("testerDataGrid")));
             // Load data by setting the CollectionViewSource.Source property:
             // testerViewSource.Source = [generic data source]
         }

@@ -51,15 +51,36 @@ namespace PL
 
         private void Window_Activated(object sender, EventArgs e)
         {
-            lbTesters.DataContext = bl.getAllTester();
-            testerDataGrid.DataContext = bl.getAllTester();
+            //matrix1.DataContext = testerViewSource.
+            //matrix.DataContext = bl.getAllTester();
+             testerDataGrid.DataContext = bl.getAllTester();
+            //matrix1.DataContext = (Tester)(testerDataGrid.SelectedItem);
+            
+
         }
+
+       
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             System.Windows.Data.CollectionViewSource testerViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("testerViewSource")));
+
             // Load data by setting the CollectionViewSource.Source property:
             // testerViewSource.Source = [generic data source]
+        }
+
+        private void TesterDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+           // if (testerDataGrid.SelectedItem == null) return;
+            //var selectedPerson = testerDataGrid.SelectedItem as Tester;
+
+            //MessageBox.Show(string.Format("The Person you double cl
+        }
+
+        private void TesterDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+          // matrix1.DataContext =((testerDataGrid. ));
+            
         }
     }
 }
