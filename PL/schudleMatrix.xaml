@@ -8,7 +8,7 @@
              >
     <Grid ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto"/>
@@ -39,8 +39,15 @@
         <TextBlock x:Name="tbk10" Text=" wednesday" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="4"/>
         <TextBlock x:Name="tbk11" Text=" thursday" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="5"/>
 
-        <CheckBox Name="cb_sun_9" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" />
-        <CheckBox Name="cb_sun_10" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <CheckBox Name="cb_sun_9" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <CheckBox.IsChecked>
+                <MultiBinding Converter="{StaticResource MultiDimensionalCoverter}">
+                    <Binding Path="workHour"/>
+                </MultiBinding>
+            </CheckBox.IsChecked>
+        </CheckBox>
+
+        <CheckBox Name="cb_sun_10" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <CheckBox Name="cb_sun_11" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" />
         <CheckBox Name="cb_sun_12" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" />
         <CheckBox Name="cb_sun_13" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" />

@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using BE;
+using BL;
 
 namespace PL
 {
@@ -22,7 +24,9 @@ namespace PL
     {
         public UserControl1()
         {
+            
             InitializeComponent();
+     
         }
     }
 }
