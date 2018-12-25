@@ -82,7 +82,7 @@
         <Label Content="ID:" Grid.Column="0" HorizontalAlignment="Left"  Grid.Row="0" VerticalAlignment="Center"/>
         <TextBox x:Name="ID" Grid.Column="1" HorizontalAlignment="Left" Height="23"  Grid.Row="0" Text="{Binding ID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
         <local:UserControl1  x:Name="matrix" Grid.Row="9" Grid.Column="1"/>
-
+        <Button Content="update tester" Name="UpdateTester" Grid.Row="11" Grid.Column="1" Margin="109,24.333,-19.333,-53" RenderTransformOrigin="0.501,0.5" Click="UpdateTester_Click"/>
 
     </Grid>
 

@@ -36,10 +36,7 @@ namespace PL
             birthdayDatePicker.DisplayDateEnd = DateTime.Now.AddYears(-BL.MyBL.Instance.getMinimumAgeOfTester());
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            
-        }
+
 
         private void Window_Loaded_1(object sender, RoutedEventArgs e)
         {

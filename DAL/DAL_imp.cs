@@ -56,9 +56,12 @@ namespace DAL
 
         }
 
+
+
+
         public void UpdateTester(Tester tester)
         {
-            int index = 0; ;
+            int index = 0; 
             foreach (Tester item in DataSource.testers)
             {
                 if (item.Id == tester.Id)
@@ -66,8 +69,8 @@ namespace DAL
                     DataSource.testers[index] = tester;
                     this.OnNotifyCollectionChanged(
         new NotifyCollectionChangedEventArgs(
-          NotifyCollectionChangedAction.Replace, tester));
-                    break;
+          NotifyCollectionChangedAction.Add, tester));
+                    return;
                 }
                 index++;
             }
