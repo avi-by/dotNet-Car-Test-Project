@@ -37,6 +37,7 @@
         </DataGrid>
         <local:UserControl1  x:Name="matrix1" Margin="477,55,4.333,-55.333" Grid.ColumnSpan="2"  />
         <TextBlock Name="tbOfHours" Grid.Column="1" HorizontalAlignment="Left" Margin="3.667,39,0,0" TextWrapping="Wrap" Text="work hours (of the selected tester):" VerticalAlignment="Top" Height="30" Width="207" FontWeight="Bold"/>
+        <Button Name="pbUpdateTester" Content="Update selected tester" HorizontalAlignment="Left" VerticalAlignment="Top" Width="136" Margin="147,15,0,0" Click="PbUpdateTester_Click" />
 
     </Grid>
 </Window>

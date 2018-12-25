@@ -1,0 +1,89 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:BE="clr-namespace:BE;assembly=BE" x:Class="PL.UpdateTesterWindow"
+        mc:Ignorable="d"
+        Title="UpdateTesterWindow"  >
+    <Window.Resources>
+        <ObjectDataProvider x:Key="dataFromEnum" MethodName="GetValues"
+                        ObjectType="{x:Type sys:Enum}">
+            <ObjectDataProvider.MethodParameters>
+
+                <BE:Gender>MALE</BE:Gender>
+                <BE:GearBox>Manual</BE:GearBox>
+                <BE:CarType>PrivetCar</BE:CarType>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+    </Window.Resources>
+    <Grid Name="windowGrid" >
+        <Grid.RowDefinitions>
+
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+
+
+
+
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+
+        </Grid.ColumnDefinitions>
+
+        <Label VerticalAlignment="Center" Grid.Row="4" HorizontalAlignment="Left" Grid.Column="0" Content="Birthday:"/>
+        <DatePicker x:Name="birthdayDatePicker" VerticalAlignment="Center" SelectedDate="{Binding Birthday, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="4"  HorizontalAlignment="Left" Grid.Column="1" Width="120"/>
+
+        <Label Content="Car Type:" Grid.Column="0" HorizontalAlignment="Left"  Grid.Row="10" VerticalAlignment="Center"/>
+        <ComboBox x:Name="carTypeComboBox" Grid.Column="1" HorizontalAlignment="Left" Height="23"  Grid.Row="10" SelectedItem="{Binding CarType, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+
+        <Label Content="Last Name:" Grid.Column="0" HorizontalAlignment="Left"  Grid.Row="2" VerticalAlignment="Center"/>
+        <TextBox x:Name="lastNameTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="24"  Grid.Row="2" Text="{Binding LastName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+
+        <Label Content="First Name:" Grid.Column="0" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Center"/>
+        <TextBox x:Name="firstNameTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="24" Grid.Row="1" Text="{Binding FirstName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" />
+
+        <Label Content="Max Test In Week:" Grid.Column="0" HorizontalAlignment="Left"  Grid.Row="3" VerticalAlignment="Center"/>
+        <TextBox x:Name="maxTestInWeekTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23"  Grid.Row="3" Text="{Binding MaxTestInWeek, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+
+        <Label Content="Exp Years:" Grid.Column="0" HorizontalAlignment="Left"  Grid.Row="5" VerticalAlignment="Center"/>
+        <TextBox x:Name="expYearsTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23"  Grid.Row="5" Text="{Binding ExpYears, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+
+        <Label Content="Gear Box:" Grid.Column="0" HorizontalAlignment="Left" Grid.Row="6" VerticalAlignment="Center"/>
+        <ComboBox x:Name="gearBoxComboBox" Grid.Column="1" HorizontalAlignment="Left" Height="23"  Grid.Row="6" SelectedItem="{Binding GearBox, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+
+
+
+
+
+        <Label Content="Phone Number:" Grid.Column="0" HorizontalAlignment="Left"  Grid.Row="7" VerticalAlignment="Center"/>
+        <TextBox x:Name="phoneNumberTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23"  Grid.Row="7" Text="{Binding PhoneNumber, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+
+        <Label Content="Gender:" Grid.Column="0" HorizontalAlignment="Left"  Grid.Row="8" VerticalAlignment="Center"/>
+        <ComboBox x:Name="genderComboBox" Grid.Column="1"  HorizontalAlignment="Left"  Grid.Row="8" VerticalAlignment="Center" Width="120" SelectedItem="{Binding Gender, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+
+        <Label Content="Work Hours:" Grid.Column="0" HorizontalAlignment="Left"  Grid.Row="9" VerticalAlignment="Center"/>
+
+        <Label Content="ID:" Grid.Column="0" HorizontalAlignment="Left"  Grid.Row="0" VerticalAlignment="Center"/>
+        <TextBox x:Name="ID" Grid.Column="1" HorizontalAlignment="Left" Height="23"  Grid.Row="0" Text="{Binding ID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+        <local:UserControl1  x:Name="matrix" Grid.Row="9" Grid.Column="1"/>
+
+
+    </Grid>
+
+</Window>

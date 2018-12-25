@@ -33,11 +33,11 @@
         <TextBlock x:Name="tbk5" Text="13:00" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="5"/>
         <TextBlock x:Name="tbk6" Text="14:00" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="6"/>
 
-        <TextBlock x:Name="tbk7" Text="sunday" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1"/>
-        <TextBlock x:Name="tbk8" Text=" monday" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="2"/>
-        <TextBlock x:Name="tbk9" Text=" tuesday" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="3"/>
-        <TextBlock x:Name="tbk10" Text=" wednesday" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="4"/>
-        <TextBlock x:Name="tbk11" Text=" thursday" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="5"/>
+        <TextBlock x:Name="tbk7" Text=" sunday " FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1"/>
+        <TextBlock x:Name="tbk8" Text=" monday " FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="2"/>
+        <TextBlock x:Name="tbk9" Text=" tuesday " FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="3"/>
+        <TextBlock x:Name="tbk10" Text=" wednesday " FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="4"/>
+        <TextBlock x:Name="tbk11" Text=" thursday " FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="5"/>
 
         <CheckBox Name="cb_sun_9" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding workHour[0][0] ,Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
         <CheckBox Name="cb_sun_10" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding workHour[0][1] ,Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>

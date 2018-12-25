@@ -129,5 +129,19 @@ namespace PL
             // matrix1.DataContext =((testerDataGrid. ));
 
         }
+
+        private void PbUpdateTester_Click(object sender, RoutedEventArgs e)
+        {
+            if (testerDataGrid.SelectedItem == null) return;
+            var selectedPerson = (testerDataGrid.SelectedItem) as Tester;
+
+            UpdateTesterWindow updateTesterWindow = new UpdateTesterWindow();
+
+            updateTesterWindow.DataContext = selectedPerson;
+
+
+            updateTesterWindow.Show();
+
+        }
     }
 }
