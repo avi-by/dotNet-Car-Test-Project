@@ -9,7 +9,7 @@ using System.Globalization;
 
 namespace BE
 {
-    public class Tester :ICloneable
+    public class Tester :ICloneable, INotifyPropertyChanged
     {
         private string id;
         private string firstName;
@@ -24,9 +24,8 @@ namespace BE
         private GearBox gearBox;
         private bool[][] workHour;
         private double distance;
-        
-       
-        
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public Tester(string name, int age, Gender gender, string phoneNumber, Address address, int expYears, int maxTestInWeek, CarType carType, GearBox gearBox, bool[][] workHour, double distance)
         {
@@ -45,7 +44,7 @@ namespace BE
             GearBox = gearBox;
             WorkHour = workHour;
             Distance = distance;
-   
+
         }
 
         private void initilazeSchedule()
@@ -96,6 +95,7 @@ namespace BE
             }
 
             Distance = distance;
+
         }
 
         public Tester(string firstName, DateTime birthDay, string lastName)
@@ -107,10 +107,10 @@ namespace BE
             
         }
 
-        public string Id { get => id; set => id = value; }
+        public string Id { get { return id; } set { id = value; } }
         public string FirstName { get => firstName; set => firstName = value; }
         public string LastName { get => lastName; set => lastName = value; }
-        public DateTime BirthDate { get => birthDate; set => birthDate = value; }
+        public DateTime BirthDate { get { return birthDate; } set { birthDate = value; } }
         public Gender Gender { get => gender; set => gender = value; }
         public string PhoneNumber { get => phoneNumber; set => phoneNumber = value; }
         public Address Address { get => address; set => address = value; }

@@ -97,7 +97,7 @@ namespace PL
             #endregion
 
 
-            MyBL.Instance.addTester(new Tester( "111", firstNameTextBox.Text,lastNameTextBox.Text, birthdayDatePicker.DisplayDate, new Address(" ", 0, " sd"), (BE.Gender)genderComboBox.SelectedValue,"8",1,1,(BE.CarType)1,(BE.GearBox)1, temp_workHour,0 ));
+            MyBL.Instance.addTester(new Tester( ID.Text, firstNameTextBox.Text,lastNameTextBox.Text, birthdayDatePicker.DisplayDate, new Address(" ", 0, " sd"), (BE.Gender)genderComboBox.SelectedValue,"8",1,1,(BE.CarType)1,(BE.GearBox)1, temp_workHour,0 ));
 
 
 

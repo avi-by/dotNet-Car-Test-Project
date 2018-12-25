@@ -17,6 +17,10 @@ namespace BE
             this.street = street;
             this.houseNumber = houseNumber;
             this.city = city;
+
         }
+
+
+
     }
 }

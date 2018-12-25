@@ -20,6 +20,8 @@
         <DataGrid x:Name="testerDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}"  RowDetailsVisibilityMode="VisibleWhenSelected" Margin="10,39,21.333,26.667" MouseDoubleClick="TesterDataGrid_MouseDoubleClick" HorizontalContentAlignment="Center" SelectionChanged="TesterDataGrid_SelectionChanged">
 
             <DataGrid.Columns>
+                
+                
                 <DataGridTextColumn x:Name="IdColumn" Binding="{Binding Id}" Header="Id" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="ageColumn" Binding="{Binding Age}" Header="Age" IsReadOnly="True" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="nameColumn" Binding="{Binding FirstName}" Header="First Name" Width="SizeToHeader"/>
@@ -31,6 +33,7 @@
                 <DataGridTextColumn x:Name="MaxTestInWeek" Binding="{Binding MaxTestInWeek}" Header="MxTestsWeek" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="CarType" Binding="{Binding CarType}" Header="CarType" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="GearBox" Binding="{Binding GearBox}" Header="GearBox" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="DateBirth" Binding="{Binding Path=DateBirth}" Header="DateBirth" Width="SizeToHeader"/>
 
 
             </DataGrid.Columns>

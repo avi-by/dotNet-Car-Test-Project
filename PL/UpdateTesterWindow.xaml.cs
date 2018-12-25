@@ -31,7 +31,7 @@ namespace PL
 
             birthdayDatePicker.DisplayDateStart = DateTime.Now.AddYears(-BL.MyBL.Instance.getMaximumAge());
             birthdayDatePicker.DisplayDateEnd = DateTime.Now.AddYears(-BL.MyBL.Instance.getMinimumAgeOfTester());
-
+            
         }
 
         private void UpdateTester_Click(object sender, RoutedEventArgs e)

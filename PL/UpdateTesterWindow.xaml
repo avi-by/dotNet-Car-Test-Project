@@ -47,10 +47,14 @@
         </Grid.ColumnDefinitions>
 
         <Label VerticalAlignment="Center" Grid.Row="4" HorizontalAlignment="Left" Grid.Column="0" Content="Birthday:"/>
-        <DatePicker x:Name="birthdayDatePicker" VerticalAlignment="Center" SelectedDate="{Binding Birthday, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="4"  HorizontalAlignment="Left" Grid.Column="1" Width="120"/>
+        <DatePicker x:Name="birthdayDatePicker" VerticalAlignment="Center"  SelectedDate="{Binding BirthDate, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="4"  HorizontalAlignment="Left" Grid.Column="1" Width="120"/>
+
 
         <Label Content="Car Type:" Grid.Column="0" HorizontalAlignment="Left"  Grid.Row="10" VerticalAlignment="Center"/>
         <ComboBox x:Name="carTypeComboBox" Grid.Column="1" HorizontalAlignment="Left" Height="23"  Grid.Row="10" SelectedItem="{Binding CarType, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+
+        <Label Content="ID:" Grid.Column="0" HorizontalAlignment="Left"  Grid.Row="0" VerticalAlignment="Center"/>
+        <TextBox x:Name="ID" Grid.Column="1" HorizontalAlignment="Left" Height="23"  Grid.Row="0" Text="{Binding Path=Id, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
 
         <Label Content="Last Name:" Grid.Column="0" HorizontalAlignment="Left"  Grid.Row="2" VerticalAlignment="Center"/>
         <TextBox x:Name="lastNameTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="24"  Grid.Row="2" Text="{Binding LastName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
@@ -67,10 +71,6 @@
         <Label Content="Gear Box:" Grid.Column="0" HorizontalAlignment="Left" Grid.Row="6" VerticalAlignment="Center"/>
         <ComboBox x:Name="gearBoxComboBox" Grid.Column="1" HorizontalAlignment="Left" Height="23"  Grid.Row="6" SelectedItem="{Binding GearBox, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
 
-
-
-
-
         <Label Content="Phone Number:" Grid.Column="0" HorizontalAlignment="Left"  Grid.Row="7" VerticalAlignment="Center"/>
         <TextBox x:Name="phoneNumberTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23"  Grid.Row="7" Text="{Binding PhoneNumber, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
 
@@ -79,9 +79,7 @@
 
         <Label Content="Work Hours:" Grid.Column="0" HorizontalAlignment="Left"  Grid.Row="9" VerticalAlignment="Center"/>
 
-        <Label Content="ID:" Grid.Column="0" HorizontalAlignment="Left"  Grid.Row="0" VerticalAlignment="Center"/>
-        <TextBox x:Name="ID" Grid.Column="1" HorizontalAlignment="Left" Height="23"  Grid.Row="0" Text="{Binding ID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-        <local:UserControl1  x:Name="matrix" Grid.Row="9" Grid.Column="1"/>
+        <local:UserControl1  x:Name="matrix" Grid.Row="9" Grid.Column="1" DataContext="WorkHour"/>
         <Button Content="update tester" Name="UpdateTester" Grid.Row="11" Grid.Column="1" Margin="109,24.333,-19.333,-53" RenderTransformOrigin="0.501,0.5" Click="UpdateTester_Click"/>
 
     </Grid>
