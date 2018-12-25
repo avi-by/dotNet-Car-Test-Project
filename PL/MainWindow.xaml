@@ -17,8 +17,8 @@
             <ColumnDefinition Width="316*"/>
         </Grid.ColumnDefinitions>
         <Button x:Name="pbTester" Content="Add Tetser" HorizontalAlignment="Left" Margin="55,15,0,0" VerticalAlignment="Top" Width="75" Click="pbTester_Click" Height="19"/>
-        <DataGrid x:Name="testerDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}"  RowDetailsVisibilityMode="VisibleWhenSelected" Margin="10,39,21.333,163.667" MouseDoubleClick="TesterDataGrid_MouseDoubleClick" HorizontalContentAlignment="Center" SelectionChanged="TesterDataGrid_SelectionChanged">
-          
+        <DataGrid x:Name="testerDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}"  RowDetailsVisibilityMode="VisibleWhenSelected" Margin="10,39,21.333,26.667" MouseDoubleClick="TesterDataGrid_MouseDoubleClick" HorizontalContentAlignment="Center" SelectionChanged="TesterDataGrid_SelectionChanged">
+
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="IdColumn" Binding="{Binding Id}" Header="Id" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="ageColumn" Binding="{Binding Age}" Header="Age" IsReadOnly="True" Width="SizeToHeader"/>
@@ -35,7 +35,8 @@
 
             </DataGrid.Columns>
         </DataGrid>
-        <local:UserControl1  x:Name="matrix1" Margin="477,21,4.333,-21.333" Grid.ColumnSpan="2" />
+        <local:UserControl1  x:Name="matrix1" Margin="477,55,4.333,-55.333" Grid.ColumnSpan="2"  />
+        <TextBlock Name="tbOfHours" Grid.Column="1" HorizontalAlignment="Left" Margin="3.667,39,0,0" TextWrapping="Wrap" Text="work hours (of the selected tester):" VerticalAlignment="Top" Height="30" Width="207" FontWeight="Bold"/>
 
     </Grid>
 </Window>

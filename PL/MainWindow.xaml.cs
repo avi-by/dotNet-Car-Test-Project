@@ -59,7 +59,8 @@ namespace PL
 
         }
 
-       
+        
+        
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -69,18 +70,64 @@ namespace PL
             // testerViewSource.Source = [generic data source]
         }
 
+        
         private void TesterDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-           // if (testerDataGrid.SelectedItem == null) return;
-            //var selectedPerson = testerDataGrid.SelectedItem as Tester;
+            //didnt work...
+           if (testerDataGrid.SelectedItem == null) return;
+            var selectedPerson = (testerDataGrid.SelectedItem) as Tester;
+            matrix1.DataContext = selectedPerson.WorkHour;
+            
 
             //MessageBox.Show(string.Format("The Person you double cl
         }
 
         private void TesterDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-          // matrix1.DataContext =((testerDataGrid. ));
-            
+            if (testerDataGrid.SelectedItem == null) return;
+            var selectedPerson = (testerDataGrid.SelectedItem) as Tester;
+            //matrix1.DataContext = selectedPerson.WorkHour;
+
+
+            matrix1.IsEnabled = false;
+            matrix1.cb_sun_9.IsChecked =  (selectedPerson.WorkHour[0][0]) ? true : false ;
+            matrix1.cb_sun_10.IsChecked = (selectedPerson.WorkHour[0][1]) ? true : false;
+            matrix1.cb_sun_11.IsChecked = (selectedPerson.WorkHour[0][2]) ? true : false;
+            matrix1.cb_sun_12.IsChecked = (selectedPerson.WorkHour[0][3]) ? true : false;
+            matrix1.cb_sun_13.IsChecked = (selectedPerson.WorkHour[0][4]) ? true : false;
+            matrix1.cb_sun_14.IsChecked = (selectedPerson.WorkHour[0][5]) ? true : false;
+
+            matrix1.cb_mon_9.IsChecked = (selectedPerson.WorkHour[1][0]) ? true : false;
+            matrix1.cb_mon_10.IsChecked = (selectedPerson.WorkHour[1][1]) ? true : false;
+            matrix1.cb_mon_11.IsChecked = (selectedPerson.WorkHour[1][2]) ? true : false;
+            matrix1.cb_mon_12.IsChecked = (selectedPerson.WorkHour[1][3]) ? true : false;
+            matrix1.cb_mon_13.IsChecked = (selectedPerson.WorkHour[1][4]) ? true : false;
+            matrix1.cb_mon_14.IsChecked = (selectedPerson.WorkHour[1][5]) ? true : false;
+
+            matrix1.cb_tue_9.IsChecked = (selectedPerson.WorkHour[2][0]) ? true : false;
+            matrix1.cb_tue_10.IsChecked = (selectedPerson.WorkHour[2][1]) ? true : false;
+            matrix1.cb_tue_11.IsChecked = (selectedPerson.WorkHour[2][2]) ? true : false;
+            matrix1.cb_tue_12.IsChecked = (selectedPerson.WorkHour[2][3]) ? true : false;
+            matrix1.cb_tue_13.IsChecked = (selectedPerson.WorkHour[2][4]) ? true : false;
+            matrix1.cb_tue_14.IsChecked = (selectedPerson.WorkHour[2][5]) ? true : false;
+
+            matrix1.cb_wed_9.IsChecked = (selectedPerson.WorkHour[3][0]) ? true : false;
+            matrix1.cb_wed_10.IsChecked = (selectedPerson.WorkHour[3][1]) ? true : false;
+            matrix1.cb_wed_11.IsChecked = (selectedPerson.WorkHour[3][2]) ? true : false;
+            matrix1.cb_wed_12.IsChecked = (selectedPerson.WorkHour[3][3]) ? true : false;
+            matrix1.cb_wed_13.IsChecked = (selectedPerson.WorkHour[3][4]) ? true : false;
+            matrix1.cb_wed_14.IsChecked = (selectedPerson.WorkHour[3][5]) ? true : false;
+
+            matrix1.cb_thu_9.IsChecked = (selectedPerson.WorkHour[4][0]) ? true : false;
+            matrix1.cb_thu_10.IsChecked = (selectedPerson.WorkHour[4][1]) ? true : false;
+            matrix1.cb_thu_11.IsChecked = (selectedPerson.WorkHour[4][2]) ? true : false;
+            matrix1.cb_thu_12.IsChecked = (selectedPerson.WorkHour[4][3]) ? true : false;
+            matrix1.cb_thu_13.IsChecked = (selectedPerson.WorkHour[4][4]) ? true : false;
+            matrix1.cb_thu_14.IsChecked = (selectedPerson.WorkHour[4][5]) ? true : false;
+
+
+            // matrix1.DataContext =((testerDataGrid. ));
+
         }
     }
 }
