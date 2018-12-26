@@ -64,6 +64,11 @@ namespace BL
             
         }
 
+        public void updateTester(Tester tester, string id)
+        {
+            MyDal.UpdateTester(tester,id);
+        }
+
         public void deleteTester(Tester tester)
         {
             MyDal.DeleteTester(tester);
@@ -150,6 +155,8 @@ namespace BL
         {
             return MyDal.getAllTests();
         }
-#endregion
+
+      
+        #endregion
     }
 }

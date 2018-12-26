@@ -21,7 +21,8 @@ namespace PL
     /// </summary>
     public partial class UpdateTesterWindow : Window
     {
-        
+
+        Tester orginalTester;
         public UpdateTesterWindow()
         {
             InitializeComponent();
@@ -32,7 +33,7 @@ namespace PL
 
             birthdayDatePicker.DisplayDateStart = DateTime.Now.AddYears(-BL.MyBL.Instance.getMaximumAge());
             birthdayDatePicker.DisplayDateEnd = DateTime.Now.AddYears(-BL.MyBL.Instance.getMinimumAgeOfTester());
-            
+           
         }
 
         private void UpdateTester_Click(object sender, RoutedEventArgs e)
@@ -82,30 +83,48 @@ namespace PL
                 temp_workHour[4][5] = (bool)matrix.cb_thu_14.IsChecked;
 
             #endregion
-            if (AllFieldOK(temp_workHour))
+            string[] address=Tools.StringToStringArry(addressTexBox.Text,",");
+            if (AllFieldOK(temp_workHour,address))
             {
-                //Tester temp= (new Tester("111", firstNameTextBox.Text, lastNameTextBox.Text, birthdayDatePicker.DisplayDate, new Address(" ", 0, " sd"), (BE.Gender)genderComboBox.SelectedValue, "8", 1, 1, (BE.CarType)1, (BE.GearBox)1, temp_workHour, 0))
-                MyBL.Instance.updateTester(new Tester(ID.Text, firstNameTextBox.Text, lastNameTextBox.Text, birthdayDatePicker.DisplayDate, new Address(" ", 0, " sd"), (BE.Gender)genderComboBox.SelectedValue, phoneNumberTextBox.Text,int.Parse( expYearsTextBox.Text),int.Parse( maxTestInWeekTextBox.Text), (BE.CarType)carTypeComboBox.SelectedValue, (BE.GearBox)gearBoxComboBox.SelectedValue, temp_workHour, 0));
-                this.Close();
+                try
+                {
+
+                    if (ID.Text== orginalTester.Id)
+                    {
+                        MyBL.Instance.updateTester(new Tester(ID.Text, firstNameTextBox.Text, lastNameTextBox.Text, birthdayDatePicker.DisplayDate, new Address(" ", 0, " sd"), (BE.Gender)genderComboBox.SelectedValue, phoneNumberTextBox.Text, int.Parse(expYearsTextBox.Text), int.Parse(maxTestInWeekTextBox.Text), (BE.CarType)carTypeComboBox.SelectedValue, (BE.GearBox)gearBoxComboBox.SelectedValue, temp_workHour, double.Parse(distanceTexBox.Text)));
+
+                    }
+                    else
+                    {
+                        MyBL.Instance.updateTester(new Tester(ID.Text, firstNameTextBox.Text, lastNameTextBox.Text, birthdayDatePicker.DisplayDate, new Address(address[0],int.Parse( address[2]), address[1]), (BE.Gender)genderComboBox.SelectedValue, phoneNumberTextBox.Text, int.Parse(expYearsTextBox.Text), int.Parse(maxTestInWeekTextBox.Text), (BE.CarType)carTypeComboBox.SelectedValue, (BE.GearBox)gearBoxComboBox.SelectedValue, temp_workHour, double.Parse(distanceTexBox.Text)), orginalTester.Id);
+                    }
+                    this.Close();
+                }
+                catch (Exception msg)
+                {
+
+                    MessageBox.Show(msg.Message, "Exception", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
 
-        private bool AllFieldOK(bool [][] temp_workHour)
+        private bool AllFieldOK(bool [][] temp_workHour, string[] address)
         {
             string msg = "problems:\n";
-            int temp=0;
+            long temp=0;
+            double temp2;
             bool flag = false,workHourFlag=false;
 
-            //if (ID.Text.Length < 8 || !int.TryParse(ID.Text, out temp)) //the id need at least 8 digits and only digits so it can be convert to int
-            //{
-            //    msg += "--the id need at least 8 digits and only digits\n";
-            //    labelID.Foreground = Brushes.Red;
-            //    flag = true;
-            //}
-            //else
-            //{
-            //    labelID.Foreground = Brushes.Black;
-            //}
+            if (ID.Text.Length < 8 || !long.TryParse(ID.Text, out temp)) //the id need at least 8 digits and only digits so it can be convert to int
+            {
+                msg += "--the id need at least 8 digits and only digits\n";
+                labelID.Foreground = Brushes.Red;
+                flag = true;
+            }
+            else
+            {
+                labelID.Foreground = Brushes.Black;
+            }
 
             if (firstNameTextBox.Text=="")
             {
@@ -129,7 +148,7 @@ namespace PL
                 labelLastName.Foreground = Brushes.Black;
             }
 
-            if (maxTestInWeekTextBox.Text == ""|| !int.TryParse(maxTestInWeekTextBox.Text, out temp)||temp<1)//need only digits and must work atleast one time at week
+            if (maxTestInWeekTextBox.Text == ""|| !long.TryParse(maxTestInWeekTextBox.Text, out temp)||temp<1)//need only digits and must work atleast one time at week
             {
                 msg += "--need work hour, digits only\n";
                 labelMaxTestInWeek.Foreground = Brushes.Red;
@@ -151,7 +170,7 @@ namespace PL
                 labelBirthDay.Foreground = Brushes.Black;
             }
 
-            if (expYearsTextBox.Text == "" || !int.TryParse(expYearsTextBox.Text, out temp))
+            if (expYearsTextBox.Text == "" || !long.TryParse(expYearsTextBox.Text, out temp))
             {
                 msg += "--need exp years,digits only\n";
                 labelExpYears.Foreground = Brushes.Red;
@@ -162,7 +181,7 @@ namespace PL
                 labelExpYears.Foreground = Brushes.Black;
             }
 
-            if (phoneNumberTextBox.Text == "" || !int.TryParse(phoneNumberTextBox.Text, out temp)||phoneNumberTextBox.Text.Length<7)
+            if (phoneNumberTextBox.Text == "" || !long.TryParse(phoneNumberTextBox.Text, out temp)||phoneNumberTextBox.Text.Length<7)
             {
                 msg += "--need phone number, digits only, at least 7 digits\n";
                 labelPhoneNumber.Foreground = Brushes.Red;
@@ -174,27 +193,47 @@ namespace PL
             }
 
 
-            //foreach (bool[] arr in temp_workHour)
-            //{
-            //    foreach (bool item in arr)
-            //    {
-            //        if (item)
-            //            workHourFlag = true;
-            //        break;
-            //    }
-            //    if (workHourFlag)
-            //        break;
-            //}
-            //if(!workHourFlag)
-            //{
-            //    msg += "--need work hour, at least one\n";
-            //    labelWorkHours.Foreground = Brushes.Red;
-            //    return false;
-            //}
-            //else
-            //{
-            //    labelWorkHours.Foreground = Brushes.Black;
-            //}
+            for (int i = 0; i < temp_workHour.GetLength(0); i++)
+            {
+                for (int j = 0; j < temp_workHour[i].Length; j++)
+                {
+                    if (temp_workHour[i][j])
+                        workHourFlag = true;
+                }
+            }
+                   
+            if (!workHourFlag)
+            {
+                msg += "--need work hour, at least one\n";
+                labelWorkHours.Foreground = Brushes.Red;
+               flag=true;
+            }
+            else
+            {
+                labelWorkHours.Foreground = Brushes.Black;
+            }
+
+            if (distanceTexBox.Text == "" || !double.TryParse(distanceTexBox.Text, out temp2) )
+            {
+                msg += "--need distance, digits only, cant be negative value \n";
+                labelDistance.Foreground = Brushes.Red;
+                flag = true;
+            }
+            else
+            {
+                labelDistance.Foreground = Brushes.Black;
+            }
+
+            if (addressTexBox.Text == "" || !int.TryParse(address[2], out int temp3)||temp3<1) //address [2] is the house number and he need to be more then 0
+            {
+                msg += "--need address, city street house number separated by a comma, house number must be a digit and bigger then 0 \n";
+                labelAddress.Foreground = Brushes.Red;
+                flag = true;
+            }
+            else
+            {
+                labelAddress.Foreground = Brushes.Black;
+            }
 
             if (flag)
             {
@@ -203,6 +242,12 @@ namespace PL
                 return false;
             }
            return true;
+        }
+
+        private void Window_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if(orginalTester==null)
+            orginalTester = (Tester)((Tester)DataContext).Clone();//save the orginal data
         }
     }
 }

@@ -33,6 +33,7 @@ namespace DAL
         void UpdateTest(Test t);
         List<Test> getAllTests();
         List<Test> GetTestList(Func<Test, bool> p);
+        void UpdateTester(Tester tester, string id);
         #endregion
     }
 }

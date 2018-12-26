@@ -233,7 +233,26 @@ namespace DAL
             return DataSource.tests.Clone().ToList();
         }
 
-       
+        public void UpdateTester(Tester tester, string id)
+        {
+            int index = 0;
+            foreach (Tester item in DataSource.testers)
+            {
+                if (item.Id == id)
+                {
+                    DataSource.testers[index] = tester;
+                    this.OnNotifyCollectionChanged(
+        new NotifyCollectionChangedEventArgs(
+          NotifyCollectionChangedAction.Add, tester));
+                    return;
+                }
+                index++;
+            }
+            throw new Exception("failed to update, the tester old ID not found");
+
+        }
+
+
         #endregion test
 
     }

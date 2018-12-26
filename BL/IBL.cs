@@ -18,7 +18,7 @@ namespace BL
         #region trainee
         void addTrainee(Trainee trainee);
         void deleteTrainee(Trainee trainee);
-        //void updateTrainee(Tester tester, string name);
+      //  void updateTrainee(Trainee tester, string id);
         //void updateTrainee(Trainee trainee, Trainee newTrainee);
         List<Trainee> getAllTrainees();
 
@@ -27,7 +27,7 @@ namespace BL
         #region Tester
         void addTester(Tester tester);
         void deleteTester(Tester tester);
-        //void updateTester(Tester tester, string name);
+        void updateTester(Tester tester, string id);
         //void updateTester(Tester tester, Tester newtester);
         List<Tester> getAllTester();
         
