@@ -74,9 +74,9 @@ namespace PL
         private void TesterDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             //didnt work...
-           if (testerDataGrid.SelectedItem == null) return;
-            var selectedPerson = (testerDataGrid.SelectedItem) as Tester;
-            matrix1.DataContext = selectedPerson.WorkHour;
+           //if (testerDataGrid.SelectedItem == null) return;
+           // var selectedPerson = (testerDataGrid.SelectedItem) as Tester;
+           // matrix1.DataContext = selectedPerson.WorkHour;
             
 
             //MessageBox.Show(string.Format("The Person you double cl

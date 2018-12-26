@@ -83,20 +83,21 @@ namespace PL
                 temp_workHour[4][5] = (bool)matrix.cb_thu_14.IsChecked;
 
             #endregion
-            string[] address=Tools.StringToStringArry(addressTexBox.Text,",");
-            if (AllFieldOK(temp_workHour,address))
+
+            if (AllFieldOK(temp_workHour)) 
             {
                 try
                 {
 
-                    if (ID.Text== orginalTester.Id)
+                    if (true/*ID.Text== orginalTester.Id*/)
                     {
-                        MyBL.Instance.updateTester(new Tester(ID.Text, firstNameTextBox.Text, lastNameTextBox.Text, birthdayDatePicker.DisplayDate, new Address(" ", 0, " sd"), (BE.Gender)genderComboBox.SelectedValue, phoneNumberTextBox.Text, int.Parse(expYearsTextBox.Text), int.Parse(maxTestInWeekTextBox.Text), (BE.CarType)carTypeComboBox.SelectedValue, (BE.GearBox)gearBoxComboBox.SelectedValue, temp_workHour, double.Parse(distanceTexBox.Text)));
+                        MyBL.Instance.updateTester(new Tester(ID.Text, firstNameTextBox.Text, lastNameTextBox.Text, birthdayDatePicker.DisplayDate, new Address(street.Text, int.Parse(houseNumberTextBox.Text), city.Text), (BE.Gender)genderComboBox.SelectedValue, phoneNumberTextBox.Text, int.Parse(expYearsTextBox.Text), int.Parse(maxTestInWeekTextBox.Text), (BE.CarType)carTypeComboBox.SelectedValue, (BE.GearBox)gearBoxComboBox.SelectedValue, temp_workHour, double.Parse(distanceTexBox.Text)));
 
                     }
                     else
                     {
-                        MyBL.Instance.updateTester(new Tester(ID.Text, firstNameTextBox.Text, lastNameTextBox.Text, birthdayDatePicker.DisplayDate, new Address(address[0],int.Parse( address[2]), address[1]), (BE.Gender)genderComboBox.SelectedValue, phoneNumberTextBox.Text, int.Parse(expYearsTextBox.Text), int.Parse(maxTestInWeekTextBox.Text), (BE.CarType)carTypeComboBox.SelectedValue, (BE.GearBox)gearBoxComboBox.SelectedValue, temp_workHour, double.Parse(distanceTexBox.Text)), orginalTester.Id);
+                        
+                       // MyBL.Instance.updateTester(new Tester(ID.Text, firstNameTextBox.Text, lastNameTextBox.Text, birthdayDatePicker.DisplayDate, new Address(street.Text, int.Parse(houseNumberTextBox.Text), city.Text), (BE.Gender)genderComboBox.SelectedValue, phoneNumberTextBox.Text, int.Parse(expYearsTextBox.Text), int.Parse(maxTestInWeekTextBox.Text), (BE.CarType)carTypeComboBox.SelectedValue, (BE.GearBox)gearBoxComboBox.SelectedValue, temp_workHour, double.Parse(distanceTexBox.Text)), orginalTester.Id);
                     }
                     this.Close();
                 }
@@ -108,22 +109,33 @@ namespace PL
             }
         }
 
-        private bool AllFieldOK(bool [][] temp_workHour, string[] address)
+        private bool AllFieldOK(bool [][] temp_workHour)
         {
             string msg = "problems:\n";
             long temp=0;
             double temp2;
             bool flag = false,workHourFlag=false;
 
-            if (ID.Text.Length < 8 || !long.TryParse(ID.Text, out temp)) //the id need at least 8 digits and only digits so it can be convert to int
+            //if (ID.Text.Length < 8 || !long.TryParse(ID.Text, out temp)) //the id need at least 8 digits and only digits so it can be convert to int
+            //{
+            //    msg += "--the id need at least 8 digits and only digits\n";
+            //    labelID.Foreground = Brushes.Red;
+            //    flag = true;
+            //}
+            //else
+            //{
+            //    labelID.Foreground = Brushes.Black;
+            //}
+
+            if (houseNumberTextBox.Text == "" || !long.TryParse(houseNumberTextBox.Text, out temp) || temp < 1)
             {
-                msg += "--the id need at least 8 digits and only digits\n";
-                labelID.Foreground = Brushes.Red;
+                msg += "--house number could contain digits only\n";
+                labelhouseNumber.Foreground = Brushes.Red;
                 flag = true;
             }
             else
             {
-                labelID.Foreground = Brushes.Black;
+                labelhouseNumber.Foreground = Brushes.Black;
             }
 
             if (firstNameTextBox.Text=="")
@@ -224,16 +236,16 @@ namespace PL
                 labelDistance.Foreground = Brushes.Black;
             }
 
-            if (addressTexBox.Text == "" || !int.TryParse(address[2], out int temp3)||temp3<1) //address [2] is the house number and he need to be more then 0
-            {
-                msg += "--need address, city street house number separated by a comma, house number must be a digit and bigger then 0 \n";
-                labelAddress.Foreground = Brushes.Red;
-                flag = true;
-            }
-            else
-            {
-                labelAddress.Foreground = Brushes.Black;
-            }
+            //if (addressTexBox.Text == "" || !int.TryParse(address[2], out int temp3)||temp3<1) //address [2] is the house number and he need to be more then 0
+            //{
+            //    msg += "--need address, city street house number separated by a comma, house number must be a digit and bigger then 0 \n";
+            //    labelAddress.Foreground = Brushes.Red;
+            //    flag = true;
+            //}
+            //else
+            //{
+            //    labelAddress.Foreground = Brushes.Black;
+            //}
 
             if (flag)
             {
