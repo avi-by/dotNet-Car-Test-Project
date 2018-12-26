@@ -21,8 +21,8 @@ namespace PL
     /// </summary>
     public partial class UpdateTesterWindow : Window
     {
-
         Tester orginalTester;
+
         public UpdateTesterWindow()
         {
             InitializeComponent();
@@ -33,15 +33,17 @@ namespace PL
 
             birthdayDatePicker.DisplayDateStart = DateTime.Now.AddYears(-BL.MyBL.Instance.getMaximumAge());
             birthdayDatePicker.DisplayDateEnd = DateTime.Now.AddYears(-BL.MyBL.Instance.getMinimumAgeOfTester());
+
            
         }
 
         private void UpdateTester_Click(object sender, RoutedEventArgs e)
         {
-           
-                #region temp workHour from checkboxes
-                //create_temporaty_workHour
-                bool[][] temp_workHour = new bool[5][];
+           orginalTester = (this.DataContext) as Tester;
+
+            #region temp workHour from checkboxes
+            //create_temporaty_workHour
+            bool[][] temp_workHour = new bool[5][];
                 for (int i = 0; i < temp_workHour.Length; i++)
                 {
                     temp_workHour[i] = new bool[6];
@@ -89,7 +91,7 @@ namespace PL
                 try
                 {
 
-                    if (true/*ID.Text== orginalTester.Id*/)
+                    if (ID.Text== orginalTester.Id)
                     {
                         MyBL.Instance.updateTester(new Tester(ID.Text, firstNameTextBox.Text, lastNameTextBox.Text, birthdayDatePicker.DisplayDate, new Address(street.Text, int.Parse(houseNumberTextBox.Text), city.Text), (BE.Gender)genderComboBox.SelectedValue, phoneNumberTextBox.Text, int.Parse(expYearsTextBox.Text), int.Parse(maxTestInWeekTextBox.Text), (BE.CarType)carTypeComboBox.SelectedValue, (BE.GearBox)gearBoxComboBox.SelectedValue, temp_workHour, double.Parse(distanceTexBox.Text)));
 
@@ -97,7 +99,7 @@ namespace PL
                     else
                     {
                         
-                       // MyBL.Instance.updateTester(new Tester(ID.Text, firstNameTextBox.Text, lastNameTextBox.Text, birthdayDatePicker.DisplayDate, new Address(street.Text, int.Parse(houseNumberTextBox.Text), city.Text), (BE.Gender)genderComboBox.SelectedValue, phoneNumberTextBox.Text, int.Parse(expYearsTextBox.Text), int.Parse(maxTestInWeekTextBox.Text), (BE.CarType)carTypeComboBox.SelectedValue, (BE.GearBox)gearBoxComboBox.SelectedValue, temp_workHour, double.Parse(distanceTexBox.Text)), orginalTester.Id);
+                       MyBL.Instance.updateTester(new Tester(ID.Text, firstNameTextBox.Text, lastNameTextBox.Text, birthdayDatePicker.DisplayDate, new Address(street.Text, int.Parse(houseNumberTextBox.Text), city.Text), (BE.Gender)genderComboBox.SelectedValue, phoneNumberTextBox.Text, int.Parse(expYearsTextBox.Text), int.Parse(maxTestInWeekTextBox.Text), (BE.CarType)carTypeComboBox.SelectedValue, (BE.GearBox)gearBoxComboBox.SelectedValue, temp_workHour, double.Parse(distanceTexBox.Text)), orginalTester.Id);
                     }
                     this.Close();
                 }
@@ -258,8 +260,8 @@ namespace PL
 
         private void Window_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            if(orginalTester==null)
-            orginalTester = (Tester)((Tester)DataContext).Clone();//save the orginal data
+            //if(orginalTester==null) 
+            orginalTester = (Tester)((Tester)this.DataContext).Clone();//save the orginal data
         }
     }
 }
