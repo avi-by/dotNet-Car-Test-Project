@@ -20,9 +20,10 @@ namespace BE
         private bool test5_LegalSpeed;
         //...
         private bool succeeded;
+        private GearBox gearBox;
         private string notes;
 
-        public Test(string testerId, string traineeId, DateTime date, DateTime hour, Address address, bool test1_ReverseParking, bool test2_KeepingSafeDistance, bool test3_UsingMirrors, bool test4_UsingTurnSignals, bool test5_LegalSpeed, bool succeeded, string notes)
+        public Test(string testerId, string traineeId,GearBox gear, DateTime date, DateTime hour, Address address, bool test1_ReverseParking, bool test2_KeepingSafeDistance, bool test3_UsingMirrors, bool test4_UsingTurnSignals, bool test5_LegalSpeed, bool succeeded, string notes)
         {
             this.testerId = testerId;
             this.traineeId = traineeId;
@@ -35,6 +36,7 @@ namespace BE
             this.test5_LegalSpeed = test5_LegalSpeed;
             this.succeeded = succeeded;
             this.notes = notes;
+            GearBox = gear;
         }
 
         public string Id { get => id; set => id = value; }
@@ -49,6 +51,7 @@ namespace BE
         public bool Test5_LegalSpeed { get => test5_LegalSpeed; set => test5_LegalSpeed = value; }
         public bool Succeeded { get => succeeded; set => succeeded = value; }
         public string Notes { get => notes; set => notes = value; }
+        public GearBox GearBox { get => gearBox; set => gearBox = value; }
 
         public object Clone()
         {

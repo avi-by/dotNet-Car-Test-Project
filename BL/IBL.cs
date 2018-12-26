@@ -22,6 +22,7 @@ namespace BL
         //void updateTrainee(Trainee trainee, Trainee newTrainee);
         List<Trainee> getAllTrainees();
 
+
         #endregion
 
         #region Tester
