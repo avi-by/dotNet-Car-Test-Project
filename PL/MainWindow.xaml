@@ -47,6 +47,10 @@
                 <DataGridTextColumn x:Name="CarType" Binding="{Binding CarType}" Header="CarType" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="GearBox" Binding="{Binding GearBox}" Header="GearBox" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="DateBirth" Binding="{Binding Path=DateBirth}" Header="DateBirth" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="maxDistance" Binding="{Binding Distance}" Header="max distance" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="houseNumber" Binding="{Binding houseNumber}" Header="house Number" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="street" Binding="{Binding street}" Header="street" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="city" Binding="{Binding city}" Header="city" Width="SizeToHeader"/>
 
 
             </DataGrid.Columns>

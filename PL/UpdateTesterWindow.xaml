@@ -7,7 +7,7 @@
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:BE="clr-namespace:BE;assembly=BE" x:Class="PL.UpdateTesterWindow"
         mc:Ignorable="d"
-        Title="UpdateTesterWindow"  >
+        Title="UpdateTesterWindow" Height="599.333" Width="755.333"  >
     <Window.Resources>
         <ObjectDataProvider x:Key="dataFromEnum" MethodName="GetValues"
                         ObjectType="{x:Type sys:Enum}">
@@ -19,7 +19,7 @@
             </ObjectDataProvider.MethodParameters>
         </ObjectDataProvider>
     </Window.Resources>
-    <Grid Name="windowGrid" >
+    <Grid Name="windowGrid"  >
         <Grid.RowDefinitions>
 
             <RowDefinition Height="Auto" />
@@ -29,13 +29,13 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" MinHeight="28.667" />
-            <RowDefinition Height="Auto" MinHeight="42" />
-            <RowDefinition Height="Auto" MinHeight="33.333" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
 
 
@@ -84,7 +84,7 @@
 
         <local:UserControl1  x:Name="matrix" Grid.Row="8" Grid.Column="1" DataContext="WorkHour" Margin="0.333,28.333,-0.667,1" Grid.RowSpan="2"/>
         <Button Content="update tester" Name="UpdateTester" Grid.Row="
-                13" Grid.Column="1" Margin="99.333,2,19.667,1.333" RenderTransformOrigin="0.501,0.5" Click="UpdateTester_Click"/>
+                13" Grid.Column="1"  RenderTransformOrigin="0.501,0.5" Click="UpdateTester_Click" Margin="170,0,-0.333,0"/>
 
         <TextBox x:Name="street" Grid.Column="1" HorizontalAlignment="Left"  Height="23"  Grid.Row="11"  VerticalAlignment="Center" Width="53" Margin="99.333,9.333,0,9.667" Text="{Binding Path=street , Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
         <TextBox x:Name="city" Grid.Column="1" HorizontalAlignment="Left"  Height="23"  Grid.Row="11"  VerticalAlignment="Center" Width="76" Margin="180.333,9.333,0,9.667" Text="{Binding Path=city , Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
@@ -92,10 +92,11 @@
         <Label Content="street" Grid.Column="1" HorizontalAlignment="Left"  Grid.Row="11" VerticalAlignment="Center" Height="26" Margin="59.333,8.333,0,7.667" Width="41" RenderTransformOrigin="1.283,0.5"/>
         <Label Content="city" Grid.Column="1" HorizontalAlignment="Left"  Grid.Row="11" VerticalAlignment="Center" Height="26" Margin="152.333,8.333,0,7.667" Width="41" RenderTransformOrigin="1.283,0.5"/>
         <Label Content="adress:" Grid.Column="0" HorizontalAlignment="Left"  Grid.Row="11" VerticalAlignment="Center" Height="26" Margin="0,8.333,0,7.667" Width="47" />
-        <TextBox x:Name="houseNumberTextBox" Grid.Column="1" HorizontalAlignment="Left"  Height="23"  Grid.Row="11"  VerticalAlignment="Center" Width="29" Margin="29.333,9.333,0,9.667" Text="{Binding Path=houseNumber , Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+        <TextBox x:Name="houseNumberTextBox" Grid.Column="1" HorizontalAlignment="Left"  Height="23"  Grid.Row="11"  VerticalAlignment="Center" Width="29" Margin="29.333,9.333,0,9.667" DataContext="Address" Text="{Binding Path=houseNumber, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+
 
         <Label x:Name="labelDistance" Content="Max Distance :" Grid.Column="0" HorizontalAlignment="Left" Grid.Row="12" VerticalAlignment="Center" Height="26" Margin="0,3.333,0,4" Width="87"/>
-        <TextBox x:Name="distanceTexBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Grid.Row="12" Text="{Binding distance, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" Margin="0.333,5.333,0,5"/>
+        <TextBox x:Name="distanceTexBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Grid.Row="12" Text="{Binding Distance, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" Margin="0.333,5.333,0,5"/>
 
 
     </Grid>

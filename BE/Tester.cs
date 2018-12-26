@@ -113,12 +113,14 @@ namespace BE
         public DateTime BirthDate { get { return birthDate; } set { birthDate = value; } }
         public Gender Gender { get => gender; set => gender = value; }
         public string PhoneNumber { get => phoneNumber; set => phoneNumber = value; }
-        public Address Address { get => address; set => address = value; }
+        public Address Address {get { return address; } set{ address = value;
+                if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs("Address"));}}
         public int ExpYears { get => expYears; set => expYears = value; }
         public int MaxTestInWeek { get => maxTestInWeek; set => maxTestInWeek = value; }
         public CarType CarType { get => carType; set => carType = value; }
         public GearBox GearBox { get => gearBox; set => gearBox = value; }
-        public bool[][] WorkHour { get => workHour; set => workHour = value; }
+        public bool[][] WorkHour { get { return workHour; } set { workHour = value;
+                if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs("WorkHour"));}}
         public double Distance { get => distance; set => distance = value; }
         public int Age
         {
