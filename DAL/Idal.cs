@@ -34,6 +34,8 @@ namespace DAL
         List<Test> getAllTests();
         List<Test> GetTestList(Func<Test, bool> p);
         void UpdateTester(Tester tester, string id);
+        Tester findTester(string testerId);
+        Trainee findTrainee(string traineeId);
         #endregion
     }
 }

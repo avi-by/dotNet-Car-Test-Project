@@ -252,6 +252,10 @@ namespace DAL
 
         }
 
+        public Tester findTester(string testerId) => DataSource.testers.Find(item => item.Id == testerId);
+
+        public Trainee findTrainee(string traineeId) => DataSource.trainees.Find(item => item.Id == traineeId);
+
 
         #endregion test
 
