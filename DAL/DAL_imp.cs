@@ -49,6 +49,7 @@ namespace DAL
 
         public void UpdateTester(Tester tester)
         {
+           
             int index = 0; 
             foreach (Tester item in DataSource.testers)
             {
@@ -64,6 +65,7 @@ namespace DAL
             }
             throw new Exception("failed to update, tester with the same ID not found");
         }
+
 
         public List<Test> GetTestList(Func<Test, bool> p)
         {
@@ -183,6 +185,12 @@ namespace DAL
         public void AddTest(Test test)
         {
             test.Id = Configuration.test_id.ToString();
+            //add 0 at the start of the id antil there is 8 digits
+            StringBuilder builder = new StringBuilder();
+            for (int i = test.Id.Length; i < 8; i++)
+                builder.Append(0);
+            builder.Append(test.Id);
+            test.Id = builder.ToString();
             Configuration.test_id++;
             DataSource.tests.Add(test);
         }
@@ -203,6 +211,10 @@ namespace DAL
 
         public void UpdateTest(Test test)
         {
+            if (test.Id==null)
+            {
+                throw new Exception("failed to update, cant make test without ID");
+            }
             int index = 0; ;
             foreach (Test item in DataSource.tests)
             {

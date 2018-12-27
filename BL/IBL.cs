@@ -13,7 +13,8 @@ namespace BL
         void AddTest(Test test);
         void DeleteTest(Test test);
         List<Test> getAllTests();
-
+        void updateTest(Test test);
+        void completedTest(Test test);
         #endregion
         #region trainee
         void addTrainee(Trainee trainee);
