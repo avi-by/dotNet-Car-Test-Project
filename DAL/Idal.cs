@@ -14,8 +14,12 @@ namespace DAL
         void AddTester(Tester t);
         void DeleteTester(Tester t);
         void UpdateTester(Tester t);
+        void UpdateTester(Tester tester, string id);
+        Tester findTester(string testerId);
         List<Tester> getAllTesters();
         #endregion
+
+
 
         #region Trainee
 
@@ -23,9 +27,12 @@ namespace DAL
         void DeleteTrainee(Trainee t);
         void UpdateTrainee(Trainee t);
         List<Trainee> getAllTrainees();
-
+        Trainee findTrainee(string traineeId);
+        void UpdateTrainee(Trainee tester, string id);
         #endregion
-       
+
+
+
         #region Test
 
         void AddTest(Test t);
@@ -33,9 +40,6 @@ namespace DAL
         void UpdateTest(Test t);
         List<Test> getAllTests();
         List<Test> GetTestList(Func<Test, bool> p);
-        void UpdateTester(Tester tester, string id);
-        Tester findTester(string testerId);
-        Trainee findTrainee(string traineeId);
         #endregion
     }
 }

@@ -20,7 +20,7 @@ namespace BE
         private string schoolName;
         private string teacherName;
         private int numberOfLesson;
-        private int amountOfTests;
+     //   private int amountOfTests;
 
         public Trainee(string id, string name, int age, Address address, string schoolName="", string teacherName="", int numberOfLesson=0, string phoneNumber="00000", Gender gender = Gender.MALE, CarType carType = CarType.PrivetCar, GearBox gearBox = GearBox.Manual)
         {
@@ -39,7 +39,7 @@ namespace BE
             SchoolName = schoolName;
             TeacherName = teacherName;
             NumberOfLesson = numberOfLesson;
-            AmountOfTests = 0;
+     //       AmountOfTests = 0;
         }
 
         public Trainee(string id, string firstName, string lastName, DateTime birthDay, string schoolName, string teacherName, int numberOfLesson, string phoneNumber, Address address, Gender gender=Gender.MALE,  CarType carType=CarType.PrivetCar, GearBox gearBox=GearBox.Manual)
@@ -85,7 +85,7 @@ namespace BE
             set => BirthDate = new DateTime(DateTime.Now.Year - value, 1, 1);//default month and day if enter only age
         }
 
-        public int AmountOfTests { get => amountOfTests; set => amountOfTests = value; }
+    //    public int AmountOfTests { get => amountOfTests; set => amountOfTests = value; }
 
         public object Clone()
         {

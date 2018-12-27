@@ -38,16 +38,6 @@ namespace DAL
         }
 
         #region Tester
-        //public void AddTester(Tester t)
-        //{
-        //    DataSource.testers.Add(t);
-        //}
-
-        //public void AddTester(string name)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
 
         public void DeleteTester(Tester tester)
         {
@@ -55,8 +45,6 @@ namespace DAL
                 throw new Exception("failed to remove, tester with the same ID not found");
 
         }
-
-
 
 
         public void UpdateTester(Tester tester)
@@ -178,7 +166,7 @@ namespace DAL
 
                 case "amountOfTests":
                     group = from trainee in DataSource.trainees
-                            group trainee by trainee.AmountOfTests;
+                            group trainee by GetTestList(item => item.Car == trainee.CarType && item.GearBox == trainee.GearBox && item.TraineeId == trainee.Id).Count;
                     listOfTrainees = (group as List<Trainee>).Clone();
                     break;
 
@@ -255,6 +243,22 @@ namespace DAL
         public Tester findTester(string testerId) => DataSource.testers.Find(item => item.Id == testerId);
 
         public Trainee findTrainee(string traineeId) => DataSource.trainees.Find(item => item.Id == traineeId);
+
+        public void UpdateTrainee(Trainee trainee, string id)
+        {
+            int index = 0; ;
+            foreach (Trainee item in DataSource.trainees)
+            {
+                if (item.Id == id)
+                {
+                    DataSource.trainees[index] = trainee;
+                    break;
+                }
+                index++;
+            }
+            throw new Exception("failed to update, trainee with the same ID not found");
+
+        }
 
 
         #endregion test
