@@ -36,30 +36,27 @@
                                 <ColumnDefinition Width="316*"/>
                             </Grid.ColumnDefinitions>
                             <Button x:Name="pbTester" Content="Add Tetser" HorizontalAlignment="Left" Margin="55,15,0,0" VerticalAlignment="Top" Width="75" Click="pbTester_Click" Height="19"/>
-                            <DataGrid x:Name="testerDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}"  RowDetailsVisibilityMode="VisibleWhenSelected" Margin="10,39,21.333,26.667" MouseDoubleClick="TesterDataGrid_MouseDoubleClick" HorizontalContentAlignment="Center" SelectionChanged="TesterDataGrid_SelectionChanged" IsReadOnly="True">
+                            <DataGrid x:Name="testerDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}"  RowDetailsVisibilityMode="VisibleWhenSelected" Margin="10,39,21.333,26.667" MouseDoubleClick="TesterDataGrid_MouseDoubleClick" HorizontalContentAlignment="Center" SelectionChanged="TesterDataGrid_SelectionChanged" IsReadOnly="True" MinHeight="23" MinRowHeight="23">
 
                                 <DataGrid.Columns>
+                                    <DataGridTextColumn x:Name="nameColumn" Binding="{Binding FirstName}" Header="First Name" />
+                                    <DataGridTextColumn x:Name="lastnameColumn" Binding="{Binding LastName}" Header="Last Name" />
 
 
                                     <DataGridTextColumn x:Name="IdColumn" Binding="{Binding Id}" Header="Id" />
-                                    <DataGridTextColumn x:Name="ageColumn" Binding="{Binding Age}" Header="Age" IsReadOnly="True" Width="SizeToHeader"/>
-                                    <DataGridTextColumn x:Name="nameColumn" Binding="{Binding FirstName}" Header="First Name" Width="SizeToHeader"/>
-                                    <DataGridTextColumn x:Name="lastnameColumn" Binding="{Binding LastName}" Header="Last Name" Width="SizeToHeader"/>
-                                    <DataGridTextColumn x:Name="genderColumn" Binding="{Binding Gender}" Header="Gender" Width="SizeToHeader"/>
-                                    <DataGridTextColumn x:Name="phoneNumberColumn" Binding="{Binding PhoneNumber}" Header="Phone number" Width="SizeToHeader"/>
-                                    <DataGridTextColumn x:Name="addressColumn2" Binding="{Binding Address}" Header="Address" Width="SizeToHeader"/>
+                                    <DataGridTextColumn x:Name="ageColumn" Binding="{Binding Age}" Header="Age" IsReadOnly="True" />
+                                    <DataGridTextColumn x:Name="genderColumn" Binding="{Binding Gender}" Header="Gender" />
+                                    <DataGridTextColumn x:Name="phoneNumberColumn" Binding="{Binding PhoneNumber}" Header="Phone number" />
+                                    <DataGridTextColumn x:Name="addressColumn2" Binding="{Binding Address}" Header="Address" />
                                    
              
 
-                                    <DataGridTextColumn x:Name="ExpYears" Binding="{Binding ExpYears}" Header="ExpYears" Width="SizeToHeader"/>
-                                    <DataGridTextColumn x:Name="MaxTestInWeek" Binding="{Binding MaxTestInWeek}" Header="MxTestsWeek" Width="SizeToHeader"/>
-                                    <DataGridTextColumn x:Name="CarType" Binding="{Binding CarType}" Header="CarType" Width="SizeToHeader"/>
-                                    <DataGridTextColumn x:Name="GearBox" Binding="{Binding GearBox}" Header="GearBox" Width="SizeToHeader"/>
-                                    <DataGridTextColumn x:Name="DateBirth" Binding="{Binding Path=DateBirth}" Header="DateBirth" Width="SizeToHeader"/>
-                                    <DataGridTextColumn x:Name="maxDistance" Binding="{Binding Distance}" Header="max distance" Width="SizeToHeader"/>
-                                    <DataGridTextColumn x:Name="houseNumber" Binding="{Binding houseNumber}" Header="house Number" Width="SizeToHeader"/>
-                                    <DataGridTextColumn x:Name="street" Binding="{Binding street}" Header="street" Width="SizeToHeader"/>
-                                    <DataGridTextColumn x:Name="city" Binding="{Binding city}" Header="city" Width="SizeToHeader"/>
+                                    <DataGridTextColumn x:Name="ExpYears" Binding="{Binding ExpYears}" Header="ExpYears" />
+                                    <DataGridTextColumn x:Name="MaxTestInWeek" Binding="{Binding MaxTestInWeek}" Header="MxTestsWeek" />
+                                    <DataGridTextColumn x:Name="CarType" Binding="{Binding CarType}" Header="CarType" />
+                                    <DataGridTextColumn x:Name="GearBox" Binding="{Binding GearBox}" Header="GearBox" />
+                                    <DataGridTextColumn x:Name="DateBirth" Binding="{Binding Path=DateBirth}" Header="DateBirth"/>
+                                    <DataGridTextColumn x:Name="maxDistance" Binding="{Binding Distance}" Header="max distance" />
 
 
                                 </DataGrid.Columns>

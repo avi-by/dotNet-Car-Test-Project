@@ -19,30 +19,28 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Label Content="Address:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
-            <TextBox x:Name="addressTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding Address, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
         </Grid>
-        <DataGrid x:Name="traineeDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="62,46,338,204" RowDetailsVisibilityMode="VisibleWhenSelected">
+        <DataGrid x:Name="traineeDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="10,46,338,81" RowDetailsVisibilityMode="VisibleWhenSelected">
             <DataGrid.Columns>
-                <DataGridTextColumn x:Name="addressColumn" Binding="{Binding Address}" Header="Address" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="ageColumn" Binding="{Binding Age}" Header="Age" Width="SizeToHeader"/>
-                <DataGridTemplateColumn x:Name="birthDateColumn" Header="Birth Date" Width="SizeToHeader">
+                <DataGridTextColumn x:Name="addressColumn" Binding="{Binding Address}" Header="Address" />
+                <DataGridTextColumn x:Name="ageColumn" Binding="{Binding Age}" Header="Age" />
+                <DataGridTemplateColumn x:Name="birthDateColumn" Header="Birth Date" >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <DatePicker SelectedDate="{Binding BirthDate, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn x:Name="carTypeColumn" Binding="{Binding CarType}" Header="Car Type" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="firstNameColumn" Binding="{Binding FirstName}" Header="First Name" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="gearBoxColumn" Binding="{Binding GearBox}" Header="Gear Box" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="genderColumn" Binding="{Binding Gender}" Header="Gender" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="idColumn" Binding="{Binding Id}" Header="Id" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="lastNameColumn" Binding="{Binding LastName}" Header="Last Name" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="numberOfLessonColumn" Binding="{Binding NumberOfLesson}" Header="Number Of Lesson" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="phoneNumberColumn" Binding="{Binding PhoneNumber}" Header="Phone Number" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="schoolNameColumn" Binding="{Binding SchoolName}" Header="School Name" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="teacherNameColumn" Binding="{Binding TeacherName}" Header="Teacher Name" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="carTypeColumn" Binding="{Binding CarType}" Header="Car Type" />
+                <DataGridTextColumn x:Name="firstNameColumn" Binding="{Binding FirstName}" Header="First Name" />
+                <DataGridTextColumn x:Name="gearBoxColumn" Binding="{Binding GearBox}" Header="Gear Box" />
+                <DataGridTextColumn x:Name="genderColumn" Binding="{Binding Gender}" Header="Gender" />
+                <DataGridTextColumn x:Name="idColumn" Binding="{Binding Id}" Header="Id" />
+                <DataGridTextColumn x:Name="lastNameColumn" Binding="{Binding LastName}" Header="Last Name" />
+                <DataGridTextColumn x:Name="numberOfLessonColumn" Binding="{Binding NumberOfLesson}" Header="Number Of Lesson" />
+                <DataGridTextColumn x:Name="phoneNumberColumn" Binding="{Binding PhoneNumber}" Header="Phone Number" />
+                <DataGridTextColumn x:Name="schoolNameColumn" Binding="{Binding SchoolName}" Header="School Name" />
+                <DataGridTextColumn x:Name="teacherNameColumn" Binding="{Binding TeacherName}" Header="Teacher Name" />
             </DataGrid.Columns>
         </DataGrid>
 
