@@ -1,12 +1,50 @@
-﻿<UserControl x:Class="PL.Trainees_UserControl"
+﻿<UserControl
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PL"
+             xmlns:BE="clr-namespace:BE;assembly=BE" x:Class="PL.Trainees_UserControl"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
+             d:DesignHeight="450" d:DesignWidth="800" Loaded="UserControl_Loaded_1">
+    <UserControl.Resources>
+        <CollectionViewSource x:Key="traineeViewSource" d:DesignSource="{d:DesignInstance {x:Type BE:Trainee}, CreateList=True}"/>
+    </UserControl.Resources>
+    <Grid DataContext="{StaticResource traineeViewSource}">
+        <Grid x:Name="grid1" HorizontalAlignment="Left" Margin="540,284,0,0" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Label Content="Address:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+            <TextBox x:Name="addressTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding Address, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+        </Grid>
+        <DataGrid x:Name="traineeDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="327,240,73,10" RowDetailsVisibilityMode="VisibleWhenSelected">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="addressColumn" Binding="{Binding Address}" Header="Address" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="ageColumn" Binding="{Binding Age}" Header="Age" Width="SizeToHeader"/>
+                <DataGridTemplateColumn x:Name="birthDateColumn" Header="Birth Date" Width="SizeToHeader">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <DatePicker SelectedDate="{Binding BirthDate, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn x:Name="carTypeColumn" Binding="{Binding CarType}" Header="Car Type" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="firstNameColumn" Binding="{Binding FirstName}" Header="First Name" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="gearBoxColumn" Binding="{Binding GearBox}" Header="Gear Box" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="genderColumn" Binding="{Binding Gender}" Header="Gender" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="idColumn" Binding="{Binding Id}" Header="Id" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="lastNameColumn" Binding="{Binding LastName}" Header="Last Name" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="numberOfLessonColumn" Binding="{Binding NumberOfLesson}" Header="Number Of Lesson" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="phoneNumberColumn" Binding="{Binding PhoneNumber}" Header="Phone Number" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="schoolNameColumn" Binding="{Binding SchoolName}" Header="School Name" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="teacherNameColumn" Binding="{Binding TeacherName}" Header="Teacher Name" Width="SizeToHeader"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
     </Grid>
 </UserControl>

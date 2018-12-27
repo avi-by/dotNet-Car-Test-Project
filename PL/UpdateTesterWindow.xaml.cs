@@ -38,8 +38,7 @@ namespace PL
 
         private void UpdateTester_Click(object sender, RoutedEventArgs e)
         {
-           orginalTester = (this.DataContext) as Tester;
-
+           
             #region temp workHour from checkboxes
             //create_temporaty_workHour
             bool[][] temp_workHour = new bool[5][];
@@ -259,7 +258,7 @@ namespace PL
 
         private void Window_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            //if(orginalTester==null) 
+            if(orginalTester==null) 
             orginalTester = (Tester)((Tester)this.DataContext).Clone();//save the orginal data
         }
     }

@@ -24,6 +24,7 @@ namespace BE
             this.city = city;
         }
 
+        
 
 
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
@@ -45,6 +46,11 @@ namespace BE
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
+        }
+
+        public override string ToString()
+        {
+            return houseNumber + " " + street + " " + city;
         }
     }
 }
