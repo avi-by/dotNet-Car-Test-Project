@@ -49,7 +49,7 @@ namespace DAL
 
         public void UpdateTester(Tester tester)
         {
-           
+
             int index = 0; 
             foreach (Tester item in DataSource.testers)
             {
@@ -78,6 +78,8 @@ namespace DAL
 
         public void AddTester(Tester tester)
         {
+            if (DataSource.testers.Find(item => item.Id == tester.Id) != null)
+                throw new Exception("cant add the tester, there are another tester with the same id");
             DataSource.testers.Add(tester);
 
             this.OnNotifyCollectionChanged(
@@ -115,6 +117,8 @@ namespace DAL
         #region trainee
         public void AddTrainee(Trainee t)
         {
+            if (DataSource.trainees.Find(item => item.Id == t.Id) != null)
+                throw new Exception("cant add the trainee, there are another trainee with the same id");
             DataSource.trainees.Add(t);
         }
 

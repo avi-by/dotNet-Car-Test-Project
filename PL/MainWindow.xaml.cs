@@ -64,7 +64,7 @@ namespace PL
         private void pbTester_Click(object sender, RoutedEventArgs e)
         {
             AddTesterWindow addTesterWindow = new AddTesterWindow();
-            addTesterWindow.Show();
+            addTesterWindow.ShowDialog();
         }
 
         private void Window_Activated(object sender, EventArgs e)
@@ -155,7 +155,7 @@ namespace PL
           //  updateTesterWindow.DataContext = selectedPerson;
 
 
-            updateTesterWindow.Show();
+            updateTesterWindow.ShowDialog();
 
         }
     }

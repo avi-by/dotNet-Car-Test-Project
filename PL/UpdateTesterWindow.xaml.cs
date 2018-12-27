@@ -231,9 +231,9 @@ namespace PL
                 labelMaxTestInWeek.Foreground = Brushes.Black;
             }
 
-            if (birthdayDatePicker.DisplayDate==null)
+            if (birthdayDatePicker.SelectedDate.HasValue == false)
             {
-                msg += "--need birth day\n";
+                msg += "--enter birthday\n";
                 labelBirthDay.Foreground = Brushes.Red;
                 flag = true;
             }
