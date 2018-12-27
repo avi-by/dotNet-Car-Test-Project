@@ -89,9 +89,13 @@ namespace BE
                 initilazeSchedule();
             else
             {
-                for (var day = DayOfWeek.Sunday; day < DayOfWeek.Friday; day++)
-                    for (int hour = 0; hour < 6; hour++)
-                        WorkHour[(int)day][hour] = workHour[(int)day][hour];
+                //  for (var day = DayOfWeek.Sunday; day < DayOfWeek.Friday; day++)
+                //    for (int hour = 0; hour < 6; hour++)
+                //   WorkHour[(int)day][hour] = workHour[(int)day][hour];
+                this.workHour = workHour;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("cb_sun_10"));
+                
             }
 
             Distance = distance;

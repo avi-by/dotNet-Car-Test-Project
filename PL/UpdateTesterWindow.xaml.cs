@@ -22,6 +22,8 @@ namespace PL
     public partial class UpdateTesterWindow : Window
     {
         Tester orginalTester;
+        //private Tester selectedPerson;
+
         public UpdateTesterWindow()
         {
             InitializeComponent();
@@ -33,7 +35,65 @@ namespace PL
 
             birthdayDatePicker.DisplayDateStart = DateTime.Now.AddYears(-BL.MyBL.Instance.getMaximumAge());
             birthdayDatePicker.DisplayDateEnd = DateTime.Now.AddYears(-BL.MyBL.Instance.getMinimumAgeOfTester());
+         
             
+        }
+
+        public UpdateTesterWindow(Tester selectedPerson)
+        {
+            InitializeComponent();
+
+
+
+            genderComboBox.ItemsSource = Enum.GetValues(typeof(Gender));
+            gearBoxComboBox.ItemsSource = Enum.GetValues(typeof(GearBox));
+            carTypeComboBox.ItemsSource = Enum.GetValues(typeof(CarType));
+
+            birthdayDatePicker.DisplayDateStart = DateTime.Now.AddYears(-BL.MyBL.Instance.getMaximumAge());
+            birthdayDatePicker.DisplayDateEnd = DateTime.Now.AddYears(-BL.MyBL.Instance.getMinimumAgeOfTester());
+
+            this.DataContext = selectedPerson;
+
+            houseNumberTextBox.Text = selectedPerson.Address.houseNumber.ToString();
+            streetTextBox.Text= selectedPerson.Address.street.ToString();
+            city.Text = selectedPerson.Address.city.ToString();
+
+            matrix.cb_sun_9.IsChecked = (selectedPerson.WorkHour[0][0]) ? true : false;
+            matrix.cb_sun_10.IsChecked = (selectedPerson.WorkHour[0][1]) ? true : false;
+            matrix.cb_sun_11.IsChecked = (selectedPerson.WorkHour[0][2]) ? true : false;
+            matrix.cb_sun_12.IsChecked = (selectedPerson.WorkHour[0][3]) ? true : false;
+            matrix.cb_sun_13.IsChecked = (selectedPerson.WorkHour[0][4]) ? true : false;
+            matrix.cb_sun_14.IsChecked = (selectedPerson.WorkHour[0][5]) ? true : false;
+
+            matrix.cb_mon_9.IsChecked = (selectedPerson.WorkHour[1][0]) ? true : false;
+            matrix.cb_mon_10.IsChecked = (selectedPerson.WorkHour[1][1]) ? true : false;
+            matrix.cb_mon_11.IsChecked = (selectedPerson.WorkHour[1][2]) ? true : false;
+            matrix.cb_mon_12.IsChecked = (selectedPerson.WorkHour[1][3]) ? true : false;
+            matrix.cb_mon_13.IsChecked = (selectedPerson.WorkHour[1][4]) ? true : false;
+            matrix.cb_mon_14.IsChecked = (selectedPerson.WorkHour[1][5]) ? true : false;
+
+            matrix.cb_tue_9.IsChecked = (selectedPerson.WorkHour[2][0]) ? true : false;
+            matrix.cb_tue_10.IsChecked = (selectedPerson.WorkHour[2][1]) ? true : false;
+            matrix.cb_tue_11.IsChecked = (selectedPerson.WorkHour[2][2]) ? true : false;
+            matrix.cb_tue_12.IsChecked = (selectedPerson.WorkHour[2][3]) ? true : false;
+            matrix.cb_tue_13.IsChecked = (selectedPerson.WorkHour[2][4]) ? true : false;
+            matrix.cb_tue_14.IsChecked = (selectedPerson.WorkHour[2][5]) ? true : false;
+
+            matrix.cb_wed_9.IsChecked = (selectedPerson.WorkHour[3][0]) ? true : false;
+            matrix.cb_wed_10.IsChecked = (selectedPerson.WorkHour[3][1]) ? true : false;
+            matrix.cb_wed_11.IsChecked = (selectedPerson.WorkHour[3][2]) ? true : false;
+            matrix.cb_wed_12.IsChecked = (selectedPerson.WorkHour[3][3]) ? true : false;
+            matrix.cb_wed_13.IsChecked = (selectedPerson.WorkHour[3][4]) ? true : false;
+            matrix.cb_wed_14.IsChecked = (selectedPerson.WorkHour[3][5]) ? true : false;
+
+            matrix.cb_thu_9.IsChecked = (selectedPerson.WorkHour[4][0]) ? true : false;
+            matrix.cb_thu_10.IsChecked = (selectedPerson.WorkHour[4][1]) ? true : false;
+            matrix.cb_thu_11.IsChecked = (selectedPerson.WorkHour[4][2]) ? true : false;
+            matrix.cb_thu_12.IsChecked = (selectedPerson.WorkHour[4][3]) ? true : false;
+            matrix.cb_thu_13.IsChecked = (selectedPerson.WorkHour[4][4]) ? true : false;
+            matrix.cb_thu_14.IsChecked = (selectedPerson.WorkHour[4][5]) ? true : false;
+            orginalTester = selectedPerson;
+
         }
 
         private void UpdateTester_Click(object sender, RoutedEventArgs e)
@@ -91,13 +151,13 @@ namespace PL
 
                     if (ID.Text== orginalTester.Id)
                     {
-                        MyBL.Instance.updateTester(new Tester(ID.Text, firstNameTextBox.Text, lastNameTextBox.Text, birthdayDatePicker.DisplayDate, new Address(street.Text, int.Parse(houseNumberTextBox.Text), city.Text), (BE.Gender)genderComboBox.SelectedValue, phoneNumberTextBox.Text, int.Parse(expYearsTextBox.Text), int.Parse(maxTestInWeekTextBox.Text), (BE.CarType)carTypeComboBox.SelectedValue, (BE.GearBox)gearBoxComboBox.SelectedValue, temp_workHour, double.Parse(distanceTexBox.Text)));
+                        MyBL.Instance.updateTester(new Tester(ID.Text, firstNameTextBox.Text, lastNameTextBox.Text, birthdayDatePicker.DisplayDate, new Address(streetTextBox.Text, int.Parse(houseNumberTextBox.Text), city.Text), (BE.Gender)genderComboBox.SelectedValue, phoneNumberTextBox.Text, int.Parse(expYearsTextBox.Text), int.Parse(maxTestInWeekTextBox.Text), (BE.CarType)carTypeComboBox.SelectedValue, (BE.GearBox)gearBoxComboBox.SelectedValue, temp_workHour, double.Parse(distanceTexBox.Text)));
 
                     }
                     else
                     {
                         
-                       MyBL.Instance.updateTester(new Tester(ID.Text, firstNameTextBox.Text, lastNameTextBox.Text, birthdayDatePicker.DisplayDate, new Address(street.Text, int.Parse(houseNumberTextBox.Text), city.Text), (BE.Gender)genderComboBox.SelectedValue, phoneNumberTextBox.Text, int.Parse(expYearsTextBox.Text), int.Parse(maxTestInWeekTextBox.Text), (BE.CarType)carTypeComboBox.SelectedValue, (BE.GearBox)gearBoxComboBox.SelectedValue, temp_workHour, double.Parse(distanceTexBox.Text)), orginalTester.Id);
+                       MyBL.Instance.updateTester(new Tester(ID.Text, firstNameTextBox.Text, lastNameTextBox.Text, birthdayDatePicker.DisplayDate, new Address(streetTextBox.Text, int.Parse(houseNumberTextBox.Text), city.Text), (BE.Gender)genderComboBox.SelectedValue, phoneNumberTextBox.Text, int.Parse(expYearsTextBox.Text), int.Parse(maxTestInWeekTextBox.Text), (BE.CarType)carTypeComboBox.SelectedValue, (BE.GearBox)gearBoxComboBox.SelectedValue, temp_workHour, double.Parse(distanceTexBox.Text)), orginalTester.Id);
                     }
                     this.Close();
                 }
@@ -258,8 +318,8 @@ namespace PL
 
         private void Window_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            if(orginalTester==null) 
-            orginalTester = (Tester)((Tester)this.DataContext).Clone();//save the orginal data
+            //if(orginalTester==null) 
+            //orginalTester = (Tester)((Tester)this.DataContext).Clone();//save the orginal data
         }
     }
 }

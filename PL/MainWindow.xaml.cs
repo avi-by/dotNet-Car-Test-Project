@@ -150,9 +150,9 @@ namespace PL
             if (testerDataGrid.SelectedItem == null) return;
             var selectedPerson = (testerDataGrid.SelectedItem) as Tester;
 
-            UpdateTesterWindow updateTesterWindow = new UpdateTesterWindow();
+            UpdateTesterWindow updateTesterWindow = new UpdateTesterWindow(selectedPerson);
 
-            updateTesterWindow.DataContext = selectedPerson;
+          //  updateTesterWindow.DataContext = selectedPerson;
 
 
             updateTesterWindow.Show();
