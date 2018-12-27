@@ -1,5 +1,8 @@
 ﻿<Window
     
+    
+    
+    
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -15,7 +18,19 @@
         <BE:Address    x:Key="convertor"/>
 
     </Window.Resources>
-    <Grid DataContext="{StaticResource testerViewSource}">
+
+
+    <Grid>
+        <TabControl>
+
+            <TabControl.Items>
+
+                <!--#region tab_Testers-->
+
+
+                <TabItem Header="Testers">
+                    <TabItem.Content>
+                        <Grid DataContext="{StaticResource testerViewSource}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="477*"/>
             <ColumnDefinition Width="316*"/>
@@ -59,5 +74,27 @@
         <TextBlock Name="tbOfHours" Grid.Column="1" HorizontalAlignment="Left" Margin="3.667,39,0,0" TextWrapping="Wrap" Text="work hours (of the selected tester):" VerticalAlignment="Top" Height="30" Width="207" FontWeight="Bold"/>
         <Button Name="pbUpdateTester" Content="Update selected tester" HorizontalAlignment="Left" VerticalAlignment="Top" Width="136" Margin="147,15,0,0" Click="PbUpdateTester_Click" />
 
+    </Grid>
+                    </TabItem.Content>
+                </TabItem>
+
+                <!--#endregion-->
+
+
+                <TabItem Header="Trainees">
+                    <local:Trainees_UserControl/>
+                </TabItem>
+
+                <TabItem Header="Tests">
+                    <local:Tests_UserControl/>
+                </TabItem>
+
+
+
+
+
+
+            </TabControl.Items>
+        </TabControl>
     </Grid>
 </Window>

@@ -92,7 +92,7 @@
         <Label Content="street" Grid.Column="1" HorizontalAlignment="Left"  Grid.Row="11" VerticalAlignment="Center" Height="26" Margin="59.333,8.333,0,7.667" Width="41" RenderTransformOrigin="1.283,0.5"/>
         <Label Content="city" Grid.Column="1" HorizontalAlignment="Left"  Grid.Row="11" VerticalAlignment="Center" Height="26" Margin="152.333,8.333,0,7.667" Width="41" RenderTransformOrigin="1.283,0.5"/>
         <Label Content="adress:" Grid.Column="0" HorizontalAlignment="Left"  Grid.Row="11" VerticalAlignment="Center" Height="26" Margin="0,8.333,0,7.667" Width="47" />
-        <TextBox x:Name="houseNumberTextBox" Grid.Column="1" HorizontalAlignment="Left"  Height="23"  Grid.Row="11"  VerticalAlignment="Center" Width="29" Margin="29.333,9.333,0,9.667" DataContext="Address" Text="{Binding Path=houseNumber, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+        <TextBox x:Name="houseNumberTextBox" Grid.Column="1" HorizontalAlignment="Left"  Height="23"  Grid.Row="11"  VerticalAlignment="Center" Width="29" Margin="29.333,9.333,0,9.667"  Text="{Binding numhouseTobinding , Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
 
 
         <Label x:Name="labelDistance" Content="Max Distance :" Grid.Column="0" HorizontalAlignment="Left" Grid.Row="12" VerticalAlignment="Center" Height="26" Margin="0,3.333,0,4" Width="87"/>

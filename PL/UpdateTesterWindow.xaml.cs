@@ -22,10 +22,10 @@ namespace PL
     public partial class UpdateTesterWindow : Window
     {
         Tester orginalTester;
-
         public UpdateTesterWindow()
         {
             InitializeComponent();
+
 
             genderComboBox.ItemsSource = Enum.GetValues(typeof(Gender));
             gearBoxComboBox.ItemsSource = Enum.GetValues(typeof(GearBox));
@@ -33,8 +33,7 @@ namespace PL
 
             birthdayDatePicker.DisplayDateStart = DateTime.Now.AddYears(-BL.MyBL.Instance.getMaximumAge());
             birthdayDatePicker.DisplayDateEnd = DateTime.Now.AddYears(-BL.MyBL.Instance.getMinimumAgeOfTester());
-
-           
+            
         }
 
         private void UpdateTester_Click(object sender, RoutedEventArgs e)
