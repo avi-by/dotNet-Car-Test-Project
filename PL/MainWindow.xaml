@@ -31,50 +31,44 @@
                 <TabItem Header="Testers">
                     <TabItem.Content>
                         <Grid DataContext="{StaticResource testerViewSource}">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="477*"/>
-            <ColumnDefinition Width="316*"/>
-        </Grid.ColumnDefinitions>
-        <Button x:Name="pbTester" Content="Add Tetser" HorizontalAlignment="Left" Margin="55,15,0,0" VerticalAlignment="Top" Width="75" Click="pbTester_Click" Height="19"/>
-        <DataGrid x:Name="testerDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}"  RowDetailsVisibilityMode="VisibleWhenSelected" Margin="10,39,21.333,26.667" MouseDoubleClick="TesterDataGrid_MouseDoubleClick" HorizontalContentAlignment="Center" SelectionChanged="TesterDataGrid_SelectionChanged" IsReadOnly="True">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="477*"/>
+                                <ColumnDefinition Width="316*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button x:Name="pbTester" Content="Add Tetser" HorizontalAlignment="Left" Margin="55,15,0,0" VerticalAlignment="Top" Width="75" Click="pbTester_Click" Height="19"/>
+                            <DataGrid x:Name="testerDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}"  RowDetailsVisibilityMode="VisibleWhenSelected" Margin="10,39,21.333,26.667" MouseDoubleClick="TesterDataGrid_MouseDoubleClick" HorizontalContentAlignment="Center" SelectionChanged="TesterDataGrid_SelectionChanged" IsReadOnly="True">
 
-            <DataGrid.Columns>
-
-
-                <DataGridTextColumn x:Name="IdColumn" Binding="{Binding Id}" Header="Id" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="ageColumn" Binding="{Binding Age}" Header="Age" IsReadOnly="True" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="nameColumn" Binding="{Binding FirstName}" Header="First Name" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="lastnameColumn" Binding="{Binding LastName}" Header="Last Name" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="genderColumn" Binding="{Binding Gender}" Header="Gender" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="phoneNumberColumn" Binding="{Binding PhoneNumber}" Header="Phone number" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="adressColumn"  Header="Adress" Width="SizeToHeader">
-                    <DataGridTextColumn.Binding>
-                        <MultiBinding Converter="{StaticResource convertor}">
-                            <Binding  Path="houseNumber" Mode="TwoWay"/>
-                            <Binding  Path="street" Mode="TwoWay"/>
-                            <Binding  Path="city" Mode="TwoWay"/>
-                        </MultiBinding>
-                    </DataGridTextColumn.Binding>
-                </DataGridTextColumn>
-
-                <DataGridTextColumn x:Name="ExpYears" Binding="{Binding ExpYears}" Header="ExpYears" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="MaxTestInWeek" Binding="{Binding MaxTestInWeek}" Header="MxTestsWeek" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="CarType" Binding="{Binding CarType}" Header="CarType" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="GearBox" Binding="{Binding GearBox}" Header="GearBox" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="DateBirth" Binding="{Binding Path=DateBirth}" Header="DateBirth" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="maxDistance" Binding="{Binding Distance}" Header="max distance" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="houseNumber" Binding="{Binding houseNumber}" Header="house Number" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="street" Binding="{Binding street}" Header="street" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="city" Binding="{Binding city}" Header="city" Width="SizeToHeader"/>
+                                <DataGrid.Columns>
 
 
-            </DataGrid.Columns>
-        </DataGrid>
-        <local:UserControl1  x:Name="matrix1" Margin="477,55,4.333,-55.333" Grid.ColumnSpan="2"  />
-        <TextBlock Name="tbOfHours" Grid.Column="1" HorizontalAlignment="Left" Margin="3.667,39,0,0" TextWrapping="Wrap" Text="work hours (of the selected tester):" VerticalAlignment="Top" Height="30" Width="207" FontWeight="Bold"/>
-        <Button Name="pbUpdateTester" Content="Update selected tester" HorizontalAlignment="Left" VerticalAlignment="Top" Width="136" Margin="147,15,0,0" Click="PbUpdateTester_Click" />
+                                    <DataGridTextColumn x:Name="IdColumn" Binding="{Binding Id}" Header="Id" />
+                                    <DataGridTextColumn x:Name="ageColumn" Binding="{Binding Age}" Header="Age" IsReadOnly="True" Width="SizeToHeader"/>
+                                    <DataGridTextColumn x:Name="nameColumn" Binding="{Binding FirstName}" Header="First Name" Width="SizeToHeader"/>
+                                    <DataGridTextColumn x:Name="lastnameColumn" Binding="{Binding LastName}" Header="Last Name" Width="SizeToHeader"/>
+                                    <DataGridTextColumn x:Name="genderColumn" Binding="{Binding Gender}" Header="Gender" Width="SizeToHeader"/>
+                                    <DataGridTextColumn x:Name="phoneNumberColumn" Binding="{Binding PhoneNumber}" Header="Phone number" Width="SizeToHeader"/>
+                                    <DataGridTextColumn x:Name="addressColumn2" Binding="{Binding Address}" Header="Address" Width="SizeToHeader"/>
+                                   
+             
 
-    </Grid>
+                                    <DataGridTextColumn x:Name="ExpYears" Binding="{Binding ExpYears}" Header="ExpYears" Width="SizeToHeader"/>
+                                    <DataGridTextColumn x:Name="MaxTestInWeek" Binding="{Binding MaxTestInWeek}" Header="MxTestsWeek" Width="SizeToHeader"/>
+                                    <DataGridTextColumn x:Name="CarType" Binding="{Binding CarType}" Header="CarType" Width="SizeToHeader"/>
+                                    <DataGridTextColumn x:Name="GearBox" Binding="{Binding GearBox}" Header="GearBox" Width="SizeToHeader"/>
+                                    <DataGridTextColumn x:Name="DateBirth" Binding="{Binding Path=DateBirth}" Header="DateBirth" Width="SizeToHeader"/>
+                                    <DataGridTextColumn x:Name="maxDistance" Binding="{Binding Distance}" Header="max distance" Width="SizeToHeader"/>
+                                    <DataGridTextColumn x:Name="houseNumber" Binding="{Binding houseNumber}" Header="house Number" Width="SizeToHeader"/>
+                                    <DataGridTextColumn x:Name="street" Binding="{Binding street}" Header="street" Width="SizeToHeader"/>
+                                    <DataGridTextColumn x:Name="city" Binding="{Binding city}" Header="city" Width="SizeToHeader"/>
+
+
+                                </DataGrid.Columns>
+                            </DataGrid>
+                            <local:UserControl1  x:Name="matrix1" Margin="477,55,4.333,-55.333" Grid.ColumnSpan="2"  />
+                            <TextBlock Name="tbOfHours" Grid.Column="1" HorizontalAlignment="Left" Margin="3.667,39,0,0" TextWrapping="Wrap" Text="work hours (of the selected tester):" VerticalAlignment="Top" Height="30" Width="207" FontWeight="Bold"/>
+                            <Button Name="pbUpdateTester" Content="Update selected tester" HorizontalAlignment="Left" VerticalAlignment="Top" Width="136" Margin="147,15,0,0" Click="PbUpdateTester_Click" />
+
+                        </Grid>
                     </TabItem.Content>
                 </TabItem>
 

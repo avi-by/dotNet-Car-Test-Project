@@ -35,11 +35,7 @@ namespace PL
 
         private void CreateDemoEntites()
         {
-            int[] idArray = new int[] { 1, 2, 3, 4, 5 };
-            foreach (int i in idArray)
-            {
-               bl.addTester(new Tester(i.ToString(),i.ToString(),i.ToString(), new DateTime(1990,10,1),new Address (" ",0," sd")));
-            }
+            
 
             bool[][] temp_workHour = new bool[5][];
             for (int i = 0; i < temp_workHour.Length; i++)
@@ -73,16 +69,13 @@ namespace PL
 
         private void Window_Activated(object sender, EventArgs e)
         {
-            //matrix1.DataContext = testerViewSource.
-            //matrix.DataContext = bl.getAllTester();
-             testerDataGrid.DataContext = bl.getAllTester();
-            //matrix1.DataContext = (Tester)(testerDataGrid.SelectedItem);
             
-
+             testerDataGrid.DataContext = bl.getAllTester();
+       
         }
 
-        
-        
+
+
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -92,7 +85,7 @@ namespace PL
             // testerViewSource.Source = [generic data source]
         }
 
-        
+
         private void TesterDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             //didnt work...

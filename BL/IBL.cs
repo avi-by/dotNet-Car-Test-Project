@@ -15,7 +15,10 @@ namespace BL
         List<Test> getAllTests();
         void updateTest(Test test);
         void completedTest(Test test);
+        List<Test> allTheTestAtDate(DateTime date);
+        List<Test> allTheTestAtMonth(DateTime date);
         #endregion
+
         #region trainee
         void addTrainee(Trainee trainee);
         void deleteTrainee(Trainee trainee);
@@ -37,6 +40,8 @@ namespace BL
         List<Tester> testersAvailableAtDate(DateTime date);
         bool isAvailableAtDate(string testerId, DateTime date);
         bool atAvailbleDistance(string testerId, Address address);
+        DateTime NearestOpenDate(DateTime date);
+        DateTime NearestOpenDate();
         #endregion
     }
 }
