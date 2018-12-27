@@ -41,6 +41,28 @@ namespace PL
                bl.addTester(new Tester(i.ToString(),i.ToString(),i.ToString(), new DateTime(1990,10,1),new Address (" ",0," sd")));
             }
 
+            bool[][] temp_workHour = new bool[5][];
+            for (int i = 0; i < temp_workHour.Length; i++)
+            {
+               temp_workHour[i] = new bool[6];
+            }
+            for (var day = DayOfWeek.Sunday; day < DayOfWeek.Friday; day++)
+                for (int hour = 0; hour < 6; hour++)
+                {
+                    if (hour % 2 == 0)
+                        temp_workHour[(int)day][hour] = false;
+                    else
+                        temp_workHour[(int)day][hour] = true;
+
+                }
+
+            bl.addTester(new Tester("12345666", "israel", "israeli",new DateTime(1985,1,1), new Address("hacotel", 5, "jerusalem"), BE.Gender.MALE, "02123456", 10, 15, BE.CarType.Truck, BE.GearBox.Auto, temp_workHour, 10.5));
+            bl.addTester(new Tester("12345667", "batia", "shmueli", new DateTime(1984, 1, 1), new Address("hacotel", 5, "jerusalem"), BE.Gender.FEMALE, "02123456", 10, 15, BE.CarType.Truck, BE.GearBox.Auto, temp_workHour, 10.5));
+            bl.addTester(new Tester("12345668", "eliyahu", "teomim", new DateTime(1990, 1, 1), new Address("hacotel", 5, "jerusalem"), BE.Gender.MALE, "02123456", 10, 15, BE.CarType.Truck, BE.GearBox.Auto, temp_workHour, 10.5));
+            bl.addTester(new Tester("12345669", "asa'el", "shalom", new DateTime(1989, 1, 1), new Address("hacotel", 5, "jerusalem"), BE.Gender.MALE, "02123456", 10, 15, BE.CarType.Truck, BE.GearBox.Auto, temp_workHour, 10.5));
+
+
+
         }
 
         private void pbTester_Click(object sender, RoutedEventArgs e)
@@ -74,9 +96,9 @@ namespace PL
         private void TesterDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             //didnt work...
-           if (testerDataGrid.SelectedItem == null) return;
-            var selectedPerson = (testerDataGrid.SelectedItem) as Tester;
-            matrix1.DataContext = selectedPerson.WorkHour;
+           //if (testerDataGrid.SelectedItem == null) return;
+           // var selectedPerson = (testerDataGrid.SelectedItem) as Tester;
+           // matrix1.DataContext = selectedPerson.WorkHour;
             
 
             //MessageBox.Show(string.Format("The Person you double cl
