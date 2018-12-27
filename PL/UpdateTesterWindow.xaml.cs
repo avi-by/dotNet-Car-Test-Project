@@ -92,7 +92,7 @@ namespace PL
             matrix.cb_thu_12.IsChecked = (selectedPerson.WorkHour[4][3]) ? true : false;
             matrix.cb_thu_13.IsChecked = (selectedPerson.WorkHour[4][4]) ? true : false;
             matrix.cb_thu_14.IsChecked = (selectedPerson.WorkHour[4][5]) ? true : false;
-            orginalTester = selectedPerson;
+            orginalTester = (Tester)selectedPerson.Clone();
 
         }
 
