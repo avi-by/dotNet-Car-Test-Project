@@ -123,7 +123,13 @@ namespace BL
         #region test
         public void AddTest(Test test)
         {
+            checkIfValidTest(test);
 
+            AddTest(test);
+        }
+
+        private void checkIfValidTest(Test test)
+        {
             Tester tester = MyDal.findTester(test.TesterId);
             Trainee trainee = MyDal.findTrainee(test.TraineeId);
             if (trainee == null)
@@ -166,12 +172,17 @@ namespace BL
                 throw new Exception("cant regist, this tester cant test on this kind of car");
             }
 
-            if (!atAvailbleDistance(tester.Id,test.Address))
+            if (!atAvailbleDistance(tester.Id, test.Address))
             {
                 throw new Exception("cant regist, the address is too far to the tester");
             }
 
-            AddTest(test);
+            if (test.Succeeded != null && (test.Test1_ReverseParking == null || test.Test2_KeepingSafeDistance == null || test.Test3_UsingMirrors == null || test.Test4_UsingTurnSignals == null || test.Test5_LegalSpeed == null))//the test can not be insert as a finished test if any of the test's check not insert
+                throw new Exception("the test can not be insert as a finished test if any of the test's check not insert");
+            if (test.Succeeded==true&&test.Grade<Configuration.minGradeForPassTest)
+            {
+                throw new Exception("cant pass the test with grade of " + 100 * test.Grade + " the min grade is: " + Configuration.minGradeForPassTest);
+            }
         }
 
         public void DeleteTest(Test test)
@@ -230,7 +241,7 @@ namespace BL
         /// <returns></returns>
         public bool haveLicense(string id, GearBox gearBox)
         {
-            return (MyDal.GetTestList(item => item.TraineeId == id && item.GearBox == gearBox && item.Succeeded) != null) ? true : false;
+            return (MyDal.GetTestList(item => item.TraineeId == id && item.GearBox == gearBox && item.Succeeded==true) != null) ? true : false;
         }
 
 
@@ -242,7 +253,7 @@ namespace BL
         public bool isPassed(string id)
         {
             Trainee trainee = MyDal.findTrainee(id);
-            if (MyDal.GetTestList(item => item.Car == trainee.CarType && item.GearBox == trainee.GearBox && item.TraineeId == trainee.Id && item.Succeeded) != null) //all the test of this trainee on this kind of gearbox and car that he pass 
+            if (MyDal.GetTestList(item => item.Car == trainee.CarType && item.GearBox == trainee.GearBox && item.TraineeId == trainee.Id && item.Succeeded==true) != null) //all the test of this trainee on this kind of gearbox and car that he pass 
                 return true;
             return false;
         }
@@ -281,6 +292,67 @@ namespace BL
             return distanceFromAddress(tester.Address, address) <= tester.Distance;
         }
 
+        /// <summary>
+        /// Update of a test that has not yet been performed
+        /// </summary>
+        /// <param name="test"></param>
+        public void updateTest(Test test)
+        {
+            if (test.Id==null)
+            {
+                throw new Exception("cant update, test without ID, if you update Use only legitimate tests that have previously entered the system");
+            }
+            if (test.Succeeded != null)
+                throw new Exception("cant update test that done, for insert test resukt use the right function");
+            if (test.Test1_ReverseParking != null || test.Test2_KeepingSafeDistance != null || test.Test3_UsingMirrors != null || test.Test4_UsingTurnSignals != null || test.Test5_LegalSpeed != null)
+                throw new Exception("cant insert the result of any of the test check before finished");
+            checkIfValidTest(test);
+            MyDal.UpdateTest(test);
+        }
+
+        /// <summary>
+        /// use to insert test results, can calculate if pass or not
+        /// </summary>
+        /// <param name="test"></param>
+        public void completedTest(Test test)
+        {
+            if ((test.Test1_ReverseParking == null || test.Test2_KeepingSafeDistance == null || test.Test3_UsingMirrors == null || test.Test4_UsingTurnSignals == null || test.Test5_LegalSpeed == null))
+                throw new Exception("The test did not end until all the tests were over");
+            checkIfValidTest(test);
+            if (test.Succeeded == null) //if the trainne pass most of the tests
+                test.Succeeded = test.Grade > Configuration.minGradeForPassTest ? true : false;
+            MyDal.UpdateTest(test);
+        }
+
+
+        public List<Test> allTheTestAtDate(DateTime date)
+        {
+            return MyDal.GetTestList(item => item.Date.Date == date.Date);//compare only the date of the test
+        }
+
+        public List<Test> allTheTestAtMonth(DateTime date)
+        {
+            return MyDal.GetTestList(item => item.Date.Year == date.Year && item.Date.Month == date.Month);//return all the test in the same year and month
+        }
+
+
+        public DateTime NearestOpenDate(DateTime date)
+        {
+            while (testersAvailableAtDate(date)!=null)
+            {
+                date.AddDays(1);
+            }
+            return date.Date;
+        }
+
+        /// <summary>
+        /// the nearest date available from tommorow
+        /// </summary>
+        /// <returns></returns>
+        public DateTime NearestOpenDate()
+        {
+            return NearestOpenDate(DateTime.Now.AddDays(1));
+        }
 
         #endregion
     }
