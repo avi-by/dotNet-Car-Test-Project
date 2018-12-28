@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BE;
 using BL;
+using System.Globalization;
 
 namespace PL
 {
@@ -31,7 +32,7 @@ namespace PL
             genderComboBox.ItemsSource = Enum.GetValues(typeof(Gender)); 
             gearBoxComboBox.ItemsSource = Enum.GetValues(typeof(GearBox));
             carTypeComboBox.ItemsSource = Enum.GetValues(typeof(CarType));
-
+            
             birthdayDatePicker.DisplayDateStart = DateTime.Now.AddYears(-BL.MyBL.Instance.getMaximumAge());
             birthdayDatePicker.DisplayDateEnd = DateTime.Now.AddYears(-BL.MyBL.Instance.getMinimumAgeOfTester());
         }
