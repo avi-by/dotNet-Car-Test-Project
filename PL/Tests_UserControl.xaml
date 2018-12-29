@@ -1,12 +1,51 @@
-﻿<UserControl x:Class="PL.Tests_UserControl"
+﻿<UserControl
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PL"
+             xmlns:BE="clr-namespace:BE;assembly=BE" x:Class="PL.Tests_UserControl"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
+             d:DesignHeight="450" d:DesignWidth="800" Loaded="UserControl_Loaded_2">
+    <UserControl.Resources>
+        <CollectionViewSource x:Key="testViewSource" d:DesignSource="{d:DesignInstance {x:Type BE:Test}, CreateList=True}"/>
+    </UserControl.Resources>
+    <Grid DataContext="{StaticResource testViewSource}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="123*"/>
+            <ColumnDefinition Width="37*"/>
+        </Grid.ColumnDefinitions>
+
+        <DataGrid x:Name="testDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="0,90,10,10" RowDetailsVisibilityMode="VisibleWhenSelected" SelectionChanged="testDataGrid_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="addressColumn" Binding="{Binding Address}" Header="Address" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="carColumn" Binding="{Binding Car}" Header="Car" Width="SizeToHeader"/>
+                <DataGridTemplateColumn x:Name="dateColumn" Header="Date" Width="SizeToHeader">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <DatePicker SelectedDate="{Binding Date, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn x:Name="gearBoxColumn" Binding="{Binding GearBox}" Header="Gear Box" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="gradeColumn" Binding="{Binding Grade}" Header="Grade" IsReadOnly="True" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="idColumn" Binding="{Binding Id}" Header="Id" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="notesColumn" Binding="{Binding Notes}" Header="Notes" Width="SizeToHeader"/>
+                <DataGridCheckBoxColumn x:Name="succeededColumn" Binding="{Binding Succeeded}" Header="Succeeded" Width="SizeToHeader"/>
+                <DataGridCheckBoxColumn x:Name="test1_ReverseParkingColumn" Binding="{Binding Test1_ReverseParking}" Header="Test 1 Reverse Parking" Width="SizeToHeader"/>
+                <DataGridCheckBoxColumn x:Name="test2_KeepingSafeDistanceColumn" Binding="{Binding Test2_KeepingSafeDistance}" Header="Test 2 Keeping Safe Distance" Width="SizeToHeader"/>
+                <DataGridCheckBoxColumn x:Name="test3_UsingMirrorsColumn" Binding="{Binding Test3_UsingMirrors}" Header="Test 3 Using Mirrors" Width="SizeToHeader"/>
+                <DataGridCheckBoxColumn x:Name="test4_UsingTurnSignalsColumn" Binding="{Binding Test4_UsingTurnSignals}" Header="Test 4 Using Turn Signals" Width="SizeToHeader"/>
+                <DataGridCheckBoxColumn x:Name="test5_LegalSpeedColumn" Binding="{Binding Test5_LegalSpeed}" Header="Test 5 Legal Speed" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="testerIdColumn" Binding="{Binding TesterId}" Header="Tester Id" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="traineeIdColumn" Binding="{Binding TraineeId}" Header="Trainee Id" Width="SizeToHeader"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Grid x:Name="grid1" HorizontalAlignment="Left" Margin="0,90,0,0" VerticalAlignment="Top" Grid.Column="1" Height="174" Width="185">
+
+
+            <Calendar x:Name="dateCalendar" Grid.Column="1" DisplayDate="{Binding SelectedDate, RelativeSource={RelativeSource Self}}" HorizontalAlignment="Left" Margin="3" Grid.Row="0" SelectedDate="{Binding Date, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center"/>
+        </Grid>
+
     </Grid>
 </UserControl>
