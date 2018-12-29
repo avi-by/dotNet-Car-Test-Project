@@ -52,7 +52,7 @@ namespace PL
 
                 }
 
-            bl.addTester(new Tester("12345666", "israel", "israeli",new DateTime(1985,1,1), new Address("hacotel", 5, "jerusalem"), BE.Gender.MALE, "02123456", 10, 15, BE.CarType.Truck, BE.GearBox.Auto, temp_workHour, 10.5));
+            bl.addTester(new Tester("12345666", "israel", "israeli",new DateTime(1985,1,1), new Address("hacotel", 5, "jerusalem"), BE.Gender.MALE, "02123456", 10, 15, BE.CarType.PrivetCar, BE.GearBox.Manual, temp_workHour, 10.5));
             bl.addTester(new Tester("12345667", "batia", "shmueli", new DateTime(1984, 1, 1), new Address("hacotel", 5, "jerusalem"), BE.Gender.FEMALE, "02123456", 10, 15, BE.CarType.Truck, BE.GearBox.Auto, temp_workHour, 10.5));
             bl.addTester(new Tester("12345668", "eliyahu", "teomim", new DateTime(1990, 1, 1), new Address("hacotel", 5, "jerusalem"), BE.Gender.MALE, "02123456", 10, 15, BE.CarType.Truck, BE.GearBox.Auto, temp_workHour, 10.5));
             bl.addTester(new Tester("12345669", "asa'el", "shalom", new DateTime(1989, 1, 1), new Address("hacotel", 5, "jerusalem"), BE.Gender.MALE, "02123456", 10, 15, BE.CarType.Truck, BE.GearBox.Auto, temp_workHour, 10.5));
@@ -71,6 +71,7 @@ namespace PL
         {
             
              testerDataGrid.DataContext = bl.getAllTester();
+            
        
         }
 
@@ -156,6 +157,11 @@ namespace PL
 
 
             updateTesterWindow.ShowDialog();
+
+        }
+
+        private void Tests_UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
 
         }
     }

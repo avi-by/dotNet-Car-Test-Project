@@ -25,7 +25,7 @@ namespace BL
         void updateTrainee(Trainee trainee, string id);
         void updateTrainee(Trainee trainee);
         List<Trainee> getAllTrainees();
-        bool haveLicense(string id, GearBox gearBox);
+        bool haveLicense(string id, GearBox gearBox,CarType carType);
         bool isPassed(string id);
         int amountOfTests(string id);
         #endregion
@@ -35,6 +35,7 @@ namespace BL
         void deleteTester(Tester tester);
         void updateTester(Tester tester, string id);
         void updateTester(Tester tester);
+        bool isWorkAtThisDay(Tester tester, DayOfWeek dayOfWeek);
         List<Tester> getAllTester();
         List<Tester> testersAtDistanceFromAddress(Address address, double distance = 5);
         List<Tester> testersAvailableAtDate(DateTime date);

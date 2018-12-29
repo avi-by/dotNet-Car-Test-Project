@@ -15,6 +15,7 @@
         Title="MainWindow" Height="450" Width="800" Activated="Window_Activated" Loaded="Window_Loaded">
     <Window.Resources>
         <CollectionViewSource x:Key="testerViewSource" d:DesignSource="{d:DesignInstance {x:Type BE:Tester}, CreateList=True}"/>
+        <CollectionViewSource x:Key="testViewSource" d:DesignSource="{d:DesignInstance {x:Type BE:Tester}, CreateList=True}"/>
         <BE:Address    x:Key="convertor"/>
 
     </Window.Resources>
@@ -61,7 +62,7 @@
 
                                 </DataGrid.Columns>
                             </DataGrid>
-                            <local:UserControl1  x:Name="matrix1" Margin="477,55,4.333,-55.333" Grid.ColumnSpan="2"  />
+                            <local:UserControl1  x:Name="matrix1" Grid.Column="1" HorizontalAlignment="Left" Margin="4,62,0,196"/>
                             <TextBlock Name="tbOfHours" Grid.Column="1" HorizontalAlignment="Left" Margin="3.667,39,0,0" TextWrapping="Wrap" Text="work hours (of the selected tester):" VerticalAlignment="Top" Height="30" Width="207" FontWeight="Bold"/>
                             <Button Name="pbUpdateTester" Content="Update selected tester" HorizontalAlignment="Left" VerticalAlignment="Top" Width="136" Margin="147,15,0,0" Click="PbUpdateTester_Click" />
 
@@ -78,7 +79,7 @@
                 </TabItem>
 
                 <TabItem Header="Tests">
-                    <local:Tests_UserControl/>
+                    <local:Tests_UserControl Loaded="Tests_UserControl_Loaded"/>
                 </TabItem>
 
 

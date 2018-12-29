@@ -73,6 +73,10 @@ namespace DAL
                     where p(item)
                     select item;
             var y = x.ToList<Test>();
+            //if (y.Count==0)
+            //{
+            //    return null;
+            //}
             return (y.Clone().ToList());
         }
 
@@ -206,6 +210,9 @@ namespace DAL
             test.Id = builder.ToString();
             Configuration.test_id++;
             DataSource.tests.Add(test);
+            this.OnNotifyCollectionChanged(
+new NotifyCollectionChangedEventArgs(
+NotifyCollectionChangedAction.Add, test));
         }
 
         public void DeleteTest(Test test)

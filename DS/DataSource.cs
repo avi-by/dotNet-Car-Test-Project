@@ -21,7 +21,9 @@ namespace DS
             testers = new List<Tester>();
             trainees = new List<Trainee>();
             tests = new List<Test>();
-            
+            Test test = new Test("12345666", "12345670", new DateTime(2019, 2, 3), new Address("hacotel", 5, "jerusalem"), GearBox.Manual, CarType.PrivetCar);
+            test.Notes = "this is an exemple, the code is in DS";
+            tests.Add(test);
         }
 
     }
