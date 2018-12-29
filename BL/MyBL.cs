@@ -58,7 +58,7 @@ namespace BL
         {
             if (tester.Age < BE.Configuration.MinAgeTrainee)
             {
-                throw new Exception("too young, cant be a tester");
+                throw new Exception("too young, can't be a tester");
             }
             MyDal.AddTester(tester);
 
@@ -163,10 +163,13 @@ namespace BL
                 throw new Exception("cant regist, the tester did his max test this week");
             }
 
+
+            
             if (isPassed(trainee.Id))
             {
-                throw new Exception("cant regist, this trainee have licence on this kind of gecararbox");
+                throw new Exception("cant regist, this trainee have licence on this kind of car gearbox");
             }
+
             if (trainee.GearBox != tester.GearBox || trainee.CarType != tester.CarType)
             {
                 throw new Exception("cant regist, this tester cant test on this kind of car");
@@ -303,7 +306,7 @@ namespace BL
                 throw new Exception("cant update, test without ID, if you update Use only legitimate tests that have previously entered the system");
             }
             if (test.Succeeded != null)
-                throw new Exception("cant update test that done, for insert test resukt use the right function");
+                throw new Exception("cant update test that done, for insert test result use the right function");
             if (test.Test1_ReverseParking != null || test.Test2_KeepingSafeDistance != null || test.Test3_UsingMirrors != null || test.Test4_UsingTurnSignals != null || test.Test5_LegalSpeed != null)
                 throw new Exception("cant insert the result of any of the test check before finished");
             checkIfValidTest(test);

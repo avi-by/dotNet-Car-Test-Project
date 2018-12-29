@@ -4,10 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BE;
+using System.Collections.Specialized;
+
 
 namespace DS
 {
-    public class DataSource
+    public class DataSource 
     {
         public static List<Tester> testers;
         public static List<Trainee> trainees;
@@ -21,8 +23,6 @@ namespace DS
             tests = new List<Test>();
             
         }
-
-        
 
     }
 }

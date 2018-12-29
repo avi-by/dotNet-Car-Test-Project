@@ -82,9 +82,9 @@ namespace DAL
                 throw new Exception("cant add the tester, there are another tester with the same id");
             DataSource.testers.Add(tester);
 
-            this.OnNotifyCollectionChanged(
-        new NotifyCollectionChangedEventArgs(
-          NotifyCollectionChangedAction.Add, tester)); 
+       this.OnNotifyCollectionChanged(
+       new NotifyCollectionChangedEventArgs(
+        NotifyCollectionChangedAction.Add, tester)); 
 
         }
         public List<Tester> getAllTesters()
@@ -95,14 +95,14 @@ namespace DAL
         public IEnumerable<object> testerGrouping(string property)
         {
             IEnumerable<object> groupOfTesters = null;
-            List<Trainee> listOfTesters = null;
+            List<Tester> listOfTesters = null;
             switch (property)
             {
                 case "carType":
 
                     groupOfTesters = from tester in DataSource.testers
                             group tester by tester.CarType;
-                    listOfTesters = (groupOfTesters as List<Trainee>).Clone();
+                    listOfTesters = (groupOfTesters as List<Tester>).Clone();
                     break;
 
                 
@@ -115,19 +115,25 @@ namespace DAL
         #endregion
 
         #region trainee
-        public void AddTrainee(Trainee t)
+        public void AddTrainee(Trainee trainee)
         {
-            if (DataSource.trainees.Find(item => item.Id == t.Id) != null)
+            if (DataSource.trainees.Find(item => item.Id == trainee.Id) != null)
                 throw new Exception("cant add the trainee, there are another trainee with the same id");
-            DataSource.trainees.Add(t);
+            DataSource.trainees.Add(trainee);
+
+            this.OnNotifyCollectionChanged(
+       new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, trainee));
+
         }
 
         public void DeleteTrainee(Trainee trainee)
         {
             if (DataSource.trainees.RemoveAll(item => item.Id == trainee.Id) == 0)
                 throw new Exception("failed to remove, trainee with the same ID not found");
+            this.OnNotifyCollectionChanged(
+       new NotifyCollectionChangedEventArgs(
+         NotifyCollectionChangedAction.Remove, trainee));
 
-            
         }
 
         public void UpdateTrainee(Trainee trainee)
@@ -138,7 +144,10 @@ namespace DAL
                 if (item.Id == trainee.Id)
                 {
                     DataSource.trainees[index] = trainee;
-                    break;
+                    this.OnNotifyCollectionChanged(
+       new NotifyCollectionChangedEventArgs(
+         NotifyCollectionChangedAction.Add, trainee));
+                    return;
                 }
                 index++;
             }
@@ -213,8 +222,10 @@ namespace DAL
             }
         }
 
+
         public void UpdateTest(Test test)
         {
+        
             if (test.Id==null)
             {
                 throw new Exception("failed to update, cant make test without ID");
@@ -249,7 +260,7 @@ namespace DAL
         new NotifyCollectionChangedEventArgs(
           NotifyCollectionChangedAction.Add, tester));
                     return;
-                }
+                } 
                 index++;
             }
             throw new Exception("failed to update, the tester old ID not found");
@@ -268,7 +279,10 @@ namespace DAL
                 if (item.Id == id)
                 {
                     DataSource.trainees[index] = trainee;
-                    break;
+                    this.OnNotifyCollectionChanged(
+       new NotifyCollectionChangedEventArgs(
+         NotifyCollectionChangedAction.Add, trainee));
+                    return;
                 }
                 index++;
             }
