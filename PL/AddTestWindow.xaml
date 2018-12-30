@@ -55,7 +55,7 @@
         <ComboBox x:Name="carTypeComboBox" Grid.Column="1" HorizontalAlignment="Left" Height="22"  Grid.Row="14" SelectedItem="{Binding Car, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" Margin="0.333,3,0,3.667"/>
 
         <Label x:Name="labelID" Content="ID:" Grid.Column="0" HorizontalAlignment="Left"  Grid.Row="0" VerticalAlignment="Center" Height="26" Margin="0,3,0,1" Width="24"/>
-        <TextBox x:Name="ID" Grid.Column="1" HorizontalAlignment="Left" Height="23"  Grid.Row="0" Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" Margin="0.333,4,0,3"/>
+        <TextBox x:Name="ID" Grid.Column="1" HorizontalAlignment="Left" Height="23"  Grid.Row="0" Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" Margin="0.333,4,0,3" IsReadOnly="True"/>
 
         <Label x:Name="labelTraineeId" Content="TraineeId:" Grid.Column="0" HorizontalAlignment="Left"  Grid.Row="2" VerticalAlignment="Center" Height="26" Margin="0,1,0,3" Width="69"/>
         <TextBox x:Name="TraineeIdTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="24"  Grid.Row="2" Text="{Binding TraineeId, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" Margin="0.333,2,0,4"/>

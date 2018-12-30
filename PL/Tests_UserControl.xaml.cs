@@ -80,14 +80,22 @@ namespace PL
             dateCalendar.DisplayDate = (testDataGrid.SelectedItem as Test).Date.Date;
         }
 
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
+ 
+        private void PbAdd_Test_Click(object sender, RoutedEventArgs e)
         {
-
+            AddTestWindow addTestWindow = new AddTestWindow();
+            addTestWindow.ShowDialog();
         }
 
-        private void MenuItem_Click_1(object sender, RoutedEventArgs e)
+        private void MenuItem_add_Click(object sender, RoutedEventArgs e)
         {
-            if (testDataGrid.SelectedItem == null) return ;
+            AddTestWindow addTestWindow = new AddTestWindow();
+            addTestWindow.ShowDialog();
+        }
+
+        private void MenuItem_delete_Click(object sender, RoutedEventArgs e)
+        {
+            if (testDataGrid.SelectedItem == null) return;
             try
             {
                 bl.DeleteTest((testDataGrid.SelectedItem as Test));
@@ -97,15 +105,11 @@ namespace PL
 
                 MessageBox.Show(msg.Message, "Exception", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-
         }
 
-  
-
-        private void PbAdd_Test_Click(object sender, RoutedEventArgs e)
+        private void MenuItem_edit_Click(object sender, RoutedEventArgs e)
         {
-            AddTestWindow addTestWindow = new AddTestWindow();
-            addTestWindow.ShowDialog();
+
         }
     }
 }
