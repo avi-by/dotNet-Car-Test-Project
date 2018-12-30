@@ -8,7 +8,7 @@ using BE;
 
 namespace BL
 {
-   public interface IBL
+    public interface IBL
     {
         #region test
         void AddTest(Test test);
@@ -28,7 +28,7 @@ namespace BL
         void updateTrainee(Trainee trainee);
         event EventHandler<EventArgs> TraineeEvent;
         List<Trainee> getAllTrainees();
-        bool haveLicense(string id, GearBox gearBox,CarType carType);
+        bool haveLicense(string id, GearBox gearBox, CarType carType);
         bool isPassed(string id);
         int amountOfTests(string id);
         #endregion
