@@ -71,6 +71,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddTraineeWindow.xaml.cs">
+      <DependentUpon>AddTraineeWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="schudleMatrix.xaml.cs">
       <DependentUpon>schudleMatrix.xaml</DependentUpon>
     </Compile>
@@ -84,7 +87,14 @@
     <Compile Include="UpdateTesterWindow.xaml.cs">
       <DependentUpon>UpdateTesterWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UpdateTraineeWindow.xaml.cs">
+      <DependentUpon>UpdateTraineeWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="AddTesterWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddTraineeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -117,6 +127,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UpdateTesterWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UpdateTraineeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

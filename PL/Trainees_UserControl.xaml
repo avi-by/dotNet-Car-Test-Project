@@ -20,10 +20,17 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
         </Grid>
-        <DataGrid x:Name="traineeDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="10,46,338,81" RowDetailsVisibilityMode="VisibleWhenSelected">
+        <DataGrid x:Name="traineeDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="10,46,338,81" RowDetailsVisibilityMode="VisibleWhenSelected" IsReadOnly="True">
             <DataGrid.Columns>
-                <DataGridTextColumn x:Name="addressColumn" Binding="{Binding Address}" Header="Address" />
+
+                <DataGridTextColumn x:Name="firstNameColumn" Binding="{Binding FirstName}" Header="First Name" />
+                <DataGridTextColumn x:Name="lastNameColumn" Binding="{Binding LastName}" Header="Last Name" />
+                <DataGridTextColumn x:Name="idColumn" Binding="{Binding Id}" Header="Id" />
+                <DataGridTextColumn x:Name="genderColumn" Binding="{Binding Gender}" Header="Gender" />
                 <DataGridTextColumn x:Name="ageColumn" Binding="{Binding Age}" Header="Age" />
+                <DataGridTextColumn x:Name="phoneNumberColumn" Binding="{Binding PhoneNumber}" Header="Phone Number" />
+
+                <DataGridTextColumn x:Name="addressColumn" Binding="{Binding Address}" Header="Address" />
                 <DataGridTemplateColumn x:Name="birthDateColumn" Header="Birth Date" >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -32,17 +39,14 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTextColumn x:Name="carTypeColumn" Binding="{Binding CarType}" Header="Car Type" />
-                <DataGridTextColumn x:Name="firstNameColumn" Binding="{Binding FirstName}" Header="First Name" />
                 <DataGridTextColumn x:Name="gearBoxColumn" Binding="{Binding GearBox}" Header="Gear Box" />
-                <DataGridTextColumn x:Name="genderColumn" Binding="{Binding Gender}" Header="Gender" />
-                <DataGridTextColumn x:Name="idColumn" Binding="{Binding Id}" Header="Id" />
-                <DataGridTextColumn x:Name="lastNameColumn" Binding="{Binding LastName}" Header="Last Name" />
                 <DataGridTextColumn x:Name="numberOfLessonColumn" Binding="{Binding NumberOfLesson}" Header="Number Of Lesson" />
-                <DataGridTextColumn x:Name="phoneNumberColumn" Binding="{Binding PhoneNumber}" Header="Phone Number" />
                 <DataGridTextColumn x:Name="schoolNameColumn" Binding="{Binding SchoolName}" Header="School Name" />
                 <DataGridTextColumn x:Name="teacherNameColumn" Binding="{Binding TeacherName}" Header="Teacher Name" />
             </DataGrid.Columns>
         </DataGrid>
+        <Button x:Name="pbUpdateTrainee" Content="Update selected trainee" HorizontalAlignment="Left" VerticalAlignment="Top" Width="136" Margin="147,15,0,0" Click="PbUpdateTrainee_Click"  />
+        <Button x:Name="pbTrainee" Content="Add Trainee" HorizontalAlignment="Left" Margin="55,15,0,0" VerticalAlignment="Top" Width="75"  Height="19" Click="PbAddTrainee_Click"/>
 
     </Grid>
 </UserControl>

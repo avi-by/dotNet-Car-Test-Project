@@ -64,5 +64,24 @@ namespace PL
             // 	myCollectionViewSource.Source = your data
             // }
         }
+
+        private void PbUpdateTrainee_Click(object sender, RoutedEventArgs e)
+        {
+            if (traineeDataGrid.SelectedItem == null) return;
+            var selectedPerson = (traineeDataGrid.SelectedItem) as Trainee;
+
+            UpdateTraineeWindow updateTraineeWindow = new UpdateTraineeWindow(selectedPerson);
+
+            //  updateTesterWindow.DataContext = selectedPerson;
+
+
+            updateTraineeWindow.ShowDialog();
+        }
+
+        private void PbAddTrainee_Click(object sender, RoutedEventArgs e)
+        {
+            AddTraineeWindow addTraineeWindow = new AddTraineeWindow();
+            addTraineeWindow.ShowDialog();
+        }
     }
 }
