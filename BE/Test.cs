@@ -34,7 +34,7 @@ namespace BE
             this.car = car;
         }
 
-        public Test(string testerId, string traineeId,GearBox gear,CarType car, DateTime date, DateTime hour, Address address, bool? test1_ReverseParking, bool test2_KeepingSafeDistance, bool test3_UsingMirrors, bool? test4_UsingTurnSignals, bool? test5_LegalSpeed, bool? succeeded, string notes)
+        public Test(string testerId, string traineeId,GearBox gear,CarType car, DateTime date, DateTime hour, Address address, bool? test1_ReverseParking, bool? test2_KeepingSafeDistance, bool? test3_UsingMirrors, bool? test4_UsingTurnSignals, bool? test5_LegalSpeed, bool? succeeded, string notes)
         {
             id = null;
             this.testerId = testerId;

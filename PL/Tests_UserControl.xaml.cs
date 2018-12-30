@@ -99,5 +99,13 @@ namespace PL
             }
 
         }
+
+  
+
+        private void PbAdd_Test_Click(object sender, RoutedEventArgs e)
+        {
+            AddTestWindow addTestWindow = new AddTestWindow();
+            addTestWindow.ShowDialog();
+        }
     }
 }

@@ -71,6 +71,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddTestWindow.xaml.cs">
+      <DependentUpon>AddTestWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AddTraineeWindow.xaml.cs">
       <DependentUpon>AddTraineeWindow.xaml</DependentUpon>
     </Compile>
@@ -91,6 +94,10 @@
       <DependentUpon>UpdateTraineeWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="AddTesterWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddTestWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

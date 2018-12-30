@@ -35,7 +35,7 @@
          <PropertyUISetting Name="Date">
             <ControlSettings>
                <ControlSetting ArtifactName="Microsoft:System.Windows:WPF">
-                  <BindableControlInfo Name="Calendar" Type="System.Windows.Controls.Calendar" AssemblyName="PresentationFramework, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+                  <BindableControlInfo Name="DatePicker" Type="System.Windows.Controls.DatePicker" AssemblyName="PresentationFramework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
                </ControlSetting>
             </ControlSettings>
          </PropertyUISetting>
