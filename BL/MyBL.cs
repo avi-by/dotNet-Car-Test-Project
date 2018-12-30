@@ -262,7 +262,7 @@ namespace BL
         /// <returns></returns>
         public List<Tester> testersAvailableAtDateAndHour(DateTime date)
         {
-            if (date.Hour > 15 || date.Hour < 9)//testers works hour is between 9:00 -15:00
+            if (date.Hour > 14 || date.Hour < 9)//testers works hour is between 9:00 -15:00
                 return new List<Tester>(); //empty list (not null, becuse the result of the linq is also empty list and not null 
             //all the test at this date
             var testList = MyDal.GetTestList(item => item.Date == date);
