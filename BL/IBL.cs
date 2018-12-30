@@ -8,7 +8,7 @@ using BE;
 
 namespace BL
 {
-   public interface IBL
+    public interface IBL
     {
         #region test
         void AddTest(Test test);
