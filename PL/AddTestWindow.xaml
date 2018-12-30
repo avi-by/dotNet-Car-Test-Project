@@ -45,7 +45,7 @@
         </Grid.ColumnDefinitions>
 
         <Label x:Name="labelDate" VerticalAlignment="Center" Grid.Row="3" HorizontalAlignment="Left" Grid.Column="0" Content="Date:" Height="26" Margin="0,1,0,1.667" Width="57"/>
-        <DatePicker x:Name="Date_DatePicker" VerticalAlignment="Top"  SelectedDate="{Binding Date, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="3"  HorizontalAlignment="Left" Grid.Column="1" Width="120" Height="24" Margin="0.333,3,0,0" SelectedDateChanged="Date_DatePicker_SelectedDateChanged"/>
+        <DatePicker x:Name="Date_DatePicker" VerticalAlignment="Center"  SelectedDate="{Binding Date, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="3"  HorizontalAlignment="Left" Grid.Column="1" Width="120" Height="24" Margin="0.333,2,0,2.667" Loaded="Date_DatePicker_Loaded" SelectedDateChanged="Date_DatePicker_SelectedDateChanged"/>
 
         <Label x:Name="hour" VerticalAlignment="Center" Grid.Row="4" HorizontalAlignment="Left" Grid.Column="0" Content="hour:" Height="26" Margin="0,1,0,1.667" Width="57"/>
         <ComboBox x:Name="hourComboBox" Grid.Column="1" HorizontalAlignment="Left" Height="23"  Grid.Row="4" SelectedItem="{Binding hour, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" Margin="0.333,2.667,0,3"/>
@@ -61,7 +61,7 @@
         <TextBox x:Name="TraineeIdTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="24"  Grid.Row="2" Text="{Binding TraineeId, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" Margin="0.333,2,0,4"/>
 
         <Label x:Name="labelTesterId" Content="Tester ID:" Grid.Column="0" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Center" Height="26" Margin="0,2" Width="70"/>
-        <TextBox x:Name="TesterIdTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="24" Grid.Row="1" Text="{Binding TesterId, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" Margin="0.333,3,0,3" TextChanged="TesterIdTextBox_TextChanged" />
+        <TextBox x:Name="TesterIdTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="24" Grid.Row="1" Text="{Binding TesterId, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" Margin="0.333,3,0,3"  TextChanged="TesterIdTextBox_TextChanged" />
 
 
         <Label x:Name="labelGearBox" Content="Gear Box:" Grid.Column="0" HorizontalAlignment="Left" Grid.Row="13" VerticalAlignment="Center" Height="26" Margin="0,1.667,0,1" Width="60"/>
@@ -89,13 +89,13 @@
         <CheckBox x:Name="test4_UsingTurnSignalsCheckBox" Content="" Grid.Column="1" HorizontalAlignment="Left" IsChecked="{Binding Test4_UsingTurnSignals, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="3" Grid.Row="8" VerticalAlignment="Center"/>
         <Label Content="Test 5 Legal Speed:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="9" VerticalAlignment="Center"/>
         <CheckBox x:Name="test5_LegalSpeedCheckBox" Content="" Grid.Column="1" HorizontalAlignment="Left" IsChecked="{Binding Test5_LegalSpeed, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="3" Grid.Row="9" VerticalAlignment="Center"/>
-
+            
         <Label Content="Succeeded:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="10" VerticalAlignment="Center"/>
-        <CheckBox x:Name="succeededCheckBox" Content="" Grid.Column="1" HorizontalAlignment="Left" IsChecked="{Binding Succeeded, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="3" Grid.Row="10" VerticalAlignment="Center"/>
-
+            <CheckBox x:Name="succeededCheckBox" Content="" Grid.Column="1" HorizontalAlignment="Left" IsChecked="{Binding Succeeded, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="3" Grid.Row="10" VerticalAlignment="Center"/>
+           
         <Label Content="Notes:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="11" VerticalAlignment="Center"/>
-        <TextBox x:Name="notesTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="11" Text="{Binding Notes, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-
+            <TextBox x:Name="notesTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="11" Text="{Binding Notes, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+        
 
 
 

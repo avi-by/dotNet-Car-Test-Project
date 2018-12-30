@@ -87,14 +87,28 @@ namespace BL
         }
 
 
-
-
-
-
         public void updateTester(Tester tester)
         {
             MyDal.UpdateTester(tester);
         }
+
+        /// <summary>
+        /// return true if the tester Available at this date and hour
+        /// </summary>
+        /// <param name="testerId"></param>
+        /// <param name="date"></param>
+        /// <returns></returns>
+        public bool isAvailableAtDate(string testerId, DateTime date)
+        {
+            return testersAvailableAtDate(date).Find(item => item.Id == testerId) != null;
+        }
+
+        public bool atAvailbleDistance(string testerId, Address address)
+        {
+            Tester tester = MyDal.findTester(testerId);
+            return distanceFromAddress(tester.Address, address) <= tester.Distance;
+        }
+
         #endregion
 
         #region trainee
@@ -124,9 +138,24 @@ namespace BL
             return MyDal.getAllTrainees();
         }
 
+        /// <summary>
+        /// return the amount of test that this treinee do on the current kind of car
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public int amountOfTests(string id)
+        {
+            Trainee trainee = MyDal.findTrainee(id);
+            return MyDal.GetTestList(item => item.Car == trainee.CarType && item.GearBox == trainee.GearBox && item.TraineeId == trainee.Id).Count;
+        }
 
+        public void updateTrainee(Trainee trainee, string id)
+        {
+            MyDal.UpdateTrainee(trainee, id);
+        }
 
         #endregion trainee
+
         #region test
         public void AddTest(Test test)
         {
@@ -303,39 +332,10 @@ namespace BL
             return false;
         }
 
-        /// <summary>
-        /// return the amount of test that this treinee do on the current kind of car
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public int amountOfTests(string id)
-        {
-            Trainee trainee = MyDal.findTrainee(id);
-            return MyDal.GetTestList(item => item.Car == trainee.CarType && item.GearBox == trainee.GearBox && item.TraineeId == trainee.Id).Count;
-        }
-
-        public void updateTrainee(Trainee trainee, string id)
-        {
-            MyDal.UpdateTrainee(trainee, id);
-        }
+      
 
 
-        /// <summary>
-        /// return true if the tester Available at this date and hour
-        /// </summary>
-        /// <param name="testerId"></param>
-        /// <param name="date"></param>
-        /// <returns></returns>
-        public bool isAvailableAtDate(string testerId, DateTime date)
-        {
-            return testersAvailableAtDate(date).Find(item => item.Id == testerId) != null;
-        }
-
-        public bool atAvailbleDistance(string testerId, Address address)
-        {
-            Tester tester = MyDal.findTester(testerId);
-            return distanceFromAddress(tester.Address, address) <= tester.Distance;
-        }
+     
 
         /// <summary>
         /// Update of a test that has not yet been performed
@@ -397,6 +397,20 @@ namespace BL
         public DateTime NearestOpenDate()
         {
             return NearestOpenDate(DateTime.Now.AddDays(1));
+        }
+
+        public bool isAvailableDate(DateTime date)
+        {
+            if (testersAvailableAtDate(date).Count==0)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public List<Test> allTheTestAtRange(DateTime start, DateTime end)
+        {
+            return MyDal.GetTestList(item => item.Date.Date >= start.Date && item.Date.Date <= end.Date);
         }
 
 

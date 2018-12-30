@@ -21,9 +21,7 @@ namespace PL
     /// </summary>
     public partial class AddTestWindow : Window
     {
-
-
-
+        private IBL bl = FactoryBL.GetBL(Configuration.BLType);
         public AddTestWindow()
         {
             InitializeComponent();
@@ -54,17 +52,14 @@ namespace PL
             hour_14.Content = "14:00";
             hourComboBox.Items.Add(hour_14);
 
-            //initilized hours as false
-            for (int i = 0; i < 6; i++)
-                (hourComboBox.Items[i] as ComboBoxItem).IsEnabled = false;
-
-            Date_DatePicker.SelectedDate = DateTime.Now.AddDays(1);
+            
 
         }
 
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
 
-
-      
+        }
 
         private void Window_Loaded_1(object sender, RoutedEventArgs e)
         {
@@ -80,7 +75,7 @@ namespace PL
             if (AllFieldOK())
             {
 
-                MyBL.Instance.AddTest(new Test(TesterIdTextBox.Text, TraineeIdTextBox.Text, (GearBox)gearBoxComboBox.SelectedItem, (CarType)carTypeComboBox.SelectedItem, Date_DatePicker.DisplayDate, new DateTime(), new Address(streetTextBox.Text, int.Parse(houseNumberTextBox.Text), city.Text), test1_ReverseParkingCheckBox.IsChecked, test2_KeepingSafeDistanceCheckBox.IsChecked, test3_UsingMirrorsCheckBox.IsChecked, test4_UsingTurnSignalsCheckBox.IsChecked, test5_LegalSpeedCheckBox.IsChecked, succeededCheckBox.IsChecked, notesTextBox.Text));
+                MyBL.Instance.AddTest(new Test(TesterIdTextBox.Text, TraineeIdTextBox.Text,  (GearBox)gearBoxComboBox.SelectedItem, (CarType)carTypeComboBox.SelectedItem, Date_DatePicker.DisplayDate, new DateTime(), new Address(streetTextBox.Text, int.Parse(houseNumberTextBox.Text), city.Text), test1_ReverseParkingCheckBox.IsChecked,test2_KeepingSafeDistanceCheckBox.IsChecked,test3_UsingMirrorsCheckBox.IsChecked,test4_UsingTurnSignalsCheckBox.IsChecked,test5_LegalSpeedCheckBox.IsChecked, succeededCheckBox.IsChecked, notesTextBox.Text));
 
 
                 this.Close();
@@ -117,10 +112,10 @@ namespace PL
                 labelhouseNumber.Foreground = Brushes.Black;
             }
 
+            
 
 
-
-
+          
             //if (addressTexBox.Text == "" || !int.TryParse(address[2], out int temp3)||temp3<1) //address [2] is the house number and he need to be more then 0
             //{
             //    msg += "--need address, city street house number separated by a comma, house number must be a digit and bigger then 0 \n";
@@ -141,43 +136,54 @@ namespace PL
             return true;
         }
 
-        private void TesterIdTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void Date_DatePicker_Loaded(object sender, RoutedEventArgs e)
         {
-            //set each combox item enabled only if the tester work in this hour  
-            if (MyBL.Instance.isAvailableAtDate(TesterIdTextBox.Text, Date_DatePicker.DisplayDate))
+            DatePicker picker = sender as DatePicker;
+            DateTime start = bl.NearestOpenDate();
+            DateTime end = start.AddMonths(3);
+            picker.DisplayDateStart = start;
+            picker.DisplayDateEnd = end;
+            picker.BlackoutDates.Clear();
+            var x = from item in bl.allTheTestAtRange(start,end) select item.Date;
+            //the loop check every date in the 3 month from the first open date if day availble, if not disable them
+            while (end>=start)
             {
-                
-                DayOfWeek day = Date_DatePicker.DisplayDate.DayOfWeek;
-                Tester temp = MyBL.Instance.getAllTester().Find(tester => tester.Id == TesterIdTextBox.Text);
-                for (int i = 0; i < 6; i++)
-                    (hourComboBox.Items[i] as ComboBoxItem).IsEnabled = (temp.WorkHour[(int)day][i]);
-            }
-            else
-            {
-                for (int i = 0; i < 6; i++)
-                    (hourComboBox.Items[i] as ComboBoxItem).IsEnabled = false;
+                if (x.Contains(start))
+                {
+                    picker.BlackoutDates.Add(new CalendarDateRange(start));
+                }
+                start = start.AddDays(1);
             }
         }
 
         private void Date_DatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            //set each combox item enabled only if the tester work in this hour  
+            if (e.AddedItems.Count>0)
+            {
+                DateTime selctedDate = (DateTime)e.AddedItems[0];
+                if(!bl.isAvailableDate(selctedDate))
+                {
+                    MessageBox.Show("this day unavailbale");
+                    ((DatePicker)sender).SelectedDate = null;
+                }
+            }
+        }
+
+        private void TesterIdTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Tester temp;
             if (MyBL.Instance.isAvailableAtDate(TesterIdTextBox.Text, Date_DatePicker.DisplayDate))
             {
+                int i = 0;
+                for (i = 0; i < 5; i++)
+                {
+                   // MyBL.get
+                }
 
-                DayOfWeek day = Date_DatePicker.DisplayDate.DayOfWeek;
-                Tester temp = MyBL.Instance.getAllTester().Find(tester => tester.Id == TesterIdTextBox.Text);
-                for (int i = 0; i < 6; i++)
-                    (hourComboBox.Items[i] as ComboBoxItem).IsEnabled = (temp.WorkHour[(int)day][i]);
-            }
-            else
-            {
-                
-                for (int i = 0; i < 6; i++)
-                    (hourComboBox.Items[i] as ComboBoxItem).IsEnabled = false;
             }
         }
     }
 }
+
 
     
