@@ -55,6 +55,8 @@ namespace PL
 
         }
 
+        
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
 
@@ -133,6 +135,20 @@ namespace PL
                 return false;
             }
             return true;
+        }
+
+        private void TesterIdTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Tester temp;
+            if (MyBL.Instance.isAvailableAtDate(TesterIdTextBox.Text, Date_DatePicker.DisplayDate))
+             {
+                int i = 0;
+                for (i=0;i<5;i++)
+                {
+                MyBL.get
+                }
+
+            } 
         }
     }
 }
