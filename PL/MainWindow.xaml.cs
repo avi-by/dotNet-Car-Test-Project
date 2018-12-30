@@ -22,15 +22,18 @@ namespace PL
     /// </summary>
     public partial class MainWindow : Window
     {
-        private MyBL bl;
+        private IBL bl;
         public MainWindow()
         {
             InitializeComponent();
-            bl = MyBL.Instance;
-                  CreateDemoEntites();
-         //   bl.addTester(new Tester("Nadav", new DateTime(1978, 11, 1)));
-      //      lbTesters.DataContext = bl.getAllTester();
-        //    testerDataGrid.DataContext = bl.getAllTester();
+            bl = FactoryBL.GetBL(Configuration.BLType);
+            bl.TesterEvent += TesterEvent;
+            CreateDemoEntites();
+        }
+
+        private void TesterEvent(object sender, EventArgs e)
+        {
+            testerDataGrid.DataContext = bl.getAllTester();
         }
 
         private void CreateDemoEntites()
@@ -163,6 +166,36 @@ namespace PL
         private void Tests_UserControl_Loaded(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void MenuItem_Click_delete(object sender, RoutedEventArgs e)
+        {
+            if (testerDataGrid.SelectedItem == null) return;
+            try
+            {
+                bl.deleteTester((testerDataGrid.SelectedItem as Tester));
+            }
+            catch (Exception msg)
+            {
+
+                MessageBox.Show(msg.Message, "Exception", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+           
+        }
+
+        private void MenuItem_Click_add(object sender, RoutedEventArgs e)
+        {
+            AddTesterWindow addTesterWindow = new AddTesterWindow();
+            addTesterWindow.ShowDialog();
+        }
+
+        private void MenuItem_Click_edit(object sender, RoutedEventArgs e)
+        {
+            if (testerDataGrid.SelectedItem == null) return;
+            var selectedPerson = (testerDataGrid.SelectedItem) as Tester;
+
+            UpdateTesterWindow updateTesterWindow = new UpdateTesterWindow(selectedPerson);
+            updateTesterWindow.ShowDialog();
         }
     }
 }

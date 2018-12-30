@@ -17,28 +17,34 @@
         </Grid.ColumnDefinitions>
 
         <DataGrid x:Name="testDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="0,90,10,10" RowDetailsVisibilityMode="VisibleWhenSelected" SelectionChanged="testDataGrid_SelectionChanged">
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="edit" Click="MenuItem_Click" />
+                    <MenuItem Header="delete" Click="MenuItem_Click_1"/>
+                </ContextMenu>
+            </DataGrid.ContextMenu>
             <DataGrid.Columns>
-                <DataGridTextColumn x:Name="addressColumn" Binding="{Binding Address}" Header="Address" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="carColumn" Binding="{Binding Car}" Header="Car" Width="SizeToHeader"/>
-                <DataGridTemplateColumn x:Name="dateColumn" Header="Date" Width="SizeToHeader">
+                <DataGridTextColumn x:Name="addressColumn" Binding="{Binding Address}" Header="Address" Width="auto" IsReadOnly="True"/>
+                <DataGridTextColumn x:Name="carColumn" Binding="{Binding Car}" Header="Car" Width="auto" IsReadOnly="True"/>
+                <DataGridTemplateColumn x:Name="dateColumn" Header="Date" Width="auto" IsReadOnly="True">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <DatePicker SelectedDate="{Binding Date, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn x:Name="gearBoxColumn" Binding="{Binding GearBox}" Header="Gear Box" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="gradeColumn" Binding="{Binding Grade}" Header="Grade" IsReadOnly="True" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="idColumn" Binding="{Binding Id}" Header="Id" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="notesColumn" Binding="{Binding Notes}" Header="Notes" Width="SizeToHeader"/>
-                <DataGridCheckBoxColumn x:Name="succeededColumn" Binding="{Binding Succeeded}" Header="Succeeded" Width="SizeToHeader"/>
-                <DataGridCheckBoxColumn x:Name="test1_ReverseParkingColumn" Binding="{Binding Test1_ReverseParking}" Header="Test 1 Reverse Parking" Width="SizeToHeader"/>
-                <DataGridCheckBoxColumn x:Name="test2_KeepingSafeDistanceColumn" Binding="{Binding Test2_KeepingSafeDistance}" Header="Test 2 Keeping Safe Distance" Width="SizeToHeader"/>
-                <DataGridCheckBoxColumn x:Name="test3_UsingMirrorsColumn" Binding="{Binding Test3_UsingMirrors}" Header="Test 3 Using Mirrors" Width="SizeToHeader"/>
-                <DataGridCheckBoxColumn x:Name="test4_UsingTurnSignalsColumn" Binding="{Binding Test4_UsingTurnSignals}" Header="Test 4 Using Turn Signals" Width="SizeToHeader"/>
-                <DataGridCheckBoxColumn x:Name="test5_LegalSpeedColumn" Binding="{Binding Test5_LegalSpeed}" Header="Test 5 Legal Speed" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="testerIdColumn" Binding="{Binding TesterId}" Header="Tester Id" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="traineeIdColumn" Binding="{Binding TraineeId}" Header="Trainee Id" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="gearBoxColumn" Binding="{Binding GearBox}" Header="Gear Box" Width="SizeToHeader" IsReadOnly="True"/>
+               <!-- <DataGridTextColumn x:Name="gradeColumn" Binding="{Binding Grade}" Header="Grade" IsReadOnly="True" Width="SizeToHeader"/> -->
+                <DataGridTextColumn x:Name="idColumn" Binding="{Binding Id}" Header="Id" Width="auto" IsReadOnly="True"/>
+                <DataGridTextColumn x:Name="notesColumn" Binding="{Binding Notes}" Header="Notes" Width="auto" IsReadOnly="True"/>
+                <DataGridCheckBoxColumn x:Name="succeededColumn" Binding="{Binding Succeeded}" Header="Succeeded" Width="SizeToHeader" IsReadOnly="True"/>
+                <DataGridCheckBoxColumn x:Name="test1_ReverseParkingColumn" Binding="{Binding Test1_ReverseParking}" Header="Test 1 Reverse Parking" Width="SizeToHeader" IsReadOnly="True"/>
+                <DataGridCheckBoxColumn x:Name="test2_KeepingSafeDistanceColumn" Binding="{Binding Test2_KeepingSafeDistance}" Header="Test 2 Keeping Safe Distance" Width="SizeToHeader" IsReadOnly="True"/>
+                <DataGridCheckBoxColumn x:Name="test3_UsingMirrorsColumn" Binding="{Binding Test3_UsingMirrors}" Header="Test 3 Using Mirrors" Width="SizeToHeader" IsReadOnly="True"/>
+                <DataGridCheckBoxColumn x:Name="test4_UsingTurnSignalsColumn" Binding="{Binding Test4_UsingTurnSignals}" Header="Test 4 Using Turn Signals" Width="SizeToHeader" IsReadOnly="True"/>
+                <DataGridCheckBoxColumn x:Name="test5_LegalSpeedColumn" Binding="{Binding Test5_LegalSpeed}" Header="Test 5 Legal Speed" Width="SizeToHeader" IsReadOnly="True"/>
+                <DataGridTextColumn x:Name="testerIdColumn" Binding="{Binding TesterId}" Header="Tester Id" Width="auto" IsReadOnly="True"/>
+                <DataGridTextColumn x:Name="traineeIdColumn" Binding="{Binding TraineeId}" Header="Trainee Id" Width="auto" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
         <Grid x:Name="grid1" HorizontalAlignment="Left" Margin="0,90,0,0" VerticalAlignment="Top" Grid.Column="1" Height="174" Width="185">
