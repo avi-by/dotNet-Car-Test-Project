@@ -21,6 +21,7 @@ namespace PL
     /// </summary>
     public partial class AddTestWindow : Window
     {
+        private IBL bl = FactoryBL.GetBL(Configuration.BLType);
         public AddTestWindow()
         {
             InitializeComponent();
@@ -54,8 +55,6 @@ namespace PL
             
 
         }
-
-        
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -137,18 +136,37 @@ namespace PL
             return true;
         }
 
-        private void TesterIdTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void Date_DatePicker_Loaded(object sender, RoutedEventArgs e)
         {
-            Tester temp;
-            if (MyBL.Instance.isAvailableAtDate(TesterIdTextBox.Text, Date_DatePicker.DisplayDate))
-             {
-                int i = 0;
-                for (i=0;i<5;i++)
+            DatePicker picker = sender as DatePicker;
+            DateTime start = bl.NearestOpenDate();
+            DateTime end = start.AddMonths(3);
+            picker.DisplayDateStart = start;
+            picker.DisplayDateEnd = end;
+            picker.BlackoutDates.Clear();
+            var x = from item in bl.allTheTestAtRange(start,end) select item.Date;
+            //the loop check every date in the 3 month from the first open date if day availble, if not disable them
+            while (end>=start)
+            {
+                if (x.Contains(start))
                 {
-                MyBL.get
+                    picker.BlackoutDates.Add(new CalendarDateRange(start));
                 }
+                start = start.AddDays(1);
+            }
+        }
 
-            } 
+        private void Date_DatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems.Count>0)
+            {
+                DateTime selctedDate = (DateTime)e.AddedItems[0];
+                if(!bl.isAvailableDate(selctedDate))
+                {
+                    MessageBox.Show("this day unavailbale");
+                    ((DatePicker)sender).SelectedDate = null;
+                }
+            }
         }
     }
 }

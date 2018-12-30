@@ -18,6 +18,8 @@ namespace BL
         void completedTest(Test test);
         List<Test> allTheTestAtDate(DateTime date);
         List<Test> allTheTestAtMonth(DateTime date);
+        List<Test> allTheTestAtRange(DateTime start, DateTime end);
+        bool isAvailableDate(DateTime date);
         event EventHandler<EventArgs> TestEvent;
         #endregion
 
@@ -43,6 +45,7 @@ namespace BL
         List<Tester> getAllTester();
         List<Tester> testersAtDistanceFromAddress(Address address, double distance = 5);
         List<Tester> testersAvailableAtDate(DateTime date);
+        List<Tester> testersAvailableAtDateAndHour(DateTime date);
         bool isAvailableAtDate(string testerId, DateTime date);
         bool atAvailbleDistance(string testerId, Address address);
         DateTime NearestOpenDate(DateTime date);
