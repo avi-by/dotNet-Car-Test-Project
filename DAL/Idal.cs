@@ -9,7 +9,7 @@ namespace DAL
 {
     public interface IDAL
     {
-        #region Tester
+                #region Tester
 
         void AddTester(Tester t);
         void DeleteTester(Tester t);
@@ -17,6 +17,8 @@ namespace DAL
         void UpdateTester(Tester tester, string id);
         Tester findTester(string testerId);
         List<Tester> getAllTesters();
+        event EventHandler<EventArgs> TesterEvent;
+
         #endregion
 
 
@@ -29,6 +31,8 @@ namespace DAL
         List<Trainee> getAllTrainees();
         Trainee findTrainee(string traineeId);
         void UpdateTrainee(Trainee tester, string id);
+        event EventHandler<EventArgs> TraineeEvent;
+
         #endregion
 
 
@@ -40,6 +44,7 @@ namespace DAL
         void UpdateTest(Test t);
         List<Test> getAllTests();
         List<Test> GetTestList(Func<Test, bool> p);
+        event EventHandler<EventArgs> TestEvent;
         #endregion
     }
 }

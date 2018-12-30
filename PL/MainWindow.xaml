@@ -37,7 +37,14 @@
                                 <ColumnDefinition Width="316*"/>
                             </Grid.ColumnDefinitions>
                             <Button x:Name="pbTester" Content="Add Tetser" HorizontalAlignment="Left" Margin="55,15,0,0" VerticalAlignment="Top" Width="75" Click="pbTester_Click" Height="19"/>
-                            <DataGrid x:Name="testerDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}"  RowDetailsVisibilityMode="VisibleWhenSelected" Margin="10,39,21.333,26.667"  HorizontalContentAlignment="Center" SelectionChanged="TesterDataGrid_SelectionChanged" IsReadOnly="True" MinHeight="23" MinRowHeight="23">
+                            <DataGrid x:Name="testerDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}"  RowDetailsVisibilityMode="VisibleWhenSelected" Margin="10,39,21.333,26.667" MouseDoubleClick="TesterDataGrid_MouseDoubleClick" HorizontalContentAlignment="Center" SelectionChanged="TesterDataGrid_SelectionChanged" IsReadOnly="True" MinHeight="23" MinRowHeight="23">
+                                <DataGrid.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="edit" Click="MenuItem_Click_edit" />
+                                        <MenuItem Header="delete" Click="MenuItem_Click_delete"/>
+                                        <MenuItem Header="add" Click="MenuItem_Click_add"/>
+                                    </ContextMenu>
+                                </DataGrid.ContextMenu>
 
                                 <DataGrid.Columns>
                                     <DataGridTextColumn x:Name="nameColumn" Binding="{Binding FirstName}" Header="First Name" />
@@ -75,7 +82,6 @@
 
                 <TabItem Header="Trainees" Name="traineeTab">
                     <local:Trainees_UserControl/>
-                    
                 </TabItem>
 
                 <TabItem Header="Tests">

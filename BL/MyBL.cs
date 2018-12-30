@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Configuration;
 using BE;
 using DAL;
+using System.Collections.Specialized;
 
 namespace BL
 {
@@ -22,6 +23,12 @@ namespace BL
         #endregion
 
         static IDAL MyDal;
+
+        public event EventHandler<EventArgs> TraineeEvent { add { MyDal.TraineeEvent += value; } remove { MyDal.TraineeEvent -= value; } }
+
+        public event EventHandler<EventArgs> TesterEvent { add { MyDal.TesterEvent += value; } remove { MyDal.TesterEvent -= value; } }
+
+        public event EventHandler<EventArgs> TestEvent { add { MyDal.TestEvent += value; } remove { MyDal.TestEvent -= value; } }
 
         #region Constructor
 
@@ -142,13 +149,13 @@ namespace BL
                 throw new Exception("cant regist, the tester not exist at the data base");
             }
 
-            if (MyDal.GetTestList(item => item.Date == test.Date && item.TraineeId == test.TraineeId).Count!=0)//if their id another test of this trainee at the same time
+            if (MyDal.GetTestList(item => item.Date == test.Date && item.TraineeId == test.TraineeId).Count != 0)//if their id another test of this trainee at the same time
                 throw new Exception("cant regist, the traniee do another test at the same time");
 
             if (!isAvailableAtDate(test.TesterId, test.Date))
                 throw new Exception("cant regist, the tester do another test at the same time");
             var temp = MyDal.GetTestList(item => item.TraineeId == trainee.Id && item.GearBox == trainee.GearBox && item.Car == trainee.CarType);
-            if (temp.Count>0&&(test.Date - temp.Max(item => item.Date)).Days < Configuration.IntervalBetweenTest.Days) //get all the test of this trainee on this gearbox and select the test with the later date and check if past enough days from this test (first check if there are any test records and after search in them, max cant work on empty list) 
+            if (temp.Count > 0 && (test.Date - temp.Max(item => item.Date)).Days < Configuration.IntervalBetweenTest.Days) //get all the test of this trainee on this gearbox and select the test with the later date and check if past enough days from this test (first check if there are any test records and after search in them, max cant work on empty list) 
             {
                 throw new Exception("cant regist, the trainee did his last test not long ago");
             }
@@ -182,7 +189,7 @@ namespace BL
 
             if (test.Succeeded != null && (test.Test1_ReverseParking == null || test.Test2_KeepingSafeDistance == null || test.Test3_UsingMirrors == null || test.Test4_UsingTurnSignals == null || test.Test5_LegalSpeed == null))//the test can not be insert as a finished test if any of the test's check not insert
                 throw new Exception("the test can not be insert as a finished test if any of the test's check not insert");
-            if (test.Succeeded==true&&test.Grade<Configuration.minGradeForPassTest)
+            if (test.Succeeded == true && test.Grade < Configuration.minGradeForPassTest)
             {
                 throw new Exception("cant pass the test with grade of " + 100 * test.Grade + " the min grade is: " + Configuration.minGradeForPassTest);
             }
@@ -208,11 +215,11 @@ namespace BL
         public List<Tester> testersAtDistanceFromAddress(Address address, double distance = 5)
         {
             var lis = MyDal.getAllTesters();
-            var l = from x in lis where distanceFromAddress(x.Address,address) <= distance select x;
+            var l = from x in lis where distanceFromAddress(x.Address, address) <= distance select x;
             return l.ToList();
         }
 
-        private double distanceFromAddress(Address addressSource,Address addressDestination)
+        private double distanceFromAddress(Address addressSource, Address addressDestination)
         {
             Random random = new Random();
             double e = random.Next() % 8;
@@ -233,7 +240,7 @@ namespace BL
             var allTester = MyDal.getAllTesters();
             //select all the testers that not exist at the list of the tester at the same date and work at this day and hour
             var availableTesters = from item in allTester
-                                   where testList.Find(element => element.TesterId == item.Id) == null && item.WorkHour[(int)date.DayOfWeek][date.Hour-9]//9:00 is the first slot and its num is 0
+                                   where testList.Find(element => element.TesterId == item.Id) == null && item.WorkHour[(int)date.DayOfWeek][date.Hour - 9]//9:00 is the first slot and its num is 0
                                    select item;
             return availableTesters.ToList();
         }
@@ -250,7 +257,7 @@ namespace BL
             var allTester = MyDal.getAllTesters();
             //select all the testers that not exist at the list of the tester at the same date and work at this day
             var availableTesters = from item in allTester
-                                   where testList.Find(element => element.TesterId == item.Id) == null && isWorkAtThisDay(item,date.DayOfWeek)
+                                   where testList.Find(element => element.TesterId == item.Id) == null && isWorkAtThisDay(item, date.DayOfWeek)
                                    select item;
             return availableTesters.ToList();
         }
@@ -277,9 +284,9 @@ namespace BL
         /// <param name="id"></param>
         /// <param name="gearBox"></param>
         /// <returns></returns>
-        public bool haveLicense(string id, GearBox gearBox,CarType carType)
+        public bool haveLicense(string id, GearBox gearBox, CarType carType)
         {
-            return (MyDal.GetTestList(item => item.TraineeId == id && item.GearBox == gearBox &&item.Car==carType &&item.Succeeded==true).Count != 0) ? true : false;
+            return (MyDal.GetTestList(item => item.TraineeId == id && item.GearBox == gearBox && item.Car == carType && item.Succeeded == true).Count != 0) ? true : false;
         }
 
 
@@ -291,7 +298,7 @@ namespace BL
         public bool isPassed(string id)
         {
             Trainee trainee = MyDal.findTrainee(id);
-            if (MyDal.GetTestList(item => item.Car == trainee.CarType && item.GearBox == trainee.GearBox && item.TraineeId == trainee.Id && item.Succeeded==true).Count !=0) //all the test of this trainee on this kind of gearbox and car that he pass 
+            if (MyDal.GetTestList(item => item.Car == trainee.CarType && item.GearBox == trainee.GearBox && item.TraineeId == trainee.Id && item.Succeeded == true).Count != 0) //all the test of this trainee on this kind of gearbox and car that he pass 
                 return true;
             return false;
         }
@@ -336,7 +343,7 @@ namespace BL
         /// <param name="test"></param>
         public void updateTest(Test test)
         {
-            if (test.Id==null)
+            if (test.Id == null)
             {
                 throw new Exception("cant update, test without ID, if you update Use only legitimate tests that have previously entered the system");
             }
@@ -376,7 +383,7 @@ namespace BL
 
         public DateTime NearestOpenDate(DateTime date)
         {
-            while (testersAvailableAtDate(date).Count==0)
+            while (testersAvailableAtDate(date).Count == 0)
             {
                 date = date.AddDays(1);
             }
@@ -391,6 +398,7 @@ namespace BL
         {
             return NearestOpenDate(DateTime.Now.AddDays(1));
         }
+
 
         #endregion
     }

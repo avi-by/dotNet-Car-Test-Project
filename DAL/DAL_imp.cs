@@ -10,32 +10,39 @@ using System.Collections.Specialized;
 namespace DAL
 {
 
-    public class DAL_imp : IDAL, INotifyCollectionChanged
+    public class DAL_imp : IDAL  //, INotifyCollectionChanged
     {
         #region Singleton
         private static readonly DAL_imp instance = new DAL_imp();
 
-        
+
 
         public static DAL_imp Instance
         {
             get { return instance; }
         }
 
+
         private DAL_imp() { }
         static DAL_imp() { }
 
         #endregion
+        private EventHandler<EventArgs> testerEvent=delegate { }; //to prevent exeption of null event 
+        public event EventHandler<EventArgs> TesterEvent { add { testerEvent += value; } remove { testerEvent -= value; } }
 
-        public event NotifyCollectionChangedEventHandler CollectionChanged;
+        private EventHandler<EventArgs> traineeEvent = delegate { };
+        public event EventHandler<EventArgs> TraineeEvent { add { traineeEvent += value; } remove { traineeEvent -= value; } }
 
-        private void OnNotifyCollectionChanged(NotifyCollectionChangedEventArgs args)
-        {
-            if (this.CollectionChanged != null)
-            {
-                this.CollectionChanged(this, args);
-            }
-        }
+        private EventHandler<EventArgs> testEvent = delegate { };
+        public event EventHandler<EventArgs> TestEvent { add { testEvent += value; } remove { testEvent -= value; } }
+
+        //private void OnNotifyCollectionChanged(NotifyCollectionChangedEventArgs args)
+        //{
+        //    if (this.CollectionChanged != null)
+        //    {
+        //        this.CollectionChanged(this, args);
+        //    }
+        //}
 
         #region Tester
 
@@ -43,22 +50,23 @@ namespace DAL
         {
             if (DataSource.testers.RemoveAll(item => item.Id == tester.Id) == 0)
                 throw new Exception("failed to remove, tester with the same ID not found");
-
+            testerEvent(this, null);
         }
 
 
         public void UpdateTester(Tester tester)
         {
 
-            int index = 0; 
+            int index = 0;
             foreach (Tester item in DataSource.testers)
             {
                 if (item.Id == tester.Id)
                 {
                     DataSource.testers[index] = tester;
-                    this.OnNotifyCollectionChanged(
-        new NotifyCollectionChangedEventArgs(
-          NotifyCollectionChangedAction.Add, tester));
+                    testerEvent(this, null);
+                    //            this.OnNotifyCollectionChanged(
+                    //new NotifyCollectionChangedEventArgs(
+                    //  NotifyCollectionChangedAction.Add, tester));
                     return;
                 }
                 index++;
@@ -67,28 +75,16 @@ namespace DAL
         }
 
 
-        public List<Test> GetTestList(Func<Test, bool> p)
-        {
-            var x = from item in DataSource.tests
-                    where p(item)
-                    select item;
-            var y = x.ToList<Test>();
-            //if (y.Count==0)
-            //{
-            //    return null;
-            //}
-            return (y.Clone().ToList());
-        }
 
         public void AddTester(Tester tester)
         {
             if (DataSource.testers.Find(item => item.Id == tester.Id) != null)
                 throw new Exception("cant add the tester, there are another tester with the same id");
             DataSource.testers.Add(tester);
-
-       this.OnNotifyCollectionChanged(
-       new NotifyCollectionChangedEventArgs(
-        NotifyCollectionChangedAction.Add, tester)); 
+            testerEvent(DAL_imp.Instance, null);
+            //    this.OnNotifyCollectionChanged(
+            //new NotifyCollectionChangedEventArgs(
+            //  NotifyCollectionChangedAction.Add, tester)); 
 
         }
         public List<Tester> getAllTesters()
@@ -105,16 +101,38 @@ namespace DAL
                 case "carType":
 
                     groupOfTesters = from tester in DataSource.testers
-                            group tester by tester.CarType;
+                                     group tester by tester.CarType;
                     listOfTesters = (groupOfTesters as List<Tester>).Clone();
                     break;
 
-                
+
 
             }
             return listOfTesters;
 
         }
+
+        public void UpdateTester(Tester tester, string id)
+        {
+            int index = 0;
+            foreach (Tester item in DataSource.testers)
+            {
+                if (item.Id == id)
+                {
+                    DataSource.testers[index] = tester;
+                    //            this.OnNotifyCollectionChanged(
+                    //new NotifyCollectionChangedEventArgs(
+                    //  NotifyCollectionChangedAction.Add, tester));
+                    return;
+                }
+                index++;
+            }
+            throw new Exception("failed to update, the tester old ID not found");
+
+        }
+
+        public Tester findTester(string testerId) => DataSource.testers.Find(item => item.Id == testerId);
+
 
         #endregion
 
@@ -124,19 +142,14 @@ namespace DAL
             if (DataSource.trainees.Find(item => item.Id == trainee.Id) != null)
                 throw new Exception("cant add the trainee, there are another trainee with the same id");
             DataSource.trainees.Add(trainee);
-
-            this.OnNotifyCollectionChanged(
-       new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, trainee));
-
+            traineeEvent(this, null);
         }
 
         public void DeleteTrainee(Trainee trainee)
         {
             if (DataSource.trainees.RemoveAll(item => item.Id == trainee.Id) == 0)
                 throw new Exception("failed to remove, trainee with the same ID not found");
-            this.OnNotifyCollectionChanged(
-       new NotifyCollectionChangedEventArgs(
-         NotifyCollectionChangedAction.Remove, trainee));
+            traineeEvent(this, null);
 
         }
 
@@ -148,16 +161,30 @@ namespace DAL
                 if (item.Id == trainee.Id)
                 {
                     DataSource.trainees[index] = trainee;
-                    this.OnNotifyCollectionChanged(
-       new NotifyCollectionChangedEventArgs(
-         NotifyCollectionChangedAction.Add, trainee));
-                    return;
+                    traineeEvent(this, null);
+                    break;
                 }
                 index++;
             }
             throw new Exception("failed to update, trainee with the same ID not found");
         }
 
+        public void UpdateTrainee(Trainee trainee, string id)
+        {
+            int index = 0; ;
+            foreach (Trainee item in DataSource.trainees)
+            {
+                if (item.Id == id)
+                {
+                    DataSource.trainees[index] = trainee;
+                    traineeEvent(this, null);
+                    break;
+                }
+                index++;
+            }
+            throw new Exception("failed to update, trainee with the same ID not found");
+
+        }
 
         public List<Trainee> getAllTrainees()
         {
@@ -194,10 +221,26 @@ namespace DAL
 
         }
 
+        public Trainee findTrainee(string traineeId) => DataSource.trainees.Find(item => item.Id == traineeId);
+
+
+
         #endregion
 
         #region test
 
+        public List<Test> GetTestList(Func<Test, bool> p)
+        {
+            var x = from item in DataSource.tests
+                    where p(item)
+                    select item;
+            var y = x.ToList<Test>();
+            //if (y.Count==0)
+            //{
+            //    return null;
+            //}
+            return (y.Clone().ToList());
+        }
 
         public void AddTest(Test test)
         {
@@ -210,9 +253,10 @@ namespace DAL
             test.Id = builder.ToString();
             Configuration.test_id++;
             DataSource.tests.Add(test);
-            this.OnNotifyCollectionChanged(
-new NotifyCollectionChangedEventArgs(
-NotifyCollectionChangedAction.Add, test));
+            testEvent(this, null);
+            //            this.OnNotifyCollectionChanged(
+            //new NotifyCollectionChangedEventArgs(
+            //NotifyCollectionChangedAction.Add, test));
         }
 
         public void DeleteTest(Test test)
@@ -222,6 +266,9 @@ NotifyCollectionChangedAction.Add, test));
                 if (item.Id == test.Id)
                 {
                     DataSource.tests.Remove(item);
+                    testEvent(this, null);
+                    //           new NotifyCollectionChangedEventArgs(
+                    //NotifyCollectionChangedAction.Remove, test);
                     return;
                 }
                 throw new Exception("failed to remove, test with the same ID not found");
@@ -229,11 +276,9 @@ NotifyCollectionChangedAction.Add, test));
             }
         }
 
-
         public void UpdateTest(Test test)
         {
-        
-            if (test.Id==null)
+            if (test.Id == null)
             {
                 throw new Exception("failed to update, cant make test without ID");
             }
@@ -243,6 +288,7 @@ NotifyCollectionChangedAction.Add, test));
                 if (item.Id == test.Id)
                 {
                     DataSource.tests[index] = test;
+                    testEvent(this, null);
                     break;
                 }
                 index++;
@@ -255,47 +301,7 @@ NotifyCollectionChangedAction.Add, test));
             return DataSource.tests.Clone().ToList();
         }
 
-        public void UpdateTester(Tester tester, string id)
-        {
-            int index = 0;
-            foreach (Tester item in DataSource.testers)
-            {
-                if (item.Id == id)
-                {
-                    DataSource.testers[index] = tester;
-                    this.OnNotifyCollectionChanged(
-        new NotifyCollectionChangedEventArgs(
-          NotifyCollectionChangedAction.Add, tester));
-                    return;
-                } 
-                index++;
-            }
-            throw new Exception("failed to update, the tester old ID not found");
 
-        }
-
-        public Tester findTester(string testerId) => DataSource.testers.Find(item => item.Id == testerId);
-
-        public Trainee findTrainee(string traineeId) => DataSource.trainees.Find(item => item.Id == traineeId);
-
-        public void UpdateTrainee(Trainee trainee, string id)
-        {
-            int index = 0; ;
-            foreach (Trainee item in DataSource.trainees)
-            {
-                if (item.Id == id)
-                {
-                    DataSource.trainees[index] = trainee;
-                    this.OnNotifyCollectionChanged(
-       new NotifyCollectionChangedEventArgs(
-         NotifyCollectionChangedAction.Add, trainee));
-                    return;
-                }
-                index++;
-            }
-            throw new Exception("failed to update, trainee with the same ID not found");
-
-        }
 
 
         #endregion test

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Collections.Specialized;
 using BE;
 using BL;
 
@@ -23,12 +24,18 @@ namespace PL
     /// </summary>
     public partial class Tests_UserControl : UserControl
     {
-        private MyBL bl=BL.MyBL.Instance;
-
+       // private MyBL bl=BL.MyBL.Instance;
+        private IBL bl = BL.FactoryBL.GetBL(Configuration.BLType);
         public Tests_UserControl()
         {
             InitializeComponent();
+            bl.TestEvent += TestEvent;
            
+        }
+
+        private void TestEvent(object sender, EventArgs e)
+        {
+            testDataGrid.DataContext = bl.getAllTests();
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -62,15 +69,35 @@ namespace PL
 
             //    MessageBox.Show(msg.Message, "Exception", MessageBoxButton.OK, MessageBoxImage.Error);
             //}
+            System.Windows.Data.CollectionViewSource testViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("testViewSource")));
             testDataGrid.DataContext = bl.getAllTests();
         }
 
-       
-
+      
         private void testDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (testDataGrid.SelectedItem == null) return;
             dateCalendar.DisplayDate = (testDataGrid.SelectedItem as Test).Date.Date;
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MenuItem_Click_1(object sender, RoutedEventArgs e)
+        {
+            if (testDataGrid.SelectedItem == null) return ;
+            try
+            {
+                bl.DeleteTest((testDataGrid.SelectedItem as Test));
+            }
+            catch (Exception msg)
+            {
+
+                MessageBox.Show(msg.Message, "Exception", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
         }
     }
 }

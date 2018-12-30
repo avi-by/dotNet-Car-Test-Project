@@ -21,9 +21,12 @@ namespace PL
     /// </summary>
     public partial class Trainees_UserControl : UserControl
     {
+
+        private IBL bl = FactoryBL.GetBL(Configuration.BLType);
         public Trainees_UserControl()
         {
             InitializeComponent();
+            bl.TraineeEvent += TraineeEvent;
             MyBL.Instance.addTrainee(new Trainee("12345670", "yosef", "machanaim", new DateTime(1980, 1, 1), "normal_Gaz_School", "eliyahu", 28, "99999999", new Address("shahal", 7, "jerusalem "), Gender.MALE, CarType.PrivetCar, GearBox.Manual));
             MyBL.Instance.addTrainee(new Trainee("12345671", "hagai", "sugerman", new DateTime(1980, 1, 1), "normal_Gaz_School", "eliyahu", 25, "99999999", new Address("yehosua", 11, "jerusalem "), Gender.MALE, CarType.PrivetCar, GearBox.Manual));
             MyBL.Instance.addTrainee(new Trainee("12345672", "moshe", "shauli", new DateTime(1980, 1, 1), "normal_Gaz_School", "eliyahu", 30, "99999999", new Address("shahal", 7, "jerusalem "), Gender.MALE, CarType.PrivetCar, GearBox.Manual));
@@ -32,6 +35,11 @@ namespace PL
 
 
 
+        }
+
+        private void TraineeEvent(object sender, EventArgs e)
+        {
+            traineeDataGrid.DataContext = bl.getAllTrainees();
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -74,6 +82,40 @@ namespace PL
         {
             AddTraineeWindow addTraineeWindow = new AddTraineeWindow();
             addTraineeWindow.ShowDialog();
+        }
+
+        private void MenuItem_Click_delete(object sender, RoutedEventArgs e)
+        {
+            if (traineeDataGrid.SelectedItem == null) return;
+            try
+            {
+                bl.deleteTrainee((traineeDataGrid.SelectedItem as Trainee));
+            }
+            catch (Exception msg)
+            {
+
+                MessageBox.Show(msg.Message, "Exception", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+        }
+
+        private void MenuItem_Click_add(object sender, RoutedEventArgs e)
+        {
+            AddTraineeWindow addTraineeWindow = new AddTraineeWindow();
+            addTraineeWindow.ShowDialog();
+        }
+
+        private void MenuItem_Click_edit(object sender, RoutedEventArgs e)
+        {
+            if (traineeDataGrid.SelectedItem == null) return;
+            var selectedPerson = (traineeDataGrid.SelectedItem) as Trainee;
+
+            UpdateTraineeWindow updateTraineeWindow = new UpdateTraineeWindow(selectedPerson);
+
+            //  updateTesterWindow.DataContext = selectedPerson;
+
+
+            updateTraineeWindow.ShowDialog();
         }
     }
 }
