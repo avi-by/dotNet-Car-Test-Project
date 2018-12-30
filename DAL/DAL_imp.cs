@@ -95,14 +95,14 @@ namespace DAL
         public IEnumerable<object> testerGrouping(string property)
         {
             IEnumerable<object> groupOfTesters = null;
-            List<Trainee> listOfTesters = null;
+            List<Tester> listOfTesters = null;
             switch (property)
             {
                 case "carType":
 
                     groupOfTesters = from tester in DataSource.testers
                                      group tester by tester.CarType;
-                    listOfTesters = (groupOfTesters as List<Trainee>).Clone();
+                    listOfTesters = (groupOfTesters as List<Tester>).Clone();
                     break;
 
 
@@ -137,11 +137,11 @@ namespace DAL
         #endregion
 
         #region trainee
-        public void AddTrainee(Trainee t)
+        public void AddTrainee(Trainee trainee)
         {
-            if (DataSource.trainees.Find(item => item.Id == t.Id) != null)
+            if (DataSource.trainees.Find(item => item.Id == trainee.Id) != null)
                 throw new Exception("cant add the trainee, there are another trainee with the same id");
-            DataSource.trainees.Add(t);
+            DataSource.trainees.Add(trainee);
             traineeEvent(this, null);
         }
 

@@ -21,6 +21,13 @@
             </Grid.RowDefinitions>
         </Grid>
         <DataGrid x:Name="traineeDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="10,46,338,81" RowDetailsVisibilityMode="VisibleWhenSelected" IsReadOnly="True">
+            <DataGrid.ContextMenu>
+            <ContextMenu>
+                <MenuItem Header="edit" Click="MenuItem_Click_edit" />
+                <MenuItem Header="delete" Click="MenuItem_Click_delete"/>
+                <MenuItem Header="add" Click="MenuItem_Click_add"/>
+            </ContextMenu>
+            </DataGrid.ContextMenu>
             <DataGrid.Columns>
 
                 <DataGridTextColumn x:Name="firstNameColumn" Binding="{Binding FirstName}" Header="First Name" />

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,7 +8,7 @@ using BE;
 
 namespace BL
 {
-    interface IBL
+   public interface IBL
     {
         #region test
         void AddTest(Test test);
@@ -17,6 +18,7 @@ namespace BL
         void completedTest(Test test);
         List<Test> allTheTestAtDate(DateTime date);
         List<Test> allTheTestAtMonth(DateTime date);
+        event EventHandler<EventArgs> TestEvent;
         #endregion
 
         #region trainee
@@ -24,8 +26,9 @@ namespace BL
         void deleteTrainee(Trainee trainee);
         void updateTrainee(Trainee trainee, string id);
         void updateTrainee(Trainee trainee);
+        event EventHandler<EventArgs> TraineeEvent;
         List<Trainee> getAllTrainees();
-        bool haveLicense(string id, GearBox gearBox);
+        bool haveLicense(string id, GearBox gearBox,CarType carType);
         bool isPassed(string id);
         int amountOfTests(string id);
         #endregion
@@ -35,6 +38,8 @@ namespace BL
         void deleteTester(Tester tester);
         void updateTester(Tester tester, string id);
         void updateTester(Tester tester);
+        event EventHandler<EventArgs> TesterEvent;
+        bool isWorkAtThisDay(Tester tester, DayOfWeek dayOfWeek);
         List<Tester> getAllTester();
         List<Tester> testersAtDistanceFromAddress(Address address, double distance = 5);
         List<Tester> testersAvailableAtDate(DateTime date);

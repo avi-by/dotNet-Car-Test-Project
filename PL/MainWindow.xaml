@@ -80,7 +80,7 @@
                 <!--#endregion-->
 
 
-                <TabItem Header="Trainees">
+                <TabItem Header="Trainees" Name="traineeTab">
                     <local:Trainees_UserControl/>
                 </TabItem>
 

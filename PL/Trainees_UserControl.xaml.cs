@@ -83,5 +83,39 @@ namespace PL
             AddTraineeWindow addTraineeWindow = new AddTraineeWindow();
             addTraineeWindow.ShowDialog();
         }
+
+        private void MenuItem_Click_delete(object sender, RoutedEventArgs e)
+        {
+            if (traineeDataGrid.SelectedItem == null) return;
+            try
+            {
+                bl.deleteTrainee((traineeDataGrid.SelectedItem as Trainee));
+            }
+            catch (Exception msg)
+            {
+
+                MessageBox.Show(msg.Message, "Exception", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+        }
+
+        private void MenuItem_Click_add(object sender, RoutedEventArgs e)
+        {
+            AddTraineeWindow addTraineeWindow = new AddTraineeWindow();
+            addTraineeWindow.ShowDialog();
+        }
+
+        private void MenuItem_Click_edit(object sender, RoutedEventArgs e)
+        {
+            if (traineeDataGrid.SelectedItem == null) return;
+            var selectedPerson = (traineeDataGrid.SelectedItem) as Trainee;
+
+            UpdateTraineeWindow updateTraineeWindow = new UpdateTraineeWindow(selectedPerson);
+
+            //  updateTesterWindow.DataContext = selectedPerson;
+
+
+            updateTraineeWindow.ShowDialog();
+        }
     }
 }
