@@ -20,6 +20,7 @@ namespace BE
         private string schoolName;
         private string teacherName;
         private int numberOfLesson;
+        private DateTime registration_date;
      //   private int amountOfTests;
 
         public Trainee(string id, string name, int age, Address address, string schoolName="", string teacherName="", int numberOfLesson=0, string phoneNumber="00000", Gender gender = Gender.MALE, CarType carType = CarType.PrivetCar, GearBox gearBox = GearBox.Manual)
@@ -42,20 +43,22 @@ namespace BE
      //       AmountOfTests = 0;
         }
 
-        public Trainee(string id, string firstName, string lastName, DateTime birthDay, string schoolName, string teacherName, int numberOfLesson, string phoneNumber, Address address, Gender gender=Gender.MALE,  CarType carType=CarType.PrivetCar, GearBox gearBox=GearBox.Manual)
+        public Trainee(string id, string firstName, string lastName, DateTime birthDay, string schoolName, string teacherName, int numberOfLesson, string phoneNumber, Address address, Gender gender = Gender.MALE, CarType carType = CarType.PrivetCar, GearBox gearBox = GearBox.Manual)
         {
-           Id = id;
-           FirstName = firstName;
-           LastName = lastName;
-           BirthDate = birthDay;
-           Gender = gender;
-           PhoneNumber = phoneNumber;
-           Address = address;
-           CarType = carType;
-           GearBox = gearBox;
-           SchoolName = schoolName;
-           TeacherName = teacherName;
-           NumberOfLesson = numberOfLesson;
+
+            Id = id;
+            FirstName = firstName;
+            LastName = lastName;
+            BirthDate = birthDay;
+            Gender = gender;
+            PhoneNumber = phoneNumber;
+            Address = address;
+            CarType = carType;
+            GearBox = gearBox;
+            SchoolName = schoolName;
+            TeacherName = teacherName;
+            NumberOfLesson = numberOfLesson;
+            Registration_date = DateTime.Now;
         }
 
         public string Id { get => id; set => id = value; }
@@ -85,7 +88,10 @@ namespace BE
             set => BirthDate = new DateTime(DateTime.Now.Year - value, 1, 1);//default month and day if enter only age
         }
 
-    //    public int AmountOfTests { get => amountOfTests; set => amountOfTests = value; }
+        public DateTime Registration_date { get => registration_date; set => registration_date = value; }
+
+
+        //    public int AmountOfTests { get => amountOfTests; set => amountOfTests = value; }
 
         public object Clone()
         {
