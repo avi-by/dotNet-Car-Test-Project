@@ -86,6 +86,7 @@ namespace PL
         {
             System.Windows.Data.CollectionViewSource testerViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("testerViewSource")));
 
+            funny_animation.Play();
             // Load data by setting the CollectionViewSource.Source property:
             // testerViewSource.Source = [generic data source]
         }
@@ -260,5 +261,15 @@ namespace PL
             }
             testerDataGrid.DataContext = sortTester;
         }
+
+        private void Funny_animation_MediaEnded(object sender, RoutedEventArgs e)
+        {
+
+            funny_animation.Position = TimeSpan.FromMilliseconds(1);
+            funny_animation.Play();
+
+            
+        }
+        
     }
 }

@@ -113,7 +113,8 @@
 
                 <TabItem Header="media">
                     <Grid>
-                        <MediaElement Name="funny_animation" Source="icons\giphy.gif" LoadedBehavior="Play" Margin="237,103,179.333,86.667"  />
+                        <MediaElement Name="funny_animation" Source="icons\giphy.gif" LoadedBehavior="Manual" Margin="237,103,179.333,86.667" MediaEnded="Funny_animation_MediaEnded" />
+
                     </Grid>
                 </TabItem>
 
