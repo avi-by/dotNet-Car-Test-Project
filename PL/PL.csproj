@@ -213,5 +213,10 @@
   <ItemGroup>
     <Resource Include="icons\plus_add_green_61658 %281%29.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="icons\giphy.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

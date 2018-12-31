@@ -36,7 +36,13 @@
                                 <ColumnDefinition Width="477*"/>
                                 <ColumnDefinition Width="316*"/>
                             </Grid.ColumnDefinitions>
-                            <Button x:Name="pbTester" Content="Add Tetser" HorizontalAlignment="Left" Margin="37,15,0,0" VerticalAlignment="Top" Width="75" Click="pbTester_Click" Height="19"/>
+                            <Button x:Name="pbTester"  HorizontalAlignment="Left" Margin="35,8,0,0" VerticalAlignment="Top"  Click="pbTester_Click" Width="auto"  Height="29" RenderTransformOrigin="0.835,0.989">
+                                <Button.Template>
+                                    <ControlTemplate>
+                                        <Image Source="icons/plus_add_green_61658 (1).png" />
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
                             <DataGrid x:Name="testerDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}"  RowDetailsVisibilityMode="VisibleWhenSelected" Margin="10,39,21.333,26.667" MouseDoubleClick="TesterDataGrid_MouseDoubleClick" HorizontalContentAlignment="Center" SelectionChanged="TesterDataGrid_SelectionChanged" IsReadOnly="True" MinHeight="23" MinRowHeight="26">
                                 <DataGrid.ContextMenu>
                                     <ContextMenu>
@@ -103,6 +109,12 @@
 
                 <TabItem Header="Tests">
                     <local:Tests_UserControl Loaded="Tests_UserControl_Loaded"/>
+                </TabItem>
+
+                <TabItem Header="media">
+                    <Grid>
+                        <MediaElement Name="funny_animation" Source="icons\giphy.gif" LoadedBehavior="Play" Margin="237,103,179.333,86.667"  />
+                    </Grid>
                 </TabItem>
 
 
