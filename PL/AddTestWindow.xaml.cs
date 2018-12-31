@@ -76,8 +76,13 @@ namespace PL
 
             if (AllFieldOK())
             {
+                //set hour that selected
+                DateTime hour;
+                var temp = hourComboBox.SelectedIndex + 9;
+                hour = new DateTime(1, 1, 1, temp, 0, 0);
 
-                MyBL.Instance.AddTest(new Test(TesterIdTextBox.Text, TraineeIdTextBox.Text, (GearBox)gearBoxComboBox.SelectedItem, (CarType)carTypeComboBox.SelectedItem, Date_DatePicker.DisplayDate, new DateTime(), new Address(streetTextBox.Text, int.Parse(houseNumberTextBox.Text), city.Text), test1_ReverseParkingCheckBox.IsChecked, test2_KeepingSafeDistanceCheckBox.IsChecked, test3_UsingMirrorsCheckBox.IsChecked, test4_UsingTurnSignalsCheckBox.IsChecked, test5_LegalSpeedCheckBox.IsChecked, succeededCheckBox.IsChecked, notesTextBox.Text));
+                
+                MyBL.Instance.AddTest(new Test(TesterIdTextBox.Text, TraineeIdTextBox.Text, (GearBox)gearBoxComboBox.SelectedItem, (CarType)carTypeComboBox.SelectedItem, Date_DatePicker.DisplayDate, hour, new Address(streetTextBox.Text, int.Parse(houseNumberTextBox.Text), city.Text), test1_ReverseParkingCheckBox.IsChecked, test2_KeepingSafeDistanceCheckBox.IsChecked, test3_UsingMirrorsCheckBox.IsChecked, test4_UsingTurnSignalsCheckBox.IsChecked, test5_LegalSpeedCheckBox.IsChecked, succeededCheckBox.IsChecked, notesTextBox.Text));
 
 
                 this.Close();
@@ -161,6 +166,7 @@ namespace PL
         private void Date_DatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             
+
             if (e.AddedItems.Count > 0)
             {
                 DateTime selctedDate = (DateTime)e.AddedItems[0];
@@ -168,8 +174,10 @@ namespace PL
                 {
                     MessageBox.Show("this day unavailbale");
                     ((DatePicker)sender).SelectedDate = null;
+                    return;
                 }
             }
+
 
             hourComboBox.SelectedItem = null;
             //set each combox item enabled only if the tester work in this hour  
@@ -177,7 +185,7 @@ namespace PL
             {
 
 
-                DayOfWeek day = Date_DatePicker.DisplayDate.DayOfWeek;
+                DayOfWeek day = Date_DatePicker.SelectedDate.Value.DayOfWeek;
                 Tester temp = MyBL.Instance.getAllTester().Find(tester => tester.Id == TesterIdTextBox.Text);
                 for (int i = 0; i < 6; i++)
                     (hourComboBox.Items[i] as ComboBoxItem).IsEnabled = (temp.WorkHour[(int)day][i]);
@@ -194,6 +202,17 @@ namespace PL
 
         private void TesterIdTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
+            //set tester name according to the id that entered.
+            var the_tester= MyBL.Instance.getAllTester().Find(item => item.Id == TesterIdTextBox.Text);
+            if (the_tester != null)
+            {
+                string names = the_tester.FirstName +" "+ the_tester.LastName;
+                tb_testerName.Text = names;
+            }
+            else
+                tb_testerName.Text = "(name of tester)";
+
+
             hourComboBox.SelectedItem = null;
 
             //set each combox item enabled only if the tester work in this hour  
@@ -213,6 +232,29 @@ namespace PL
                     (hourComboBox.Items[i] as ComboBoxItem).IsEnabled = false;
                
             }
+        }
+
+        private void Tb_traineeName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            //set trainee name according to the id that entered.
+            var the_trainee = MyBL.Instance.getAllTrainees().Find(item => item.Id == TraineeIdTextBox.Text);
+            if (the_trainee != null)
+            {
+                string names = the_trainee.FirstName + " " + the_trainee.LastName;
+                tb_testerName.Text = names;
+            }
+            else
+                tb_traineeName.Text = "(name of trainee)";
+        }
+
+        private void Pb_chooseTrainee_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Pb_chooseTester_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

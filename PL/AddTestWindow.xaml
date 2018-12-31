@@ -41,6 +41,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
 
         </Grid.ColumnDefinitions>
 
@@ -54,14 +55,15 @@
         <Label x:Name="labelCarType" Content="Car Type:" Grid.Column="0" HorizontalAlignment="Left"  Grid.Row="14" VerticalAlignment="Center" Height="26" Margin="0,1,0,1.667" Width="59"/>
         <ComboBox x:Name="carTypeComboBox" Grid.Column="1" HorizontalAlignment="Left" Height="22"  Grid.Row="14" SelectedItem="{Binding Car, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" Margin="0.333,3,0,3.667"/>
 
-        <Label x:Name="labelID" Content="ID:" Grid.Column="0" HorizontalAlignment="Left"  Grid.Row="0" VerticalAlignment="Center" Height="26" Margin="0,3,0,1" Width="24"/>
-        <TextBox x:Name="ID" Grid.Column="1" HorizontalAlignment="Left" Height="23"  Grid.Row="0" Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" Margin="0.333,4,0,3" IsReadOnly="True"/>
-
         <Label x:Name="labelTraineeId" Content="TraineeId:" Grid.Column="0" HorizontalAlignment="Left"  Grid.Row="2" VerticalAlignment="Center" Height="26" Margin="0,1,0,3" Width="69"/>
-        <TextBox x:Name="TraineeIdTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="24"  Grid.Row="2" Text="{Binding TraineeId, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" Margin="0.333,2,0,4"/>
+        <TextBox x:Name="TraineeIdTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="24"  Grid.Row="2" Text="{Binding TraineeId, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" />
+        <TextBox x:Name="tb_testerName" Grid.Column="1" HorizontalAlignment="Left" Height="24" Grid.Row="1"  VerticalAlignment="Center" Width="120" Margin="125,0,0,0" IsReadOnly="True" Text="(the tester name)"/>
+
 
         <Label x:Name="labelTesterId" Content="Tester ID:" Grid.Column="0" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Center" Height="26" Margin="0,2" Width="70"/>
-        <TextBox x:Name="TesterIdTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="24" Grid.Row="1" Text="{Binding TesterId, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" Margin="0.333,3,0,3"  TextChanged="TesterIdTextBox_TextChanged" />
+        <TextBox x:Name="TesterIdTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="24" Grid.Row="1" Text="{Binding TesterId, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" TextChanged="TesterIdTextBox_TextChanged"  />
+        <TextBox x:Name="tb_traineeName" Grid.Column="1" HorizontalAlignment="Left" Height="24" Grid.Row="2"  VerticalAlignment="Center" Width="120" Margin="125,0,0,0" IsReadOnly="True" Text="(the trainee name)" TextChanged="Tb_traineeName_TextChanged"  />
+        <Button Name="pb_chooseTrainee" Content="choose trainee from list" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Left"  VerticalAlignment="Center" Width="140" Click="Pb_chooseTrainee_Click" />
 
 
         <Label x:Name="labelGearBox" Content="Gear Box:" Grid.Column="0" HorizontalAlignment="Left" Grid.Row="13" VerticalAlignment="Center" Height="26" Margin="0,1.667,0,1" Width="60"/>
@@ -75,7 +77,7 @@
         <Label Content="address:" Grid.Column="0" HorizontalAlignment="Left"  Grid.Row="12" VerticalAlignment="Center" Height="26" Margin="0,8.333,0,7.667" Width="47" />
         <TextBox x:Name="houseNumberTextBox" Grid.Column="1" HorizontalAlignment="Left"  Height="23"  Grid.Row="12"  VerticalAlignment="Center" Width="29" Margin="30.333,0,0,0" />
 
-        <Button Content="add test" x:Name="pb_AddTest" Grid.Row="15" Grid.Column="1" Margin="30.333,10.333,10,-10" Click="Add_Test_Click"   />
+        <Button Content="add test" x:Name="pb_AddTest" Grid.Row="15" Grid.Column="1" Margin="30.333,10.333,10,-10" Click="Add_Test_Click" Height="21" VerticalAlignment="Top"   />
 
         <Label Content="Test 1 Reverse Parking:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="5" VerticalAlignment="Center"/>
         <CheckBox x:Name="test1_ReverseParkingCheckBox" Content="" Grid.Column="1" HorizontalAlignment="Left" IsChecked="{Binding Test1_ReverseParking, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="3" Grid.Row="5" VerticalAlignment="Center"/>
@@ -89,13 +91,14 @@
         <CheckBox x:Name="test4_UsingTurnSignalsCheckBox" Content="" Grid.Column="1" HorizontalAlignment="Left" IsChecked="{Binding Test4_UsingTurnSignals, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="3" Grid.Row="8" VerticalAlignment="Center"/>
         <Label Content="Test 5 Legal Speed:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="9" VerticalAlignment="Center"/>
         <CheckBox x:Name="test5_LegalSpeedCheckBox" Content="" Grid.Column="1" HorizontalAlignment="Left" IsChecked="{Binding Test5_LegalSpeed, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="3" Grid.Row="9" VerticalAlignment="Center"/>
-            
+
         <Label Content="Succeeded:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="10" VerticalAlignment="Center"/>
-            <CheckBox x:Name="succeededCheckBox" Content="" Grid.Column="1" HorizontalAlignment="Left" IsChecked="{Binding Succeeded, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="3" Grid.Row="10" VerticalAlignment="Center"/>
-           
+        <CheckBox x:Name="succeededCheckBox" Content="" Grid.Column="1" HorizontalAlignment="Left" IsChecked="{Binding Succeeded, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="3" Grid.Row="10" VerticalAlignment="Center"/>
+
         <Label Content="Notes:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="11" VerticalAlignment="Center"/>
-            <TextBox x:Name="notesTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="11" Text="{Binding Notes, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-        
+        <TextBox x:Name="notesTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="11" Text="{Binding Notes, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+        <Button Name="pb_chooseTester" Content="choose tester from list" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Left"  VerticalAlignment="Center" Width="140" Click="Pb_chooseTester_Click"  />
+
 
 
 
