@@ -61,7 +61,12 @@
             </DataGrid.Columns>
         </DataGrid>
         <Button x:Name="pbUpdateTrainee" Content="Update selected trainee" HorizontalAlignment="Left" VerticalAlignment="Top" Width="136" Margin="147,15,0,0" Click="PbUpdateTrainee_Click"  />
-        <Button x:Name="pbTrainee" Content="Add Trainee" HorizontalAlignment="Left" Margin="55,15,0,0" VerticalAlignment="Top" Width="75"  Height="19" Click="PbAddTrainee_Click"/>
-
+        <Button x:Name="pbTrainee" Content="Add Trainee" HorizontalAlignment="Left" Margin="55,15,0,0" VerticalAlignment="Top" Width="auto"  Height="29" Click="PbAddTrainee_Click">
+            <Button.Template>
+                <ControlTemplate>
+                    <Image Source="icons/plus_add_green_61658 (1).png" />
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
     </Grid>
 </UserControl>
