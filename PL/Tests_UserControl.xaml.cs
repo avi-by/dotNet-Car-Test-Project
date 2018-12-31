@@ -95,6 +95,20 @@ namespace PL
 
         private void MenuItem_delete_Click(object sender, RoutedEventArgs e)
         {
+            #region message 'are you sure?'
+            MessageBoxResult result = MessageBox.Show("are you sure you want to delete the test?", "", MessageBoxButton.YesNo, MessageBoxImage.None, MessageBoxResult.Yes);
+            switch (result)
+            {
+                case MessageBoxResult.No:
+                    return;
+                case MessageBoxResult.Yes:
+                    break;
+                default:
+                    break;
+
+            }
+            #endregion
+
             if (testDataGrid.SelectedItem == null) return;
             try
             {

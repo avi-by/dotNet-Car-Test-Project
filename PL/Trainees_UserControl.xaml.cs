@@ -88,6 +88,20 @@ namespace PL
 
         private void MenuItem_Click_delete(object sender, RoutedEventArgs e)
         {
+            #region message 'are you sure?'
+            MessageBoxResult result = MessageBox.Show("are you sure you want to delete the trainee?", "", MessageBoxButton.YesNo, MessageBoxImage.None, MessageBoxResult.Yes);
+            switch (result)
+            {
+                case MessageBoxResult.No:
+                    return;
+                case MessageBoxResult.Yes:
+                    break;
+                default:
+                    break;
+
+            }
+            #endregion
+
             if (traineeDataGrid.SelectedItem == null) return;
             try
             {
