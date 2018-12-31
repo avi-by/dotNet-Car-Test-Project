@@ -249,11 +249,15 @@ namespace PL
 
         private void Pb_chooseTrainee_Click(object sender, RoutedEventArgs e)
         {
+            searchAndChooseTrainee_Window searchAndChooseTrainee = new searchAndChooseTrainee_Window(this);
+            searchAndChooseTrainee.Show();
 
         }
 
         private void Pb_chooseTester_Click(object sender, RoutedEventArgs e)
         {
+            searchAndChooseTester_Window searchAndChooseTester = new searchAndChooseTester_Window(this);
+            searchAndChooseTester.Show();
 
         }
     }

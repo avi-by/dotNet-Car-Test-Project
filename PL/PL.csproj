@@ -80,6 +80,12 @@
     <Compile Include="schudleMatrix.xaml.cs">
       <DependentUpon>schudleMatrix.xaml</DependentUpon>
     </Compile>
+    <Compile Include="searchAndChooseTester_Window.xaml.cs">
+      <DependentUpon>searchAndChooseTester_Window.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="searchAndChooseTrainee_Window.xaml.cs">
+      <DependentUpon>searchAndChooseTrainee_Window.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Tests_UserControl.xaml.cs">
       <DependentUpon>Tests_UserControl.xaml</DependentUpon>
     </Compile>
@@ -122,6 +128,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="schudleMatrix.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="searchAndChooseTester_Window.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="searchAndChooseTrainee_Window.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
