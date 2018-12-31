@@ -241,7 +241,7 @@ namespace PL
             if (the_trainee != null)
             {
                 string names = the_trainee.FirstName + " " + the_trainee.LastName;
-                tb_testerName.Text = names;
+                tb_traineeName.Text = names;
             }
             else
                 tb_traineeName.Text = "(name of trainee)";

@@ -56,13 +56,13 @@
         <ComboBox x:Name="carTypeComboBox" Grid.Column="1" HorizontalAlignment="Left" Height="22"  Grid.Row="14" SelectedItem="{Binding Car, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" Margin="0.333,3,0,3.667"/>
 
         <Label x:Name="labelTraineeId" Content="TraineeId:" Grid.Column="0" HorizontalAlignment="Left"  Grid.Row="2" VerticalAlignment="Center" Height="26" Margin="0,1,0,3" Width="69"/>
-        <TextBox x:Name="TraineeIdTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="24"  Grid.Row="2" Text="{Binding TraineeId, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" />
+        <TextBox x:Name="TraineeIdTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="24"  Grid.Row="2" Text="{Binding TraineeId, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" TextChanged="Tb_traineeName_TextChanged"/>
         <TextBox x:Name="tb_testerName" Grid.Column="1" HorizontalAlignment="Left" Height="24" Grid.Row="1"  VerticalAlignment="Center" Width="120" Margin="125,0,0,0" IsReadOnly="True" Text="(the tester name)"/>
 
 
         <Label x:Name="labelTesterId" Content="Tester ID:" Grid.Column="0" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Center" Height="26" Margin="0,2" Width="70"/>
         <TextBox x:Name="TesterIdTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="24" Grid.Row="1" Text="{Binding TesterId, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" TextChanged="TesterIdTextBox_TextChanged"  />
-        <TextBox x:Name="tb_traineeName" Grid.Column="1" HorizontalAlignment="Left" Height="24" Grid.Row="2"  VerticalAlignment="Center" Width="120" Margin="125,0,0,0" IsReadOnly="True" Text="(the trainee name)" TextChanged="Tb_traineeName_TextChanged"  />
+        <TextBox x:Name="tb_traineeName" Grid.Column="1" HorizontalAlignment="Left" Height="24" Grid.Row="2"  VerticalAlignment="Center" Width="120" Margin="125,0,0,0" IsReadOnly="True" Text="(the trainee name)"   />
         <Button Name="pb_chooseTrainee" Content="choose trainee from list" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Left"  VerticalAlignment="Center" Width="140" Click="Pb_chooseTrainee_Click" />
 
 
