@@ -28,12 +28,14 @@ namespace PL
             InitializeComponent();
             bl = FactoryBL.GetBL(Configuration.BLType);
             bl.TesterEvent += TesterEvent;
+            string[] SortByValues = { "firstName", "lastName", "id", "max test in week", "gender", "age", "exp years", "car type","max distance" };
+            ComboBoxSortBy.ItemsSource = SortByValues;
             CreateDemoEntites();
         }
 
         private void TesterEvent(object sender, EventArgs e)
         {
-            testerDataGrid.DataContext = bl.getAllTester();
+            sortContaxDataByComboBox();
         }
 
         private void CreateDemoEntites()
@@ -73,7 +75,7 @@ namespace PL
         private void Window_Activated(object sender, EventArgs e)
         {
             
-             testerDataGrid.DataContext = bl.getAllTester();
+            sortContaxDataByComboBox();
             
         }
 
@@ -195,6 +197,54 @@ namespace PL
 
             UpdateTesterWindow updateTesterWindow = new UpdateTesterWindow(selectedPerson);
             updateTesterWindow.ShowDialog();
+        }
+
+        private void ComboBoxSortBy_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems == null) return;
+            sortContaxDataByComboBox();
+        }
+
+        private void sortContaxDataByComboBox()
+        {
+            if (ComboBoxSortBy.SelectedItem == null)
+            {
+                testerDataGrid.DataContext = bl.getAllTester();
+                return;
+            }
+            var allTester = bl.getAllTester();
+            IOrderedEnumerable<Tester> sortTester = null;
+            switch (ComboBoxSortBy.SelectedItem.ToString())
+            {
+                case "firstName":
+                    sortTester = from item in allTester orderby item.FirstName select item;
+                    break;
+                case "lastName":
+                    sortTester = from item in allTester orderby item.LastName select item;
+                    break;
+                case "id":
+                    sortTester = from item in allTester orderby item.Id select item;
+                    break;
+                case "max test in week":
+                    sortTester = from item in allTester orderby item.MaxTestInWeek select item;
+                    break;
+                case "gender":
+                    sortTester = from item in allTester orderby item.Gender select item;
+                    break;
+                case "age":
+                    sortTester = from item in allTester orderby item.Age select item;
+                    break;
+                case "exp years":
+                    sortTester = from item in allTester orderby item.ExpYears select item;
+                    break;
+                case "car type":
+                    sortTester = from item in allTester orderby item.CarType select item;
+                    break;
+                case "max distance":
+                    sortTester = from item in allTester orderby item.Distance select item;
+                    break;
+            }
+            testerDataGrid.DataContext = sortTester;
         }
     }
 }

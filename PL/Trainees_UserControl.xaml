@@ -11,7 +11,7 @@
         <CollectionViewSource x:Key="traineeViewSource" d:DesignSource="{d:DesignInstance {x:Type BE:Trainee}, CreateList=True}"/>
     </UserControl.Resources>
     <Grid DataContext="{StaticResource traineeViewSource}">
-        <Grid x:Name="grid1" HorizontalAlignment="Left" Margin="540,284,0,0" VerticalAlignment="Top">
+        <Grid x:Name="grid1" HorizontalAlignment="Left" Margin="300,13,0,0" VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
@@ -19,6 +19,14 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
+            <Label Name="labelSortBy" Content="sort by:" Grid.Column="0" HorizontalAlignment="Left" Margin="-16,0,0,6" Grid.Row="0" VerticalAlignment="Center"/>
+            <ComboBox x:Name="ComboBoxSortBy" Grid.Column="1"  HorizontalAlignment="Left" Height="Auto"  Margin="0,3,0,7" Grid.Row="0" VerticalAlignment="Center" Width="120" SelectionChanged="ComboBoxSortBy_SelectionChanged">
+                <ComboBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <VirtualizingStackPanel/>
+                    </ItemsPanelTemplate>
+                </ComboBox.ItemsPanel>
+            </ComboBox>
         </Grid>
         <DataGrid x:Name="traineeDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="10,46,338,81" RowDetailsVisibilityMode="VisibleWhenSelected" IsReadOnly="True">
             <DataGrid.ContextMenu>

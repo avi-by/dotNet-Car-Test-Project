@@ -13,7 +13,7 @@ namespace BE
         }
     public enum CarType
     {
-        PrivetCar, Motorcycle,SmallTruck,Truck
+        Motorcycle, PrivetCar, SmallTruck, Truck
     }
     public enum GearBox
     {

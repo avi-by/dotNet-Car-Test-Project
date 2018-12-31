@@ -73,6 +73,10 @@ namespace BL
 
         public void updateTester(Tester tester, string id)
         {
+            if (tester.Age < BE.Configuration.MinAgeTrainee)
+            {
+                throw new Exception("too young, can't be a tester");
+            }
             MyDal.UpdateTester(tester, id);
         }
 
@@ -89,6 +93,10 @@ namespace BL
 
         public void updateTester(Tester tester)
         {
+            if (tester.Age < BE.Configuration.MinAgeTrainee)
+            {
+                throw new Exception("too young, can't be a tester");
+            }
             MyDal.UpdateTester(tester);
         }
 
@@ -114,12 +122,10 @@ namespace BL
         #region trainee
         public void addTrainee(Trainee trainee)
         {
-
-            if (trainee.Age > Configuration.MinAgeTrainee)
-                MyDal.AddTrainee(trainee);
-            else
-                throw new Exception("cannot add a trainee too young");
+            checkTrainee(trainee);
+            MyDal.AddTrainee(trainee);
         }
+
 
         public void deleteTrainee(Trainee trainee)
         {
@@ -128,9 +134,18 @@ namespace BL
 
         public void updateTrainee(Trainee trainee)
         {
-            MyDal.UpdateTrainee(trainee);
+            checkTrainee(trainee);
+                MyDal.UpdateTrainee(trainee);
         }
 
+        private void checkTrainee(Trainee trainee)
+        {
+            if (trainee.Age < Configuration.MinAgeTrainee)
+                throw new Exception("cannot add a trainee too young");
+            //small truck nedd license in privete car, and truck need license in small truck, the enum value of the car type is in order of the level of the license
+            if ((int)(trainee.CarType) >= (int)CarType.SmallTruck && !haveLicense(trainee.Id, trainee.GearBox, (CarType)((int)trainee.GearBox - 1)))
+                throw new Exception("the trainee does not meet the conditions required for driving license, need license in " + (CarType)((int)trainee.GearBox - 1));
+        }
 
 
         public List<Trainee> getAllTrainees()
@@ -151,7 +166,10 @@ namespace BL
 
         public void updateTrainee(Trainee trainee, string id)
         {
-            MyDal.UpdateTrainee(trainee, id);
+            if (trainee.Age >= Configuration.MinAgeTrainee)
+                MyDal.UpdateTrainee(trainee, id);
+            else
+                throw new Exception("cannot update, the trainee too young");
         }
 
         #endregion trainee
@@ -199,9 +217,7 @@ namespace BL
                 throw new Exception("cant regist, the tester did his max test this week");
             }
 
-
-            
-            if (isPassed(trainee.Id))
+            if (haveLicense(trainee.Id, trainee.GearBox, trainee.CarType))
             {
                 throw new Exception("cant regist, this trainee have licence on this kind of car gearbox");
             }
@@ -215,6 +231,8 @@ namespace BL
             {
                 throw new Exception("cant regist, the address is too far to the tester");
             }
+
+
 
             if (test.Succeeded != null && (test.Test1_ReverseParking == null || test.Test2_KeepingSafeDistance == null || test.Test3_UsingMirrors == null || test.Test4_UsingTurnSignals == null || test.Test5_LegalSpeed == null))//the test can not be insert as a finished test if any of the test's check not insert
                 throw new Exception("the test can not be insert as a finished test if any of the test's check not insert");
@@ -315,7 +333,7 @@ namespace BL
         /// <returns></returns>
         public bool haveLicense(string id, GearBox gearBox, CarType carType)
         {
-            return (MyDal.GetTestList(item => item.TraineeId == id && item.GearBox == gearBox && item.Car == carType && item.Succeeded == true).Count != 0) ? true : false;
+            return (MyDal.GetTestList(item => item.TraineeId == id && (int)(item.GearBox) <= (int)gearBox && item.Car == carType && item.Succeeded == true).Count != 0) ? true : false; //if the trainee have a license in manual gearbox he can drive on auto gearbox but not vice versa
         }
 
 

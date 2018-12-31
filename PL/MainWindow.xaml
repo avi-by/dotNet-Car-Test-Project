@@ -36,7 +36,7 @@
                                 <ColumnDefinition Width="477*"/>
                                 <ColumnDefinition Width="316*"/>
                             </Grid.ColumnDefinitions>
-                            <Button x:Name="pbTester" Content="Add Tetser" HorizontalAlignment="Left" Margin="55,15,0,0" VerticalAlignment="Top" Width="75" Click="pbTester_Click" Height="19"/>
+                            <Button x:Name="pbTester" Content="Add Tetser" HorizontalAlignment="Left" Margin="37,15,0,0" VerticalAlignment="Top" Width="75" Click="pbTester_Click" Height="19"/>
                             <DataGrid x:Name="testerDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}"  RowDetailsVisibilityMode="VisibleWhenSelected" Margin="10,39,21.333,26.667" MouseDoubleClick="TesterDataGrid_MouseDoubleClick" HorizontalContentAlignment="Center" SelectionChanged="TesterDataGrid_SelectionChanged" IsReadOnly="True" MinHeight="23" MinRowHeight="26">
                                 <DataGrid.ContextMenu>
                                     <ContextMenu>
@@ -56,8 +56,8 @@
                                     <DataGridTextColumn x:Name="genderColumn" Binding="{Binding Gender}" Header="Gender" />
                                     <DataGridTextColumn x:Name="phoneNumberColumn" Binding="{Binding PhoneNumber}" Header="Phone number" />
                                     <DataGridTextColumn x:Name="addressColumn2" Binding="{Binding Address}" Header="Address" />
-                                   
-             
+
+
 
                                     <DataGridTextColumn x:Name="ExpYears" Binding="{Binding ExpYears}" Header="ExpYears" />
                                     <DataGridTextColumn x:Name="MaxTestInWeek" Binding="{Binding MaxTestInWeek}" Header="MxTestsWeek" />
@@ -71,7 +71,24 @@
                             </DataGrid>
                             <local:UserControl1  x:Name="matrix1" Grid.Column="1" HorizontalAlignment="Left" Margin="4,62,0,196"/>
                             <TextBlock Name="tbOfHours" Grid.Column="1" HorizontalAlignment="Left" Margin="3.667,39,0,0" TextWrapping="Wrap" Text="work hours (of the selected tester):" VerticalAlignment="Top" Height="30" Width="207" FontWeight="Bold"/>
-                            <Button Name="pbUpdateTester" Content="Update selected tester" HorizontalAlignment="Left" VerticalAlignment="Top" Width="136" Margin="147,15,0,0" Click="PbUpdateTester_Click" />
+                            <Button Name="pbUpdateTester" Content="Update selected tester" HorizontalAlignment="Left" VerticalAlignment="Top" Width="136" Margin="126,15,0,0" Click="PbUpdateTester_Click" />
+                            <Grid x:Name="grid1" HorizontalAlignment="Left" Margin="286,12,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Label Name="labelSortBy" Content="sort by:" Grid.Column="0" HorizontalAlignment="Left" Margin="-16,0,0,6" Grid.Row="0" VerticalAlignment="Center"/>
+                                <ComboBox x:Name="ComboBoxSortBy" Grid.Column="1"  HorizontalAlignment="Left" Height="Auto"  Margin="0,3,0,7" Grid.Row="0" VerticalAlignment="Center" Width="120" SelectionChanged="ComboBoxSortBy_SelectionChanged">
+                                    <ComboBox.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <VirtualizingStackPanel/>
+                                        </ItemsPanelTemplate>
+                                    </ComboBox.ItemsPanel>
+                                </ComboBox>
+                            </Grid>
 
                         </Grid>
                     </TabItem.Content>
