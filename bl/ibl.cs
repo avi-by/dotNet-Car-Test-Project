@@ -29,13 +29,13 @@ namespace BL
         /// </summary>
         /// <returns></returns>
         List<Test> getAllTests();
-        
+
         /// <summary>
         /// Update of a test that has not yet been performed
         /// </summary>
         /// <param name="test"></param>
         void updateTest(Test test);
-        
+
         /// <summary>
         /// use to insert test results, can calculate if pass or not
         /// </summary>
@@ -63,7 +63,7 @@ namespace BL
         /// <param name="end"></param>
         /// <returns></returns>
         List<Test> allTheTestAtRange(DateTime start, DateTime end);
-       
+
         /// <summary>
         /// return true if there are atleast one avialble tester at this ohur and date
         /// </summary>
@@ -121,7 +121,7 @@ namespace BL
         /// </summary>
         /// <returns></returns>
         List<Trainee> getAllTrainees();
-       
+
         /// <summary>
         /// return if person have a license at this kind of car and gearbox
         /// </summary>
@@ -129,14 +129,14 @@ namespace BL
         /// <param name="gearBox"></param>
         /// <returns></returns>
         bool haveLicense(string id, GearBox gearBox, CarType carType);
-        
+
         /// <summary>
         /// return true if the trainee pass the test
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         bool isPassed(string id);
-      
+
         /// <summary>
         /// return the amount of test that this treinee do on the current kind of car
         /// </summary>
@@ -158,6 +158,8 @@ namespace BL
         /// </summary>
         /// <returns></returns>
         int getMinimumAgeOfTester();
+
+
 
         /// <summary>
         /// add new tester to the data base
@@ -183,12 +185,12 @@ namespace BL
         /// </summary>
         /// <param name="tester"></param>
         void updateTester(Tester tester);
-        
+
         /// <summary>
         /// notify if somthing change in tester data base
         /// </summary>
         event EventHandler<EventArgs> TesterEvent;
-        
+
         /// <summary>
         /// return if the tester work at this day
         /// </summary>
@@ -202,7 +204,7 @@ namespace BL
         /// </summary>
         /// <returns></returns>
         List<Tester> getAllTester();
-        
+
         /// <summary>
         /// return all the testers that  at in "distance" from the "address" 
         /// </summary>
@@ -210,21 +212,21 @@ namespace BL
         /// <param name="distance"></param>
         /// <returns></returns>
         List<Tester> testersAtDistanceFromAddress(Address address, double distance = 5);
-        
+
         /// <summary>
         ///  return all the tester that available at this date
         /// </summary>
         /// <param name="date"></param>
         /// <returns></returns>
         List<Tester> testersAvailableAtDate(DateTime date);
-        
+
         /// <summary>
         /// return all the tester that available at this date and this hour
         /// </summary>
         /// <param name="date"></param>
         /// <returns></returns>
         List<Tester> testersAvailableAtDateAndHour(DateTime date);
-        
+
         /// <summary>
         /// return if this tester can do do a test at this date in any possible hour
         /// </summary>
@@ -232,7 +234,7 @@ namespace BL
         /// <param name="date"></param>
         /// <returns></returns>
         bool isAvailableAtDate(string testerId, DateTime date);
-        
+
         /// <summary>
         /// return if the address is at availble distance for this tester
         /// </summary>
@@ -240,14 +242,14 @@ namespace BL
         /// <param name="address"></param>
         /// <returns></returns>
         bool atAvailbleDistance(string testerId, Address address);
-        
+
         /// <summary>
         ///  the nearest date available for test from the insert date
         /// </summary>
         /// <param name="date"></param>
         /// <returns></returns>
         DateTime NearestOpenDate(DateTime date);
-       
+
         /// <summary>
         /// the nearest date available for test from tommorow
         /// </summary>

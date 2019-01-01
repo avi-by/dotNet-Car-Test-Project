@@ -206,8 +206,8 @@ namespace PL
 
         private void Cb_testerChoosing_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            string first_name = (cb_traineeChoosing.SelectedItem as Tester).FirstName;
-            string last_name = (cb_traineeChoosing.SelectedItem as Tester).LastName;
+            string first_name = (cb_testerChoosing.SelectedItem as Tester).FirstName;
+            string last_name = (cb_testerChoosing.SelectedItem as Tester).LastName;
             tb_testerName.Text = first_name + " " + last_name;
         }
 
