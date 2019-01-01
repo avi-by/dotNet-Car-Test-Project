@@ -1,12 +1,59 @@
-﻿<Window x:Class="PL.searchAndChooseTester_Window"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
+        xmlns:BE="clr-namespace:BE;assembly=BE" x:Class="PL.searchAndChooseTester_Window"
         mc:Ignorable="d"
-        Title="searchAndChooseTester_Window" Height="450" Width="800">
-    <Grid>
-        
+        Title="searchAndChooseTester_Window" Height="450" Width="800" Loaded="Window_Loaded">
+    <Window.Resources>
+        <CollectionViewSource x:Key="testerViewSource" d:DesignSource="{d:DesignInstance {x:Type BE:Tester}, CreateList=True}"/>
+    </Window.Resources>
+    <Grid DataContext="{StaticResource testerViewSource}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35*"/>
+            <RowDefinition Height="358*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="477*"/>
+            <ColumnDefinition Width="316*"/>
+        </Grid.ColumnDefinitions>
+        <DataGrid x:Name="testerDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}"  RowDetailsVisibilityMode="VisibleWhenSelected" Margin="10,3.833,21.333,26.667"  HorizontalContentAlignment="Center" SelectionChanged="TesterDataGrid_SelectionChanged" IsReadOnly="True" MinHeight="23" MinRowHeight="26" Grid.Row="1">
+                       <DataGrid.Columns>
+                <DataGridTextColumn x:Name="nameColumn" Binding="{Binding FirstName}" Header="First Name" />
+                <DataGridTextColumn x:Name="lastnameColumn" Binding="{Binding LastName}" Header="Last Name" />
+
+
+                <DataGridTextColumn x:Name="IdColumn" Binding="{Binding Id}" Header="Id" />
+                <DataGridTextColumn x:Name="ageColumn" Binding="{Binding Age}" Header="Age" IsReadOnly="True" />
+                <DataGridTextColumn x:Name="genderColumn" Binding="{Binding Gender}" Header="Gender" />
+                <DataGridTextColumn x:Name="phoneNumberColumn" Binding="{Binding PhoneNumber}" Header="Phone number" />
+                <DataGridTextColumn x:Name="addressColumn2" Binding="{Binding Address}" Header="Address" />
+
+
+
+                <DataGridTextColumn x:Name="ExpYears" Binding="{Binding ExpYears}" Header="ExpYears" />
+                <DataGridTextColumn x:Name="MaxTestInWeek" Binding="{Binding MaxTestInWeek}" Header="MxTestsWeek" />
+                <DataGridTextColumn x:Name="CarType" Binding="{Binding CarType}" Header="CarType" />
+                <DataGridTextColumn x:Name="GearBox" Binding="{Binding GearBox}" Header="GearBox" />
+                <DataGridTextColumn x:Name="DateBirth" Binding="{Binding Path=DateBirth}" Header="DateBirth"/>
+                <DataGridTextColumn x:Name="maxDistance" Binding="{Binding Distance}" Header="max distance" />
+
+
+            </DataGrid.Columns>
+        </DataGrid>
+        <local:UserControl1  x:Name="matrix1" Grid.Column="1" HorizontalAlignment="Left" Margin="3.667,26.833,0,195.667" Grid.Row="1"/>
+        <TextBlock Name="tbOfHours" Grid.Column="1" HorizontalAlignment="Left" Margin="3.667,3.833,0,0" TextWrapping="Wrap" Text="work hours (of the selected tester):" VerticalAlignment="Top" Height="30" Width="207" FontWeight="Bold" Grid.Row="1"/>
+        <Label Name="labelSortBy" Content="sort by:" Grid.Column="0" HorizontalAlignment="Left" Margin="280,0,0,0" Grid.Row="0" VerticalAlignment="Bottom"/>
+        <ComboBox x:Name="ComboBoxSortBy"  HorizontalAlignment="Left" Height="Auto"  Margin="330,0,0,0" Grid.Row="0" VerticalAlignment="Bottom" Width="120" SelectionChanged="ComboBoxSortBy_SelectionChanged" Grid.ColumnSpan="2">
+            <ComboBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel/>
+                </ItemsPanelTemplate>
+            </ComboBox.ItemsPanel>
+        </ComboBox>
+        <Button Content="choose selected tester" HorizontalAlignment="Left" Grid.Row="0"  Height="21" Margin="88,15,0,0" VerticalAlignment="Top" Width="144" Click="Button_Click"/>
+
     </Grid>
 </Window>

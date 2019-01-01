@@ -22,7 +22,11 @@
 
 
     <Grid>
-        <TabControl>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="65*"/>
+            <RowDefinition Height="356*"/>
+        </Grid.RowDefinitions>
+        <TabControl Margin="0,0,0.333,-0.333" Grid.RowSpan="2">
 
             <TabControl.Items>
 
@@ -32,18 +36,22 @@
                 <TabItem Header="Testers">
                     <TabItem.Content>
                         <Grid DataContext="{StaticResource testerViewSource}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="35*"/>
+                                <RowDefinition Height="358*"/>
+                            </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="477*"/>
                                 <ColumnDefinition Width="316*"/>
                             </Grid.ColumnDefinitions>
-                            <Button x:Name="pbTester"  HorizontalAlignment="Left" Margin="35,8,0,0" VerticalAlignment="Top"  Click="pbTester_Click" Width="auto"  Height="29" RenderTransformOrigin="0.835,0.989">
+                            <Button x:Name="pbTester"  HorizontalAlignment="Left" Margin="35,8,0,0" VerticalAlignment="Top"  Click="pbTester_Click" Width="auto"  Height="29" RenderTransformOrigin="0.835,0.989" Grid.RowSpan="2">
                                 <Button.Template>
                                     <ControlTemplate>
                                         <Image Source="icons/plus_add_green_61658 (1).png" />
                                     </ControlTemplate>
                                 </Button.Template>
                             </Button>
-                            <DataGrid x:Name="testerDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}"  RowDetailsVisibilityMode="VisibleWhenSelected" Margin="10,39,21.333,26.667" MouseDoubleClick="TesterDataGrid_MouseDoubleClick" HorizontalContentAlignment="Center" SelectionChanged="TesterDataGrid_SelectionChanged" IsReadOnly="True" MinHeight="23" MinRowHeight="26">
+                            <DataGrid x:Name="testerDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}"  RowDetailsVisibilityMode="VisibleWhenSelected" Margin="10,3.833,21.333,26.667" MouseDoubleClick="TesterDataGrid_MouseDoubleClick" HorizontalContentAlignment="Center" SelectionChanged="TesterDataGrid_SelectionChanged" IsReadOnly="True" MinHeight="23" MinRowHeight="26" Grid.Row="1">
                                 <DataGrid.ContextMenu>
                                     <ContextMenu>
                                         <MenuItem Header="edit" Click="MenuItem_Click_edit" />
@@ -75,26 +83,18 @@
 
                                 </DataGrid.Columns>
                             </DataGrid>
-                            <local:UserControl1  x:Name="matrix1" Grid.Column="1" HorizontalAlignment="Left" Margin="4,62,0,196"/>
-                            <TextBlock Name="tbOfHours" Grid.Column="1" HorizontalAlignment="Left" Margin="3.667,39,0,0" TextWrapping="Wrap" Text="work hours (of the selected tester):" VerticalAlignment="Top" Height="30" Width="207" FontWeight="Bold"/>
-                            <Button Name="pbUpdateTester" Content="Update selected tester" HorizontalAlignment="Left" VerticalAlignment="Top" Width="136" Margin="126,15,0,0" Click="PbUpdateTester_Click" />
-                            <Grid x:Name="grid1" HorizontalAlignment="Left" Margin="286,12,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <Label Name="labelSortBy" Content="sort by:" Grid.Column="0" HorizontalAlignment="Left" Margin="-16,0,0,6" Grid.Row="0" VerticalAlignment="Center"/>
-                                <ComboBox x:Name="ComboBoxSortBy" Grid.Column="1"  HorizontalAlignment="Left" Height="Auto"  Margin="0,3,0,7" Grid.Row="0" VerticalAlignment="Center" Width="120" SelectionChanged="ComboBoxSortBy_SelectionChanged">
-                                    <ComboBox.ItemsPanel>
-                                        <ItemsPanelTemplate>
-                                            <VirtualizingStackPanel/>
-                                        </ItemsPanelTemplate>
-                                    </ComboBox.ItemsPanel>
-                                </ComboBox>
-                            </Grid>
+                            <local:UserControl1  x:Name="matrix1" Grid.Column="1" HorizontalAlignment="Left" Margin="3.667,26.833,0,195.667" Grid.Row="1"/>
+                            <TextBlock Name="tbOfHours" Grid.Column="1" HorizontalAlignment="Left" Margin="3.667,3.833,0,0" TextWrapping="Wrap" Text="work hours (of the selected tester):" VerticalAlignment="Top" Height="30" Width="207" FontWeight="Bold" Grid.Row="1"/>
+                            <Button Name="pbUpdateTester" Content="Update selected tester" HorizontalAlignment="Left" Grid.Row="0" VerticalAlignment="Bottom" Width="136" Margin="126,0,0,0" Click="PbUpdateTester_Click" />
+                            <Label Name="labelSortBy" Content="sort by:" Grid.Column="0" HorizontalAlignment="Left" Margin="280,0,0,0" Grid.Row="0" VerticalAlignment="Bottom"/>
+                            <ComboBox x:Name="ComboBoxSortBy"  HorizontalAlignment="Left" Height="Auto"  Margin="330,0,0,0" Grid.Row="0" VerticalAlignment="Bottom" Width="120" SelectionChanged="ComboBoxSortBy_SelectionChanged" Grid.ColumnSpan="2">
+                                <ComboBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <VirtualizingStackPanel/>
+                                    </ItemsPanelTemplate>
+                                </ComboBox.ItemsPanel>
+                            </ComboBox>
+
 
                         </Grid>
                     </TabItem.Content>
@@ -113,7 +113,7 @@
 
                 <TabItem Header="media">
                     <Grid>
-                        <MediaElement Name="funny_animation" Source="icons\giphy.gif" LoadedBehavior="Manual" Margin="237,103,179.333,86.667" MediaEnded="Funny_animation_MediaEnded" />
+                        <MediaElement Name="funny_animation" Source="icons\giphy.gif"  Margin="237,103,179.333,86.667" MediaEnded="Funny_animation_MediaEnded" />
 
                     </Grid>
                 </TabItem>

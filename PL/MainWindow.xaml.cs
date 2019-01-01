@@ -86,7 +86,6 @@ namespace PL
         {
             System.Windows.Data.CollectionViewSource testerViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("testerViewSource")));
 
-            funny_animation.Play();
             // Load data by setting the CollectionViewSource.Source property:
             // testerViewSource.Source = [generic data source]
         }
@@ -266,7 +265,6 @@ namespace PL
         {
 
             funny_animation.Position = TimeSpan.FromMilliseconds(1);
-            funny_animation.Play();
 
             
         }
