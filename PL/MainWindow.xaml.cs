@@ -268,6 +268,10 @@ namespace PL
 
             
         }
-        
+
+        private void Trainees_UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

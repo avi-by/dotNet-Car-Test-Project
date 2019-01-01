@@ -141,7 +141,7 @@ namespace PL
                 traineeDataGrid.DataContext = bl.getAllTrainees();
                 return;
             }
-            // {  }
+           
             var allTrainee = bl.getAllTrainees();
             IOrderedEnumerable<Trainee> sortTrainee = null;
             switch (ComboBoxSortBy.SelectedItem.ToString())

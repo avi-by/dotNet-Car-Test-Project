@@ -104,7 +104,7 @@
 
 
                 <TabItem Header="Trainees" Name="traineeTab">
-                    <local:Trainees_UserControl/>
+                    <local:Trainees_UserControl Loaded="Trainees_UserControl_Loaded"/>
                 </TabItem>
 
                 <TabItem Header="Tests">
