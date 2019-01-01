@@ -120,6 +120,8 @@ namespace DAL
                 if (item.Id == id)
                 {
                     DataSource.testers[index] = tester;
+                    testerEvent(this, null);
+
                     //            this.OnNotifyCollectionChanged(
                     //new NotifyCollectionChangedEventArgs(
                     //  NotifyCollectionChangedAction.Add, tester));

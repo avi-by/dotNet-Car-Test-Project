@@ -12,9 +12,8 @@
         xmlns:BE="clr-namespace:BE;assembly=BE"  x:Class="PL.MainWindow"
  
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Activated="Window_Activated" Loaded="Window_Loaded">
+        Title="MainWindow" Height="450" Width="800" >
     <Window.Resources>
-        <CollectionViewSource x:Key="testerViewSource" d:DesignSource="{d:DesignInstance {x:Type BE:Tester}, CreateList=True}"/>
         <CollectionViewSource x:Key="testViewSource" d:DesignSource="{d:DesignInstance {x:Type BE:Tester}, CreateList=True}"/>
         <BE:Address    x:Key="convertor"/>
 
@@ -30,90 +29,19 @@
 
             <TabControl.Items>
 
-                <!--#region tab_Testers-->
 
-
-                <TabItem Header="Testers">
-                    <TabItem.Content>
-                        <Grid DataContext="{StaticResource testerViewSource}">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="35*"/>
-                                <RowDefinition Height="358*"/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="477*"/>
-                                <ColumnDefinition Width="316*"/>
-                            </Grid.ColumnDefinitions>
-                            <Button x:Name="pbTester"  HorizontalAlignment="Left" Margin="35,8,0,0" VerticalAlignment="Top"  Click="pbTester_Click" Width="auto"  Height="29" RenderTransformOrigin="0.835,0.989" Grid.RowSpan="2">
-                                <Button.Template>
-                                    <ControlTemplate>
-                                        <Image Source="icons/plus_add_green_61658 (1).png" />
-                                    </ControlTemplate>
-                                </Button.Template>
-                            </Button>
-                            <DataGrid x:Name="testerDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}"  RowDetailsVisibilityMode="VisibleWhenSelected" Margin="10,3.833,21.333,26.667" MouseDoubleClick="TesterDataGrid_MouseDoubleClick" HorizontalContentAlignment="Center" SelectionChanged="TesterDataGrid_SelectionChanged" IsReadOnly="True" MinHeight="23" MinRowHeight="26" Grid.Row="1">
-                                <DataGrid.ContextMenu>
-                                    <ContextMenu>
-                                        <MenuItem Header="edit" Click="MenuItem_Click_edit" />
-                                        <MenuItem Header="delete" Click="MenuItem_Click_delete"/>
-                                        <MenuItem Header="add" Click="MenuItem_Click_add"/>
-                                    </ContextMenu>
-                                </DataGrid.ContextMenu>
-
-                                <DataGrid.Columns>
-                                    <DataGridTextColumn x:Name="nameColumn" Binding="{Binding FirstName}" Header="First Name" />
-                                    <DataGridTextColumn x:Name="lastnameColumn" Binding="{Binding LastName}" Header="Last Name" />
-
-
-                                    <DataGridTextColumn x:Name="IdColumn" Binding="{Binding Id}" Header="Id" />
-                                    <DataGridTextColumn x:Name="ageColumn" Binding="{Binding Age}" Header="Age" IsReadOnly="True" />
-                                    <DataGridTextColumn x:Name="genderColumn" Binding="{Binding Gender}" Header="Gender" />
-                                    <DataGridTextColumn x:Name="phoneNumberColumn" Binding="{Binding PhoneNumber}" Header="Phone number" />
-                                    <DataGridTextColumn x:Name="addressColumn2" Binding="{Binding Address}" Header="Address" />
-
-
-
-                                    <DataGridTextColumn x:Name="ExpYears" Binding="{Binding ExpYears}" Header="ExpYears" />
-                                    <DataGridTextColumn x:Name="MaxTestInWeek" Binding="{Binding MaxTestInWeek}" Header="MxTestsWeek" />
-                                    <DataGridTextColumn x:Name="CarType" Binding="{Binding CarType}" Header="CarType" />
-                                    <DataGridTextColumn x:Name="GearBox" Binding="{Binding GearBox}" Header="GearBox" />
-                                    <DataGridTextColumn x:Name="DateBirth" Binding="{Binding Path=DateBirth}" Header="DateBirth"/>
-                                    <DataGridTextColumn x:Name="maxDistance" Binding="{Binding Distance}" Header="max distance" />
-
-
-                                </DataGrid.Columns>
-                            </DataGrid>
-                            <local:UserControl1  x:Name="matrix1" Grid.Column="1" HorizontalAlignment="Left" Margin="3.667,26.833,0,195.667" Grid.Row="1"/>
-                            <TextBlock Name="tbOfHours" Grid.Column="1" HorizontalAlignment="Left" Margin="3.667,3.833,0,0" TextWrapping="Wrap" Text="work hours (of the selected tester):" VerticalAlignment="Top" Height="30" Width="207" FontWeight="Bold" Grid.Row="1"/>
-                            <Button Name="pbUpdateTester" Content="Update selected tester" HorizontalAlignment="Left" Grid.Row="0" VerticalAlignment="Bottom" Width="136" Margin="126,0,0,0" Click="PbUpdateTester_Click" />
-                            <Label Name="labelSortBy" Content="sort by:" Grid.Column="0" HorizontalAlignment="Left" Margin="280,0,0,0" Grid.Row="0" VerticalAlignment="Bottom"/>
-                            <ComboBox x:Name="ComboBoxSortBy"  HorizontalAlignment="Left" Height="Auto"  Margin="330,0,0,0" Grid.Row="0" VerticalAlignment="Bottom" Width="120" SelectionChanged="ComboBoxSortBy_SelectionChanged" Grid.ColumnSpan="2">
-                                <ComboBox.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <VirtualizingStackPanel/>
-                                    </ItemsPanelTemplate>
-                                </ComboBox.ItemsPanel>
-                            </ComboBox>
-
-
-                        </Grid>
-                    </TabItem.Content>
-                </TabItem>
-
-                <!--#endregion-->
-
-                <TabItem Header="Niasyon- Testers in User control" Name="testersUserControlTab">
+                <TabItem Header="Testers" Name="testersUserControlTab">
                     <local:Tester_UserControl />
                 </TabItem>
 
 
 
                 <TabItem Header="Trainees" Name="traineeTab">
-                    <local:Trainees_UserControl Loaded="Trainees_UserControl_Loaded"/>
+                    <local:Trainees_UserControl />
                 </TabItem>
 
                 <TabItem Header="Tests">
-                    <local:Tests_UserControl Loaded="Tests_UserControl_Loaded"/>
+                    <local:Tests_UserControl />
                 </TabItem>
 
                 <TabItem Header="media">
