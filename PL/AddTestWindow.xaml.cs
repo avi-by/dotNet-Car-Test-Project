@@ -81,13 +81,16 @@ namespace PL
             if (AllFieldOK())
             {
                 //set hour that selected
-                DateTime hour;
-                var temp = hourComboBox.SelectedIndex + 9;
-                hour = new DateTime(1, 1, 1, temp, 0, 0);
+                DateTime DateAndHour;
+                DateAndHour = new DateTime(Date_DatePicker.DisplayDate.Year,
+                                     Date_DatePicker.DisplayDate.Month,
+                                     Date_DatePicker.DisplayDate.Day,
+                                     hourComboBox.SelectedIndex + 9, 0, 0);
+
 
                 try
                 {
-                 //   bl.AddTest(new Test(TesterIdTextBox.Text, TraineeIdTextBox.Text, (GearBox)gearBoxComboBox.SelectedItem, (CarType)carTypeComboBox.SelectedItem, Date_DatePicker.DisplayDate, hour, new Address(streetTextBox.Text, int.Parse(houseNumberTextBox.Text), city.Text), test1_ReverseParkingCheckBox.IsChecked, test2_KeepingSafeDistanceCheckBox.IsChecked, test3_UsingMirrorsCheckBox.IsChecked, test4_UsingTurnSignalsCheckBox.IsChecked, test5_LegalSpeedCheckBox.IsChecked, succeededCheckBox.IsChecked, notesTextBox.Text));
+                  bl.AddTest(new Test((cb_testerChoosing.SelectedItem as Tester).Id, (cb_traineeChoosing.SelectedItem as Trainee).Id, (GearBox)gearBoxComboBox.SelectedItem, (CarType)carTypeComboBox.SelectedItem, DateAndHour, new Address(streetTextBox.Text, int.Parse(houseNumberTextBox.Text), city.Text), test1_ReverseParkingCheckBox.IsChecked, test2_KeepingSafeDistanceCheckBox.IsChecked, test3_UsingMirrorsCheckBox.IsChecked, test4_UsingTurnSignalsCheckBox.IsChecked, test5_LegalSpeedCheckBox.IsChecked, succeededCheckBox.IsChecked, notesTextBox.Text));
 
                 }
                 catch (Exception msg)

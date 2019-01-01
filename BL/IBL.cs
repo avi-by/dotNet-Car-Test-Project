@@ -65,7 +65,7 @@ namespace BL
         List<Test> allTheTestAtRange(DateTime start, DateTime end);
 
         /// <summary>
-        /// return true if there are atleast one avialble tester at this hour and date
+        /// return true if there are atleast one avialble tester at this ohur and date
         /// </summary>
         /// <param name="testerId"></param>
         /// <param name="date"></param>
