@@ -135,7 +135,7 @@ namespace BL
         public void updateTrainee(Trainee trainee)
         {
             checkTrainee(trainee);
-                MyDal.UpdateTrainee(trainee);
+            MyDal.UpdateTrainee(trainee);
         }
 
         private void checkTrainee(Trainee trainee)
@@ -361,12 +361,12 @@ namespace BL
         //            on finshedTest.TesterId equals tester.Id
         //            into groupTester
         //            select new { testers = groupTester, ID =finshedTest.TesterId  };
-           
+
         //    return x.ToList();
-                               
+
         //}
 
-     
+
 
         /// <summary>
         /// Update of a test that has not yet been performed
@@ -432,7 +432,7 @@ namespace BL
 
         public bool isAvailableDate(DateTime date)
         {
-            if (testersAvailableAtDate(date).Count==0)
+            if (testersAvailableAtDate(date).Count == 0)
             {
                 return false;
             }
