@@ -32,6 +32,7 @@ namespace DAL
         Trainee findTrainee(string traineeId);
         void UpdateTrainee(Trainee tester, string id);
         event EventHandler<EventArgs> TraineeEvent;
+        IEnumerable<object> traineeGrouping(string property);
 
         #endregion
 
