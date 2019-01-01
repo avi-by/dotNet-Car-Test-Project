@@ -34,8 +34,8 @@ namespace PL
             gearBoxComboBox.ItemsSource = Enum.GetValues(typeof(GearBox));
             carTypeComboBox.ItemsSource = Enum.GetValues(typeof(CarType));
 
-            birthdayDatePicker.DisplayDateStart = DateTime.Now.AddYears(-bl.getMaximumAge());
-            birthdayDatePicker.DisplayDateEnd = DateTime.Now.AddYears(-bl.getMinimumAgeOfTester());
+            //birthdayDatePicker.DisplayDateStart = DateTime.Now.AddYears(-bl.getMaximumAge());
+            //birthdayDatePicker.DisplayDateEnd = DateTime.Now.AddYears(-bl.getMinimumAgeOfTester());
          
             
         }
