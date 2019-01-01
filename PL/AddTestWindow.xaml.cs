@@ -190,8 +190,21 @@ namespace PL
                 }
             }
 
+            if (hourComboBox.SelectedItem == null || Date_DatePicker.SelectedDate == null)
+            {
+                cb_testerChoosing.DataContext = null;
+                return;
+            }
 
-            
+            DateTime dateAndHour;
+            dateAndHour = new DateTime(Date_DatePicker.DisplayDate.Year,
+                                     Date_DatePicker.DisplayDate.Month,
+                                     Date_DatePicker.DisplayDate.Day,
+                                     hourComboBox.SelectedIndex + 9, 0, 0);
+            cb_testerChoosing.DataContext = bl.testersAvailableAtDateAndHour(dateAndHour);
+
+
+
 
 
         }
@@ -209,6 +222,24 @@ namespace PL
             string first_name = (cb_testerChoosing.SelectedItem as Tester).FirstName;
             string last_name = (cb_testerChoosing.SelectedItem as Tester).LastName;
             tb_testerName.Text = first_name + " " + last_name;
+        }
+
+        private void HourComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+            if (hourComboBox.SelectedItem == null || Date_DatePicker.SelectedDate == null)
+            {
+                cb_testerChoosing.DataContext = null;
+                return;
+            }
+
+            DateTime dateAndHour;
+            dateAndHour = new DateTime(Date_DatePicker.DisplayDate.Year,
+                                     Date_DatePicker.DisplayDate.Month,
+                                     Date_DatePicker.DisplayDate.Day,
+                                     hourComboBox.SelectedIndex + 9, 0, 0);
+            cb_testerChoosing.DataContext = bl.testersAvailableAtDateAndHour(dateAndHour);
+            
         }
 
         //private void TesterIdTextBox_TextChanged(object sender, TextChangedEventArgs e)
