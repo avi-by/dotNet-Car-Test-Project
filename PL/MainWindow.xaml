@@ -102,6 +102,11 @@
 
                 <!--#endregion-->
 
+                <TabItem Header="Niasyon- Testers in User control" Name="testersUserControlTab">
+                    <local:Tester_UserControl />
+                </TabItem>
+
+
 
                 <TabItem Header="Trainees" Name="traineeTab">
                     <local:Trainees_UserControl Loaded="Trainees_UserControl_Loaded"/>
