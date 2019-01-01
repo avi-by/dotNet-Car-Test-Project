@@ -81,8 +81,16 @@ namespace PL
                 var temp = hourComboBox.SelectedIndex + 9;
                 hour = new DateTime(1, 1, 1, temp, 0, 0);
 
-                
-                MyBL.Instance.AddTest(new Test(TesterIdTextBox.Text, TraineeIdTextBox.Text, (GearBox)gearBoxComboBox.SelectedItem, (CarType)carTypeComboBox.SelectedItem, Date_DatePicker.DisplayDate, hour, new Address(streetTextBox.Text, int.Parse(houseNumberTextBox.Text), city.Text), test1_ReverseParkingCheckBox.IsChecked, test2_KeepingSafeDistanceCheckBox.IsChecked, test3_UsingMirrorsCheckBox.IsChecked, test4_UsingTurnSignalsCheckBox.IsChecked, test5_LegalSpeedCheckBox.IsChecked, succeededCheckBox.IsChecked, notesTextBox.Text));
+                try
+                {
+                    bl.AddTest(new Test(TesterIdTextBox.Text, TraineeIdTextBox.Text, (GearBox)gearBoxComboBox.SelectedItem, (CarType)carTypeComboBox.SelectedItem, Date_DatePicker.DisplayDate, hour, new Address(streetTextBox.Text, int.Parse(houseNumberTextBox.Text), city.Text), test1_ReverseParkingCheckBox.IsChecked, test2_KeepingSafeDistanceCheckBox.IsChecked, test3_UsingMirrorsCheckBox.IsChecked, test4_UsingTurnSignalsCheckBox.IsChecked, test5_LegalSpeedCheckBox.IsChecked, succeededCheckBox.IsChecked, notesTextBox.Text));
+
+                }
+                catch (Exception msg)
+                {
+
+                    MessageBox.Show(msg.Message, "Exception", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
 
 
                 this.Close();
@@ -181,12 +189,12 @@ namespace PL
 
             hourComboBox.SelectedItem = null;
             //set each combox item enabled only if the tester work in this hour  
-            if (MyBL.Instance.isAvailableAtDate(TesterIdTextBox.Text, Date_DatePicker.DisplayDate))
+            if (bl.isAvailableAtDate(TesterIdTextBox.Text, Date_DatePicker.DisplayDate))
             {
 
 
                 DayOfWeek day = Date_DatePicker.SelectedDate.Value.DayOfWeek;
-                Tester temp = MyBL.Instance.getAllTester().Find(tester => tester.Id == TesterIdTextBox.Text);
+                Tester temp = bl.getAllTester().Find(tester => tester.Id == TesterIdTextBox.Text);
                 for (int i = 0; i < 6; i++)
                     (hourComboBox.Items[i] as ComboBoxItem).IsEnabled = (temp.WorkHour[(int)day][i]);
             }
@@ -203,7 +211,7 @@ namespace PL
         private void TesterIdTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             //set tester name according to the id that entered.
-            var the_tester= MyBL.Instance.getAllTester().Find(item => item.Id == TesterIdTextBox.Text);
+            var the_tester= bl.getAllTester().Find(item => item.Id == TesterIdTextBox.Text);
             if (the_tester != null)
             {
                 string names = the_tester.FirstName +" "+ the_tester.LastName;
@@ -216,12 +224,12 @@ namespace PL
             hourComboBox.SelectedItem = null;
 
             //set each combox item enabled only if the tester work in this hour  
-            if (MyBL.Instance.isAvailableAtDate(TesterIdTextBox.Text, Date_DatePicker.DisplayDate))
+            if (bl.isAvailableAtDate(TesterIdTextBox.Text, Date_DatePicker.DisplayDate))
             {
 
 
                 DayOfWeek day = Date_DatePicker.DisplayDate.DayOfWeek;
-                Tester temp = MyBL.Instance.getAllTester().Find(tester => tester.Id == TesterIdTextBox.Text);
+                Tester temp = bl.getAllTester().Find(tester => tester.Id == TesterIdTextBox.Text);
                 for (int i = 0; i < 6; i++)
                     (hourComboBox.Items[i] as ComboBoxItem).IsEnabled = (temp.WorkHour[(int)day][i]);
             }
@@ -237,7 +245,7 @@ namespace PL
         private void Tb_traineeName_TextChanged(object sender, TextChangedEventArgs e)
         {
             //set trainee name according to the id that entered.
-            var the_trainee = MyBL.Instance.getAllTrainees().Find(item => item.Id == TraineeIdTextBox.Text);
+            var the_trainee = bl.getAllTrainees().Find(item => item.Id == TraineeIdTextBox.Text);
             if (the_trainee != null)
             {
                 string names = the_trainee.FirstName + " " + the_trainee.LastName;

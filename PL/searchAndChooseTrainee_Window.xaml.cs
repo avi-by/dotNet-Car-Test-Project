@@ -19,6 +19,7 @@ namespace PL
     /// </summary>
     public partial class searchAndChooseTrainee_Window : Window
     {
+        
         private Window sender;
 
         public searchAndChooseTrainee_Window()

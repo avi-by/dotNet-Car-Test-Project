@@ -81,6 +81,12 @@ namespace BL
         #region trainee
 
         /// <summary>
+        /// minimum age of trainee
+        /// </summary>
+        /// <returns></returns>
+        int getMinimumAge();
+
+        /// <summary>
         /// add new trainee to the data base
         /// </summary>
         /// <param name="trainee"></param>
@@ -140,6 +146,18 @@ namespace BL
         #endregion
 
         #region Tester
+
+        /// <summary>
+        /// return the maximum age of a tester
+        /// </summary>
+        /// <returns></returns>
+        int getMaximumAge();
+
+        /// <summary>
+        /// return the minimum age of the tester
+        /// </summary>
+        /// <returns></returns>
+        int getMinimumAgeOfTester();
 
         /// <summary>
         /// add new tester to the data base
