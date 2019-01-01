@@ -143,8 +143,8 @@ namespace BL
             if (trainee.Age < Configuration.MinAgeTrainee)
                 throw new Exception("cannot add a trainee too young");
             //small truck nedd license in privete car, and truck need license in small truck, the enum value of the car type is in order of the level of the license
-            if ((int)(trainee.CarType) >= (int)CarType.SmallTruck && !haveLicense(trainee.Id, trainee.GearBox, (CarType)((int)trainee.GearBox - 1)))
-                throw new Exception("the trainee does not meet the conditions required for driving license, need license in " + (CarType)((int)trainee.GearBox - 1));
+            if ((int)(trainee.CarType) >= (int)CarType.SmallTruck && !haveLicense(trainee.Id, trainee.GearBox, (CarType)((int)trainee.CarType - 1)))
+                throw new Exception("the trainee does not meet the conditions required for driving license, need license in " + ((CarType)((int)trainee.CarType) - 1));
         }
 
 

@@ -21,6 +21,7 @@ namespace PL
     /// </summary>
     public partial class UpdateTesterWindow : Window
     {
+        private IBL bl = FactoryBL.GetBL(Configuration.BLType);
         Tester orginalTester;
         //private Tester selectedPerson;
 
@@ -33,8 +34,8 @@ namespace PL
             gearBoxComboBox.ItemsSource = Enum.GetValues(typeof(GearBox));
             carTypeComboBox.ItemsSource = Enum.GetValues(typeof(CarType));
 
-            birthdayDatePicker.DisplayDateStart = DateTime.Now.AddYears(-BL.MyBL.Instance.getMaximumAge());
-            birthdayDatePicker.DisplayDateEnd = DateTime.Now.AddYears(-BL.MyBL.Instance.getMinimumAgeOfTester());
+            birthdayDatePicker.DisplayDateStart = DateTime.Now.AddYears(-bl.getMaximumAge());
+            birthdayDatePicker.DisplayDateEnd = DateTime.Now.AddYears(-bl.getMinimumAgeOfTester());
          
             
         }
