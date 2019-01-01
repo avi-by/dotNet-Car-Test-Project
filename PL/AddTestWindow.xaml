@@ -55,15 +55,42 @@
         <Label x:Name="labelCarType" Content="Car Type:" Grid.Column="0" HorizontalAlignment="Left"  Grid.Row="14" VerticalAlignment="Center" Height="26" Margin="0,1,0,1.667" Width="59"/>
         <ComboBox x:Name="carTypeComboBox" Grid.Column="1" HorizontalAlignment="Left" Height="22"  Grid.Row="14" SelectedItem="{Binding Car, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" Margin="0.333,3,0,3.667"/>
 
-        <Label x:Name="labelTraineeId" Content="TraineeId:" Grid.Column="0" HorizontalAlignment="Left"  Grid.Row="2" VerticalAlignment="Center" Height="26" Margin="0,1,0,3" Width="69"/>
-        <TextBox x:Name="TraineeIdTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="24"  Grid.Row="2" Text="{Binding TraineeId, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" TextChanged="Tb_traineeName_TextChanged"/>
+        <Label x:Name="labelTraineeId" Content="choose tester:" Grid.Column="0" HorizontalAlignment="Left"  Grid.Row="2" VerticalAlignment="Center" Height="26" Margin="0,1,0,3" />
+        <TextBox x:Name="TraineeIdTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="24"  Grid.Row="2" Text="{Binding TraineeId, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" />
         <TextBox x:Name="tb_testerName" Grid.Column="1" HorizontalAlignment="Left" Height="24" Grid.Row="1"  VerticalAlignment="Center" Width="120" Margin="125,0,0,0" IsReadOnly="True" Text="(the tester name)"/>
 
 
-        <Label x:Name="labelTesterId" Content="Tester ID:" Grid.Column="0" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Center" Height="26" Margin="0,2" Width="70"/>
-        <TextBox x:Name="TesterIdTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="24" Grid.Row="1" Text="{Binding TesterId, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" TextChanged="TesterIdTextBox_TextChanged"  />
-        <TextBox x:Name="tb_traineeName" Grid.Column="1" HorizontalAlignment="Left" Height="24" Grid.Row="2"  VerticalAlignment="Center" Width="120" Margin="125,0,0,0" IsReadOnly="True" Text="(the trainee name)"   />
-        <Button Name="pb_chooseTrainee" Content="choose trainee from list" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Left"  VerticalAlignment="Center" Width="140" Click="Pb_chooseTrainee_Click" />
+        <Label x:Name="labelTesterId" Content="choose trainee:" Grid.Column="0" HorizontalAlignment="Left" Grid.Row="0" VerticalAlignment="Center" Height="26" Margin="0,2" />
+        <ComboBox Name="cb_traineeChoosing" SelectedValue="{Binding Id}" SelectedValuePath="Id" DisplayMemberPath="Id" HorizontalContentAlignment="Stretch" ItemsSource="{Binding}" Grid.Column="1" Margin="0.333,0,137,0.333" SelectionChanged="Cb_traineeChoosing_SelectionChanged" >
+            <ComboBox.ItemContainerStyle>
+                <Style TargetType="{x:Type ComboBoxItem}">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Margin="5" Grid.Column="0" Text="{Binding Id}"/>
+                                    <TextBlock Margin="5" Grid.Column="1" Text="{Binding FirstName}"/>
+                                    <TextBlock Margin="5" Grid.Column="2" Text="{Binding LastName}"/>
+                                </Grid>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ComboBox.ItemContainerStyle>
+        </ComboBox>
+        <TextBox x:Name="tb_traineeName" Grid.Column="1" HorizontalAlignment="Left"   Grid.Row="0"  VerticalAlignment="Center" Width="136"  IsReadOnly="True" Text="(the trainee name)" Margin="120.333,1,0,1" Height="32" />
+
+
+
+
+
+
+
 
 
         <Label x:Name="labelGearBox" Content="Gear Box:" Grid.Column="0" HorizontalAlignment="Left" Grid.Row="13" VerticalAlignment="Center" Height="26" Margin="0,1.667,0,1" Width="60"/>
@@ -97,7 +124,6 @@
 
         <Label Content="Notes:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="11" VerticalAlignment="Center"/>
         <TextBox x:Name="notesTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="11" Text="{Binding Notes, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-        <Button Name="pb_chooseTester" Content="choose tester from list" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Left"  VerticalAlignment="Center" Width="140" Click="Pb_chooseTester_Click"  />
 
 
 

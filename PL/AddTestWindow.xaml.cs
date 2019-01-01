@@ -52,8 +52,8 @@ namespace PL
             hour_14.Content = "14:00";
             hourComboBox.Items.Add(hour_14);
 
-            for (int i = 0; i < 6; i++)
-                (hourComboBox.Items[i] as ComboBoxItem).IsEnabled = false;
+            cb_traineeChoosing.DataContext = bl.getAllTrainees();
+
 
 
         }
@@ -67,6 +67,10 @@ namespace PL
         {
 
             System.Windows.Data.CollectionViewSource testViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("testViewSource")));
+            
+            
+            
+            
             // Load data by setting the CollectionViewSource.Source property:
             // testViewSource.Source = [generic data source]
         }
@@ -82,7 +86,7 @@ namespace PL
                 hour = new DateTime(1, 1, 1, temp, 0, 0);
 
                 
-                MyBL.Instance.AddTest(new Test(TesterIdTextBox.Text, TraineeIdTextBox.Text, (GearBox)gearBoxComboBox.SelectedItem, (CarType)carTypeComboBox.SelectedItem, Date_DatePicker.DisplayDate, hour, new Address(streetTextBox.Text, int.Parse(houseNumberTextBox.Text), city.Text), test1_ReverseParkingCheckBox.IsChecked, test2_KeepingSafeDistanceCheckBox.IsChecked, test3_UsingMirrorsCheckBox.IsChecked, test4_UsingTurnSignalsCheckBox.IsChecked, test5_LegalSpeedCheckBox.IsChecked, succeededCheckBox.IsChecked, notesTextBox.Text));
+                //MyBL.Instance.AddTest(new Test(TesterIdTextBox.Text, TraineeIdTextBox.Text, (GearBox)gearBoxComboBox.SelectedItem, (CarType)carTypeComboBox.SelectedItem, Date_DatePicker.DisplayDate, hour, new Address(streetTextBox.Text, int.Parse(houseNumberTextBox.Text), city.Text), test1_ReverseParkingCheckBox.IsChecked, test2_KeepingSafeDistanceCheckBox.IsChecked, test3_UsingMirrorsCheckBox.IsChecked, test4_UsingTurnSignalsCheckBox.IsChecked, test5_LegalSpeedCheckBox.IsChecked, succeededCheckBox.IsChecked, notesTextBox.Text));
 
 
                 this.Close();
@@ -178,88 +182,47 @@ namespace PL
                 }
             }
 
-
-            hourComboBox.SelectedItem = null;
-            //set each combox item enabled only if the tester work in this hour  
-            if (MyBL.Instance.isAvailableAtDate(TesterIdTextBox.Text, Date_DatePicker.DisplayDate))
-            {
-
-
-                DayOfWeek day = Date_DatePicker.SelectedDate.Value.DayOfWeek;
-                Tester temp = MyBL.Instance.getAllTester().Find(tester => tester.Id == TesterIdTextBox.Text);
-                for (int i = 0; i < 6; i++)
-                    (hourComboBox.Items[i] as ComboBoxItem).IsEnabled = (temp.WorkHour[(int)day][i]);
-            }
-            else
-            {
-
-                for (int i = 0; i < 6; i++)
-                    (hourComboBox.Items[i] as ComboBoxItem).IsEnabled = false;
-            }
-
-
         }
 
-        private void TesterIdTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void Cb_traineeChoosing_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //set tester name according to the id that entered.
-            var the_tester= MyBL.Instance.getAllTester().Find(item => item.Id == TesterIdTextBox.Text);
-            if (the_tester != null)
-            {
-                string names = the_tester.FirstName +" "+ the_tester.LastName;
-                tb_testerName.Text = names;
-            }
-            else
-                tb_testerName.Text = "(name of tester)";
-
-
-            hourComboBox.SelectedItem = null;
-
-            //set each combox item enabled only if the tester work in this hour  
-            if (MyBL.Instance.isAvailableAtDate(TesterIdTextBox.Text, Date_DatePicker.DisplayDate))
-            {
-
-
-                DayOfWeek day = Date_DatePicker.DisplayDate.DayOfWeek;
-                Tester temp = MyBL.Instance.getAllTester().Find(tester => tester.Id == TesterIdTextBox.Text);
-                for (int i = 0; i < 6; i++)
-                    (hourComboBox.Items[i] as ComboBoxItem).IsEnabled = (temp.WorkHour[(int)day][i]);
-            }
-            else
-            {
-
-                for (int i = 0; i < 6; i++)
-                    (hourComboBox.Items[i] as ComboBoxItem).IsEnabled = false;
-               
-            }
+            string first_name= (cb_traineeChoosing.SelectedItem as Trainee).FirstName;
+            string last_name = (cb_traineeChoosing.SelectedItem as Trainee).LastName;
+            tb_traineeName.Text = first_name + " " + last_name;
         }
 
-        private void Tb_traineeName_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            //set trainee name according to the id that entered.
-            var the_trainee = MyBL.Instance.getAllTrainees().Find(item => item.Id == TraineeIdTextBox.Text);
-            if (the_trainee != null)
-            {
-                string names = the_trainee.FirstName + " " + the_trainee.LastName;
-                tb_traineeName.Text = names;
-            }
-            else
-                tb_traineeName.Text = "(name of trainee)";
-        }
 
-        private void Pb_chooseTrainee_Click(object sender, RoutedEventArgs e)
-        {
-            searchAndChooseTrainee_Window searchAndChooseTrainee = new searchAndChooseTrainee_Window(this);
-            searchAndChooseTrainee.Show();
 
-        }
+        //private void TesterIdTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        //{
+        //    //set tester name according to the id that entered.
+        //    var the_tester= MyBL.Instance.getAllTester().Find(item => item.Id == TesterIdTextBox.Text);
+        //    if (the_tester != null)
+        //    {
+        //        string names = the_tester.FirstName +" "+ the_tester.LastName;
+        //        tb_testerName.Text = names;
+        //    }
+        //    else
+        //        tb_testerName.Text = "(name of tester)";
 
-        private void Pb_chooseTester_Click(object sender, RoutedEventArgs e)
-        {
-            searchAndChooseTester_Window searchAndChooseTester = new searchAndChooseTester_Window(this);
-            searchAndChooseTester.Show();
 
-        }
+        //}
+
+        //private void Tb_traineeName_TextChanged(object sender, TextChangedEventArgs e)
+        //{
+        //    //set trainee name according to the id that entered.
+        //    var the_trainee = MyBL.Instance.getAllTrainees().Find(item => item.Id == TraineeIdTextBox.Text);
+        //    if (the_trainee != null)
+        //    {
+        //        string names = the_trainee.FirstName + " " + the_trainee.LastName;
+        //        tb_traineeName.Text = names;
+        //    }
+        //    else
+        //        tb_traineeName.Text = "(name of trainee)";
+        //}
+
+
+
     }
 }
 
