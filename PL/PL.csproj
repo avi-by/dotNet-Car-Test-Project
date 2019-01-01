@@ -86,6 +86,9 @@
     <Compile Include="searchAndChooseTrainee_Window.xaml.cs">
       <DependentUpon>searchAndChooseTrainee_Window.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Tester_UserControl.xaml.cs">
+      <DependentUpon>Tester_UserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Tests_UserControl.xaml.cs">
       <DependentUpon>Tests_UserControl.xaml</DependentUpon>
     </Compile>
@@ -136,6 +139,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="searchAndChooseTrainee_Window.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Tester_UserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
