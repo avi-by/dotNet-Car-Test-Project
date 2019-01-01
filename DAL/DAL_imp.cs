@@ -27,7 +27,7 @@ namespace DAL
         static DAL_imp() { }
 
         #endregion
-        private EventHandler<EventArgs> testerEvent=delegate { }; //to prevent exeption of null event 
+        private EventHandler<EventArgs> testerEvent = delegate { }; //to prevent exeption of null event 
         public event EventHandler<EventArgs> TesterEvent { add { testerEvent += value; } remove { testerEvent -= value; } }
 
         private EventHandler<EventArgs> traineeEvent = delegate { };
