@@ -202,7 +202,7 @@ namespace BL
             if (!isAvailableAtDate(test.TesterId, test.Date))
                 throw new Exception("cant regist, the tester do another test at the same time");
             var temp = MyDal.GetTestList(item => item.TraineeId == trainee.Id && item.GearBox == trainee.GearBox && item.Car == trainee.CarType);
-            if (temp.Count > 0 && -1*(test.Date - temp.Max(item => item.Date)).Days < Configuration.IntervalBetweenTest.Days) //get all the test of this trainee on this gearbox and select the test with the later date and check if past enough days from this test (first check if there are any test records and after search in them, max cant work on empty list) 
+            if (temp.Count > 0 && (temp.Max(item => item.Date)-test.Date).Days < Configuration.IntervalBetweenTest.Days) //get all the test of this trainee on this gearbox and select the test with the later date and check if past enough days from this test (first check if there are any test records and after search in them, max cant work on empty list) 
             {
                 throw new Exception("cant regist, the trainee did his last test not long ago");
             }
@@ -360,20 +360,27 @@ namespace BL
         }
 
 
-        //public IEnumerable<object> average()
-        //{
-        //    var x = from test in MyDal.getAllTests()
-        //            where test.Succeeded !=null
-        //            select test
-        //            into finshedTest
-        //            join tester in MyDal.getAllTesters()
-        //            on finshedTest.TesterId equals tester.Id
-        //            into groupTester
-        //            select new { testers = groupTester, ID =finshedTest.TesterId  };
-
-        //    return x.ToList();
-
-        //}
+        public IEnumerable<object> successesPercentage(string mod)
+        {
+            var testslist = from test in MyDal.getAllTests()
+                        where test.Succeeded != null
+                        select test;
+            switch (mod)
+            {
+                case "tester":
+                    var tester = from test in MyDal.getAllTests()
+                                 where test.Succeeded != null
+                                 select test
+                                 into tests
+                                 group tests by tests.TesterId
+                                into groupTesters
+                                 select new { key = groupTesters.Key, p = ((double)groupTesters.Count(x => x.Succeeded == true) / groupTesters.Count()).ToString("0.0%") };
+                 return tester.ToList();
+               
+                default:
+                    return null;
+        }
+        }
 
 
 

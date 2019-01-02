@@ -30,12 +30,15 @@ namespace PL
         {
             InitializeComponent();
             bl.TestEvent += TestEvent;
-           
+            string[] SortByValues = { "id","car type","tester id","trainee id","date"};
+            ComboBoxSortBy.ItemsSource = SortByValues;
+
+
         }
 
         private void TestEvent(object sender, EventArgs e)
         {
-            testDataGrid.DataContext = bl.getAllTests();
+            sortContaxDataByComboBox();
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -70,7 +73,7 @@ namespace PL
             //    MessageBox.Show(msg.Message, "Exception", MessageBoxButton.OK, MessageBoxImage.Error);
             //}
             System.Windows.Data.CollectionViewSource testViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("testViewSource")));
-            testDataGrid.DataContext = bl.getAllTests();
+            sortContaxDataByComboBox();
         }
 
       
@@ -124,6 +127,42 @@ namespace PL
         private void MenuItem_edit_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void sortContaxDataByComboBox()
+        {
+            if (ComboBoxSortBy.SelectedItem == null)
+            {
+                testDataGrid.DataContext = bl.getAllTests();
+                return;
+            }
+            var allTest = bl.getAllTests();
+            IOrderedEnumerable<Test> sortTest = null;
+            switch (ComboBoxSortBy.SelectedItem.ToString())
+            {
+                case "date":
+                    sortTest = from item in allTest orderby item.Date select item;
+                    break;
+                case "tester id":
+                    sortTest = from item in allTest orderby item.TesterId select item;
+                    break;
+                case "trainee id":
+                    sortTest = from item in allTest orderby item.TraineeId select item;
+                    break;
+                case "id":
+                    sortTest = from item in allTest orderby item.Id select item;
+                    break;
+                case "car type":
+                    sortTest = from item in allTest orderby item.Car select item;
+                    break;
+               
+            }
+            testDataGrid.DataContext = sortTest;
+        }
+
+        private void ComboBoxSortBy_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            sortContaxDataByComboBox();
         }
     }
 }

@@ -281,7 +281,7 @@ namespace BL
         /// <param name="gearBox"></param>
         /// <returns></returns>
         List<Tester> testersAvailableAtDateBySpecialization(DateTime date, CarType car, GearBox gearBox);
-
+        IEnumerable<object> successesPercentage(string mod);
         #endregion
     }
 }
