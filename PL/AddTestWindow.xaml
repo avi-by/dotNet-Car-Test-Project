@@ -62,16 +62,16 @@
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate>
-                                <Grid >
+                                <Grid Background="LightGreen">
                                     
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
                                     <TextBlock Margin="5" Grid.Column="0" Text="{Binding Id}"/>
                                     <TextBlock Margin="5" Grid.Column="1" Text="{Binding FirstName}"/>
-                                    <TextBlock Margin="5" Grid.Column="2" Text="{Binding LastName}"/>
+                                    <TextBlock Margin="0,5,5,5" Grid.Column="2" Text="{Binding LastName}"/>
                                 </Grid>
                             </ControlTemplate>
                         </Setter.Value>
@@ -93,15 +93,15 @@
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate>
-                                <Grid>
+                                <Grid Background="LightGreen">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="auto"/>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
                                     <TextBlock Margin="5" Grid.Column="0" Text="{Binding Id}"/>
                                     <TextBlock Margin="5" Grid.Column="1" Text="{Binding FirstName}"/>
-                                    <TextBlock Margin="5" Grid.Column="2" Text="{Binding LastName}"/>
+                                    <TextBlock Margin="0,5,5,5" Grid.Column="2" Text="{Binding LastName}"/>
                                 </Grid>
                             </ControlTemplate>
                         </Setter.Value>
