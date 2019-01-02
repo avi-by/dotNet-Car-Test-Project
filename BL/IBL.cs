@@ -255,33 +255,6 @@ namespace BL
         /// </summary>
         /// <returns></returns> 
         DateTime NearestOpenDate();
-
-        /// <summary>
-        /// return all the tester that available at this date and this hour and can test this trainee
-        /// </summary>
-        /// <param name="dateAndHour"></param>
-        /// <param name="trainee"></param>
-        /// <returns></returns>
-        List<Tester> testersAvailableAtDateAndHourBySpecialization(DateTime dateAndHour, Trainee trainee);
-        
-        /// <summary>
-        ///  the nearest date available for test of specific type from date, default tommorow
-        /// </summary>
-        /// <param name="carType"></param>
-        /// <param name="gearBox"></param>
-        /// <param name="date"></param>
-        /// <returns></returns>
-        DateTime NearestOpenDateByspecialization(CarType carType, GearBox gearBox,DateTime? date);
-
-        /// <summary>
-        /// return all the tester that specialize in a specific type that available at this date
-        /// </summary>
-        /// <param name="date"></param>
-        /// <param name="car"></param>
-        /// <param name="gearBox"></param>
-        /// <returns></returns>
-        List<Tester> testersAvailableAtDateBySpecialization(DateTime date, CarType car, GearBox gearBox);
-        IEnumerable<object> successesPercentage(string mod);
         #endregion
     }
 }
