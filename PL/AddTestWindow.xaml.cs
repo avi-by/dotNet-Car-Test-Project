@@ -53,7 +53,8 @@ namespace PL
             hourComboBox.Items.Add(hour_14);
 
             cb_traineeChoosing.DataContext = bl.getAllTrainees();
-            cb_testerChoosing.DataContext = bl.getAllTester();
+            cb_testerChoosing.IsEnabled = false;
+         //   cb_testerChoosing.DataContext = bl.getAllTester();    //if you change it after the selection of the date, you dont need it now
 
 
         }
@@ -90,8 +91,10 @@ namespace PL
 
                 try
                 {
-                  bl.AddTest(new Test((cb_testerChoosing.SelectedItem as Tester).Id, (cb_traineeChoosing.SelectedItem as Trainee).Id, (GearBox)gearBoxComboBox.SelectedItem, (CarType)carTypeComboBox.SelectedItem, DateAndHour, new Address(streetTextBox.Text, int.Parse(houseNumberTextBox.Text), city.Text), test1_ReverseParkingCheckBox.IsChecked, test2_KeepingSafeDistanceCheckBox.IsChecked, test3_UsingMirrorsCheckBox.IsChecked, test4_UsingTurnSignalsCheckBox.IsChecked, test5_LegalSpeedCheckBox.IsChecked, succeededCheckBox.IsChecked, notesTextBox.Text));
-
+                    Trainee trainee = cb_traineeChoosing.SelectedItem as Trainee;
+                    Tester tester = cb_testerChoosing.SelectedItem as Tester;
+                    bl.AddTest(new Test(tester.Id, trainee.Id, DateAndHour, new Address(streetTextBox.Text, int.Parse(houseNumberTextBox.Text), city.Text),trainee.GearBox, trainee.CarType ));
+                    Close();
                 }
                 catch (Exception msg)
                 {
@@ -100,7 +103,7 @@ namespace PL
                 }
 
 
-                this.Close();
+                
 
 
             }
@@ -123,6 +126,50 @@ namespace PL
             //    labelID.Foreground = Brushes.Black;
             //}
 
+            if (cb_traineeChoosing.SelectedItem == null )
+            {
+                msg += "--you need to chose a trainee\n";
+                labelTraineeCho.Foreground = Brushes.Red;
+                flag = true;
+            }
+            else
+            {
+                labelTraineeCho.Foreground = Brushes.Black;
+            }
+
+            if (Date_DatePicker.SelectedDate== null)
+            {
+                msg += "--you need to chose a date\n";
+                labelDate.Foreground = Brushes.Red;
+                flag = true;
+            }
+            else
+            {
+                labelDate.Foreground = Brushes.Black;
+            }
+
+            if (hourComboBox.SelectedItem == null)
+            {
+                msg += "--you need to chose a hour\n";
+                hour.Foreground = Brushes.Red;
+                flag = true;
+            }
+            else
+            {
+                hour.Foreground = Brushes.Black;
+            }
+
+            if (cb_testerChoosing.SelectedItem == null)
+            {
+                msg += "--you need to chose a tester\n";
+                labelTesterChoosing.Foreground = Brushes.Red;
+                flag = true;
+            }
+            else
+            {
+                labelTesterChoosing.Foreground = Brushes.Black;
+            }
+
             if (houseNumberTextBox.Text == "" || !long.TryParse(houseNumberTextBox.Text, out temp) || temp < 1)
             {
                 msg += "--house number could contain digits only\n";
@@ -134,20 +181,27 @@ namespace PL
                 labelhouseNumber.Foreground = Brushes.Black;
             }
 
+            if (streetTextBox.Text== "")
+            {
+                msg += "--you need to enter a street\n";
+                labelStreet.Foreground = Brushes.Red;
+                flag = true;
+            }
+            else
+            {
+                labelStreet.Foreground = Brushes.Black;
+            }
 
-
-
-
-            //if (addressTexBox.Text == "" || !int.TryParse(address[2], out int temp3)||temp3<1) //address [2] is the house number and he need to be more then 0
-            //{
-            //    msg += "--need address, city street house number separated by a comma, house number must be a digit and bigger then 0 \n";
-            //    labelAddress.Foreground = Brushes.Red;
-            //    flag = true;
-            //}
-            //else
-            //{
-            //    labelAddress.Foreground = Brushes.Black;
-            //}
+            if (city.Text == "")
+            {
+                msg += "--you need to enter a city\n";
+                labelCity.Foreground = Brushes.Red;
+                flag = true;
+            }
+            else
+            {
+                labelCity.Foreground = Brushes.Black;
+            }
 
             if (flag)
             {
@@ -196,6 +250,8 @@ namespace PL
             if (hourComboBox.SelectedItem == null || Date_DatePicker.SelectedDate == null)
             {
                 cb_testerChoosing.DataContext = null;
+                tb_testerName.Text = "(the tester name)";
+                cb_testerChoosing.IsEnabled = false;
                 return;
             }
 
@@ -204,7 +260,8 @@ namespace PL
                                      Date_DatePicker.DisplayDate.Month,
                                      Date_DatePicker.DisplayDate.Day,
                                      hourComboBox.SelectedIndex + 9, 0, 0);
-            cb_testerChoosing.DataContext = bl.testersAvailableAtDateAndHour(dateAndHour);
+            cb_testerChoosing.IsEnabled = true;
+            cb_testerChoosing.DataContext = bl.testersAvailableAtDateAndHourBySpecialization(dateAndHour,cb_traineeChoosing.SelectedItem as Trainee);
 
 
 
@@ -218,13 +275,32 @@ namespace PL
             string first_name = (cb_traineeChoosing.SelectedItem as Trainee).FirstName;
             string last_name = (cb_traineeChoosing.SelectedItem as Trainee).LastName;
             tb_traineeName.Text = first_name + " " + last_name;
+            DatePicker picker = Date_DatePicker;
+            DateTime start = bl.NearestOpenDateByspecialization((cb_traineeChoosing.SelectedItem as Trainee).CarType, (cb_traineeChoosing.SelectedItem as Trainee).GearBox,null);
+            DateTime end = start.AddMonths(3);
+            picker.DisplayDateStart = start;
+            picker.DisplayDateEnd = end;
+            picker.BlackoutDates.Clear();
+            var x = from item in bl.allTheTestAtRange(start, end) select item.Date;
+            //the loop check every date in the 3 month from the first open date if day availble, if not disable them
+            while (end >= start)
+            {
+                if (x.Contains(start))
+                {
+                    picker.BlackoutDates.Add(new CalendarDateRange(start));
+                }
+                start = start.AddDays(1);
+            }
         }
 
         private void Cb_testerChoosing_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            string first_name = (cb_testerChoosing.SelectedItem as Tester).FirstName;
-            string last_name = (cb_testerChoosing.SelectedItem as Tester).LastName;
-            tb_testerName.Text = first_name + " " + last_name;
+            if (cb_testerChoosing.SelectedItem != null)
+            {
+                string first_name = (cb_testerChoosing.SelectedItem as Tester).FirstName;
+                string last_name = (cb_testerChoosing.SelectedItem as Tester).LastName;
+                tb_testerName.Text = first_name + " " + last_name;
+            }
         }
 
         private void HourComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -233,6 +309,8 @@ namespace PL
             if (hourComboBox.SelectedItem == null || Date_DatePicker.SelectedDate == null)
             {
                 cb_testerChoosing.DataContext = null;
+                tb_testerName.Text = "(the tester name)";
+                cb_testerChoosing.IsEnabled = false;
                 return;
             }
 
@@ -241,8 +319,10 @@ namespace PL
                                      Date_DatePicker.DisplayDate.Month,
                                      Date_DatePicker.DisplayDate.Day,
                                      hourComboBox.SelectedIndex + 9, 0, 0);
-            cb_testerChoosing.DataContext = bl.testersAvailableAtDateAndHour(dateAndHour);
-            
+            cb_testerChoosing.IsEnabled = true;
+            cb_testerChoosing.DataContext = bl.testersAvailableAtDateAndHourBySpecialization(dateAndHour, cb_traineeChoosing.SelectedItem as Trainee);
+            tb_testerName.Text = "(the tester name)";
+
         }
 
         //private void TesterIdTextBox_TextChanged(object sender, TextChangedEventArgs e)

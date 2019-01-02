@@ -125,9 +125,9 @@
         <TextBox x:Name="streetTextBox" Grid.Column="1" HorizontalAlignment="Left"  Height="23"  Grid.Row="12"  VerticalAlignment="Center" Width="53" Margin="99.333,9.333,0,9.667" />
         <TextBox x:Name="city" Grid.Column="1" HorizontalAlignment="Left"  Height="23"  Grid.Row="12"  VerticalAlignment="Center" Width="76" Margin="180.333,9.333,0,9.667" />
         <Label x:Name="labelhouseNumber" Content="num." HorizontalAlignment="Left"  Grid.Row="12" VerticalAlignment="Center" Height="26" Margin="170,0,0,0" Width="60" RenderTransformOrigin="0.174,0.409" Grid.ColumnSpan="2"/>
-        <Label Content="street" Grid.Column="1" HorizontalAlignment="Left"  Grid.Row="12" VerticalAlignment="Center" Height="26" Margin="59.333,8.333,0,7.667" Width="41" RenderTransformOrigin="1.283,0.5"/>
-        <Label Content="city" Grid.Column="1" HorizontalAlignment="Left"  Grid.Row="12" VerticalAlignment="Center" Height="26" Margin="152.333,8.333,0,7.667" Width="41" RenderTransformOrigin="1.283,0.5"/>
-        <Label Content="address:" Grid.Column="0" HorizontalAlignment="Left"  Grid.Row="12" VerticalAlignment="Center" Height="26" Margin="0,8.333,0,7.667" Width="47" />
+        <Label x:Name="labelStreet" Content="street" Grid.Column="1" HorizontalAlignment="Left"  Grid.Row="12" VerticalAlignment="Center" Height="26" Margin="59.333,8.333,0,7.667" Width="41" RenderTransformOrigin="1.283,0.5"/>
+        <Label x:Name="labelCity" Content="city" Grid.Column="1" HorizontalAlignment="Left"  Grid.Row="12" VerticalAlignment="Center" Height="26" Margin="153,9,0,8" Width="41" RenderTransformOrigin="1.283,0.5"/>
+        <Label x:Name="labelAddress" Content="address:" Grid.Column="0" HorizontalAlignment="Left"  Grid.Row="12" VerticalAlignment="Center" Height="26" Margin="0,8.333,0,7.667" Width="47" />
         <TextBox x:Name="houseNumberTextBox" Grid.Column="1" HorizontalAlignment="Left"  Height="23"  Grid.Row="12"  VerticalAlignment="Center" Width="29" Margin="30.333,0,0,0" />
 
         <Button Content="add test" x:Name="pb_AddTest" Grid.Row="15" Grid.Column="1" Margin="30.333,10.333,10,-10" Click="Add_Test_Click" Height="21" VerticalAlignment="Top"   />

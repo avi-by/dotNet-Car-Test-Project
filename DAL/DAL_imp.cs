@@ -303,6 +303,16 @@ namespace DAL
             return DataSource.tests.Clone().ToList();
         }
 
+        public List<Tester> GetTestersList(Predicate<Tester> p)
+        {
+            var x = from item in DataSource.testers
+                    where p(item)
+                    select item;
+            var y = x.ToList<Tester>();
+           
+            return (y.Clone().ToList());
+        }
+
 
 
 

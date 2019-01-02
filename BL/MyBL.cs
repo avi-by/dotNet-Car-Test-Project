@@ -202,7 +202,7 @@ namespace BL
             if (!isAvailableAtDate(test.TesterId, test.Date))
                 throw new Exception("cant regist, the tester do another test at the same time");
             var temp = MyDal.GetTestList(item => item.TraineeId == trainee.Id && item.GearBox == trainee.GearBox && item.Car == trainee.CarType);
-            if (temp.Count > 0 && (test.Date - temp.Max(item => item.Date)).Days < Configuration.IntervalBetweenTest.Days) //get all the test of this trainee on this gearbox and select the test with the later date and check if past enough days from this test (first check if there are any test records and after search in them, max cant work on empty list) 
+            if (temp.Count > 0 && -1*(test.Date - temp.Max(item => item.Date)).Days < Configuration.IntervalBetweenTest.Days) //get all the test of this trainee on this gearbox and select the test with the later date and check if past enough days from this test (first check if there are any test records and after search in them, max cant work on empty list) 
             {
                 throw new Exception("cant regist, the trainee did his last test not long ago");
             }
@@ -307,6 +307,15 @@ namespace BL
                                    where testList.Find(element => element.TesterId == item.Id) == null && isWorkAtThisDay(item, date.DayOfWeek)
                                    select item;
             return availableTesters.ToList();
+        }
+
+        public List<Tester> testersAvailableAtDateBySpecialization(DateTime date,CarType car,GearBox gearBox)
+        {
+            var availbeleTesters = testersAvailableAtDate(date);
+            var specTesters = from item in availbeleTesters
+                              where item.CarType == car && item.GearBox == gearBox
+                              select item;
+            return specTesters.ToList();
         }
 
         /// <summary>
@@ -442,6 +451,32 @@ namespace BL
         public List<Test> allTheTestAtRange(DateTime start, DateTime end)
         {
             return MyDal.GetTestList(item => item.Date.Date >= start.Date && item.Date.Date <= end.Date);
+        }
+
+        public List<Tester> testersAvailableAtDateAndHourBySpecialization(DateTime dateAndHour, Trainee trainee)
+        {
+            var allTestersAtDate = testersAvailableAtDateAndHour(dateAndHour);
+            var specTesters = from item in allTestersAtDate
+                           where item.GearBox == trainee.GearBox && item.CarType == trainee.CarType
+                           select item;
+            return specTesters.ToList();
+        }
+
+       
+
+        public DateTime NearestOpenDateByspecialization(CarType carType, GearBox gearBox,DateTime? inputDate)
+        {
+            DateTime date;
+            if (inputDate == null)
+                date = NearestOpenDate();
+            else
+                date = (DateTime)inputDate;
+            while (testersAvailableAtDateBySpecialization(date,carType,gearBox).Count == 0)
+            {
+                date = date.AddDays(1);
+            }
+            return date.Date;
+
         }
 
 

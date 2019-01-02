@@ -18,6 +18,7 @@ namespace DAL
         Tester findTester(string testerId);
         List<Tester> getAllTesters();
         event EventHandler<EventArgs> TesterEvent;
+        List<Tester> GetTestersList(Predicate<Tester> p);
 
         #endregion
 
@@ -46,6 +47,7 @@ namespace DAL
         List<Test> getAllTests();
         List<Test> GetTestList(Func<Test, bool> p);
         event EventHandler<EventArgs> TestEvent;
-        #endregion
+
+               #endregion
     }
 }
