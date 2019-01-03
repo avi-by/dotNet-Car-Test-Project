@@ -35,7 +35,7 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTextColumn x:Name="gearBoxColumn" Binding="{Binding GearBox}" Header="Gear Box" Width="SizeToHeader" IsReadOnly="True"/>
-               <!-- <DataGridTextColumn x:Name="gradeColumn" Binding="{Binding Grade}" Header="Grade" IsReadOnly="True" Width="SizeToHeader"/> -->
+                <!-- <DataGridTextColumn x:Name="gradeColumn" Binding="{Binding Grade}" Header="Grade" IsReadOnly="True" Width="SizeToHeader"/> -->
                 <DataGridTextColumn x:Name="idColumn" Binding="{Binding Id}" Header="Id" Width="auto" IsReadOnly="True"/>
                 <DataGridTextColumn x:Name="notesColumn" Binding="{Binding Notes}" Header="Notes" Width="auto" IsReadOnly="True"/>
                 <DataGridCheckBoxColumn x:Name="succeededColumn" Binding="{Binding Succeeded}" Header="Succeeded" Width="SizeToHeader" IsReadOnly="True"/>
@@ -53,7 +53,16 @@
 
             <Calendar x:Name="dateCalendar" Grid.Column="1" DisplayDate="{Binding SelectedDate, RelativeSource={RelativeSource Self}}" HorizontalAlignment="Left" Margin="3" Grid.Row="0" SelectedDate="{Binding Date, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center"/>
         </Grid>
+        <Button Name="bUpdate" Content="finish Test" HorizontalAlignment="Left" Margin="90,31,0,0" VerticalAlignment="Top" Width="74" Click="bUpdate_Click" />
         <Button Name="pbAdd_Test" Content="Add Test" HorizontalAlignment="Left" Margin="246,31,0,0" VerticalAlignment="Top" Width="75" Click="PbAdd_Test_Click"/>
-
+        <Label Name="labelSortBy" Content="sort by:" HorizontalAlignment="Left" Margin="386,27,0,0" VerticalAlignment="Top"/>
+        
+        <ComboBox x:Name="ComboBoxSortBy"  HorizontalAlignment="Left" Height="Auto"  Margin="455,30,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="ComboBoxSortBy_SelectionChanged" >
+            <ComboBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel/>
+                </ItemsPanelTemplate>
+            </ComboBox.ItemsPanel>
+        </ComboBox>
     </Grid>
 </UserControl>

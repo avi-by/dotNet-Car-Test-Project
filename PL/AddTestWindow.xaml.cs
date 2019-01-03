@@ -28,30 +28,30 @@ namespace PL
             gearBoxComboBox.ItemsSource = Enum.GetValues(typeof(GearBox));
             carTypeComboBox.ItemsSource = Enum.GetValues(typeof(CarType));
 
-            ComboBoxItem hour_9 = new ComboBoxItem();
-            hour_9.Content = "9:00";
-            hourComboBox.Items.Add(hour_9);
+            //ComboBoxItem hour_9 = new ComboBoxItem();
+            //hour_9.Content = "9:00";
+            //hourComboBox.Items.Add(hour_9);
 
-            ComboBoxItem hour_10 = new ComboBoxItem();
-            hour_10.Content = "10:00";
-            hourComboBox.Items.Add(hour_10);
+            //ComboBoxItem hour_10 = new ComboBoxItem();
+            //hour_10.Content = "10:00";
+            //hourComboBox.Items.Add(hour_10);
 
-            ComboBoxItem hour_11 = new ComboBoxItem();
-            hour_11.Content = "11:00";
-            hourComboBox.Items.Add(hour_11);
+            //ComboBoxItem hour_11 = new ComboBoxItem();
+            //hour_11.Content = "11:00";
+            //hourComboBox.Items.Add(hour_11);
 
-            ComboBoxItem hour_12 = new ComboBoxItem();
-            hour_12.Content = "12:00";
-            hourComboBox.Items.Add(hour_12);
+            //ComboBoxItem hour_12 = new ComboBoxItem();
+            //hour_12.Content = "12:00";
+            //hourComboBox.Items.Add(hour_12);
 
-            ComboBoxItem hour_13 = new ComboBoxItem();
-            hour_13.Content = "13:00";
-            hourComboBox.Items.Add(hour_13);
+            //ComboBoxItem hour_13 = new ComboBoxItem();
+            //hour_13.Content = "13:00";
+            //hourComboBox.Items.Add(hour_13);
 
-            ComboBoxItem hour_14 = new ComboBoxItem();
-            hour_14.Content = "14:00";
-            hourComboBox.Items.Add(hour_14);
-
+            //ComboBoxItem hour_14 = new ComboBoxItem();
+            //hour_14.Content = "14:00";
+            //hourComboBox.Items.Add(hour_14);
+            hourComboBox.IsEnabled = false;
             cb_traineeChoosing.DataContext = bl.getAllTrainees();
             cb_testerChoosing.IsEnabled = false;
          //   cb_testerChoosing.DataContext = bl.getAllTester();    //if you change it after the selection of the date, you dont need it now
@@ -247,14 +247,63 @@ namespace PL
                 }
             }
 
-            if (hourComboBox.SelectedItem == null || Date_DatePicker.SelectedDate == null)
+            if ( Date_DatePicker.SelectedDate == null)
             {
                 cb_testerChoosing.DataContext = null;
                 tb_testerName.Text = "(the tester name)";
                 cb_testerChoosing.IsEnabled = false;
                 return;
             }
+            //if there is a empty slot at this date
+            hourComboBox.IsEnabled = true;
+            //reset the hour combo box
+           
+                hourComboBox.Items.Clear();
+            
+            //insert the empty hour at this day for this trainee
+            var lis = bl.testersAvailableAtDateBySpecialization((DateTime)Date_DatePicker.SelectedDate, ((Trainee)cb_traineeChoosing.SelectedItem).CarType, ((Trainee)cb_traineeChoosing.SelectedItem).GearBox);
+            for (int i = 0; i < 6; i++)
+            {
+                if (lis.Find(item => item.WorkHour[(int)((DateTime)Date_DatePicker.SelectedDate).DayOfWeek][i]) != null)
+                {
+                    switch (i)
+                    {
+                        case 0:
+                            ComboBoxItem hour_9 = new ComboBoxItem();
+                            hour_9.Content = "09:00";
+                            hourComboBox.Items.Add(hour_9);
+                            break;
+                        case 1:
 
+                            ComboBoxItem hour_10 = new ComboBoxItem();
+                            hour_10.Content = "10:00";
+                            hourComboBox.Items.Add(hour_10);
+                            break;
+                        case 2:
+                            ComboBoxItem hour_11 = new ComboBoxItem();
+                            hour_11.Content = "11:00";
+                            hourComboBox.Items.Add(hour_11);
+                            break;
+                        case 3:
+                            ComboBoxItem hour_12 = new ComboBoxItem();
+                            hour_12.Content = "12:00";
+                            hourComboBox.Items.Add(hour_12);
+                            break;
+                        case 4:
+                            ComboBoxItem hour_13 = new ComboBoxItem();
+                            hour_13.Content = "13:00";
+                            hourComboBox.Items.Add(hour_13);
+                            break;
+                        case 5:
+                            ComboBoxItem hour_14 = new ComboBoxItem();
+                            hour_14.Content = "14:00";
+                            hourComboBox.Items.Add(hour_14);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
             DateTime dateAndHour;
             dateAndHour = new DateTime(Date_DatePicker.DisplayDate.Year,
                                      Date_DatePicker.DisplayDate.Month,
@@ -276,6 +325,7 @@ namespace PL
             string last_name = (cb_traineeChoosing.SelectedItem as Trainee).LastName;
             tb_traineeName.Text = first_name + " " + last_name;
             DatePicker picker = Date_DatePicker;
+            picker.SelectedDate = null;
             DateTime start = bl.NearestOpenDateByspecialization((cb_traineeChoosing.SelectedItem as Trainee).CarType, (cb_traineeChoosing.SelectedItem as Trainee).GearBox,null);
             DateTime end = start.AddMonths(3);
             picker.DisplayDateStart = start;
@@ -285,12 +335,15 @@ namespace PL
             //the loop check every date in the 3 month from the first open date if day availble, if not disable them
             while (end >= start)
             {
-                if (x.Contains(start))
+                if (x.Contains(start)||start.DayOfWeek==DayOfWeek.Friday|| start.DayOfWeek == DayOfWeek.Saturday)
                 {
                     picker.BlackoutDates.Add(new CalendarDateRange(start));
                 }
                 start = start.AddDays(1);
             }
+            hourComboBox.Items.Clear();
+            
+            hourComboBox.IsEnabled = false;
         }
 
         private void Cb_testerChoosing_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -318,7 +371,7 @@ namespace PL
             dateAndHour = new DateTime(Date_DatePicker.DisplayDate.Year,
                                      Date_DatePicker.DisplayDate.Month,
                                      Date_DatePicker.DisplayDate.Day,
-                                     hourComboBox.SelectedIndex + 9, 0, 0);
+                                     int.Parse(((string)(((ComboBoxItem)hourComboBox.SelectedValue).Content)).Substring(0,2)) , 0, 0);
             cb_testerChoosing.IsEnabled = true;
             cb_testerChoosing.DataContext = bl.testersAvailableAtDateAndHourBySpecialization(dateAndHour, cb_traineeChoosing.SelectedItem as Trainee);
             tb_testerName.Text = "(the tester name)";

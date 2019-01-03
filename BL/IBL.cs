@@ -263,7 +263,7 @@ namespace BL
         /// <param name="trainee"></param>
         /// <returns></returns>
         List<Tester> testersAvailableAtDateAndHourBySpecialization(DateTime dateAndHour, Trainee trainee);
-        
+
         /// <summary>
         ///  the nearest date available for test of specific type from date, default tommorow
         /// </summary>
@@ -271,7 +271,7 @@ namespace BL
         /// <param name="gearBox"></param>
         /// <param name="date"></param>
         /// <returns></returns>
-        DateTime NearestOpenDateByspecialization(CarType carType, GearBox gearBox,DateTime? date);
+        DateTime NearestOpenDateByspecialization(CarType carType, GearBox gearBox, DateTime? date);
 
         /// <summary>
         /// return all the tester that specialize in a specific type that available at this date
