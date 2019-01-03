@@ -326,6 +326,8 @@ namespace BL
         /// <returns></returns>
         public bool isWorkAtThisDay(Tester tester, DayOfWeek dayOfWeek)
         {
+            if ((int)dayOfWeek > 4) //Friday or Saturday
+                return false;
             for (int i = 0; i < tester.WorkHour[(int)dayOfWeek].Length; i++)
             {
                 if (tester.WorkHour[(int)dayOfWeek][i])

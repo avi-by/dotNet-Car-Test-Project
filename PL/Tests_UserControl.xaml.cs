@@ -164,5 +164,11 @@ namespace PL
         {
             sortContaxDataByComboBox();
         }
+
+        private void bUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            FinishTest test = new FinishTest();
+            test.ShowDialog();
+        }
     }
 }
