@@ -20,4 +20,5 @@ namespace BE
         public static double minGradeForPassTest = 0.5;
 
     }
+    //check
 }
