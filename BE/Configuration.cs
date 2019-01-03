@@ -18,6 +18,6 @@ namespace BE
         public static TimeSpan IntervalBetweenTest = new TimeSpan(7, 0, 0, 0, 0);
         public static int test_id = 0;
         public static double minGradeForPassTest = 0.5;
-        
+
     }
 }

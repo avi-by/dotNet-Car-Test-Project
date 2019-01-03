@@ -132,7 +132,7 @@
 
         <Button Content="add test" x:Name="pb_AddTest" Grid.Row="15" Grid.Column="1" Margin="30.333,10.333,10,-10" Click="Add_Test_Click" Height="21" VerticalAlignment="Top"   />
 
-        <Label Content="Test 1 Reverse Parking:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="5" VerticalAlignment="Center"/>
+     <!--   <Label Content="Test 1 Reverse Parking:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="5" VerticalAlignment="Center"/>
         <CheckBox x:Name="test1_ReverseParkingCheckBox" Content="" Grid.Column="1" HorizontalAlignment="Left" IsChecked="{Binding Test1_ReverseParking, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="3" Grid.Row="5" VerticalAlignment="Center"/>
 
         <Label Content="Test 2 Keeping Safe Distance:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="6" VerticalAlignment="Center"/>
@@ -151,7 +151,7 @@
         <Label Content="Notes:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="11" VerticalAlignment="Center"/>
         <TextBox x:Name="notesTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="11" Text="{Binding Notes, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
 
-
+-->
 
 
 
