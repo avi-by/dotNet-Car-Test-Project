@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,17 +22,17 @@ namespace PL
     /// </summary>
     public partial class AddTesterWindow : Window
     {
-
+       
         public AddTesterWindow()
         {
 
 
             InitializeComponent();
-
-            genderComboBox.ItemsSource = Enum.GetValues(typeof(Gender));
+            
+            genderComboBox.ItemsSource = Enum.GetValues(typeof(Gender)); 
             gearBoxComboBox.ItemsSource = Enum.GetValues(typeof(GearBox));
             carTypeComboBox.ItemsSource = Enum.GetValues(typeof(CarType));
-
+            
             birthdayDatePicker.DisplayDateStart = DateTime.Now.AddYears(-BL.MyBL.Instance.getMaximumAge());
             birthdayDatePicker.DisplayDateEnd = DateTime.Now.AddYears(-BL.MyBL.Instance.getMinimumAgeOfTester());
         }
@@ -59,7 +59,7 @@ namespace PL
             {
                 temp_workHour[i] = new bool[6];
             }
-
+           
             temp_workHour[0][0] = (bool)matrix.cb_sun_9.IsChecked;
             temp_workHour[0][1] = (bool)matrix.cb_sun_10.IsChecked;
             temp_workHour[0][2] = (bool)matrix.cb_sun_11.IsChecked;
@@ -111,7 +111,7 @@ namespace PL
             }
 
 
-
+           
         }
         private bool AllFieldOK(bool[][] temp_workHour)
         {
@@ -142,7 +142,7 @@ namespace PL
                 labelhouseNumber.Foreground = Brushes.Black;
             }
 
-            if (streetTextBox.Text == "")
+            if (streetTextBox.Text=="")
             {
                 msg += "--need street\n";
                 labelStreet.Foreground = Brushes.Red;
@@ -172,10 +172,10 @@ namespace PL
             }
             else
             {
-                labelBirthDay.Foreground = Brushes.Black;
+                 labelBirthDay.Foreground = Brushes.Black;
             }
 
-            if (genderComboBox.SelectedItem == null)
+            if (genderComboBox.SelectedItem==null)
             {
                 msg += "--enter gender\n";
                 labelGender.Foreground = Brushes.Red;
@@ -186,7 +186,7 @@ namespace PL
                 labelGender.Foreground = Brushes.Black;
             }
 
-            if (gearBoxComboBox.SelectedItem == null)
+            if (gearBoxComboBox.SelectedItem==null)
             {
                 msg += "--enter gearBox\n";
                 labelGearBox.Foreground = Brushes.Red;
@@ -319,7 +319,7 @@ namespace PL
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-
+            
         }
 
         private void genderComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
