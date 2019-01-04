@@ -364,21 +364,56 @@ namespace BL
 
         public IEnumerable<object> successesPercentage(string mod)
         {
-            var testslist = from test in MyDal.getAllTests()
-                        where test.Succeeded != null
-                        select test;
+            //var testslist = from test in MyDal.getAllTests()
+            //            where test.Succeeded != null
+            //            select test;
             switch (mod)
             {
+                //return list of elements. every elemnts have id of tester and percentage of successes in his tests
                 case "tester":
                     var tester = from test in MyDal.getAllTests()
                                  where test.Succeeded != null
                                  select test
-                                 into tests
+                                 into tests //list of all the test that was done
                                  group tests by tests.TesterId
-                                into groupTesters
-                                 select new { key = groupTesters.Key, p = ((double)groupTesters.Count(x => x.Succeeded == true) / groupTesters.Count()).ToString("0.0%") };
-                 return tester.ToList();
-               
+                                into groupTesters //group to gruops that every gruop contain the tester id and his tests
+                                 select new { key = groupTesters.Key, p = ((double)groupTesters.Count(x => x.Succeeded == true) / groupTesters.Count()).ToString("0.0%") };//return anonymous element that comtain the tester id and the percentage of successes in his tests in sting fotmat of percentage
+
+                    return tester.ToList();
+                //return list of elements that contain schools name and percentage of successes in tests of its trainee
+                case "school":
+                    var schoolP = from test in MyDal.getAllTests()
+                            where test.Succeeded != null
+                            select test
+                    into finshedTest
+                            group finshedTest by finshedTest.TraineeId
+                     into groupTest
+                            from trainee in MyDal.getAllTrainees()
+                            where trainee.Id == groupTest.Key
+                            select new { trainee, success = groupTest.Count(i => i.Succeeded == true), count = groupTest.Count() }
+                            into teaineeList
+                            group teaineeList by teaineeList.trainee.SchoolName
+                            into school
+                            select new { school = school.Key, p = ((double)school.Sum(i => i.success) / school.Sum(i => i.count)).ToString("0.0%") };
+                    return schoolP.ToList();
+
+                //return list of elements that contain schools name and teachers names and percentage of successes in tests of its trainee
+                case "teacher":
+                    var teacherP = from test in MyDal.getAllTests()
+                                  where test.Succeeded != null
+                                  select test
+                    into finshedTest
+                                  group finshedTest by finshedTest.TraineeId
+                     into groupTest
+                                  from trainee in MyDal.getAllTrainees()
+                                  where trainee.Id == groupTest.Key
+                                  select new { trainee, success = groupTest.Count(i => i.Succeeded == true), count = groupTest.Count() }
+                            into traineeList
+                                  group traineeList by new { traineeList.trainee.SchoolName, traineeList.trainee.TeacherName }
+                            into schoolAndTeacher
+                                  select new { schoolAndTeacher  = schoolAndTeacher.Key, p = ((double)schoolAndTeacher.Sum(i => i.success) / schoolAndTeacher.Sum(i => i.count)).ToString("0.0%") };
+                    return teacherP.ToList();
+
                 default:
                     return null;
         }

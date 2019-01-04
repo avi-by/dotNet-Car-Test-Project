@@ -281,8 +281,13 @@ namespace BL
         /// <param name="gearBox"></param>
         /// <returns></returns>
         List<Tester> testersAvailableAtDateBySpecialization(DateTime date, CarType car, GearBox gearBox);
-        ///check hgh
-        ///khhj
+
+        /// <summary>
+        /// return list of elements with successes statistcs
+        /// </summary>
+        /// <param name="mod"></param>
+        /// <returns>statistics by mod</returns>
+        IEnumerable<object> successesPercentage(string mod);
         #endregion
     }
 }

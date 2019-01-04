@@ -83,6 +83,9 @@
     <Compile Include="schudleMatrix.xaml.cs">
       <DependentUpon>schudleMatrix.xaml</DependentUpon>
     </Compile>
+    <Compile Include="statistics.xaml.cs">
+      <DependentUpon>statistics.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Tester_UserControl.xaml.cs">
       <DependentUpon>Tester_UserControl.xaml</DependentUpon>
     </Compile>
@@ -132,6 +135,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="schudleMatrix.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="statistics.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
