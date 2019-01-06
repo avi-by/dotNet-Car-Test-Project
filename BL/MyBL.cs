@@ -409,7 +409,7 @@ namespace BL
                                   where trainee.Id == groupTest.Key
                                   select new { trainee, success = groupTest.Count(i => i.Succeeded == true), count = groupTest.Count() }
                             into traineeList
-                                  group traineeList by new { traineeList.trainee.SchoolName, traineeList.trainee.TeacherName }
+                                  group traineeList by new {school= traineeList.trainee.SchoolName,teacher= traineeList.trainee.TeacherName }
                             into schoolAndTeacher
                                   select new { schoolAndTeacher  = schoolAndTeacher.Key, p = ((double)schoolAndTeacher.Sum(i => i.success) / schoolAndTeacher.Sum(i => i.count)).ToString("0.0%") };
                     return teacherP.ToList();

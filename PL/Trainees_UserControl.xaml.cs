@@ -23,11 +23,15 @@ namespace PL
     {
 
         private IBL bl = FactoryBL.GetBL(Configuration.BLType);
+        private List<Trainee> allTraineeList;
+        private List<Trainee> currentUseList;
         public Trainees_UserControl()
         {
             InitializeComponent();
             bl.TraineeEvent += TraineeEvent;
             string[] SortByValues = { "firstName", "lastName", "id", "number of lesson", "gender", "age", "school name", "car type", "teacher name" };
+            allTraineeList = bl.getAllTrainees(); //To prevent from get the all list every simple action, save the whole list until the original list change (in the event this variable will get the new list)
+            currentUseList = allTraineeList; //on this variable all the changes will be done
             ComboBoxSortBy.ItemsSource = SortByValues;
           bl.addTrainee(new Trainee("12345670", "yosef", "machanaim", new DateTime(1980, 1, 1), "normal_Gaz_School", "eliyahu", 28, "99999999", new Address("shahal", 7, "jerusalem "), Gender.MALE, CarType.PrivetCar, GearBox.Manual));
           bl.addTrainee(new Trainee("12345671", "hagai", "sugerman", new DateTime(1980, 1, 1), "normal_Gaz_School", "eliyahu", 25, "99999999", new Address("yehosua", 11, "jerusalem "), Gender.MALE, CarType.PrivetCar, GearBox.Manual));
@@ -41,7 +45,8 @@ namespace PL
 
         private void TraineeEvent(object sender, EventArgs e)
         {
-            sortContaxDataByComboBox();
+            allTraineeList = bl.getAllTrainees();
+            findAndSort();
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -54,7 +59,7 @@ namespace PL
         private void UserControl_Loaded_1(object sender, RoutedEventArgs e)
         {
 
-            sortContaxDataByComboBox();
+            findAndSort();
 
 
 
@@ -134,15 +139,18 @@ namespace PL
             updateTraineeWindow.ShowDialog();
         }
 
+        /// <summary>
+        /// sort the data grid by the sort mod in the combo box
+        /// </summary>
         private void sortContaxDataByComboBox()
         {
             if (ComboBoxSortBy.SelectedItem == null)
             {
-                traineeDataGrid.DataContext = bl.getAllTrainees();
+                traineeDataGrid.DataContext = currentUseList;
                 return;
             }
            
-            var allTrainee = bl.getAllTrainees();
+            var allTrainee =currentUseList;
             IOrderedEnumerable<Trainee> sortTrainee = null;
             switch (ComboBoxSortBy.SelectedItem.ToString())
             {
@@ -180,6 +188,25 @@ namespace PL
         private void ComboBoxSortBy_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (e.AddedItems == null) return;
+            sortContaxDataByComboBox();
+        }
+
+        private void TextBoxSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            findAndSort();
+        }
+
+        /// <summary>
+        /// search for trainee with id, first name or last name with the string in the sort text box then sort by the sort mod
+        /// </summary>
+        private void findAndSort()
+        {
+            if (TextBoxSearch.Text == "")
+                currentUseList = allTraineeList;
+            else
+                currentUseList = (from i in allTraineeList
+                                  where i.FirstName.Contains(TextBoxSearch.Text) || i.LastName.Contains(TextBoxSearch.Text) || i.Id.Contains(TextBoxSearch.Text)
+                                  select i).ToList();
             sortContaxDataByComboBox();
         }
     }

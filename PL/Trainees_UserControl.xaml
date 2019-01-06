@@ -9,6 +9,7 @@
              d:DesignHeight="450" d:DesignWidth="800" Loaded="UserControl_Loaded_1">
     <UserControl.Resources>
         <CollectionViewSource x:Key="traineeViewSource" d:DesignSource="{d:DesignInstance {x:Type BE:Trainee}, CreateList=True}"/>
+        <CollectionViewSource x:Key="testViewSource" d:DesignSource="{d:DesignInstance {x:Type BE:Test}, CreateList=True}"/>
     </UserControl.Resources>
     <Grid DataContext="{StaticResource traineeViewSource}">
         <Grid x:Name="grid1" HorizontalAlignment="Left" Margin="300,13,0,0" VerticalAlignment="Top">
@@ -30,11 +31,11 @@
         </Grid>
         <DataGrid x:Name="traineeDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="10,46,338,81" RowDetailsVisibilityMode="VisibleWhenSelected" IsReadOnly="True">
             <DataGrid.ContextMenu>
-            <ContextMenu>
-                <MenuItem Header="edit" Click="MenuItem_Click_edit" />
-                <MenuItem Header="delete" Click="MenuItem_Click_delete"/>
-                <MenuItem Header="add" Click="MenuItem_Click_add"/>
-            </ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="edit" Click="MenuItem_Click_edit" />
+                    <MenuItem Header="delete" Click="MenuItem_Click_delete"/>
+                    <MenuItem Header="add" Click="MenuItem_Click_add"/>
+                </ContextMenu>
             </DataGrid.ContextMenu>
             <DataGrid.Columns>
 
@@ -68,5 +69,16 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
+        <Grid x:Name="grid2" DataContext="{StaticResource testViewSource}" HorizontalAlignment="Left" Margin="478,13,0,0" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Label Content="search:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+            <TextBox x:Name="TextBoxSearch" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="" VerticalAlignment="Center" Width="120" TextChanged="TextBoxSearch_TextChanged"/>
+        </Grid>
     </Grid>
 </UserControl>

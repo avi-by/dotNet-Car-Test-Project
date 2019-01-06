@@ -24,12 +24,17 @@ namespace PL
     /// </summary>
     public partial class Tests_UserControl : UserControl
     {
-       // private MyBL bl=BL.MyBL.Instance;
+
         private IBL bl = BL.FactoryBL.GetBL(Configuration.BLType);
+        private List<Test> allTestList;
+        private List<Test> currentUseList;
+
         public Tests_UserControl()
         {
             InitializeComponent();
             bl.TestEvent += TestEvent;
+            allTestList = bl.getAllTests(); //To prevent from get the all list every simple action, save the whole list until the original list change (in the event this variable will get the new list)
+            currentUseList = allTestList; //on this variable all the changes will be done
             string[] SortByValues = { "id","car type","tester id","trainee id","date"};
             ComboBoxSortBy.ItemsSource = SortByValues;
 
@@ -38,7 +43,8 @@ namespace PL
 
         private void TestEvent(object sender, EventArgs e)
         {
-            sortContaxDataByComboBox();
+            allTestList = bl.getAllTests();
+            findAndSort();
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -73,7 +79,7 @@ namespace PL
             //    MessageBox.Show(msg.Message, "Exception", MessageBoxButton.OK, MessageBoxImage.Error);
             //}
             System.Windows.Data.CollectionViewSource testViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("testViewSource")));
-            sortContaxDataByComboBox();
+            findAndSort();
         }
 
       
@@ -129,14 +135,18 @@ namespace PL
 
         }
 
+
+        /// <summary>
+        /// sort the data grid by the sort mod in the combo box
+        /// </summary>
         private void sortContaxDataByComboBox()
         {
             if (ComboBoxSortBy.SelectedItem == null)
             {
-                testDataGrid.DataContext = bl.getAllTests();
+                testDataGrid.DataContext = currentUseList;
                 return;
             }
-            var allTest = bl.getAllTests();
+            var allTest = currentUseList;
             IOrderedEnumerable<Test> sortTest = null;
             switch (ComboBoxSortBy.SelectedItem.ToString())
             {
@@ -169,6 +179,26 @@ namespace PL
         {
             FinishTest test = new FinishTest();
             test.ShowDialog();
+        }
+
+        private void TextBoxSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            findAndSort();
+        }
+
+
+        /// <summary>
+        /// search for test with id, tester id or treainee id with the string in the sort text box then sort by the sort mod
+        /// </summary>
+        private void findAndSort()
+        {
+            if (TextBoxSearch.Text == "")
+                currentUseList = allTestList;
+            else
+                currentUseList = (from i in allTestList
+                                  where i.Id != null && i.Id.Contains(TextBoxSearch.Text) || i.TesterId.Contains(TextBoxSearch.Text) || i.TraineeId.Contains(TextBoxSearch.Text)
+                                  select i).ToList();
+            sortContaxDataByComboBox();
         }
     }
 }

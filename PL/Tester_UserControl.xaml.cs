@@ -32,8 +32,8 @@ namespace PL
             bl = FactoryBL.GetBL(Configuration.BLType);
             bl.TesterEvent += TesterEvent;
             string[] SortByValues = { "firstName", "lastName", "id", "max test in week", "gender", "age", "exp years", "car type", "max distance" };
-            listAllTester = bl.getAllTester();
-            currentUseList = listAllTester;
+            listAllTester = bl.getAllTester(); //To prevent from get the all list every simple action, save the whole list until the original list change (in the event this variable will get the new list)
+            currentUseList = listAllTester;//on this variable all the changes will be done
             ComboBoxSortBy.ItemsSource = SortByValues;
             CreateDemoEntites();
         }
@@ -42,8 +42,7 @@ namespace PL
         private void TesterEvent(object sender, EventArgs e)
         {
             listAllTester = bl.getAllTester();
-            currentUseList = listAllTester;
-            sortContaxDataByComboBox();
+            findAndSort();
         }
 
         private void CreateDemoEntites()
@@ -83,7 +82,7 @@ namespace PL
         private void Window_Activated(object sender, EventArgs e)
         {
 
-            sortContaxDataByComboBox();
+            findAndSort();
 
         }
 
@@ -92,7 +91,8 @@ namespace PL
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            testerDataGrid.DataContext = bl.getAllTester();
+            listAllTester = bl.getAllTester();
+            findAndSort();
             // Load data by setting the CollectionViewSource.Source property:
             // testerViewSource.Source = [generic data source]
         }
@@ -226,6 +226,9 @@ namespace PL
             sortContaxDataByComboBox();
         }
 
+        /// <summary>
+        /// sort the data grid by the sort mod in the combo box
+        /// </summary>
         private void sortContaxDataByComboBox()
         {
             if (ComboBoxSortBy.SelectedItem == null)
@@ -268,9 +271,24 @@ namespace PL
             testerDataGrid.DataContext = sortTester;
         }
 
-        private void TextBoxFilter_TextChanged(object sender, TextChangedEventArgs e)
+        private void TextBoxSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
-            //.DataContext=( TextBoxFilter.Text
+            findAndSort();
+        }
+
+
+        /// <summary>
+        /// search for tester with id, first name or last name with the string in the sort text box then sort by the sort mod
+        /// </summary>
+        private void findAndSort()
+        {
+            if (TextBoxSearch.Text == "")
+                currentUseList = listAllTester;
+            else
+                currentUseList = (from i in listAllTester
+                                  where i.FirstName.Contains(TextBoxSearch.Text) || i.LastName.Contains(TextBoxSearch.Text) || i.Id.Contains(TextBoxSearch.Text)
+                                  select i).ToList();
+            sortContaxDataByComboBox();
         }
     }
 }
