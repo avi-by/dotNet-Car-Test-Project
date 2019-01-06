@@ -65,6 +65,8 @@
                 </ItemsPanelTemplate>
             </ComboBox.ItemsPanel>
         </ComboBox>
+        <TextBox x:Name="TextBoxFilter" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="28,17,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" TextChanged="TextBoxFilter_TextChanged"/>
+        <Label x:Name="LabelFilter" Content="filters:" HorizontalAlignment="Left" Margin="459,15,0,0" VerticalAlignment="Top" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
 
 
     </Grid>

@@ -377,7 +377,7 @@ namespace BL
                                  into tests //list of all the test that was done
                                  group tests by tests.TesterId
                                 into groupTesters //group to gruops that every gruop contain the tester id and his tests
-                                 select new { key = groupTesters.Key, p = ((double)groupTesters.Count(x => x.Succeeded == true) / groupTesters.Count()).ToString("0.0%") };//return anonymous element that comtain the tester id and the percentage of successes in his tests in sting fotmat of percentage
+                                 select new { tester_ID = groupTesters.Key, p = ((double)groupTesters.Count(x => x.Succeeded == true) / groupTesters.Count()).ToString("0.0%") };//return anonymous element that comtain the tester id and the percentage of successes in his tests in sting fotmat of percentage
 
                     return tester.ToList();
                 //return list of elements that contain schools name and percentage of successes in tests of its trainee

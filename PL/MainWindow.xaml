@@ -52,7 +52,7 @@
                 </TabItem>
 
                 <TabItem Header="statistics">
-                    
+                    <local:statistics/>
                 </TabItem>
 
 

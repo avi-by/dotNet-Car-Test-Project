@@ -23,12 +23,17 @@ namespace PL
     public partial class Tester_UserControl : UserControl
     {
         private IBL bl;
+        private List<Tester> listAllTester;
+        private List<Tester> currentUseList;
+
         public Tester_UserControl()
         {
             InitializeComponent();
             bl = FactoryBL.GetBL(Configuration.BLType);
             bl.TesterEvent += TesterEvent;
             string[] SortByValues = { "firstName", "lastName", "id", "max test in week", "gender", "age", "exp years", "car type", "max distance" };
+            listAllTester = bl.getAllTester();
+            currentUseList = listAllTester;
             ComboBoxSortBy.ItemsSource = SortByValues;
             CreateDemoEntites();
         }
@@ -36,6 +41,8 @@ namespace PL
       
         private void TesterEvent(object sender, EventArgs e)
         {
+            listAllTester = bl.getAllTester();
+            currentUseList = listAllTester;
             sortContaxDataByComboBox();
         }
 
@@ -223,10 +230,10 @@ namespace PL
         {
             if (ComboBoxSortBy.SelectedItem == null)
             {
-                testerDataGrid.DataContext = bl.getAllTester();
+                testerDataGrid.DataContext = currentUseList;
                 return;
             }
-            var allTester = bl.getAllTester();
+            var allTester = currentUseList;
             IOrderedEnumerable<Tester> sortTester = null;
             switch (ComboBoxSortBy.SelectedItem.ToString())
             {
@@ -261,7 +268,9 @@ namespace PL
             testerDataGrid.DataContext = sortTester;
         }
 
-
-
+        private void TextBoxFilter_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            //.DataContext=( TextBoxFilter.Text
+        }
     }
 }

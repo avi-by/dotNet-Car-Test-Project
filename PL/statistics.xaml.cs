@@ -10,23 +10,25 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BE;
 using BL;
-
 
 namespace PL
 {
     /// <summary>
     /// Interaction logic for statistics.xaml
     /// </summary>
-    public partial class statistics : Window
+    public partial class statistics : UserControl
     {
         private IBL bl = FactoryBL.GetBL(Configuration.BLType);
         public statistics()
         {
             InitializeComponent();
-            dataGridStatics.DataContext = bl.successesPercentage("teacher");
+            teacherDadaGrid.ItemsSource = bl.successesPercentage("teacher");
+            testerDataGrid.ItemsSource = bl.successesPercentage("tester");
+            schoolDataGrid.ItemsSource = bl.successesPercentage("school");
         }
     }
 }
