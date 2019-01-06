@@ -202,7 +202,7 @@ namespace BL
             if (!isAvailableAtDate(test.TesterId, test.Date))
                 throw new Exception("cant regist, the tester do another test at the same time");
             var temp = MyDal.GetTestList(item => item.TraineeId == trainee.Id && item.GearBox == trainee.GearBox && item.Car == trainee.CarType);
-            if (temp.Count > 0 && (temp.Max(item => item.Date)-test.Date).Days < Configuration.IntervalBetweenTest.Days) //get all the test of this trainee on this gearbox and select the test with the later date and check if past enough days from this test (first check if there are any test records and after search in them, max cant work on empty list) 
+            if (temp.Count > 0 && (temp.Max(item => item.Date) - test.Date).Days < Configuration.IntervalBetweenTest.Days) //get all the test of this trainee on this gearbox and select the test with the later date and check if past enough days from this test (first check if there are any test records and after search in them, max cant work on empty list) 
             {
                 throw new Exception("cant regist, the trainee did his last test not long ago");
             }
@@ -309,7 +309,7 @@ namespace BL
             return availableTesters.ToList();
         }
 
-        public List<Tester> testersAvailableAtDateBySpecialization(DateTime date,CarType car,GearBox gearBox)
+        public List<Tester> testersAvailableAtDateBySpecialization(DateTime date, CarType car, GearBox gearBox)
         {
             var availbeleTesters = testersAvailableAtDate(date);
             var specTesters = from item in availbeleTesters
@@ -383,40 +383,47 @@ namespace BL
                 //return list of elements that contain schools name and percentage of successes in tests of its trainee
                 case "school":
                     var schoolP = from test in MyDal.getAllTests()
-                            where test.Succeeded != null
-                            select test
-                    into finshedTest
-                            group finshedTest by finshedTest.TraineeId
-                     into groupTest
-                            from trainee in MyDal.getAllTrainees()
-                            where trainee.Id == groupTest.Key
-                            select new { trainee, success = groupTest.Count(i => i.Succeeded == true), count = groupTest.Count() }
-                            into teaineeList
-                            group teaineeList by teaineeList.trainee.SchoolName
+                                  where test.Succeeded != null
+                                  select test
+                    into finshedTest //list of all the test that was done
+                                  group finshedTest by new { id = finshedTest.TraineeId, CarType = finshedTest.Car, GearBox = finshedTest.GearBox }
+                     into groupTest //group the test by trianees and the kind of car for the test
+                                  from trainee in MyDal.getAllTrainees()
+                                  where trainee.Id == groupTest.Key.id&&trainee.GearBox==groupTest.Key.GearBox&&trainee.CarType==groupTest.Key.CarType //for every match trianee, car type, gearbox and test-group 
+                                  select new { trainee, success = groupTest.Count(i => i.Succeeded == true), count = groupTest.Count() }
+                            into traineeList //make element that contain the trainee and the number of success in test (0 or 1) and the number of all the test that this trainee do in this kind of car 
+                                  group traineeList by traineeList.trainee.SchoolName 
                             into school
-                            select new { school = school.Key, p = ((double)school.Sum(i => i.success) / school.Sum(i => i.count)).ToString("0.0%") };
+                                  select new { school = school.Key, p = ((double)school.Sum(i => i.success) / school.Sum(i => i.count)).ToString("0.0%"), firstTest = ((double)school.Count(i => i.success == 1 && i.success == i.count) / school.Count()).ToString("0.0%") };
+                    //the final element contain the school name, the percentage of suuccess, the percentage of first test success
                     return schoolP.ToList();
 
                 //return list of elements that contain schools name and teachers names and percentage of successes in tests of its trainee
                 case "teacher":
                     var teacherP = from test in MyDal.getAllTests()
-                                  where test.Succeeded != null
-                                  select test
-                    into finshedTest
-                                  group finshedTest by finshedTest.TraineeId
-                     into groupTest
-                                  from trainee in MyDal.getAllTrainees()
-                                  where trainee.Id == groupTest.Key
-                                  select new { trainee, success = groupTest.Count(i => i.Succeeded == true), count = groupTest.Count() }
-                            into traineeList
-                                  group traineeList by new {school= traineeList.trainee.SchoolName,teacher= traineeList.trainee.TeacherName }
+                                   where test.Succeeded != null
+                                   select test
+                    into finshedTest //list of all the test that was done
+                                   group finshedTest by new { id = finshedTest.TraineeId, CarType = finshedTest.Car, GearBox = finshedTest.GearBox }
+                     into groupTest //group the test by trianees and the kind of car for the test
+                                   from trainee in MyDal.getAllTrainees()
+                                   where trainee.Id == groupTest.Key.id && trainee.GearBox == groupTest.Key.GearBox && trainee.CarType == groupTest.Key.CarType //for every match trianee, car type, gearbox and test-group 
+                                   select new { trainee, success = groupTest.Count(i => i.Succeeded == true), count = groupTest.Count() }
+                            into traineeList //make element that contain the trainee and the number of success in test (0 or 1) and the number of all the test that this trainee do in this kind of car 
+                                   group traineeList by new { school = traineeList.trainee.SchoolName, teacher = traineeList.trainee.TeacherName }
                             into schoolAndTeacher
-                                  select new { schoolAndTeacher  = schoolAndTeacher.Key, p = ((double)schoolAndTeacher.Sum(i => i.success) / schoolAndTeacher.Sum(i => i.count)).ToString("0.0%") };
+                                   select new
+                                   {
+                                       schoolAndTeacher = schoolAndTeacher.Key,
+                                       p = ((double)schoolAndTeacher.Sum(i => i.success) / schoolAndTeacher.Sum(i => i.count)).ToString("0.0%"),
+                                       firstTest = ((double)schoolAndTeacher.Count(i => i.success == 1 && i.success == i.count) / schoolAndTeacher.Count()).ToString("0.0%")
+                                   };
+                    //the final element contain the school name,the teacher name (both in key), the percentage of suuccess, the percentage of first test success
                     return teacherP.ToList();
 
                 default:
                     return null;
-        }
+            }
         }
 
 
@@ -501,21 +508,21 @@ namespace BL
         {
             var allTestersAtDate = testersAvailableAtDateAndHour(dateAndHour);
             var specTesters = from item in allTestersAtDate
-                           where item.GearBox == trainee.GearBox && item.CarType == trainee.CarType
-                           select item;
+                              where item.GearBox == trainee.GearBox && item.CarType == trainee.CarType
+                              select item;
             return specTesters.ToList();
         }
 
-       
 
-        public DateTime NearestOpenDateByspecialization(CarType carType, GearBox gearBox,DateTime? inputDate)
+
+        public DateTime NearestOpenDateByspecialization(CarType carType, GearBox gearBox, DateTime? inputDate)
         {
             DateTime date;
             if (inputDate == null)
                 date = NearestOpenDate();
             else
                 date = (DateTime)inputDate;
-            while (testersAvailableAtDateBySpecialization(date,carType,gearBox).Count == 0)
+            while (testersAvailableAtDateBySpecialization(date, carType, gearBox).Count == 0)
             {
                 date = date.AddDays(1);
             }

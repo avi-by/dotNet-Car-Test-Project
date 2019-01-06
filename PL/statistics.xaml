@@ -17,6 +17,7 @@
                 <DataGridTextColumn Binding="{Binding schoolAndTeacher.school}" Header="school"/>
                 <DataGridTextColumn Binding="{Binding schoolAndTeacher.teacher}" Header="teacher"/>
                 <DataGridTextColumn Binding="{Binding p}" Header="percentage"/>
+                <DataGridTextColumn Binding="{Binding firstTest}" Header="first test percentage"/>
             </DataGrid.Columns>
         </DataGrid>
         <DataGrid x:Name="testerDataGrid" AutoGenerateColumns="False" HorizontalAlignment="Center" Height="auto" Margin="20,0,0,0" Grid.Column="1" VerticalAlignment="Top" Width="auto">
@@ -29,6 +30,7 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding school}" Header="school"/>
                 <DataGridTextColumn Binding="{Binding p}" Header="percentage"/>
+                <DataGridTextColumn Binding="{Binding firstTest}" Header="first test percentage"/>
             </DataGrid.Columns>
             </DataGrid>
     </Grid>
