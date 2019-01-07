@@ -77,6 +77,9 @@
     <Compile Include="AddTraineeWindow.xaml.cs">
       <DependentUpon>AddTraineeWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="FiltersPanel.xaml.cs">
+      <DependentUpon>FiltersPanel.xaml</DependentUpon>
+    </Compile>
     <Compile Include="FinishTest.xaml.cs">
       <DependentUpon>FinishTest.xaml</DependentUpon>
     </Compile>
@@ -111,6 +114,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AddTraineeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FiltersPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

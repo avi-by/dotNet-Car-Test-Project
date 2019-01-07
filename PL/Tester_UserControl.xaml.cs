@@ -36,9 +36,20 @@ namespace PL
             currentUseList = listAllTester;//on this variable all the changes will be done
             ComboBoxSortBy.ItemsSource = SortByValues;
             CreateDemoEntites();
+            filtersControl.radioButtonAscending.Checked += RadioButtonAscending_Checked;
+            filtersControl.radioButtonDescending.Checked += RadioButtonDescending_Checked;
         }
 
-      
+        private void RadioButtonDescending_Checked(object sender, RoutedEventArgs e)
+        {
+            findAndSort();
+        }
+
+        private void RadioButtonAscending_Checked(object sender, RoutedEventArgs e)
+        {
+            findAndSort();
+        }
+
         private void TesterEvent(object sender, EventArgs e)
         {
             listAllTester = bl.getAllTester();
@@ -268,7 +279,10 @@ namespace PL
                     sortTester = from item in allTester orderby item.Distance select item;
                     break;
             }
-            testerDataGrid.DataContext = sortTester;
+            if (filtersControl.radioButtonDescending.IsChecked == false)
+                testerDataGrid.DataContext = sortTester.Reverse();
+            else
+                testerDataGrid.DataContext = sortTester;
         }
 
         private void TextBoxSearch_TextChanged(object sender, TextChangedEventArgs e)

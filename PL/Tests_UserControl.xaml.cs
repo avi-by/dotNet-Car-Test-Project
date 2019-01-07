@@ -104,8 +104,13 @@ namespace PL
 
         private void MenuItem_delete_Click(object sender, RoutedEventArgs e)
         {
+            if ((e.Source as Test).Succeeded!=null)
+            {
+                MessageBox.Show("cant delete finished test", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
             #region message 'are you sure?'
-            MessageBoxResult result = MessageBox.Show("are you sure you want to delete the test?", "", MessageBoxButton.YesNo, MessageBoxImage.None, MessageBoxResult.Yes);
+            MessageBoxResult result = MessageBox.Show("are you sure you want to delete the test?", "", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
             switch (result)
             {
                 case MessageBoxResult.No:
@@ -213,7 +218,21 @@ namespace PL
                 currentUseList = (from i in allTestList
                                   where i.Id != null && i.Id.Contains(TextBoxSearch.Text) || i.TesterId.Contains(TextBoxSearch.Text) || i.TraineeId.Contains(TextBoxSearch.Text)
                                   select i).ToList();
+            if (checkBoxFinishTestShow.IsChecked == false)
+                currentUseList = (from i in currentUseList
+                                  where i.Succeeded == null
+                                  select i).ToList();
             sortContaxDataByComboBox();
+        }
+
+        private void checkBoxFinishTestShow_Checked(object sender, RoutedEventArgs e)
+        {
+            findAndSort();
+        }
+
+        private void checkBoxFinishTestShow_Unchecked(object sender, RoutedEventArgs e)
+        {
+            findAndSort();
         }
     }
 }

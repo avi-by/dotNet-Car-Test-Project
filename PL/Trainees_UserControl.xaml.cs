@@ -33,14 +33,24 @@ namespace PL
             allTraineeList = bl.getAllTrainees(); //To prevent from get the all list every simple action, save the whole list until the original list change (in the event this variable will get the new list)
             currentUseList = allTraineeList; //on this variable all the changes will be done
             ComboBoxSortBy.ItemsSource = SortByValues;
-          bl.addTrainee(new Trainee("12345670", "yosef", "machanaim", new DateTime(1980, 1, 1), "normal_Gaz_School", "eliyahu", 28, "99999999", new Address("shahal", 7, "jerusalem "), Gender.MALE, CarType.PrivetCar, GearBox.Manual));
-          bl.addTrainee(new Trainee("12345671", "hagai", "sugerman", new DateTime(1980, 1, 1), "normal_Gaz_School", "eliyahu", 25, "99999999", new Address("yehosua", 11, "jerusalem "), Gender.MALE, CarType.PrivetCar, GearBox.Manual));
-          bl.addTrainee(new Trainee("12345672", "moshe", "shauli", new DateTime(1980, 1, 1), "normal_Gaz_School", "eliyahu", 30, "99999999", new Address("shahal", 7, "jerusalem "), Gender.MALE, CarType.PrivetCar, GearBox.Manual));
-          bl.addTrainee(new Trainee("12345673", "david", "bar-hai", new DateTime(1980, 1, 1), "normal_Gaz_School", "eliyahu", 28, "99999999", new Address("shahal", 7, "jerusalem "), Gender.MALE, CarType.PrivetCar, GearBox.Manual));
-          bl.addTrainee(new Trainee("12345674", "yehonatan", "yosef", new DateTime(1980, 1, 1), "normal_Gaz_School", "eliyahu", 28, "99999999", new Address("shahal", 7, "jerusalem "), Gender.MALE, CarType.PrivetCar, GearBox.Manual));
+            bl.addTrainee(new Trainee("12345670", "yosef", "machanaim", new DateTime(1980, 1, 1), "normal_Gaz_School", "eliyahu", 28, "99999999", new Address("shahal", 7, "jerusalem "), Gender.MALE, CarType.PrivetCar, GearBox.Manual));
+            bl.addTrainee(new Trainee("12345671", "hagai", "sugerman", new DateTime(1980, 1, 1), "normal_Gaz_School", "eliyahu", 25, "99999999", new Address("yehosua", 11, "jerusalem "), Gender.MALE, CarType.PrivetCar, GearBox.Manual));
+            bl.addTrainee(new Trainee("12345672", "moshe", "shauli", new DateTime(1980, 1, 1), "normal_Gaz_School", "eliyahu", 30, "99999999", new Address("shahal", 7, "jerusalem "), Gender.MALE, CarType.PrivetCar, GearBox.Manual));
+            bl.addTrainee(new Trainee("12345673", "david", "bar-hai", new DateTime(1980, 1, 1), "normal_Gaz_School", "eliyahu", 28, "99999999", new Address("shahal", 7, "jerusalem "), Gender.MALE, CarType.PrivetCar, GearBox.Manual));
+            bl.addTrainee(new Trainee("12345674", "yehonatan", "yosef", new DateTime(1980, 1, 1), "normal_Gaz_School", "eliyahu", 28, "99999999", new Address("shahal", 7, "jerusalem "), Gender.MALE, CarType.PrivetCar, GearBox.Manual));
+            FilterPanel1.radioButtonAscending.Checked += RadioButtonAscending_Checked;
+            FilterPanel1.radioButtonDescending.Checked += RadioButtonDescending_Checked;
 
+        }
 
+        private void RadioButtonDescending_Checked(object sender, RoutedEventArgs e)
+        {
+            findAndSort();
+        }
 
+        private void RadioButtonAscending_Checked(object sender, RoutedEventArgs e)
+        {
+            findAndSort();
         }
 
         private void TraineeEvent(object sender, EventArgs e)
@@ -182,7 +192,10 @@ namespace PL
                     sortTrainee = from item in allTrainee orderby item.TeacherName select item;
                     break;
             }
-            traineeDataGrid.DataContext = sortTrainee;
+            if (FilterPanel1.radioButtonDescending.IsChecked == true)
+                traineeDataGrid.DataContext = sortTrainee.Reverse();
+            else
+                traineeDataGrid.DataContext = sortTrainee;
         }
 
         private void ComboBoxSortBy_SelectionChanged(object sender, SelectionChangedEventArgs e)

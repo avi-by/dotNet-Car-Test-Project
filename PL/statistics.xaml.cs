@@ -26,9 +26,20 @@ namespace PL
         public statistics()
         {
             InitializeComponent();
+            bl.TestEvent += statisticsEventHandler;
+            loadData();
+        }
+
+        private void loadData()
+        {
             teacherDadaGrid.ItemsSource = bl.successesPercentage("teacher");
             testerDataGrid.ItemsSource = bl.successesPercentage("tester");
             schoolDataGrid.ItemsSource = bl.successesPercentage("school");
+        }
+
+        private void statisticsEventHandler(object sender, EventArgs e)
+        {
+            loadData();
         }
     }
 }

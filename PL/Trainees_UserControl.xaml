@@ -80,5 +80,6 @@
             <Label Content="search:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
             <TextBox x:Name="TextBoxSearch" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="" VerticalAlignment="Center" Width="120" TextChanged="TextBoxSearch_TextChanged"/>
         </Grid>
+        <local:FiltersPanel x:Name="FilterPanel1" HorizontalAlignment="Left" Height="260" Margin="478,52,0,0" VerticalAlignment="Top" Width="312"/>
     </Grid>
 </UserControl>

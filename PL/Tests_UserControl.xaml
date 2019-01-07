@@ -75,5 +75,6 @@
             <Label Content="sesarch:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
             <TextBox x:Name="TextBoxSearch" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="" VerticalAlignment="Center" Width="120" TextChanged="TextBoxSearch_TextChanged"/>
         </Grid>
+        <CheckBox x:Name="checkBoxFinishTestShow" Content="show finished tests" HorizontalAlignment="Left" Margin="30,63,0,0" VerticalAlignment="Top" IsChecked="True" Checked="checkBoxFinishTestShow_Checked" Unchecked="checkBoxFinishTestShow_Unchecked"/>
     </Grid>
 </UserControl>
