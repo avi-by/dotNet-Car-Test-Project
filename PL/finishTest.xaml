@@ -31,25 +31,25 @@
 
         </Grid.ColumnDefinitions>
 
-        <Label Content="Test 1 Reverse Parking:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
-        <CheckBox x:Name="test1_ReverseParkingCheckBox" Content="" Grid.Column="1" HorizontalAlignment="Left" IsChecked="{Binding Test1_ReverseParking, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+        <Label x:Name="labelTest1_ReverseParking" Content="Test 1 Reverse Parking:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+        <CheckBox x:Name="test1_ReverseParkingCheckBox"  Grid.Column="1" HorizontalAlignment="Left" IsChecked="{x:Null}" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
 
-        <Label Content="Test 2 Keeping Safe Distance:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
-        <CheckBox x:Name="test2_KeepingSafeDistanceCheckBox" Content="" Grid.Column="1" HorizontalAlignment="Left" IsChecked="{Binding Test2_KeepingSafeDistance, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
+        <Label x:Name="labelTest2_KeepingSafeDistance" Content="Test 2 Keeping Safe Distance:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
+        <CheckBox x:Name="test2_KeepingSafeDistanceCheckBox" Content="" Grid.Column="1" HorizontalAlignment="Left" IsChecked="{x:Null}" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
 
-        <Label Content="Test 3 Using Mirrors:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
-        <CheckBox x:Name="test3_UsingMirrorsCheckBox" Content="" Grid.Column="1" HorizontalAlignment="Left" IsChecked="{Binding Test3_UsingMirrors, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
-        <Label Content="Test 4 Using Turn Signals:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
-        <CheckBox x:Name="test4_UsingTurnSignalsCheckBox" Content="" Grid.Column="1" HorizontalAlignment="Left" IsChecked="{Binding Test4_UsingTurnSignals, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
-        <Label Content="Test 5 Legal Speed:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center"/>
-        <CheckBox x:Name="test5_LegalSpeedCheckBox" Content="" Grid.Column="1" HorizontalAlignment="Left" IsChecked="{Binding Test5_LegalSpeed, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="3" Grid.Row="4" VerticalAlignment="Center"/>
+        <Label x:Name="labelTest3_UsingMirrors" Content="Test 3 Using Mirrors:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
+        <CheckBox x:Name="test3_UsingMirrorsCheckBox" Content="" Grid.Column="1" HorizontalAlignment="Left" IsChecked="{x:Null}" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
+        <Label x:Name="labelTest4_UsingTurnSignals" Content="Test 4 Using Turn Signals:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
+        <CheckBox x:Name="test4_UsingTurnSignalsCheckBox" Content="" Grid.Column="1" HorizontalAlignment="Left" IsChecked="{x:Null}" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
+        <Label x:Name="labelTest5_LegalSpeed" Content="Test 5 Legal Speed:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center"/>
+        <CheckBox x:Name="test5_LegalSpeedCheckBox" Content="" Grid.Column="1" HorizontalAlignment="Left" IsChecked="{x:Null}" Margin="3" Grid.Row="4" VerticalAlignment="Center"/>
 
-        <Label Content="Succeeded:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="5" VerticalAlignment="Center"/>
+      <!--  <Label Content="Succeeded:" Grid.Column="0" HorizontalAlignment="Left" Margin="2,3,0,4" Grid.Row="5" VerticalAlignment="Center"/>
         <CheckBox x:Name="succeededCheckBox" Content="" Grid.Column="1" HorizontalAlignment="Left" Click="succeededCheckBox_Click" IsChecked="{Binding Succeeded, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="3" Grid.Row="5" VerticalAlignment="Center"/>
-
+-->
         <Label Content="Notes:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="6" VerticalAlignment="Center"/>
-        <TextBox x:Name="notesTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="6" Text="{Binding Notes, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-        <Button x:Name="buttonFinish" Content="insert" HorizontalAlignment="Left" Height="17" Margin="90,11,0,-27" Grid.Row="7" VerticalAlignment="Top" Width="80"/>
+        <TextBox x:Name="notesTextBox" Grid.Column="1" HorizontalAlignment="Stretch" Height="23" Margin="3" Grid.Row="6" Text="" VerticalAlignment="Center" Width="120"/>
+        <Button x:Name="buttonFinish" Content="insert" HorizontalAlignment="Left" Height="17" Margin="90,11,0,-27" Grid.Row="7" VerticalAlignment="Top" Width="80" Click="buttonFinish_Click"/>
 
     </Grid>
 

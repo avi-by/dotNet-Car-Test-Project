@@ -29,7 +29,7 @@ namespace DS
             tests.Add(test);
             tests.Add(test2);
             var x = (Test)(test.Clone());
-            x.Succeeded = false;
+            x.Succeeded = null;
             tests.Add(x);
             tests.Add((Test)(test2.Clone()));
             tests.Add(x);

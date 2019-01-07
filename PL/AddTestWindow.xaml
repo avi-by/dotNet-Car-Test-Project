@@ -21,18 +21,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-
+          
 
 
 
@@ -52,8 +41,6 @@
         <ComboBox x:Name="hourComboBox" Grid.Column="1" HorizontalAlignment="Left" Height="23"  Grid.Row="2" SelectedItem="{Binding hour, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" Margin="0.333,2.667,0,3" SelectionChanged="HourComboBox_SelectionChanged"/>
 
 
-        <Label x:Name="labelCarType" Content="Car Type:" Grid.Column="0" HorizontalAlignment="Left"  Grid.Row="14" VerticalAlignment="Center" Height="26" Margin="0,1,0,1.667" Width="59"/>
-        <ComboBox x:Name="carTypeComboBox" Grid.Column="1" HorizontalAlignment="Left" Height="22"  Grid.Row="14" SelectedItem="{Binding Car, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" Margin="0.333,3,0,3.667"/>
 
         <Label x:Name="labelTesterChoosing" Content="choose tester:" Grid.Column="0" HorizontalAlignment="Left"  Grid.Row="3" VerticalAlignment="Center" Height="26" Margin="0,1,0,3" />
         <ComboBox Name="cb_testerChoosing" SelectedValuePath="Id" DisplayMemberPath="Id" Height="23" ItemsSource="{Binding}" Grid.Column="1" Grid.Row="3" Margin="0.333,0,137,0.333" SelectionChanged="Cb_testerChoosing_SelectionChanged" >
@@ -63,7 +50,7 @@
                         <Setter.Value>
                             <ControlTemplate>
                                 <Grid Background="LightGreen">
-                                    
+
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto" />
                                         <ColumnDefinition Width="Auto"/>
@@ -119,20 +106,18 @@
 
 
 
-        <Label x:Name="labelGearBox" Content="Gear Box:" Grid.Column="0" HorizontalAlignment="Left" Grid.Row="13" VerticalAlignment="Center" Height="26" Margin="0,1.667,0,1" Width="60"/>
-        <ComboBox x:Name="gearBoxComboBox" Grid.Column="1" HorizontalAlignment="Left" Height="23"  Grid.Row="13" SelectedItem="{Binding GearBox, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" Margin="0.333,2.667,0,3"/>
 
-        <TextBox x:Name="streetTextBox" Grid.Column="1" HorizontalAlignment="Left"  Height="23"  Grid.Row="12"  VerticalAlignment="Center" Width="53" Margin="99.333,9.333,0,9.667" />
-        <TextBox x:Name="city" Grid.Column="1" HorizontalAlignment="Left"  Height="23"  Grid.Row="12"  VerticalAlignment="Center" Width="76" Margin="180.333,9.333,0,9.667" />
-        <Label x:Name="labelhouseNumber" Content="num." HorizontalAlignment="Left"  Grid.Row="12" VerticalAlignment="Center" Height="26" Margin="170,0,0,0" Width="60" RenderTransformOrigin="0.174,0.409" Grid.ColumnSpan="2"/>
-        <Label x:Name="labelStreet" Content="street" Grid.Column="1" HorizontalAlignment="Left"  Grid.Row="12" VerticalAlignment="Center" Height="26" Margin="59.333,8.333,0,7.667" Width="41" RenderTransformOrigin="1.283,0.5"/>
-        <Label x:Name="labelCity" Content="city" Grid.Column="1" HorizontalAlignment="Left"  Grid.Row="12" VerticalAlignment="Center" Height="26" Margin="153,9,0,8" Width="41" RenderTransformOrigin="1.283,0.5"/>
-        <Label x:Name="labelAddress" Content="address:" Grid.Column="0" HorizontalAlignment="Left"  Grid.Row="12" VerticalAlignment="Center" Height="26" Margin="0,8.333,0,7.667" Width="47" />
-        <TextBox x:Name="houseNumberTextBox" Grid.Column="1" HorizontalAlignment="Left"  Height="23"  Grid.Row="12"  VerticalAlignment="Center" Width="29" Margin="30.333,0,0,0" />
+        <TextBox x:Name="streetTextBox" Grid.Column="1" HorizontalAlignment="Left"  Height="23"  Grid.Row="4"  VerticalAlignment="Center" Width="53" Margin="99.333,9.333,0,9.667" />
+        <TextBox x:Name="city" Grid.Column="1" HorizontalAlignment="Left"  Height="23"  Grid.Row="4"  VerticalAlignment="Center" Width="76" Margin="180.333,9.333,0,9.667" />
+        <Label x:Name="labelhouseNumber" Content="num." HorizontalAlignment="Left"  Grid.Row="4" VerticalAlignment="Center" Height="26" Margin="0,0,0,0" Width="60" RenderTransformOrigin="0.174,0.409" Grid.Column="1"/>
+        <Label x:Name="labelStreet" Content="street" Grid.Column="1" HorizontalAlignment="Left"  Grid.Row="4" VerticalAlignment="Center" Height="26" Margin="59.333,8.333,0,7.667" Width="41" RenderTransformOrigin="1.283,0.5"/>
+        <Label x:Name="labelCity" Content="city" Grid.Column="1" HorizontalAlignment="Left"  Grid.Row="4" VerticalAlignment="Center" Height="26" Margin="153,9,0,8" Width="41" RenderTransformOrigin="1.283,0.5"/>
+        <Label x:Name="labelAddress" Content="address:" Grid.Column="0" HorizontalAlignment="Left"  Grid.Row="4" VerticalAlignment="Center" Height="26" Margin="0,10,0,8" Width="47" />
+        <TextBox x:Name="houseNumberTextBox" Grid.Column="1" HorizontalAlignment="Left"  Height="23"  Grid.Row="4"  VerticalAlignment="Center" Width="29" Margin="30.333,0,0,0" />
 
         <Button Content="add test" x:Name="pb_AddTest" Grid.Row="15" Grid.Column="1" Margin="30.333,10.333,10,-10" Click="Add_Test_Click" Height="21" VerticalAlignment="Top"   />
 
-     <!--   <Label Content="Test 1 Reverse Parking:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="5" VerticalAlignment="Center"/>
+        <!--   <Label Content="Test 1 Reverse Parking:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="5" VerticalAlignment="Center"/>
         <CheckBox x:Name="test1_ReverseParkingCheckBox" Content="" Grid.Column="1" HorizontalAlignment="Left" IsChecked="{Binding Test1_ReverseParking, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="3" Grid.Row="5" VerticalAlignment="Center"/>
 
         <Label Content="Test 2 Keeping Safe Distance:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="6" VerticalAlignment="Center"/>

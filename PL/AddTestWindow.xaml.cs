@@ -25,9 +25,7 @@ namespace PL
         public AddTestWindow()
         {
             InitializeComponent();
-            gearBoxComboBox.ItemsSource = Enum.GetValues(typeof(GearBox));
-            carTypeComboBox.ItemsSource = Enum.GetValues(typeof(CarType));
-
+           
             //ComboBoxItem hour_9 = new ComboBoxItem();
             //hour_9.Content = "9:00";
             //hourComboBox.Items.Add(hour_9);
@@ -52,7 +50,9 @@ namespace PL
             //hour_14.Content = "14:00";
             //hourComboBox.Items.Add(hour_14);
             hourComboBox.IsEnabled = false;
-            cb_traineeChoosing.DataContext = bl.getAllTrainees();
+            cb_traineeChoosing.DataContext = (from i in bl.getAllTrainees() //if the trainee end his test, cant be posible to regist him again
+                                              where !bl.isPassed(i.Id)
+                                              select i).ToList();
             cb_testerChoosing.IsEnabled = false;
          //   cb_testerChoosing.DataContext = bl.getAllTester();    //if you change it after the selection of the date, you dont need it now
 

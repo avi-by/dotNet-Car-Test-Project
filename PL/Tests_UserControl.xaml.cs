@@ -177,8 +177,23 @@ namespace PL
 
         private void bUpdate_Click(object sender, RoutedEventArgs e)
         {
-            FinishTest test = new FinishTest();
-            test.ShowDialog();
+            if (testDataGrid.SelectedItem == null)
+                return;
+            if ((testDataGrid.SelectedItem as Test).Succeeded!=null)
+            {
+                MessageBox.Show("this test has finished already", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            try
+            {
+                FinishTest test = new FinishTest(testDataGrid.SelectedItem as Test);
+                test.ShowDialog();
+            }
+            catch (Exception msg)
+            {
+
+                MessageBox.Show(msg.Message, "Exception", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void TextBoxSearch_TextChanged(object sender, TextChangedEventArgs e)
