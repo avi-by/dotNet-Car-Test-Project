@@ -38,7 +38,13 @@
         </Grid.ColumnDefinitions>
 
         <Label x:Name="labelBirthDay" VerticalAlignment="Center" Grid.Row="4" HorizontalAlignment="Left" Grid.Column="0" Content="Birthday:" Height="26" Margin="0,1,0,1.667" Width="57"/>
-        <DatePicker x:Name="birthdayDatePicker" VerticalAlignment="Center"  SelectedDate="{Binding BirthDate, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="4"  HorizontalAlignment="Left" Grid.Column="1" Width="120" Height="24" Margin="0.333,2,0,2.667" IsTabStop="True" TabIndex="5"/>
+        <DatePicker x:Name="birthdayDatePicker" VerticalAlignment="Center"  SelectedDate="{Binding BirthDate, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="4"  HorizontalAlignment="Left" Grid.Column="1" Width="120" Height="24" Margin="0.333,2,0,2.667" IsTabStop="True" TabIndex="5">
+            <DatePicker.Resources>
+                <Style TargetType="DatePickerTextBox">
+                    <Setter Property="IsReadOnly" Value="True"/>
+                </Style>
+            </DatePicker.Resources>
+        </DatePicker>
 
 
         <Label x:Name="labelCarType" Content="Car Type:" Grid.Column="0" HorizontalAlignment="Left"  Grid.Row="10" VerticalAlignment="Center" Height="26" Margin="0,1,0,1.667" Width="59"/>

@@ -35,7 +35,13 @@
         </Grid.ColumnDefinitions>
 
         <Label x:Name="labelDate" VerticalAlignment="Center" Grid.Row="1" HorizontalAlignment="Left" Grid.Column="0" Content="Date:" Height="26" Margin="0,1,0,1.667" Width="57"/>
-        <DatePicker x:Name="Date_DatePicker" VerticalAlignment="Center"  SelectedDate="{Binding Date, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="1"  HorizontalAlignment="Left" Grid.Column="1" Width="120" Height="24" Margin="0.333,2,0,2.667" Loaded="Date_DatePicker_Loaded" SelectedDateChanged="Date_DatePicker_SelectedDateChanged"/>
+        <DatePicker x:Name="Date_DatePicker" VerticalAlignment="Center"  SelectedDate="{Binding Date, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="1"  HorizontalAlignment="Left" Grid.Column="1" Width="120" Height="24" Margin="0.333,2,0,2.667" Loaded="Date_DatePicker_Loaded" SelectedDateChanged="Date_DatePicker_SelectedDateChanged">
+            <DatePicker.Resources>
+                <Style TargetType="DatePickerTextBox">
+                    <Setter Property="IsReadOnly" Value="True"/>
+                </Style>
+            </DatePicker.Resources>
+        </DatePicker>
 
         <Label x:Name="hour" VerticalAlignment="Center" Grid.Row="2" HorizontalAlignment="Left" Grid.Column="0" Content="hour:" Height="26" Margin="0,1,0,1.667" Width="57"/>
         <ComboBox x:Name="hourComboBox" Grid.Column="1" HorizontalAlignment="Left" Height="23"  Grid.Row="2" SelectedItem="{Binding hour, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" Margin="0.333,2.667,0,3" SelectionChanged="HourComboBox_SelectionChanged"/>

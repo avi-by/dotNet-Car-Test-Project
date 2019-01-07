@@ -47,6 +47,7 @@ namespace PL
                 try
                 {
                     bl.addTrainee(new Trainee(ID.Text, firstNameTextBox.Text, lastNameTextBox.Text, birthdayDatePicker.DisplayDate, tbSchoolName.Text, tb_teachername.Text, int.Parse(tbNumberOfLesson.Text), phoneNumberTextBox.Text, new Address(streetTextBox.Text, int.Parse(houseNumberTextBox.Text), city.Text), (BE.Gender)genderComboBox.SelectedValue, (BE.CarType)carTypeComboBox.SelectedValue, (BE.GearBox)gearBoxComboBox.SelectedValue));
+                    this.Close();
                 }
                 catch (Exception msg)
                 {
@@ -55,7 +56,7 @@ namespace PL
                 }
 
 
-                this.Close();
+               
               
                 
             }

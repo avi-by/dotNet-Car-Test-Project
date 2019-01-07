@@ -46,7 +46,11 @@ namespace PL
             houseNumberTextBox.Text = selectedPerson.Address.houseNumber.ToString();
             streetTextBox.Text = selectedPerson.Address.street.ToString();
             city.Text = selectedPerson.Address.city.ToString();
-
+            if (bl.getAllTests().Find(i => i.TraineeId == selectedPerson.Id) != null)
+            {
+                labelID.Visibility = Visibility.Collapsed;
+                ID.Visibility = Visibility.Collapsed;
+            }
             orginalTrainee = (Trainee)selectedPerson.Clone();
 
         }
@@ -69,14 +73,15 @@ namespace PL
                     if (ID.Text == orginalTrainee.Id)
                     {
                        bl.updateTrainee(new Trainee(ID.Text, firstNameTextBox.Text, lastNameTextBox.Text, birthdayDatePicker.DisplayDate, tbSchoolName.Text, tb_teachername.Text, int.Parse(tbNumberOfLesson.Text), phoneNumberTextBox.Text, new Address(streetTextBox.Text, int.Parse(houseNumberTextBox.Text), city.Text), (BE.Gender)genderComboBox.SelectedValue, (BE.CarType)carTypeComboBox.SelectedValue, (BE.GearBox)gearBoxComboBox.SelectedValue));
-
+                        this.Close();
                     }
                     else
                     {
 
                        bl.updateTrainee(new Trainee(ID.Text, firstNameTextBox.Text, lastNameTextBox.Text, birthdayDatePicker.DisplayDate, tbSchoolName.Text, tb_teachername.Text, int.Parse(tbNumberOfLesson.Text), phoneNumberTextBox.Text, new Address(streetTextBox.Text, int.Parse(houseNumberTextBox.Text), city.Text), (BE.Gender)genderComboBox.SelectedValue, (BE.CarType)carTypeComboBox.SelectedValue, (BE.GearBox)gearBoxComboBox.SelectedValue), orginalTrainee.Id);
+                        this.Close();
                     }
-                    this.Close();
+                   
                 }
                 catch (Exception msg)
                 {

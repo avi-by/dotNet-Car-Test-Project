@@ -94,7 +94,11 @@ namespace PL
             matrix.cb_thu_13.IsChecked = (selectedPerson.WorkHour[4][4]) ? true : false;
             matrix.cb_thu_14.IsChecked = (selectedPerson.WorkHour[4][5]) ? true : false;
             orginalTester = (Tester)selectedPerson.Clone();
-
+            if(bl.getAllTests().Find(i=>i.TesterId==selectedPerson.Id)!=null) //can change the id of a tester only if he never do a test
+            {
+                labelID.Visibility = Visibility.Collapsed;
+                ID.Visibility = Visibility.Collapsed;
+            }
         }
 
         private void UpdateTester_Click(object sender, RoutedEventArgs e)
@@ -153,14 +157,15 @@ namespace PL
                     if (ID.Text== orginalTester.Id)
                     {
                         bl.updateTester(new Tester(ID.Text, firstNameTextBox.Text, lastNameTextBox.Text, birthdayDatePicker.DisplayDate, new Address(streetTextBox.Text, int.Parse(houseNumberTextBox.Text), city.Text), (BE.Gender)genderComboBox.SelectedValue, phoneNumberTextBox.Text, int.Parse(expYearsTextBox.Text), int.Parse(maxTestInWeekTextBox.Text), (BE.CarType)carTypeComboBox.SelectedValue, (BE.GearBox)gearBoxComboBox.SelectedValue, temp_workHour, double.Parse(distanceTexBox.Text)));
-
+                        this.Close();
                     }
                     else
                     {
                         
                        bl.updateTester(new Tester(ID.Text, firstNameTextBox.Text, lastNameTextBox.Text, birthdayDatePicker.DisplayDate, new Address(streetTextBox.Text, int.Parse(houseNumberTextBox.Text), city.Text), (BE.Gender)genderComboBox.SelectedValue, phoneNumberTextBox.Text, int.Parse(expYearsTextBox.Text), int.Parse(maxTestInWeekTextBox.Text), (BE.CarType)carTypeComboBox.SelectedValue, (BE.GearBox)gearBoxComboBox.SelectedValue, temp_workHour, double.Parse(distanceTexBox.Text)), orginalTester.Id);
+                        this.Close();
                     }
-                    this.Close();
+                   
                 }
                 catch (Exception msg)
                 {

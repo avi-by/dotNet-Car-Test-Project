@@ -115,17 +115,7 @@ namespace PL
             long temp = 0;
             bool flag = false;
 
-            //if (ID.Text.Length < 8 || !long.TryParse(ID.Text, out temp)) //the id need at least 8 digits and only digits so it can be convert to int
-            //{
-            //    msg += "--the id need at least 8 digits and only digits\n";
-            //    labelID.Foreground = Brushes.Red;
-            //    flag = true;
-            //}
-            //else
-            //{
-            //    labelID.Foreground = Brushes.Black;
-            //}
-
+           
             if (cb_traineeChoosing.SelectedItem == null )
             {
                 msg += "--you need to chose a trainee\n";

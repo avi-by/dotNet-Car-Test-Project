@@ -164,7 +164,7 @@ namespace DAL
                 {
                     DataSource.trainees[index] = trainee;
                     traineeEvent(this, null);
-                    break;
+                    return;
                 }
                 index++;
             }
@@ -180,7 +180,7 @@ namespace DAL
                 {
                     DataSource.trainees[index] = trainee;
                     traineeEvent(this, null);
-                    break;
+                    return;
                 }
                 index++;
             }
@@ -291,7 +291,7 @@ namespace DAL
                 {
                     DataSource.tests[index] = test;
                     testEvent(this, null);
-                    break;
+                    return;
                 }
                 index++;
             }

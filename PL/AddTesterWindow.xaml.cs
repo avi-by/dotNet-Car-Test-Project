@@ -22,7 +22,7 @@ namespace PL
     /// </summary>
     public partial class AddTesterWindow : Window
     {
-       
+        private IBL bl = FactoryBL.GetBL(Configuration.BLType);
         public AddTesterWindow()
         {
 
@@ -33,8 +33,8 @@ namespace PL
             gearBoxComboBox.ItemsSource = Enum.GetValues(typeof(GearBox));
             carTypeComboBox.ItemsSource = Enum.GetValues(typeof(CarType));
             
-            birthdayDatePicker.DisplayDateStart = DateTime.Now.AddYears(-BL.MyBL.Instance.getMaximumAge());
-            birthdayDatePicker.DisplayDateEnd = DateTime.Now.AddYears(-BL.MyBL.Instance.getMinimumAgeOfTester());
+            birthdayDatePicker.DisplayDateStart = DateTime.Now.AddYears(-bl.getMaximumAge());
+            birthdayDatePicker.DisplayDateEnd = DateTime.Now.AddYears(-bl.getMinimumAgeOfTester());
         }
 
 
@@ -100,14 +100,15 @@ namespace PL
             {
                 try
                 {
-                    MyBL.Instance.addTester(new Tester(ID.Text, firstNameTextBox.Text, lastNameTextBox.Text, birthdayDatePicker.DisplayDate, new Address(" ", 0, " sd"), (BE.Gender)genderComboBox.SelectedValue, "8", 1, 1, (BE.CarType)1, (BE.GearBox)1, temp_workHour, 0));
+                    bl.addTester(new Tester(ID.Text, firstNameTextBox.Text, lastNameTextBox.Text, birthdayDatePicker.DisplayDate, new Address(streetTextBox.Text, int.Parse(houseNumberTextBox.Text), city.Text), (BE.Gender)genderComboBox.SelectedValue, phoneNumberTextBox.Text, int.Parse(expYearsTextBox.Text), int.Parse(maxTestInWeekTextBox.Text), (BE.CarType)carTypeComboBox.SelectedItem, (BE.GearBox)gearBoxComboBox.SelectedItem, temp_workHour, int.Parse(distanceTexBox.Text)));
+                    this.Close();
                 }
                 catch (Exception msg)
                 {
 
                     MessageBox.Show(msg.Message, "Exception", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-                this.Close();
+               
             }
 
 
@@ -120,16 +121,16 @@ namespace PL
             double temp2;
             bool flag = false, workHourFlag = false;
 
-            //if (ID.Text.Length < 8 || !long.TryParse(ID.Text, out temp)) //the id need at least 8 digits and only digits so it can be convert to int
-            //{
-            //    msg += "--the id need at least 8 digits and only digits\n";
-            //    labelID.Foreground = Brushes.Red;
-            //    flag = true;
-            //}
-            //else
-            //{
-            //    labelID.Foreground = Brushes.Black;
-            //}
+            if (ID.Text.Length < 8 || !long.TryParse(ID.Text, out temp)) //the id need at least 8 digits and only digits so it can be convert to int
+            {
+                msg += "--the id need at least 8 digits and only digits\n";
+                labelID.Foreground = Brushes.Red;
+                flag = true;
+            }
+            else
+            {
+                labelID.Foreground = Brushes.Black;
+            }
 
             if (houseNumberTextBox.Text == "" || !long.TryParse(houseNumberTextBox.Text, out temp) || temp < 1)
             {
@@ -295,17 +296,7 @@ namespace PL
             {
                 labelDistance.Foreground = Brushes.Black;
             }
-
-            //if (addressTexBox.Text == "" || !int.TryParse(address[2], out int temp3)||temp3<1) //address [2] is the house number and he need to be more then 0
-            //{
-            //    msg += "--need address, city street house number separated by a comma, house number must be a digit and bigger then 0 \n";
-            //    labelAddress.Foreground = Brushes.Red;
-            //    flag = true;
-            //}
-            //else
-            //{
-            //    labelAddress.Foreground = Brushes.Black;
-            //}
+            
 
             if (flag)
             {
