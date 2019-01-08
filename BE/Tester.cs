@@ -27,6 +27,8 @@ namespace BE
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        public Tester() { } //CTOR without arguments- required for the xmlSerializer
+
         public Tester(string name, int age, Gender gender, string phoneNumber, Address address, int expYears, int maxTestInWeek, CarType carType, GearBox gearBox, bool[][] workHour, double distance)
         {
             //make from one string first and last name, if there are only one word enter " " to the last name

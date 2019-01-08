@@ -12,6 +12,8 @@ namespace DAL
 
     public class DAL_imp : IDAL  //, INotifyCollectionChanged
     {
+        
+
         #region Singleton
         private static readonly DAL_imp instance = new DAL_imp();
 
@@ -81,7 +83,9 @@ namespace DAL
             if (DataSource.testers.Find(item => item.Id == tester.Id) != null)
                 throw new Exception("cant add the tester, there are another tester with the same id");
             DataSource.testers.Add(tester);
+            Dal_XML_imp.SaveToXML<List<Tester>>(DataSource.testers, Dal_XML_imp.TesterPath);
             testerEvent(DAL_imp.Instance, null);
+
             //    this.OnNotifyCollectionChanged(
             //new NotifyCollectionChangedEventArgs(
             //  NotifyCollectionChangedAction.Add, tester)); 
@@ -144,6 +148,7 @@ namespace DAL
             if (DataSource.trainees.Find(item => item.Id == trainee.Id) != null)
                 throw new Exception("cant add the trainee, there are another trainee with the same id");
             DataSource.trainees.Add(trainee);
+            Dal_XML_imp.SaveToXML<List<Trainee>>(DataSource.trainees, Dal_XML_imp.TraineePath);
             traineeEvent(this, null);
         }
 

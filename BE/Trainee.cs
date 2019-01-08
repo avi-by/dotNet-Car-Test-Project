@@ -21,7 +21,9 @@ namespace BE
         private string teacherName;
         private int numberOfLesson;
         private DateTime registration_date;
-     //   private int amountOfTests;
+        //   private int amountOfTests;
+
+        public Trainee() { } //CTOR without arguments- required for the xmlSerializer
 
         public Trainee(string id, string name, int age, Address address, string schoolName="", string teacherName="", int numberOfLesson=0, string phoneNumber="00000", Gender gender = Gender.MALE, CarType carType = CarType.PrivetCar, GearBox gearBox = GearBox.Manual)
         {
