@@ -252,6 +252,7 @@ namespace DAL
         public void AddTest(Test test)
         {
             test.Id = Configuration.test_id.ToString();
+
             //add 0 at the start of the id antil there is 8 digits
             StringBuilder builder = new StringBuilder();
             for (int i = test.Id.Length; i < 8; i++)
@@ -260,6 +261,8 @@ namespace DAL
             test.Id = builder.ToString();
             Configuration.test_id++;
             DataSource.tests.Add(test);
+
+            Dal_XML_imp.AddTest(test);
             testEvent(this, null);
             //            this.OnNotifyCollectionChanged(
             //new NotifyCollectionChangedEventArgs(

@@ -24,6 +24,9 @@ namespace BE
         private CarType car;
         private string notes;
 
+        public Test() { } //CTOR without arguments- required for the xmlSerializer
+
+
         public Test(string testerId, string traineeId, DateTime date, Address address, GearBox gearBox, CarType car)
         {
             this.testerId = testerId;
