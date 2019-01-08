@@ -83,9 +83,9 @@ namespace PL
             {
                 //set hour that selected
                 DateTime DateAndHour;
-                DateAndHour = new DateTime(Date_DatePicker.DisplayDate.Year,
-                                     Date_DatePicker.DisplayDate.Month,
-                                     Date_DatePicker.DisplayDate.Day,
+                DateAndHour = new DateTime(Date_DatePicker.SelectedDate.Value.Year,
+                                     Date_DatePicker.SelectedDate.Value.Month,
+                                     Date_DatePicker.SelectedDate.Value.Day,
                                      hourComboBox.SelectedIndex + 9, 0, 0);
 
 
@@ -295,9 +295,9 @@ namespace PL
                 }
             }
             DateTime dateAndHour;
-            dateAndHour = new DateTime(Date_DatePicker.DisplayDate.Year,
-                                     Date_DatePicker.DisplayDate.Month,
-                                     Date_DatePicker.DisplayDate.Day,
+            dateAndHour = new DateTime(Date_DatePicker.SelectedDate.Value.Year,
+                                     Date_DatePicker.SelectedDate.Value.Month,
+                                     Date_DatePicker.SelectedDate.Value.Day,
                                      hourComboBox.SelectedIndex + 9, 0, 0);
             cb_testerChoosing.IsEnabled = true;
             cb_testerChoosing.DataContext = bl.testersAvailableAtDateAndHourBySpecialization(dateAndHour,cb_traineeChoosing.SelectedItem as Trainee);
@@ -358,9 +358,9 @@ namespace PL
             }
 
             DateTime dateAndHour;
-            dateAndHour = new DateTime(Date_DatePicker.DisplayDate.Year,
-                                     Date_DatePicker.DisplayDate.Month,
-                                     Date_DatePicker.DisplayDate.Day,
+            dateAndHour = new DateTime(Date_DatePicker.SelectedDate.Value.Year,
+                                     Date_DatePicker.SelectedDate.Value.Month,
+                                     Date_DatePicker.SelectedDate.Value.Day,
                                      int.Parse(((string)(((ComboBoxItem)hourComboBox.SelectedValue).Content)).Substring(0,2)) , 0, 0);
             cb_testerChoosing.IsEnabled = true;
             cb_testerChoosing.DataContext = bl.testersAvailableAtDateAndHourBySpecialization(dateAndHour, cb_traineeChoosing.SelectedItem as Trainee);

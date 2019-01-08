@@ -177,6 +177,12 @@ namespace BL
         #region test
         public void AddTest(Test test)
         {
+            Trainee trainee = MyDal.findTrainee(test.TraineeId); //in update test and finish test its always false, then check it only in add test
+            var temp = MyDal.GetTestList(item => item.TraineeId == trainee.Id && item.GearBox == trainee.GearBox && item.Car == trainee.CarType);
+            if (temp.Count > 0 && (temp.Max(item => item.Date) - test.Date).Days < Configuration.IntervalBetweenTest.Days) //get all the test of this trainee on this gearbox and select the test with the later date and check if past enough days from this test (first check if there are any test records and after search in them, max cant work on empty list) 
+            {
+                throw new Exception("cant regist, the trainee did his last test not long ago");
+            }
             checkIfValidTest(test);
 
             MyDal.AddTest(test);
@@ -201,11 +207,7 @@ namespace BL
 
             if (!isAvailableAtDate(test.TesterId, test.Date))
                 throw new Exception("cant regist, the tester do another test at the same time");
-            var temp = MyDal.GetTestList(item => item.TraineeId == trainee.Id && item.GearBox == trainee.GearBox && item.Car == trainee.CarType);
-            if (temp.Count > 0 && (temp.Max(item => item.Date) - test.Date).Days < Configuration.IntervalBetweenTest.Days) //get all the test of this trainee on this gearbox and select the test with the later date and check if past enough days from this test (first check if there are any test records and after search in them, max cant work on empty list) 
-            {
-                throw new Exception("cant regist, the trainee did his last test not long ago");
-            }
+          
 
             if (trainee.NumberOfLesson < Configuration.MinNumLessons)
             {
@@ -454,7 +456,8 @@ namespace BL
         {
             if ((test.Test1_ReverseParking == null || test.Test2_KeepingSafeDistance == null || test.Test3_UsingMirrors == null || test.Test4_UsingTurnSignals == null || test.Test5_LegalSpeed == null))
                 throw new Exception("The test did not end until all the tests were over");
-            checkIfValidTest(test);
+            if (MyDal.findTest(test)==null)
+                throw new Exception("the test not exist at the data base");
             if (test.Succeeded == null) //if the trainne pass most of the tests
                 test.Succeeded = test.Grade > Configuration.minGradeForPassTest ? true : false;
             MyDal.UpdateTest(test);

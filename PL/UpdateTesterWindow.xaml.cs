@@ -156,13 +156,13 @@ namespace PL
 
                     if (ID.Text== orginalTester.Id)
                     {
-                        bl.updateTester(new Tester(ID.Text, firstNameTextBox.Text, lastNameTextBox.Text, birthdayDatePicker.DisplayDate, new Address(streetTextBox.Text, int.Parse(houseNumberTextBox.Text), city.Text), (BE.Gender)genderComboBox.SelectedValue, phoneNumberTextBox.Text, int.Parse(expYearsTextBox.Text), int.Parse(maxTestInWeekTextBox.Text), (BE.CarType)carTypeComboBox.SelectedValue, (BE.GearBox)gearBoxComboBox.SelectedValue, temp_workHour, double.Parse(distanceTexBox.Text)));
+                        bl.updateTester(new Tester(ID.Text, firstNameTextBox.Text, lastNameTextBox.Text, birthdayDatePicker.SelectedDate.Value, new Address(streetTextBox.Text, int.Parse(houseNumberTextBox.Text), city.Text), (BE.Gender)genderComboBox.SelectedValue, phoneNumberTextBox.Text, int.Parse(expYearsTextBox.Text), int.Parse(maxTestInWeekTextBox.Text), (BE.CarType)carTypeComboBox.SelectedValue, (BE.GearBox)gearBoxComboBox.SelectedValue, temp_workHour, double.Parse(distanceTexBox.Text)));
                         this.Close();
                     }
                     else
                     {
                         
-                       bl.updateTester(new Tester(ID.Text, firstNameTextBox.Text, lastNameTextBox.Text, birthdayDatePicker.DisplayDate, new Address(streetTextBox.Text, int.Parse(houseNumberTextBox.Text), city.Text), (BE.Gender)genderComboBox.SelectedValue, phoneNumberTextBox.Text, int.Parse(expYearsTextBox.Text), int.Parse(maxTestInWeekTextBox.Text), (BE.CarType)carTypeComboBox.SelectedValue, (BE.GearBox)gearBoxComboBox.SelectedValue, temp_workHour, double.Parse(distanceTexBox.Text)), orginalTester.Id);
+                       bl.updateTester(new Tester(ID.Text, firstNameTextBox.Text, lastNameTextBox.Text, birthdayDatePicker.SelectedDate.Value, new Address(streetTextBox.Text, int.Parse(houseNumberTextBox.Text), city.Text), (BE.Gender)genderComboBox.SelectedValue, phoneNumberTextBox.Text, int.Parse(expYearsTextBox.Text), int.Parse(maxTestInWeekTextBox.Text), (BE.CarType)carTypeComboBox.SelectedValue, (BE.GearBox)gearBoxComboBox.SelectedValue, temp_workHour, double.Parse(distanceTexBox.Text)), orginalTester.Id);
                         this.Close();
                     }
                    
@@ -182,16 +182,16 @@ namespace PL
             double temp2;
             bool flag = false,workHourFlag=false;
 
-            //if (ID.Text.Length < 8 || !long.TryParse(ID.Text, out temp)) //the id need at least 8 digits and only digits so it can be convert to int
-            //{
-            //    msg += "--the id need at least 8 digits and only digits\n";
-            //    labelID.Foreground = Brushes.Red;
-            //    flag = true;
-            //}
-            //else
-            //{
-            //    labelID.Foreground = Brushes.Black;
-            //}
+            if (ID.Text.Length < 8 || !long.TryParse(ID.Text, out temp)) //the id need at least 8 digits and only digits so it can be convert to int
+            {
+                msg += "--the id need at least 8 digits and only digits\n";
+                labelID.Foreground = Brushes.Red;
+                flag = true;
+            }
+            else
+            {
+                labelID.Foreground = Brushes.Black;
+            }
 
             if (houseNumberTextBox.Text == "" || !long.TryParse(houseNumberTextBox.Text, out temp) || temp < 1)
             {
@@ -202,6 +202,63 @@ namespace PL
             else
             {
                 labelhouseNumber.Foreground = Brushes.Black;
+            }
+
+            if (streetTextBox.Text == "")
+            {
+                msg += "--need street\n";
+                labelStreet.Foreground = Brushes.Red;
+                flag = true;
+            }
+            else
+            {
+                labelStreet.Foreground = Brushes.Black;
+            }
+
+            if (city.Text == "")
+            {
+                msg += "--need city\n";
+                labelCity.Foreground = Brushes.Red;
+                flag = true;
+            }
+            else
+            {
+                labelCity.Foreground = Brushes.Black;
+            }
+
+            if (gearBoxComboBox.SelectedItem==null)
+            {
+                msg += "--need gearbox\n";
+                labelGearBox.Foreground = Brushes.Red;
+                flag = true;
+            }
+            else
+            {
+                labelGearBox.Foreground = Brushes.Black;
+            }
+
+
+            if (genderComboBox.SelectedItem == null)
+            {
+                msg += "--need gender\n";
+                labelGender.Foreground = Brushes.Red;
+                flag = true;
+            }
+            else
+            {
+                labelGender.Foreground = Brushes.Black;
+            }
+
+
+            if (carTypeComboBox.SelectedItem == null)
+            {
+                msg += "--need car type\n";
+                labelCarType.Foreground = Brushes.Red;
+                flag = true;
+            }
+            else
+            {
+                labelCarType.Foreground = Brushes.Black;
             }
 
             if (firstNameTextBox.Text=="")
@@ -302,17 +359,7 @@ namespace PL
                 labelDistance.Foreground = Brushes.Black;
             }
 
-            //if (addressTexBox.Text == "" || !int.TryParse(address[2], out int temp3)||temp3<1) //address [2] is the house number and he need to be more then 0
-            //{
-            //    msg += "--need address, city street house number separated by a comma, house number must be a digit and bigger then 0 \n";
-            //    labelAddress.Foreground = Brushes.Red;
-            //    flag = true;
-            //}
-            //else
-            //{
-            //    labelAddress.Foreground = Brushes.Black;
-            //}
-
+          
             if (flag)
             {
                 MessageBox.Show(msg, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
