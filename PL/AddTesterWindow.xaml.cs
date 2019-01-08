@@ -100,7 +100,7 @@ namespace PL
             {
                 try
                 {
-                    bl.addTester(new Tester(ID.Text, firstNameTextBox.Text, lastNameTextBox.Text, birthdayDatePicker.DisplayDate, new Address(streetTextBox.Text, int.Parse(houseNumberTextBox.Text), city.Text), (BE.Gender)genderComboBox.SelectedValue, phoneNumberTextBox.Text, int.Parse(expYearsTextBox.Text), int.Parse(maxTestInWeekTextBox.Text), (BE.CarType)carTypeComboBox.SelectedItem, (BE.GearBox)gearBoxComboBox.SelectedItem, temp_workHour, int.Parse(distanceTexBox.Text)));
+                    bl.addTester(new Tester(ID.Text, firstNameTextBox.Text, lastNameTextBox.Text, birthdayDatePicker.SelectedDate.Value, new Address(streetTextBox.Text, int.Parse(houseNumberTextBox.Text), city.Text), (BE.Gender)genderComboBox.SelectedValue, phoneNumberTextBox.Text, int.Parse(expYearsTextBox.Text), int.Parse(maxTestInWeekTextBox.Text), (BE.CarType)carTypeComboBox.SelectedItem, (BE.GearBox)gearBoxComboBox.SelectedItem, temp_workHour, int.Parse(distanceTexBox.Text)));
                     this.Close();
                 }
                 catch (Exception msg)

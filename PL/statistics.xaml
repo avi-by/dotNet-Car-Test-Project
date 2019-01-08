@@ -14,23 +14,23 @@
         </Grid.ColumnDefinitions>
         <DataGrid x:Name="teacherDadaGrid" AutoGenerateColumns="False" HorizontalAlignment="Center" Height="auto" Margin="20,0,0,0" Grid.Column="0" VerticalAlignment="Top" Width="auto">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding schoolAndTeacher.school}" Header="school"/>
-                <DataGridTextColumn Binding="{Binding schoolAndTeacher.teacher}" Header="teacher"/>
-                <DataGridTextColumn Binding="{Binding p}" Header="percentage"/>
-                <DataGridTextColumn Binding="{Binding firstTest}" Header="first test percentage"/>
+                <DataGridTextColumn Binding="{Binding schoolAndTeacher.school}" Header="school" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding schoolAndTeacher.teacher}" Header="teacher" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding p}" Header="percentage" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding firstTest}" Header="first test percentage" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
         <DataGrid x:Name="testerDataGrid" AutoGenerateColumns="False" HorizontalAlignment="Center" Height="auto" Margin="20,0,0,0" Grid.Column="1" VerticalAlignment="Top" Width="auto">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding tester_ID}" Header="tester ID"/>
-                <DataGridTextColumn Binding="{Binding p}" Header="percentage"/>
+                <DataGridTextColumn Binding="{Binding tester_ID}" Header="tester ID" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding p}" Header="percentage" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
         <DataGrid x:Name="schoolDataGrid" AutoGenerateColumns="False" HorizontalAlignment="Center" Height="auto" Margin="20,0,0,0" Grid.Column="2" VerticalAlignment="Top" Width="auto" >
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding school}" Header="school"/>
-                <DataGridTextColumn Binding="{Binding p}" Header="percentage"/>
-                <DataGridTextColumn Binding="{Binding firstTest}" Header="first test percentage"/>
+                <DataGridTextColumn Binding="{Binding school}" Header="school" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding p}" Header="percentage" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding firstTest}" Header="first test percentage" IsReadOnly="True"/>
             </DataGrid.Columns>
             </DataGrid>
     </Grid>

@@ -104,7 +104,7 @@ namespace PL
 
         private void MenuItem_delete_Click(object sender, RoutedEventArgs e)
         {
-            if ((e.Source as Test).Succeeded!=null)
+            if ((testDataGrid.SelectedItem as Test).Succeeded!=null)
             {
                 MessageBox.Show("cant delete finished test", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;

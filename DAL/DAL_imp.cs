@@ -83,7 +83,7 @@ namespace DAL
             if (DataSource.testers.Find(item => item.Id == tester.Id) != null)
                 throw new Exception("cant add the tester, there are another tester with the same id");
             DataSource.testers.Add(tester);
-            Dal_XML_imp.SaveToXML<List<Tester>>(DataSource.testers, Dal_XML_imp.TesterPath);
+           Dal_XML_imp.SaveToXML<List<Tester>>(DataSource.testers, Dal_XML_imp.TesterPath);
             testerEvent(DAL_imp.Instance, null);
 
             //    this.OnNotifyCollectionChanged(
@@ -319,6 +319,11 @@ namespace DAL
             var y = x.ToList<Tester>();
            
             return (y.Clone().ToList());
+        }
+
+        public object findTest(Test test)
+        {
+            return DataSource.tests.Find(i => i.Id == test.Id);
         }
 
 
