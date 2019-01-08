@@ -533,6 +533,35 @@ namespace BL
 
         }
 
+        public List<Tester> testersAvailableAtDateAndHourBySpecializationAndAddress(DateTime dateAndHour, Trainee trainee, Address address)
+        {
+            var x = testersAvailableAtDateAndHourBySpecialization(dateAndHour, trainee);
+            x = (from i in x where atAvailbleDistance(i.Id, address) select i).ToList();
+            return x;
+        }
+
+        public DateTime NearestOpenDateBySpecializationAndAddress(CarType carType, GearBox gearBox, DateTime? inputDate, Address address)
+        {
+
+            DateTime date;
+            if (inputDate == null)
+                date = NearestOpenDate();
+            else
+                date = (DateTime)inputDate;
+            while (testersAvailableAtDateBySpecializationAndAddress(date, carType, gearBox,address).Count == 0)
+            {
+                date = date.AddDays(1);
+            }
+            return date.Date;
+        }
+
+        public List<Tester> testersAvailableAtDateBySpecializationAndAddress(DateTime date, CarType car, GearBox gearBox, Address address)
+        {
+            var x = testersAvailableAtDateBySpecialization(date, car, gearBox);
+            x = (from i in x where atAvailbleDistance(i.Id, address) select i).ToList();
+            return x;
+        }
+
 
         #endregion
     }

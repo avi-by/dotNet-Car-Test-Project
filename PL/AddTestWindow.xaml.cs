@@ -53,7 +53,8 @@ namespace PL
             cb_traineeChoosing.DataContext = (from i in bl.getAllTrainees() //if the trainee end his test, cant be posible to regist him again
                                               where !bl.isPassed(i.Id)
                                               select i).ToList();
-            cb_testerChoosing.IsEnabled = false;
+            Date_DatePicker.IsEnabled = false;
+            cb_testerChoosing.IsEnabled =  false;
          //   cb_testerChoosing.DataContext = bl.getAllTester();    //if you change it after the selection of the date, you dont need it now
 
 
@@ -78,6 +79,7 @@ namespace PL
 
         private void Add_Test_Click(object sender, RoutedEventArgs e)
         {
+            if (Date_DatePicker == null && hourComboBox == null) return;
 
             if (AllFieldOK())
             {
@@ -233,7 +235,7 @@ namespace PL
                 {
                     MessageBox.Show("this day unavailbale");
                     ((DatePicker)sender).SelectedDate = null;
-                    return;
+                   
                 }
             }
 
@@ -249,9 +251,15 @@ namespace PL
             //reset the hour combo box
            
                 hourComboBox.Items.Clear();
-            
+            int houseNum;
+            if(int.TryParse(houseNumberTextBox.Text,out houseNum)==false)
+            {
+                MessageBox.Show("the house number need to contain only digits!");
+                return;
+            }
+            Address address = new Address(streetTextBox.Text, houseNum, city.Text);
             //insert the empty hour at this day for this trainee
-            var lis = bl.testersAvailableAtDateBySpecialization((DateTime)Date_DatePicker.SelectedDate, ((Trainee)cb_traineeChoosing.SelectedItem).CarType, ((Trainee)cb_traineeChoosing.SelectedItem).GearBox);
+            var lis = bl.testersAvailableAtDateBySpecializationAndAddress((DateTime)Date_DatePicker.SelectedDate, ((Trainee)cb_traineeChoosing.SelectedItem).CarType, ((Trainee)cb_traineeChoosing.SelectedItem).GearBox,address);
             for (int i = 0; i < 6; i++)
             {
                 if (lis.Find(item => item.WorkHour[(int)((DateTime)Date_DatePicker.SelectedDate).DayOfWeek][i]) != null)
@@ -294,13 +302,13 @@ namespace PL
                     }
                 }
             }
-            DateTime dateAndHour;
-            dateAndHour = new DateTime(Date_DatePicker.SelectedDate.Value.Year,
-                                     Date_DatePicker.SelectedDate.Value.Month,
-                                     Date_DatePicker.SelectedDate.Value.Day,
-                                     hourComboBox.SelectedIndex + 9, 0, 0);
-            cb_testerChoosing.IsEnabled = true;
-            cb_testerChoosing.DataContext = bl.testersAvailableAtDateAndHourBySpecialization(dateAndHour,cb_traineeChoosing.SelectedItem as Trainee);
+            //DateTime dateAndHour;
+            //dateAndHour = new DateTime(Date_DatePicker.SelectedDate.Value.Year,
+            //                         Date_DatePicker.SelectedDate.Value.Month,
+            //                         Date_DatePicker.SelectedDate.Value.Day,
+            //                         hourComboBox.SelectedIndex + 9, 0, 0);
+            //cb_testerChoosing.IsEnabled = true;
+            //cb_testerChoosing.DataContext = bl.testersAvailableAtDateAndHourBySpecializationAndAddress(dateAndHour,cb_traineeChoosing.SelectedItem as Trainee,address);
 
 
 
@@ -314,26 +322,46 @@ namespace PL
             string first_name = (cb_traineeChoosing.SelectedItem as Trainee).FirstName;
             string last_name = (cb_traineeChoosing.SelectedItem as Trainee).LastName;
             tb_traineeName.Text = first_name + " " + last_name;
+            resetDate();
+        }
+
+        private void resetDate()
+        {
+                if (cb_traineeChoosing.SelectedItem != null && int.TryParse(houseNumberTextBox.Text, out int temp) != false && streetTextBox.Text != "" && city.Text != null)
+                    Date_DatePicker.IsEnabled = true;
+                else
+                {
+                    Date_DatePicker.IsEnabled = false;
+                    hourComboBox.IsEnabled = false;
+                    cb_testerChoosing.IsEnabled = false;
+                    return;
+                }   
             DatePicker picker = Date_DatePicker;
             picker.SelectedDate = null;
-            DateTime start = bl.NearestOpenDateByspecialization((cb_traineeChoosing.SelectedItem as Trainee).CarType, (cb_traineeChoosing.SelectedItem as Trainee).GearBox,null);
+            Address address = new Address(streetTextBox.Text, int.Parse(houseNumberTextBox.Text), city.Text);
+            Trainee trainee = cb_traineeChoosing.SelectedItem as Trainee;
+            DateTime start = bl.NearestOpenDateBySpecializationAndAddress(trainee.CarType, trainee.GearBox, null, address);
             DateTime end = start.AddMonths(3);
             picker.DisplayDateStart = start;
             picker.DisplayDateEnd = end;
             picker.BlackoutDates.Clear();
             var x = from item in bl.allTheTestAtRange(start, end) select item.Date;
             //the loop check every date in the 3 month from the first open date if day availble, if not disable them
+
             while (end >= start)
             {
-                if (x.Contains(start)||start.DayOfWeek==DayOfWeek.Friday|| start.DayOfWeek == DayOfWeek.Saturday)
+                if (x.Contains(start) || start.DayOfWeek == DayOfWeek.Friday || start.DayOfWeek == DayOfWeek.Saturday
+                    || bl.testersAvailableAtDateBySpecializationAndAddress(start, trainee.CarType, trainee.GearBox, address).Count == 0)
                 {
                     picker.BlackoutDates.Add(new CalendarDateRange(start));
                 }
                 start = start.AddDays(1);
             }
             hourComboBox.Items.Clear();
-            
+
             hourComboBox.IsEnabled = false;
+         //   cb_testerChoosing.ItemsSource=null;
+            cb_testerChoosing.IsEnabled = false;
         }
 
         private void Cb_testerChoosing_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -356,16 +384,84 @@ namespace PL
                 cb_testerChoosing.IsEnabled = false;
                 return;
             }
-
+            int houseNum;
+            if(int.TryParse(houseNumberTextBox.Text,out houseNum)==false)
+            {
+                MessageBox.Show("the house number need to contain only digits!");
+                return;
+            }
             DateTime dateAndHour;
             dateAndHour = new DateTime(Date_DatePicker.SelectedDate.Value.Year,
                                      Date_DatePicker.SelectedDate.Value.Month,
                                      Date_DatePicker.SelectedDate.Value.Day,
                                      int.Parse(((string)(((ComboBoxItem)hourComboBox.SelectedValue).Content)).Substring(0,2)) , 0, 0);
             cb_testerChoosing.IsEnabled = true;
-            cb_testerChoosing.DataContext = bl.testersAvailableAtDateAndHourBySpecialization(dateAndHour, cb_traineeChoosing.SelectedItem as Trainee);
+            cb_testerChoosing.DataContext = bl.testersAvailableAtDateAndHourBySpecializationAndAddress(dateAndHour, cb_traineeChoosing.SelectedItem as Trainee,new Address(streetTextBox.Text,houseNum,city.Text));
             tb_testerName.Text = "(the tester name)";
 
+        }
+
+        private void houseNumberTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (houseNumberTextBox.Text == "")
+                return;
+            if (houseNumberTextBox.Text != "" && int.TryParse(houseNumberTextBox.Text, out int temp) == false)
+            {
+                MessageBox.Show("the house number need to contain only digits!");
+                Date_DatePicker.IsEnabled = false;
+                hourComboBox.IsEnabled = false;
+                cb_testerChoosing.IsEnabled = false;
+                return;
+            }
+            if (houseNumberTextBox.Text != originalHouseNum)
+            {
+                originalHouseNum = houseNumberTextBox.Text;
+                resetDate();
+            }
+        }
+        private string originalStreet ="";
+        private void streetTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            //if (houseNumberTextBox.Text != "" && int.TryParse(houseNumberTextBox.Text, out int temp) == false)
+            //{
+            //    MessageBox.Show("the house number need to contain only digits!");
+            //    Date_DatePicker.IsEnabled = false;
+            //    hourComboBox.IsEnabled = false;
+            //    cb_testerChoosing.IsEnabled = false;
+            //    return;
+            //}
+            if (originalStreet!=streetTextBox.Text)
+            {
+                originalStreet = streetTextBox.Text;
+                resetDate();
+            }
+        }
+        private string originalCity = "";
+        private void city_LostFocus(object sender, RoutedEventArgs e)
+        {
+            //    if (houseNumberTextBox.Text != "" && int.TryParse(houseNumberTextBox.Text, out int temp) == false)
+            //    {
+            //        MessageBox.Show("the house number need to contain only digits!");
+            //        Date_DatePicker.IsEnabled = false;
+            //        hourComboBox.IsEnabled = false;
+            //        cb_testerChoosing.IsEnabled = false;
+            //        return;
+            //    }
+            if (originalCity != city.Text)
+            {
+                originalCity = city.Text;
+                resetDate();
+            }
+        }
+        private string originalHouseNum = "";
+        private void houseNumberTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (houseNumberTextBox.Text!=""&& int.TryParse(houseNumberTextBox.Text, out int temp) == false)
+            {
+                houseNumberTextBox.Text = originalHouseNum;
+            }
+            else
+                originalHouseNum = houseNumberTextBox.Text;
         }
 
         //private void TesterIdTextBox_TextChanged(object sender, TextChangedEventArgs e)
