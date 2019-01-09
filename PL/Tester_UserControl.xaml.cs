@@ -40,8 +40,9 @@ namespace PL
             CreateDemoEntites();
             filtersControl.radioButtonAscending.Checked += RadioButtonAscending_Checked;
             filtersControl.radioButtonDescending.Checked += RadioButtonDescending_Checked;
+            testerDataGrid.DataContext = currentUseList;
+            findAndSort();
 
-           
         }
 
         private void RadioButtonDescending_Checked(object sender, RoutedEventArgs e)
