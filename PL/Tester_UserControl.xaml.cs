@@ -79,12 +79,15 @@ namespace PL
 
                 }
 
-            bl.addTester(new Tester("123456610", "israel", "israeli", new DateTime(1985, 1, 1), new Address("hacotel", 5, "jerusalem"), BE.Gender.MALE, "02123456", 10, 15, BE.CarType.PrivetCar, BE.GearBox.Manual, temp_workHour, 10.5));
-            bl.addTester(new Tester("123456611", "batia", "shmueli", new DateTime(1984, 1, 1), new Address("hacotel", 5, "jerusalem"), BE.Gender.FEMALE, "02123456", 10, 15, BE.CarType.Truck, BE.GearBox.Auto, temp_workHour, 10.5));
-            bl.addTester(new Tester("123456612", "eliyahu", "teomim", new DateTime(1990, 1, 1), new Address("hacotel", 5, "jerusalem"), BE.Gender.MALE, "02123456", 10, 15, BE.CarType.Truck, BE.GearBox.Auto, temp_workHour, 10.5));
-            bl.addTester(new Tester("123456613", "asa'el", "shalom", new DateTime(1989, 1, 1), new Address("hacotel", 5, "jerusalem"), BE.Gender.MALE, "02123456", 10, 15, BE.CarType.Truck, BE.GearBox.Auto, temp_workHour, 10.5));
 
+            if (FactoryBL.GetBL("myBL").getAllTester().Count==0)
+            {
+                bl.addTester(new Tester("123456610", "israel", "israeli", new DateTime(1985, 1, 1), new Address("hacotel", 5, "jerusalem"), BE.Gender.MALE, "02123456", 10, 15, BE.CarType.PrivetCar, BE.GearBox.Manual, temp_workHour, 10.5));
+                bl.addTester(new Tester("123456611", "batia", "shmueli", new DateTime(1984, 1, 1), new Address("hacotel", 5, "jerusalem"), BE.Gender.FEMALE, "02123456", 10, 15, BE.CarType.Truck, BE.GearBox.Auto, temp_workHour, 10.5));
+                bl.addTester(new Tester("123456612", "eliyahu", "teomim", new DateTime(1990, 1, 1), new Address("hacotel", 5, "jerusalem"), BE.Gender.MALE, "02123456", 10, 15, BE.CarType.Truck, BE.GearBox.Auto, temp_workHour, 10.5));
+                bl.addTester(new Tester("123456613", "asa'el", "shalom", new DateTime(1989, 1, 1), new Address("hacotel", 5, "jerusalem"), BE.Gender.MALE, "02123456", 10, 15, BE.CarType.Truck, BE.GearBox.Auto, temp_workHour, 10.5));
 
+            }
 
         }
 

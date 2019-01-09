@@ -38,12 +38,15 @@ namespace PL
             string[] SortByValues = { "id","car type","tester id","trainee id","date"};
             ComboBoxSortBy.ItemsSource = SortByValues;
 
-            FactoryBL.GetBL("myBL").AddTest(new Test("123456610", "12345670", new DateTime(2019, 2, 10, 10, 0, 0), new Address("zefat", 5, "jeruslaem"), GearBox.Manual, CarType.PrivetCar));
-            FactoryBL.GetBL("myBL").AddTest(new Test("123456610", "12345671", new DateTime(2019, 2, 10, 14, 0, 0), new Address("zefat", 5, "jeruslaem"), GearBox.Manual, CarType.PrivetCar));
-            FactoryBL.GetBL("myBL").AddTest(new Test("123456610", "12345672", new DateTime(2019, 2, 10, 12, 0, 0), new Address("zefat", 5, "jeruslaem"), GearBox.Manual, CarType.PrivetCar));
-            FactoryBL.GetBL("myBL").AddTest(new Test("123456610", "12345673", new DateTime(2019, 2, 11, 10, 0, 0), new Address("zefat", 5, "jeruslaem"), GearBox.Manual, CarType.PrivetCar));
-            FactoryBL.GetBL("myBL").AddTest(new Test("123456610", "12345674", new DateTime(2019, 2, 11, 12, 0, 0), new Address("zefat", 5, "jeruslaem"), GearBox.Manual, CarType.PrivetCar));
 
+            if (FactoryBL.GetBL("myBL").getAllTests().Count==0)
+            {
+                FactoryBL.GetBL("myBL").AddTest(new Test("123456610", "12345670", new DateTime(2019, 2, 10, 10, 0, 0), new Address("zefat", 5, "jeruslaem"), GearBox.Manual, CarType.PrivetCar));
+                FactoryBL.GetBL("myBL").AddTest(new Test("123456610", "12345671", new DateTime(2019, 2, 10, 14, 0, 0), new Address("zefat", 5, "jeruslaem"), GearBox.Manual, CarType.PrivetCar));
+                FactoryBL.GetBL("myBL").AddTest(new Test("123456610", "12345672", new DateTime(2019, 2, 10, 12, 0, 0), new Address("zefat", 5, "jeruslaem"), GearBox.Manual, CarType.PrivetCar));
+                FactoryBL.GetBL("myBL").AddTest(new Test("123456610", "12345673", new DateTime(2019, 2, 11, 10, 0, 0), new Address("zefat", 5, "jeruslaem"), GearBox.Manual, CarType.PrivetCar));
+                FactoryBL.GetBL("myBL").AddTest(new Test("123456610", "12345674", new DateTime(2019, 2, 11, 12, 0, 0), new Address("zefat", 5, "jeruslaem"), GearBox.Manual, CarType.PrivetCar));
+            }
 
 
 

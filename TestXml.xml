@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Tests>
+  <test>
+    <id>0</id>
+    <testerID>123456610</testerID>
+    <traineeID>12345670</traineeID>
+  </test>
+  <test>
+    <id>1</id>
+    <testerID>123456610</testerID>
+    <traineeID>12345671</traineeID>
+  </test>
+  <test>
+    <id>2</id>
+    <testerID>123456610</testerID>
+    <traineeID>12345672</traineeID>
+  </test>
+  <test>
+    <id>3</id>
+    <testerID>123456610</testerID>
+    <traineeID>12345673</traineeID>
+  </test>
+  <test>
+    <id>4</id>
+    <testerID>123456610</testerID>
+    <traineeID>12345674</traineeID>
+  </test>
+</Tests>
