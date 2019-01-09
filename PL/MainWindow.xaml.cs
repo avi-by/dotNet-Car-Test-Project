@@ -26,20 +26,24 @@ namespace PL
         public MainWindow()
         {
             InitializeComponent();
-           
+            
+
+
         }
 
         
 
         private void Funny_animation_MediaEnded(object sender, RoutedEventArgs e)
         {
-
             funny_animation.Position = TimeSpan.FromMilliseconds(1);
-
-            
         }
 
         private void Trainees_UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void TabItem_GotFocus(object sender, RoutedEventArgs e)
         {
 
         }

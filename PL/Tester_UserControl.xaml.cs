@@ -29,6 +29,8 @@ namespace PL
         public Tester_UserControl()
         {
             InitializeComponent();
+           
+
             bl = FactoryBL.GetBL(Configuration.BLType);
             bl.TesterEvent += TesterEvent;
             string[] SortByValues = { "firstName", "lastName", "id", "max test in week", "gender", "age", "exp years", "car type", "max distance" };
@@ -38,6 +40,8 @@ namespace PL
             CreateDemoEntites();
             filtersControl.radioButtonAscending.Checked += RadioButtonAscending_Checked;
             filtersControl.radioButtonDescending.Checked += RadioButtonDescending_Checked;
+
+           
         }
 
         private void RadioButtonDescending_Checked(object sender, RoutedEventArgs e)
@@ -92,8 +96,9 @@ namespace PL
 
         private void Window_Activated(object sender, EventArgs e)
         {
-
+            listAllTester = bl.getAllTester();
             findAndSort();
+         
 
         }
 
