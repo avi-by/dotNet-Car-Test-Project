@@ -264,6 +264,8 @@ namespace BL
         /// <returns></returns>
         List<Tester> testersAvailableAtDateAndHourBySpecialization(DateTime dateAndHour, Trainee trainee);
 
+        List<Tester> testersAvailableAtDateAndHourBySpecializationAndAddress(DateTime dateAndHour, Trainee trainee,Address address);
+
         /// <summary>
         ///  the nearest date available for test of specific type from date, default tommorow
         /// </summary>
@@ -273,6 +275,8 @@ namespace BL
         /// <returns></returns>
         DateTime NearestOpenDateByspecialization(CarType carType, GearBox gearBox, DateTime? date);
 
+        DateTime NearestOpenDateBySpecializationAndAddress(CarType carType, GearBox gearBox, DateTime? date,Address address);
+
         /// <summary>
         /// return all the tester that specialize in a specific type that available at this date
         /// </summary>
@@ -281,6 +285,9 @@ namespace BL
         /// <param name="gearBox"></param>
         /// <returns></returns>
         List<Tester> testersAvailableAtDateBySpecialization(DateTime date, CarType car, GearBox gearBox);
+
+        List<Tester> testersAvailableAtDateBySpecializationAndAddress(DateTime date, CarType car, GearBox gearBox,Address address);
+
 
         /// <summary>
         /// return list of elements with successes statistcs
