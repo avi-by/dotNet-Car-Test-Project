@@ -13,7 +13,7 @@ namespace DAL
 
 
 
-    public class DAL_imp : IDAL  //, INotifyCollectionChanged
+    public class DAL_imp : IDAL  
     {
         private EventHandler<EventArgs> testerEvent = delegate { }; //to prevent exeption of null event 
         public event EventHandler<EventArgs> TesterEvent { add { testerEvent += value; } remove { testerEvent -= value; } }
@@ -39,17 +39,11 @@ namespace DAL
 
         private DAL_imp() {
             if (File.Exists(Dal_XML_imp.TesterPath))
-            {
                 DataSource.testers = Dal_XML_imp.LoadFromXML<List<Tester>>(Dal_XML_imp.TesterPath);
-              
-            }
             if (File.Exists(Dal_XML_imp.TraineePath))
-            {
                 DataSource.trainees = Dal_XML_imp.LoadFromXML<List<Trainee>>(Dal_XML_imp.TraineePath);
-         
-            }
-            // if (File.Exists(Dal_XML_imp.TestPath))
-              //DataSource.tests = Dal_XML_imp.LoadFromXML<List<Test>>(Dal_XML_imp.TestPath);
+            if (File.Exists(Dal_XML_imp.TestPath))
+              DataSource.tests = Dal_XML_imp.Instance.GetAllTests();
 
 
         }
@@ -294,7 +288,7 @@ namespace DAL
             Configuration.test_id++;
             DataSource.tests.Add(test);
 
-            Dal_XML_imp.AddTest(test);
+            Dal_XML_imp.AddTest_PartialDetails(test);
             testEvent(this, null);
             //            this.OnNotifyCollectionChanged(
             //new NotifyCollectionChangedEventArgs(

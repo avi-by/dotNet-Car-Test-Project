@@ -59,7 +59,7 @@ namespace DAL
             }
         }
 
-        public static void AddTest(Test test)
+        public static void AddTest_PartialDetails(Test test)
         {
             Tests_xml();
             XElement ID = new XElement("id", Dal_XML_imp.ID_FromConfigXML());
@@ -68,30 +68,71 @@ namespace DAL
             XElement testerId = new XElement("testerID", test.TesterId);
             XElement traineeId = new XElement("traineeID", test.TraineeId);
 
-            XElement year = new XElement("year", test.Date.Year);
-            XElement month = new XElement("month", test.Date.Month);
-            XElement day = new XElement("day", test.Date.Day);
-            XElement hour = new XElement("hour", test.Date.Hour);
-            XElement date = new XElement("date", year, month, day, hour);
+            //XElement year = new XElement("year", test.Date.Year);
+            //XElement month = new XElement("month", test.Date.Month);
+            //XElement day = new XElement("day", test.Date.Day);
+            //XElement hour = new XElement("hour", test.Date.Hour);
+            XElement date = new XElement("date", test.Date.ToShortDateString());
 
             XElement houseNumber = new XElement("houseNumber", test.Address.houseNumber);
             XElement street = new XElement("street", test.Address.street);
             XElement city = new XElement("city", test.Address.city);
             XElement address = new XElement("address", houseNumber, street, city);
 
-            XElement GearBox = new XElement("GearBox", test.GearBox);
-            XElement carType = new XElement("traineeID", test.TraineeId);
+            XElement GearBox = new XElement("GearBox",  (int)(test.GearBox));
+            XElement carType = new XElement("CarType", (int)test.Car);
+            XElement test1_ReverseParking = new XElement("test1_ReverseParking");
+            XElement test2_KeepingSafeDistance = new XElement("test2_KeepingSafeDistance");
+            XElement test3_UsingMirrors = new XElement("test3_UsingMirrors");
+            XElement test4_UsingTurnSignals = new XElement("test4_UsingTurnSignals");
+            XElement test5_LegalSpeed = new XElement("test3_UsingMirrors");
+            XElement succeeded = new XElement("succeeded");
+            XElement notes = new XElement("notes");
 
-            XElement Test = new XElement("test", ID, testerId, traineeId);
+            XElement Test = new XElement("test", ID, testerId, traineeId, date, address, GearBox,carType,test1_ReverseParking,test2_KeepingSafeDistance,test3_UsingMirrors,test4_UsingTurnSignals,test5_LegalSpeed,succeeded,notes);
 
             XElement test_root = XElement.Load(TestPath);
-            test_root.Add(Test);
 
+            test_root.Add(Test);
             test_root.Save(TestPath);
         }
 
-
-
+        public List<Test> GetAllTests()
+        {
+            XElement TestsRoot;
+            try { TestsRoot = XElement.Load(TestPath); }
+            catch { throw new Exception("File upload problem"); }
+           
+            List<Test> tests;
+            try
+            {
+                tests = (from test in TestsRoot.Elements()
+                         select new Test()
+                         {
+                             Id = test.Element("id").Value,
+                             TesterId = test.Element("testerID").Value,
+                             TraineeId = test.Element("traineeID").Value,
+                             Date = Convert.ToDateTime(test.Element("date").Value),
+                             Address = new Address(test.Element("address").Element("street").Value,
+                           int.Parse(test.Element("address").Element("houseNumber").Value),
+                             test.Element("address").Element("city").Value),
+                             GearBox = (GearBox)(int.Parse(test.Element("GearBox").Value)),
+                             Car = (CarType)(int.Parse(test.Element("CarType").Value)),
+                             Test1_ReverseParking = test.Element("test1_ReverseParking").Value == "" ? (bool?)null : (bool.Parse(test.Element("test1_ReverseParking").Value)),
+                             Test2_KeepingSafeDistance = test.Element("test2_KeepingSafeDistance").Value == "" ? (bool?)null : (bool.Parse(test.Element("test2_KeepingSafeDistance").Value)),
+                             Test3_UsingMirrors = test.Element("test3_UsingMirrors").Value == "" ? (bool?)null : (bool.Parse(test.Element("test3_UsingMirrors").Value))
+                             //Test4_UsingTurnSignals = test.Element("test4_UsingTurnSignals").Value == "" ? (bool?)null : (bool.Parse(test.Element("test4_UsingTurnSignals").Value)),
+                             //Test5_LegalSpeed = test.Element("test5_LegalSpeed").Value == "" ? (bool?)null : (bool.Parse(test.Element("test5_LegalSpeed").Value)),
+                             ////Succeeded = test.Element("succeeded").Value == "" ? (bool?)null : (bool.Parse(test.Element("succeeded").Value)),
+                             //Notes = test.Element("notes").Value
+                         }).ToList().Clone();
+            }
+            catch
+            {
+                tests = null;
+            }
+            return tests;
+        }
 
         public static int ID_FromConfigXML()
         {

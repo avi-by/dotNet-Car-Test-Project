@@ -23,6 +23,7 @@ namespace BE
         private GearBox gearBox;
         private CarType car;
         private string notes;
+        
 
         public Test() { } //CTOR without arguments- required for the xmlSerializer
 
