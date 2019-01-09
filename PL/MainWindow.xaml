@@ -43,7 +43,7 @@
                     <local:Trainees_UserControl />
                 </TabItem>
 
-                <TabItem Header="Tests">
+                <TabItem Header="Tests" GotFocus="TabItem_GotFocus" >
                     <local:Tests_UserControl />
                 </TabItem>
 

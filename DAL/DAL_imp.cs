@@ -6,13 +6,25 @@ using System.Threading.Tasks;
 using BE;
 using DS;
 using System.Collections.Specialized;
+using System.IO;
 
 namespace DAL
 {
 
+
+
     public class DAL_imp : IDAL  //, INotifyCollectionChanged
     {
-        
+        private EventHandler<EventArgs> testerEvent = delegate { }; //to prevent exeption of null event 
+        public event EventHandler<EventArgs> TesterEvent { add { testerEvent += value; } remove { testerEvent -= value; } }
+
+        private EventHandler<EventArgs> traineeEvent = delegate { };
+        public event EventHandler<EventArgs> TraineeEvent { add { traineeEvent += value; } remove { traineeEvent -= value; } }
+
+        private EventHandler<EventArgs> testEvent = delegate { };
+        public event EventHandler<EventArgs> TestEvent { add { testEvent += value; } remove { testEvent -= value; } }
+
+
 
         #region Singleton
         private static readonly DAL_imp instance = new DAL_imp();
@@ -25,18 +37,36 @@ namespace DAL
         }
 
 
-        private DAL_imp() { }
+        private DAL_imp() {
+            if (File.Exists(Dal_XML_imp.TesterPath))
+            {
+                DataSource.testers = Dal_XML_imp.LoadFromXML<List<Tester>>(Dal_XML_imp.TesterPath);
+              
+            }
+            if (File.Exists(Dal_XML_imp.TraineePath))
+            {
+                DataSource.trainees = Dal_XML_imp.LoadFromXML<List<Trainee>>(Dal_XML_imp.TraineePath);
+         
+            }
+            // if (File.Exists(Dal_XML_imp.TestPath))
+              //DataSource.tests = Dal_XML_imp.LoadFromXML<List<Test>>(Dal_XML_imp.TestPath);
+
+
+        }
         static DAL_imp() { }
+        
+
+       
 
         #endregion
-        private EventHandler<EventArgs> testerEvent = delegate { }; //to prevent exeption of null event 
-        public event EventHandler<EventArgs> TesterEvent { add { testerEvent += value; } remove { testerEvent -= value; } }
+        //private EventHandler<EventArgs> testerEvent = delegate { }; //to prevent exeption of null event 
+        //public event EventHandler<EventArgs> TesterEvent { add { testerEvent += value; } remove { testerEvent -= value; } }
 
-        private EventHandler<EventArgs> traineeEvent = delegate { };
-        public event EventHandler<EventArgs> TraineeEvent { add { traineeEvent += value; } remove { traineeEvent -= value; } }
+        //private EventHandler<EventArgs> traineeEvent = delegate { };
+        //public event EventHandler<EventArgs> TraineeEvent { add { traineeEvent += value; } remove { traineeEvent -= value; } }
 
-        private EventHandler<EventArgs> testEvent = delegate { };
-        public event EventHandler<EventArgs> TestEvent { add { testEvent += value; } remove { testEvent -= value; } }
+        //private EventHandler<EventArgs> testEvent = delegate { };
+        //public event EventHandler<EventArgs> TestEvent { add { testEvent += value; } remove { testEvent -= value; } }
 
         //private void OnNotifyCollectionChanged(NotifyCollectionChangedEventArgs args)
         //{
@@ -45,6 +75,8 @@ namespace DAL
         //        this.CollectionChanged(this, args);
         //    }
         //}
+
+        
 
         #region Tester
 

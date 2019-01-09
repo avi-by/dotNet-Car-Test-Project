@@ -12,6 +12,14 @@ namespace BL
 {
     public class MyBL : IBL
     {
+        public event EventHandler<EventArgs> TraineeEvent { add { MyDal.TraineeEvent += value; } remove { MyDal.TraineeEvent -= value; } }
+
+        public event EventHandler<EventArgs> TesterEvent { add { MyDal.TesterEvent += value; } remove { MyDal.TesterEvent -= value; } }
+
+        public event EventHandler<EventArgs> TestEvent { add { MyDal.TestEvent += value; } remove { MyDal.TestEvent -= value; } }
+
+
+
 
         #region Singleton
         private static readonly MyBL instance = new MyBL();
@@ -24,11 +32,6 @@ namespace BL
 
         static IDAL MyDal;
 
-        public event EventHandler<EventArgs> TraineeEvent { add { MyDal.TraineeEvent += value; } remove { MyDal.TraineeEvent -= value; } }
-
-        public event EventHandler<EventArgs> TesterEvent { add { MyDal.TesterEvent += value; } remove { MyDal.TesterEvent -= value; } }
-
-        public event EventHandler<EventArgs> TestEvent { add { MyDal.TestEvent += value; } remove { MyDal.TestEvent -= value; } }
 
         #region Constructor
 
