@@ -148,7 +148,7 @@ namespace PL
         {
             if (ComboBoxSortBy.SelectedItem == null)
             {
-                testDataGrid.DataContext = currentUseList;
+                testDataGrid.DataContext = currentUseList.ToList();
                 return;
             }
             var allTest = currentUseList;

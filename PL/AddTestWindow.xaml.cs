@@ -413,11 +413,15 @@ namespace PL
                 cb_testerChoosing.IsEnabled = false;
                 return;
             }
-            if (houseNumberTextBox.Text != originalHouseNum)
+            if (houseNumberTextBox.Text != originalHouseNum && Date_DatePicker.IsEnabled == true)
             {
                 originalHouseNum = houseNumberTextBox.Text;
                 resetDate();
             }
+            if (houseNumberTextBox.Text != "" && streetTextBox.Text != "" && city.Text != "" && cb_traineeChoosing.SelectedItem != null)
+                resetDate();
+            originalHouseNum = houseNumberTextBox.Text;
+
         }
         private string originalStreet ="";
         private void streetTextBox_LostFocus(object sender, RoutedEventArgs e)
@@ -430,11 +434,16 @@ namespace PL
             //    cb_testerChoosing.IsEnabled = false;
             //    return;
             //}
-            if (originalStreet!=streetTextBox.Text)
+            if (originalStreet!=streetTextBox.Text && Date_DatePicker.IsEnabled == true)
             {
                 originalStreet = streetTextBox.Text;
                 resetDate();
+                return;
             }
+            if (houseNumberTextBox.Text != "" && streetTextBox.Text != "" && city.Text != "" && cb_traineeChoosing.SelectedItem != null)
+                resetDate();
+            originalStreet = streetTextBox.Text;
+
         }
         private string originalCity = "";
         private void city_LostFocus(object sender, RoutedEventArgs e)
@@ -447,11 +456,15 @@ namespace PL
             //        cb_testerChoosing.IsEnabled = false;
             //        return;
             //    }
-            if (originalCity != city.Text)
+            if (originalCity != city.Text&&Date_DatePicker.IsEnabled==true) //if the address change
             {
                 originalCity = city.Text;
                 resetDate();
+                return;
             }
+            if (houseNumberTextBox.Text != "" && streetTextBox.Text != "" && city.Text != "" && cb_traineeChoosing.SelectedItem != null)//the first time the address insert
+                resetDate();
+            originalCity = city.Text;
         }
         private string originalHouseNum = "";
         private void houseNumberTextBox_TextChanged(object sender, TextChangedEventArgs e)
