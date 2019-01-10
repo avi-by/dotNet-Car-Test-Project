@@ -10,39 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using BL;
-using BE;
 
 namespace PL
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for login.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class login : Window
     {
-       
-        public MainWindow()
+        public login()
         {
             InitializeComponent();
-            
-
-
-        }
-
-        
-
-       
-
-        private void Trainees_UserControl_Loaded(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void TabItem_GotFocus(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

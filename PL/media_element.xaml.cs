@@ -12,37 +12,23 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using BL;
-using BE;
 
 namespace PL
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for media_element.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class media_element : UserControl
     {
-       
-        public MainWindow()
+        public media_element()
         {
             InitializeComponent();
-            
-
-
         }
 
-        
-
+        private void Funny_animation_MediaEnded(object sender, RoutedEventArgs e)
+        {
+            funny_animation.Position = TimeSpan.FromMilliseconds(1);
+        }  
        
-
-        private void Trainees_UserControl_Loaded(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void TabItem_GotFocus(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }
