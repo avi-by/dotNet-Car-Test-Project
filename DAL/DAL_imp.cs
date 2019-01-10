@@ -53,23 +53,6 @@ namespace DAL
        
 
         #endregion
-        //private EventHandler<EventArgs> testerEvent = delegate { }; //to prevent exeption of null event 
-        //public event EventHandler<EventArgs> TesterEvent { add { testerEvent += value; } remove { testerEvent -= value; } }
-
-        //private EventHandler<EventArgs> traineeEvent = delegate { };
-        //public event EventHandler<EventArgs> TraineeEvent { add { traineeEvent += value; } remove { traineeEvent -= value; } }
-
-        //private EventHandler<EventArgs> testEvent = delegate { };
-        //public event EventHandler<EventArgs> TestEvent { add { testEvent += value; } remove { testEvent -= value; } }
-
-        //private void OnNotifyCollectionChanged(NotifyCollectionChangedEventArgs args)
-        //{
-        //    if (this.CollectionChanged != null)
-        //    {
-        //        this.CollectionChanged(this, args);
-        //    }
-        //}
-
         
 
         #region Tester
@@ -92,10 +75,7 @@ namespace DAL
                 {
                     DataSource.testers[index] = tester;
                     testerEvent(this, null);
-                    //            this.OnNotifyCollectionChanged(
-                    //new NotifyCollectionChangedEventArgs(
-                    //  NotifyCollectionChangedAction.Add, tester));
-                    return;
+                                      return;
                 }
                 index++;
             }
@@ -111,10 +91,6 @@ namespace DAL
             DataSource.testers.Add(tester);
            Dal_XML_imp.SaveToXML<List<Tester>>(DataSource.testers, Dal_XML_imp.TesterPath);
             testerEvent(DAL_imp.Instance, null);
-
-            //    this.OnNotifyCollectionChanged(
-            //new NotifyCollectionChangedEventArgs(
-            //  NotifyCollectionChangedAction.Add, tester)); 
 
         }
         public List<Tester> getAllTesters()

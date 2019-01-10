@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Linq;
 using BE;
 using BL;
 
@@ -81,12 +82,38 @@ namespace PL
                 }
 
 
-            if (FactoryBL.GetBL("myBL").getAllTester().Count==0)
+            if (FactoryBL.GetBL("myBL").getAllTester().Count == 0)
             {
-                bl.addTester(new Tester("123456610", "israel", "israeli", new DateTime(1985, 1, 1), new Address("hacotel", 5, "jerusalem"), BE.Gender.MALE, "02123456", 10, 15, BE.CarType.PrivetCar, BE.GearBox.Manual, temp_workHour, 10.5));
-                bl.addTester(new Tester("123456611", "batia", "shmueli", new DateTime(1984, 1, 1), new Address("hacotel", 5, "jerusalem"), BE.Gender.FEMALE, "02123456", 10, 15, BE.CarType.Truck, BE.GearBox.Auto, temp_workHour, 10.5));
-                bl.addTester(new Tester("123456612", "eliyahu", "teomim", new DateTime(1990, 1, 1), new Address("hacotel", 5, "jerusalem"), BE.Gender.MALE, "02123456", 10, 15, BE.CarType.Truck, BE.GearBox.Auto, temp_workHour, 10.5));
-                bl.addTester(new Tester("123456613", "asa'el", "shalom", new DateTime(1989, 1, 1), new Address("hacotel", 5, "jerusalem"), BE.Gender.MALE, "02123456", 10, 15, BE.CarType.Truck, BE.GearBox.Auto, temp_workHour, 10.5));
+                string fName, lName, cityName;
+                Random random = new Random(DateTime.Now.Millisecond);
+                List<string> lstr = new List<string> { "כהן", "לוי", "מזרחי", "פרץ", "ביטון", "דהן", "פרידמן", "מלכה", "אזולאי", "כץ", "יוסף", "דוד", "עמר", "אוחיון", "חדד", "גבאי", "בן דוד", "אדרי", "לוין", "טל", "קליין", "חן", "שפירא", "חזן", "משה", "אשכנזי", "אוחנה", "סגל", "גולן", "יצחק", "בר", "מור", "דיין", "אלבז", "בכר", "סויסה", "שמש", "רוזנברג", "לביא", "אטיאס", "נחום", "שרעבי", "שטרן", "ממן", "שחר", "אלון", "שורץ", "ששון", "עובדיה", "גרינברג", "בן חמו", "וקנין", "אסולין", "מימון", "מאיר", "פלדמן", "גולדשטיין", "ברוך", "וייס", "אמסלם", "רובין", "עזרא", "סבג", "גולדברג", "אברמוב", "קדוש", "הראל", "צור", "שוורץ", "רבינוביץ", "אהרוני", "מילר", "קפלן", "שושן", "הרוש", "סולומון", "הרשקוביץ", "רוזן", "ברקוביץ", "גרוס", "נגר", "חיון", "מלול", "סלע", "פלד", "בן שושן", "צרפתי", "אסרף", "שטרית", "גוטמן", "עאמר", "פרנקל", "זוהר", "מויאל", "אלפסי", "ברגר", "פישר" };
+                List<string> fnstr = new List<string> { "אליה", "אליהב", "אליהו", "גבריאל", "גלעד", "גד", "עידן", "מיכאל", "מנשה", "ירון", "ראם", "רז", "רפאל", "רביד", "שהם", "שחר", "שי", "תמיר", "דב", "דביר", "דניאל", "דורון", "דרור", "דולב", "הראל", "הלל", "זיו", "חזקיה", "חנניה", "יאיר", "ירדן", "ישי", "ינון", "ישורון", "ישראל", "יונה", "כפיר", "לביא", "לוי", "מאיר", "מתתיהו", "מרדכי", "נחמן", "עדו", "ערן", "גרשון", "זאב", "אליעזר", "אליקים", "אלישיב", "אלישע", "זבולון", "אלמוג", "יחזקאל", "יהושע", "נריה", "גדעון", "שמואל", "שגיא", "בועז", "שמשון", "ישעיהו", "ירמיה", "עובדיה", "קהת", "נחשון", "משה", "אברהם", "יעקב", "יצחק", "יהונתן", "שאול", "דוד", "שלמה", "יוסף", "יששכר", "יהודה", "לוי", "שמעון", "ראובן", "ציון", "אלנתן", "אלעד", "אלעזר", "אלקנה", "פרץ", "פסח", "צבי", "צדוק", "צפניה", "צפריר", "פנחס", "זכריה", "אלרואי", "אמית", "אמיתי", "אמנון", "אמציה", "אסי", "נאור", "נבו", "נדב", "נהוראי", "נוה", "נעם", "נח", "נחום", "נחמיה", "נחמן", "נחשון", "ניב", "ניסים", "ניסן", "ניצן", "חביב", "חגי", "חובב", "חי", "חיים", "חן", "חנוך", "חנן", "חננאל" };
+                List<string> cstr = new List<string> { "אבן יהודה", "אופקים", "אור הנר", "אור יהודה", "אזור", "אילת", "אמירים", "אפרת", "אריאל", "אשדוד", "אשקלון", "באר יעקב", "באר שבע", "בית דגן", "בית שאן", "בית שמש", "בית שערים", "בני ברק", "בנימינה", "בת ים", "גבעת סביון", "גבעת שמואל", "גבעתיים", "גדרה", "גלעד", "גן יבנה", "גני תקוה", "הוד השרון", "הרצליה", "זכרון יעקב", "חדרה", "חולון", "חיפה", "חצור הגלילית", "טבעון", "טבריה", "טירת הכרמל", "יבנה", "יהוד", "יפו", "יקנעם עילית", "ירוחם", "ירושלים", "כוכב יאיר", "כפר אזר", "כפר ורדים", "כפר סבא", "כפר שמריהו", "כפר תבור", "כרכור", "כרמיאל", "לוד", "לפיד", "מבשרת ציון", "מגדל", "מגדל העמק", "מודיעין", "מטולה", "מכבים", "מכמורת", "מפלסים", "מצפה רמון", "מקווה ישראל", "נהריה", "נווה אור", "נווה איתן", "נס ציונה", "נען", "נצרת", "נצרת עילית", "נתניה", "סביון", "עכו", "עפולה", "ערד", "עתלית", "פרדס חנה", "פתח-תקוה", "צור הדסה", "צורעה", "צפת", "קדימה", "קיבוץ אורטל", "קיבוץ נחל עוז", "קיבוץ עלומים", "קיסריה", "קצרין", "קרית אונו", "קרית אתא", "קרית ביאליק", "קרית גת", "קרית מוצקין", "קרית שמונה", "ראש העין", "ראש פינה", "ראשון לציון", "רחובות", "רמלה", "רמת אפעל", "רמת השרון", "רמת ישי", "רמת רזיאל", "רמת-גן", "רעננה", "שדרות", "שוהם", "שילה", "תל-אביב" };
+                List<string> x;
+                XElement streetName = XElement.Load(@"download.xml");
+                for (int i = 0; i < 1000; i++)
+                {
+                    fName = fnstr[random.Next() % fnstr.Count];
+                    lName = lstr[random.Next() % lstr.Count];
+                    do
+                    {
+                        cityName = cstr[random.Next() % cstr.Count];
+                        x = (from stre in streetName.Elements()
+                             where stre.Element("city_name").Value.Contains(cityName)
+                             select stre.Element("street_name").Value).ToList();
+                    } while (x.Count == 0);
+                    int num = random.Next(1979, 1999);
+                    bl.addTester(new Tester(i.ToString("00000000"), fName, lName, new DateTime(num,
+                        i % 11 + 1, i % 24 + 1),
+                        new Address(x[random.Next() % x.Count].Trim(), i % 13 + 1, cityName),
+                        BE.Gender.MALE, "0505648" + i.ToString("000"), (DateTime.Now.Year - num) % 8, i % 12 + 4,
+                        (BE.CarType)(random.Next() % 4), (BE.GearBox)(random.Next() % 2), temp_workHour, i % 20 + 5));
+
+                }
+            //    bl.addTester(new Tester("123456610", "israel", "israeli", new DateTime(1985, 1, 1), new Address("hacotel", 5, "jerusalem"), BE.Gender.MALE, "02123456", 10, 15, BE.CarType.PrivetCar, BE.GearBox.Manual, temp_workHour, 10.5));
+            //bl.addTester(new Tester("123456611", "batia", "shmueli", new DateTime(1984, 1, 1), new Address("hacotel", 5, "jerusalem"), BE.Gender.FEMALE, "02123456", 10, 15, BE.CarType.Truck, BE.GearBox.Auto, temp_workHour, 10.5));
+            //bl.addTester(new Tester("123456612", "eliyahu", "teomim", new DateTime(1990, 1, 1), new Address("hacotel", 5, "jerusalem"), BE.Gender.MALE, "02123456", 10, 15, BE.CarType.Truck, BE.GearBox.Auto, temp_workHour, 10.5));
+            //bl.addTester(new Tester("123456613", "asa'el", "shalom", new DateTime(1989, 1, 1), new Address("hacotel", 5, "jerusalem"), BE.Gender.MALE, "02123456", 10, 15, BE.CarType.Truck, BE.GearBox.Auto, temp_workHour, 10.5));
 
             }
 
