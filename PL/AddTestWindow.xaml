@@ -38,7 +38,7 @@
         <DatePicker x:Name="Date_DatePicker" VerticalAlignment="Center"  SelectedDate="{Binding Date, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="1"  HorizontalAlignment="Left" Grid.Column="1" Width="120" Height="24" Margin="0.333,2,0,2.667" Loaded="Date_DatePicker_Loaded" SelectedDateChanged="Date_DatePicker_SelectedDateChanged">
             <DatePicker.Resources>
                 <Style TargetType="DatePickerTextBox">
-                    <Setter Property="IsReadOnly" Value="True"/>
+                    <Setter Property="IsEnabled" Value="True"/>
                 </Style>
             </DatePicker.Resources>
         </DatePicker>

@@ -96,7 +96,8 @@ namespace PL
       
         private void testDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (testDataGrid.SelectedItem == null) return;
+ 
+            if (((testDataGrid.SelectedItem) as Test) == null) return;
             dateCalendar.DisplayDate = (testDataGrid.SelectedItem as Test).Date.Date;
         }
 
