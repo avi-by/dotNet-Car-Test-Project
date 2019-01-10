@@ -16,7 +16,7 @@
             <ColumnDefinition Width="37*"/>
         </Grid.ColumnDefinitions>
 
-        <DataGrid x:Name="testDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="0,90,10,10" RowDetailsVisibilityMode="VisibleWhenSelected" SelectionChanged="testDataGrid_SelectionChanged">
+        <DataGrid x:Name="testDataGrid" CanUserAddRows="False" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="0,90,10,10" RowDetailsVisibilityMode="VisibleWhenSelected" SelectionChanged="testDataGrid_SelectionChanged">
             <DataGrid.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="add" Click="MenuItem_add_Click" />

@@ -85,7 +85,7 @@ namespace DAL
             XElement test2_KeepingSafeDistance = new XElement("test2_KeepingSafeDistance");
             XElement test3_UsingMirrors = new XElement("test3_UsingMirrors");
             XElement test4_UsingTurnSignals = new XElement("test4_UsingTurnSignals");
-            XElement test5_LegalSpeed = new XElement("test3_UsingMirrors");
+            XElement test5_LegalSpeed = new XElement("test5_LegalSpeed");
             XElement succeeded = new XElement("succeeded");
             XElement notes = new XElement("notes");
 
@@ -120,11 +120,11 @@ namespace DAL
                              Car = (CarType)(int.Parse(test.Element("CarType").Value)),
                              Test1_ReverseParking = test.Element("test1_ReverseParking").Value == "" ? (bool?)null : (bool.Parse(test.Element("test1_ReverseParking").Value)),
                              Test2_KeepingSafeDistance = test.Element("test2_KeepingSafeDistance").Value == "" ? (bool?)null : (bool.Parse(test.Element("test2_KeepingSafeDistance").Value)),
-                             Test3_UsingMirrors = test.Element("test3_UsingMirrors").Value == "" ? (bool?)null : (bool.Parse(test.Element("test3_UsingMirrors").Value))
-                             //Test4_UsingTurnSignals = test.Element("test4_UsingTurnSignals").Value == "" ? (bool?)null : (bool.Parse(test.Element("test4_UsingTurnSignals").Value)),
-                             //Test5_LegalSpeed = test.Element("test5_LegalSpeed").Value == "" ? (bool?)null : (bool.Parse(test.Element("test5_LegalSpeed").Value)),
-                             ////Succeeded = test.Element("succeeded").Value == "" ? (bool?)null : (bool.Parse(test.Element("succeeded").Value)),
-                             //Notes = test.Element("notes").Value
+                             Test3_UsingMirrors = test.Element("test3_UsingMirrors").Value == "" ? (bool?)null : (bool.Parse(test.Element("test3_UsingMirrors").Value)),
+                             Test4_UsingTurnSignals = test.Element("test4_UsingTurnSignals").Value == "" ? (bool?)null : (bool.Parse(test.Element("test4_UsingTurnSignals").Value)),
+                             Test5_LegalSpeed = test.Element("test5_LegalSpeed").Value == "" ? (bool?)null : (bool.Parse(test.Element("test5_LegalSpeed").Value)),
+                             Succeeded = test.Element("succeeded").Value == "" ? (bool?)null : (bool.Parse(test.Element("succeeded").Value)),
+                             Notes = test.Element("notes").Value
                          }).ToList().Clone();
             }
             catch
