@@ -523,6 +523,8 @@ namespace BL
 
         public DateTime NearestOpenDateByspecialization(CarType carType, GearBox gearBox, DateTime? inputDate)
         {
+            if (MyDal.getAllTesters().Find(i => i.CarType == carType && i.GearBox == gearBox) == null)
+                throw new Exception("there are no tester for this type of car and gearbox");
             DateTime date;
             if (inputDate == null)
                 date = NearestOpenDate();
@@ -545,6 +547,10 @@ namespace BL
 
         public DateTime NearestOpenDateBySpecializationAndAddress(CarType carType, GearBox gearBox, DateTime? inputDate, Address address)
         {
+            if (MyDal.getAllTesters().Find(i => i.CarType == carType && i.GearBox == gearBox) == null)
+                throw new Exception("there are no tester for this type of car and gearbox");
+            if (MyDal.getAllTesters().Find(i =>distanceFromAddress( i.Address,address)<=i.Distance) == null)
+                throw new Exception("there are no tester available at this address");
 
             DateTime date;
             if (inputDate == null)

@@ -64,6 +64,15 @@ namespace DAL
             testerEvent(this, null);
         }
 
+        public List<Tester> GetTestersList(Predicate<Tester> p)
+        {
+            var x = from item in DataSource.testers
+                    where p(item)
+                    select item;
+            var y = x.ToList<Tester>();
+            if (y == null) return null;
+            return (y.Clone().ToList());
+        }
 
         public void UpdateTester(Tester tester)
         {
@@ -95,6 +104,7 @@ namespace DAL
         }
         public List<Tester> getAllTesters()
         {
+            if (DataSource.testers == null) return null;
             return DataSource.testers.Clone().ToList();
         }
 
@@ -127,10 +137,6 @@ namespace DAL
                 {
                     DataSource.testers[index] = tester;
                     testerEvent(this, null);
-
-                    //            this.OnNotifyCollectionChanged(
-                    //new NotifyCollectionChangedEventArgs(
-                    //  NotifyCollectionChangedAction.Add, tester));
                     return;
                 }
                 index++;
@@ -197,6 +203,7 @@ namespace DAL
 
         public List<Trainee> getAllTrainees()
         {
+            if (DataSource.trainees == null) return null;
             return DataSource.trainees.Clone().ToList();
         }
 
@@ -244,10 +251,7 @@ namespace DAL
                     where p(item)
                     select item;
             var y = x.ToList<Test>();
-            //if (y.Count==0)
-            //{
-            //    return null;
-            //}
+            if (y == null) return null;
             return (y.Clone().ToList());
         }
 
@@ -266,9 +270,7 @@ namespace DAL
 
             Dal_XML_imp.AddTest_PartialDetails(test);
             testEvent(this, null);
-            //            this.OnNotifyCollectionChanged(
-            //new NotifyCollectionChangedEventArgs(
-            //NotifyCollectionChangedAction.Add, test));
+          
         }
 
         public void DeleteTest(Test test)
@@ -278,14 +280,14 @@ namespace DAL
                 if (item.Id == test.Id)
                 {
                     DataSource.tests.Remove(item);
+                    
                     testEvent(this, null);
-                    //           new NotifyCollectionChangedEventArgs(
-                    //NotifyCollectionChangedAction.Remove, test);
                     return;
                 }
-                throw new Exception("failed to remove, test with the same ID not found");
 
             }
+            throw new Exception("failed to remove, test with the same ID not found");
+
         }
 
         public void UpdateTest(Test test)
@@ -310,18 +312,11 @@ namespace DAL
 
         public List<Test> getAllTests()
         {
+            if (DataSource.tests == null) return null;
             return DataSource.tests.Clone().ToList();
         }
 
-        public List<Tester> GetTestersList(Predicate<Tester> p)
-        {
-            var x = from item in DataSource.testers
-                    where p(item)
-                    select item;
-            var y = x.ToList<Tester>();
-           
-            return (y.Clone().ToList());
-        }
+       
 
         public object findTest(Test test)
         {

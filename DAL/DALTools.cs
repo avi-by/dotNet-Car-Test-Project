@@ -10,6 +10,7 @@ namespace DAL
     {
         public static List<T> Clone<T>(this List<T> listToClone) where T : ICloneable
         {
+            if (listToClone == null) return null;
             return listToClone.Select(item => (T)item.Clone()).ToList();
         }
         // list clone

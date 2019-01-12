@@ -26,6 +26,11 @@ namespace PL
         private IBL bl;
         private List<Tester> listAllTester;
         private List<Tester> currentUseList;
+        Predicate<Tester> carTypeFilter = delegate { return true; };
+        Predicate<Tester> truckFilter = delegate { return true; };
+        Predicate<Tester> smallTruckFilter = delegate { return true; };
+        Predicate<Tester> privetCarFilter = delegate { return true; };
+        Predicate<Tester> motorcycleFilter = delegate { return true; };
 
         public Tester_UserControl()
         {
@@ -42,9 +47,68 @@ namespace PL
             filtersControl.radioButtonAscending.Checked += RadioButtonAscending_Checked;
             filtersControl.radioButtonDescending.Checked += RadioButtonDescending_Checked;
             testerDataGrid.DataContext = currentUseList;
+            filtersControl.radioButtonAscending.Checked += RadioButtonAscending_Checked;
+            filtersControl.radioButtonDescending.Checked += RadioButtonDescending_Checked;
+            filtersControl.checkBoxFilterMotorcycle.Checked += CheckBoxFilterMotorcycle_Checked;
+            filtersControl.checkBoxFilterMotorcycle.Unchecked += CheckBoxFilterMotorcycle_Unchecked;
+            filtersControl.checkBoxFilterprivetCar.Checked += CheckBoxFilterprivetCar_Checked;
+            filtersControl.checkBoxFilterprivetCar.Unchecked += CheckBoxFilterprivetCar_Unchecked;
+            filtersControl.checkBoxFilterSmallTruck.Checked += CheckBoxFilterSmallTruck_Checked;
+            filtersControl.checkBoxFilterSmallTruck.Unchecked += CheckBoxFilterSmallTruck_Unchecked;
+            filtersControl.checkBoxFilterTruck.Checked += CheckBoxFilterTruck_Checked;
+            filtersControl.checkBoxFilterTruck.Unchecked += CheckBoxFilterTruck_Unchecked;
             findAndSort();
 
         }
+
+        private void CheckBoxFilterTruck_Unchecked(object sender, RoutedEventArgs e)
+        {
+            truckFilter = (i) => i.CarType != BE.CarType.Truck;
+            findAndSort();
+        }
+
+        private void CheckBoxFilterTruck_Checked(object sender, RoutedEventArgs e)
+        {
+            truckFilter = delegate { return true; };
+            findAndSort();
+        }
+
+        private void CheckBoxFilterSmallTruck_Unchecked(object sender, RoutedEventArgs e)
+        {
+            smallTruckFilter = (i) => i.CarType != BE.CarType.SmallTruck;
+            findAndSort();
+        }
+
+        private void CheckBoxFilterSmallTruck_Checked(object sender, RoutedEventArgs e)
+        {
+            smallTruckFilter = delegate { return true; };
+            findAndSort();
+        }
+
+        private void CheckBoxFilterprivetCar_Unchecked(object sender, RoutedEventArgs e)
+        {
+            privetCarFilter = (i) => i.CarType != BE.CarType.PrivetCar;
+            findAndSort();
+        }
+
+        private void CheckBoxFilterprivetCar_Checked(object sender, RoutedEventArgs e)
+        {
+            privetCarFilter = delegate { return true; };
+            findAndSort();
+        }
+
+        private void CheckBoxFilterMotorcycle_Unchecked(object sender, RoutedEventArgs e)
+        {
+            motorcycleFilter = (i) => i.CarType != BE.CarType.Motorcycle;
+            findAndSort();
+        }
+
+        private void CheckBoxFilterMotorcycle_Checked(object sender, RoutedEventArgs e)
+        {
+            motorcycleFilter = delegate { return true; };
+            findAndSort();
+        }
+
 
         private void RadioButtonDescending_Checked(object sender, RoutedEventArgs e)
         {
@@ -153,7 +217,7 @@ namespace PL
             // matrix1.DataContext = selectedPerson.WorkHour;
 
 
-            //MessageBox.Show(string.Format("The Person you double cl
+           
             if (testerDataGrid.SelectedItem == null) return;
             var selectedPerson = (testerDataGrid.SelectedItem) as Tester;
 
@@ -332,11 +396,14 @@ namespace PL
         /// </summary>
         private void findAndSort()
         {
+            carTypeFilter = (i) => truckFilter(i) && smallTruckFilter(i) && privetCarFilter(i) && motorcycleFilter(i);
             if (TextBoxSearch.Text == "")
-                currentUseList = listAllTester;
+                currentUseList = (from i in listAllTester
+                                  where carTypeFilter(i)
+                                  select i).ToList();
             else
                 currentUseList = (from i in listAllTester
-                                  where i.FirstName.Contains(TextBoxSearch.Text) || i.LastName.Contains(TextBoxSearch.Text) || i.Id.Contains(TextBoxSearch.Text)
+                                  where (i.FirstName.Contains(TextBoxSearch.Text) || i.LastName.Contains(TextBoxSearch.Text) || i.Id.Contains(TextBoxSearch.Text))&& carTypeFilter(i)
                                   select i).ToList();
             sortContaxDataByComboBox();
         }

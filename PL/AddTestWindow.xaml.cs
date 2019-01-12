@@ -347,12 +347,11 @@ namespace PL
             picker.DisplayDateStart = start;
             picker.DisplayDateEnd = end;
             picker.BlackoutDates.Clear();
-            var x = from item in bl.allTheTestAtRange(start, end) select item.Date;
             //the loop check every date in the 3 month from the first open date if day availble, if not disable them
 
             while (end >= start)
             {
-                if (x.Contains(start) || start.DayOfWeek == DayOfWeek.Friday || start.DayOfWeek == DayOfWeek.Saturday
+                if (start.DayOfWeek == DayOfWeek.Friday || start.DayOfWeek == DayOfWeek.Saturday
                     || bl.testersAvailableAtDateBySpecializationAndAddress(start, trainee.CarType, trainee.GearBox, address).Count == 0)
                 {
                     picker.BlackoutDates.Add(new CalendarDateRange(start));
