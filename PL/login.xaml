@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="Login" Height="360" Width="560
-        " FontSize="14" Background="Yellow"  >
+        Title="Login" Height="360" Width="560" Icon="icons/571px-Lamed_sign.svg.png"
+         FontSize="14" Background="Yellow"  >
 
 
     <Grid>
