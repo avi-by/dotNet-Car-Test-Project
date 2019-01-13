@@ -33,22 +33,22 @@
             </DataGrid.ContextMenu>
 
             <DataGrid.Columns>
-                <DataGridTextColumn x:Name="nameColumn" Binding="{Binding FirstName}" Header="First Name" />
-                <DataGridTextColumn x:Name="lastnameColumn" Binding="{Binding LastName}" Header="Last Name" />
+                <DataGridTextColumn x:Name="nameColumn" Binding="{Binding FirstName}" Header="First Name" IsReadOnly="True" />
+                <DataGridTextColumn x:Name="lastnameColumn" Binding="{Binding LastName}" Header="Last Name" IsReadOnly="True" />
 
 
-                <DataGridTextColumn x:Name="IdColumn" Binding="{Binding Id}" Header="Id" />
-                <DataGridTextColumn x:Name="ageColumn" Binding="{Binding Age}" Header="Age" IsReadOnly="True" />
-                <DataGridTextColumn x:Name="genderColumn" Binding="{Binding Gender}" Header="Gender" />
-                <DataGridTextColumn x:Name="phoneNumberColumn" Binding="{Binding PhoneNumber}" Header="Phone number" />
-                <DataGridTextColumn x:Name="addressColumn2" Binding="{Binding Address}" Header="Address" />
+                <DataGridTextColumn x:Name="IdColumn" Binding="{Binding Id}" Header="Id"  IsReadOnly="True"/>
+                <DataGridTextColumn x:Name="ageColumn" Binding="{Binding Age}" Header="Age" IsReadOnly="True"  />
+                <DataGridTextColumn x:Name="genderColumn" Binding="{Binding Gender}" Header="Gender" IsReadOnly="True"/>
+                <DataGridTextColumn x:Name="phoneNumberColumn" Binding="{Binding PhoneNumber}" Header="Phone number" IsReadOnly="True" />
+                <DataGridTextColumn x:Name="addressColumn2" Binding="{Binding Address}" Header="Address" IsReadOnly="True" />
 
 
 
-                <DataGridTextColumn x:Name="ExpYears" Binding="{Binding ExpYears}" Header="ExpYears" />
-                <DataGridTextColumn x:Name="MaxTestInWeek" Binding="{Binding MaxTestInWeek}" Header="MxTestsWeek" />
-                <DataGridTextColumn x:Name="CarType" Binding="{Binding CarType}" Header="CarType" />
-                <DataGridTextColumn x:Name="GearBox" Binding="{Binding GearBox}" Header="GearBox" />
+                <DataGridTextColumn x:Name="ExpYears" Binding="{Binding ExpYears}" Header="ExpYears" IsReadOnly="True"/>
+                <DataGridTextColumn x:Name="MaxTestInWeek" Binding="{Binding MaxTestInWeek}" Header="MxTestsWeek" IsReadOnly="True" />
+                <DataGridTextColumn x:Name="CarType" Binding="{Binding CarType}" Header="CarType" IsReadOnly="True" />
+                <DataGridTextColumn x:Name="GearBox" Binding="{Binding GearBox}" Header="GearBox" IsReadOnly="True" />
                 <DataGridTemplateColumn x:Name="dateColumn" Header="Date" Width="auto" IsReadOnly="True">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -56,7 +56,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn x:Name="maxDistance" Binding="{Binding Distance}" Header="max distance" />
+                <DataGridTextColumn x:Name="maxDistance" Binding="{Binding Distance}" Header="max distance" IsReadOnly="True"/>
 
 
             </DataGrid.Columns>

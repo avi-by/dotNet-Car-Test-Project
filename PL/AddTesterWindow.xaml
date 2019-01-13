@@ -7,7 +7,7 @@
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:BE="clr-namespace:BE;assembly=BE" x:Class="PL.AddTesterWindow"
         mc:Ignorable="d"
-        Title="AddTesterWindow"  Loaded="Window_Loaded_1" Closing="Window_Closing">
+        Title="AddTesterWindow"  Loaded="Window_Loaded_1" Closing="Window_Closing" Icon="icons/571px-Lamed_sign.svg.png">
     <Window.Resources>
         <ObjectDataProvider x:Key="dataFromEnum" MethodName="GetValues"
                         ObjectType="{x:Type sys:Enum}">

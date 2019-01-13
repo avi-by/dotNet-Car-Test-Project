@@ -39,26 +39,26 @@
             </DataGrid.ContextMenu>
             <DataGrid.Columns>
 
-                <DataGridTextColumn x:Name="firstNameColumn" Binding="{Binding FirstName}" Header="First Name" />
-                <DataGridTextColumn x:Name="lastNameColumn" Binding="{Binding LastName}" Header="Last Name" />
-                <DataGridTextColumn x:Name="idColumn" Binding="{Binding Id}" Header="Id" />
-                <DataGridTextColumn x:Name="genderColumn" Binding="{Binding Gender}" Header="Gender" />
-                <DataGridTextColumn x:Name="ageColumn" Binding="{Binding Age}" Header="Age" />
-                <DataGridTextColumn x:Name="phoneNumberColumn" Binding="{Binding PhoneNumber}" Header="Phone Number" />
+                <DataGridTextColumn x:Name="firstNameColumn" Binding="{Binding FirstName}" Header="First Name" IsReadOnly="True" />
+                <DataGridTextColumn x:Name="lastNameColumn" Binding="{Binding LastName}" Header="Last Name" IsReadOnly="True" />
+                <DataGridTextColumn x:Name="idColumn" Binding="{Binding Id}" Header="Id" IsReadOnly="True" />
+                <DataGridTextColumn x:Name="genderColumn" Binding="{Binding Gender}" Header="Gender" IsReadOnly="True"/>
+                <DataGridTextColumn x:Name="ageColumn" Binding="{Binding Age}" Header="Age" IsReadOnly="True" />
+                <DataGridTextColumn x:Name="phoneNumberColumn" Binding="{Binding PhoneNumber}" Header="Phone Number" IsReadOnly="True" />
 
-                <DataGridTextColumn x:Name="addressColumn" Binding="{Binding Address}" Header="Address" />
-                <DataGridTemplateColumn x:Name="birthDateColumn" Header="Birth Date" >
+                <DataGridTextColumn x:Name="addressColumn" Binding="{Binding Address}" Header="Address" IsReadOnly="True" />
+                <DataGridTemplateColumn x:Name="birthDateColumn" Header="Birth Date" IsReadOnly="True" >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <DatePicker SelectedDate="{Binding BirthDate, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn x:Name="carTypeColumn" Binding="{Binding CarType}" Header="Car Type" />
-                <DataGridTextColumn x:Name="gearBoxColumn" Binding="{Binding GearBox}" Header="Gear Box" />
-                <DataGridTextColumn x:Name="numberOfLessonColumn" Binding="{Binding NumberOfLesson}" Header="Number Of Lesson" />
-                <DataGridTextColumn x:Name="schoolNameColumn" Binding="{Binding SchoolName}" Header="School Name" />
-                <DataGridTextColumn x:Name="teacherNameColumn" Binding="{Binding TeacherName}" Header="Teacher Name" />
+                <DataGridTextColumn x:Name="carTypeColumn" Binding="{Binding CarType}" Header="Car Type" IsReadOnly="True" />
+                <DataGridTextColumn x:Name="gearBoxColumn" Binding="{Binding GearBox}" Header="Gear Box" IsReadOnly="True" />
+                <DataGridTextColumn x:Name="numberOfLessonColumn" Binding="{Binding NumberOfLesson}" Header="Number Of Lesson" IsReadOnly="True" />
+                <DataGridTextColumn x:Name="schoolNameColumn" Binding="{Binding SchoolName}" Header="School Name" IsReadOnly="True" />
+                <DataGridTextColumn x:Name="teacherNameColumn" Binding="{Binding TeacherName}" Header="Teacher Name" IsReadOnly="True" />
             </DataGrid.Columns>
         </DataGrid>
         <Button x:Name="pbUpdateTrainee" Content="Update selected trainee" HorizontalAlignment="Left" VerticalAlignment="Top" Width="136" Margin="147,15,0,0" Click="PbUpdateTrainee_Click"  />

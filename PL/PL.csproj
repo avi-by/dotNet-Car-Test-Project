@@ -255,5 +255,11 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icons\app.512x512-75.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icons\571px-Lamed_sign.svg.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

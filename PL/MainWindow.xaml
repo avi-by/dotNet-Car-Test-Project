@@ -12,7 +12,7 @@
         xmlns:BE="clr-namespace:BE;assembly=BE"  x:Class="PL.MainWindow"
  
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" >
+        Title="MainWindow" Height="450" Width="800" Icon="icons/571px-Lamed_sign.svg.png" >
     
     <Window.Resources>
         <CollectionViewSource x:Key="testViewSource" d:DesignSource="{d:DesignInstance {x:Type BE:Tester}, CreateList=True}"/>

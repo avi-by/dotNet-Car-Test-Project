@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL"
         xmlns:BE="clr-namespace:BE;assembly=BE" x:Class="PL.AddTestWindow"
         mc:Ignorable="d"
-        Title="AddTestWindow" Height="600" Width="800" Loaded="Window_Loaded_1">
+        Title="AddTestWindow" Height="600" Width="800" Loaded="Window_Loaded_1" Icon="icons/571px-Lamed_sign.svg.png">
     <Window.Resources>
         <CollectionViewSource x:Key="testViewSource" d:DesignSource="{d:DesignInstance {x:Type BE:Test}, CreateList=True}"/>
     </Window.Resources>
