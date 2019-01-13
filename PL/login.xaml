@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="Login" Height="340" Width="520
+        Title="Login" Height="360" Width="560
         " FontSize="14" Background="Yellow"  >
 
 
@@ -51,7 +51,7 @@
            new user? please
            <!--textblock as a Hyperlink.-->
             <TextBlock>
-                 <Hyperlink FontSize="14" FontStyle="Normal">Register</Hyperlink>
+                 <Hyperlink  FontSize="14" FontStyle="Normal" Click="Hyperlink_Click" >Register</Hyperlink>
             </TextBlock> 
             <!--end textblock as a hyperlink-->
             here
@@ -59,12 +59,13 @@
             </Grid>
         </Border>
 
-        <TextBlock Text="welcome to our Driving Test Management System!" FontSize="20" Grid.Column="1" Grid.Row="0" TextWrapping="Wrap" HorizontalAlignment="Center" Margin="23,20,23.333,29.667" />
+        <TextBlock Text="welcome to our Driving Test Management System!" FontSize="22" Grid.Column="1" Grid.Row="0" TextWrapping="Wrap" HorizontalAlignment="Center" Margin="23,20,33.333,10" Width="197" />
         <StackPanel Grid.Row="1" Grid.Column="1" >
-            <UserControl>
-                <local:media_element Height="147" Margin="0,0,0.333,0" />
-            </UserControl>
+
+            <local:media_element Height="139" Margin="0,0,0.333,0" />
+
         </StackPanel>
+        <Button Content="לכניסה ללא סיסמא-סבא שלי היה טסטר" HorizontalAlignment="Left" Margin="10,27,0,0" VerticalAlignment="Top" Width="275" Click="Button_Click" Grid.ColumnSpan="2"/>
 
 
     </Grid>
