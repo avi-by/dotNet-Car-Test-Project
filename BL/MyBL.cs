@@ -32,7 +32,6 @@ namespace BL
 
         static IDAL MyDal;
 
-
         #region Constructor
 
         private MyBL() { }
@@ -43,11 +42,8 @@ namespace BL
         }
 
         #endregion
-        public int getMinimumAge()
-        {
-
-            return Configuration.MinAgeTrainee;
-        }
+      
+        #region Tester
 
         public int getMinimumAgeOfTester()
         {
@@ -62,8 +58,6 @@ namespace BL
         }
 
 
-
-        #region Tester
         public void addTester(Tester tester)
         {
             if (tester.Age < BE.Configuration.MinAgeTrainee)
@@ -120,9 +114,23 @@ namespace BL
             return distanceFromAddress(tester.Address, address) <= tester.Distance;
         }
 
+
+        public Tester findTester(string testerId)
+        {
+            return MyDal.findTester(testerId);
+        }
+
+
         #endregion
 
         #region trainee
+
+        public int getMinimumAge()
+        {
+
+            return Configuration.MinAgeTrainee;
+        }
+
         public void addTrainee(Trainee trainee)
         {
             checkTrainee(trainee);
@@ -173,6 +181,11 @@ namespace BL
                 MyDal.UpdateTrainee(trainee, id);
             else
                 throw new Exception("cannot update, the trainee too young");
+        }
+
+        public Trainee findTraine(string traineeId)
+        {
+            return MyDal.findTrainee(traineeId);
         }
 
         #endregion trainee
@@ -274,7 +287,7 @@ namespace BL
         private double distanceFromAddress(Address addressSource, Address addressDestination)
         {
             Random random = new Random();
-            double e = random.Next() % 8;
+            double e = random.Next() % 30;
             return e;
         }
 
@@ -570,6 +583,8 @@ namespace BL
             x = (from i in x where atAvailbleDistance(i.Id, address) select i).ToList();
             return x;
         }
+
+       
 
 
         #endregion

@@ -13,56 +13,98 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BE;
 using BL;
-
 namespace PL
 {
     /// <summary>
-    /// Interaction logic for AddTestWindow.xaml
+    /// Interaction logic for UpfdateTestWindow.xaml
     /// </summary>
-    public partial class AddTestWindow : Window
+    public partial class UpdateTestWindow : Window
     {
         private IBL bl = FactoryBL.GetBL(Configuration.BLType);
-        public AddTestWindow()
+
+        public UpdateTestWindow()
         {
             InitializeComponent();
-           
-            //ComboBoxItem hour_9 = new ComboBoxItem();
-            //hour_9.Content = "9:00";
-            //hourComboBox.Items.Add(hour_9);
-
-            //ComboBoxItem hour_10 = new ComboBoxItem();
-            //hour_10.Content = "10:00";
-            //hourComboBox.Items.Add(hour_10);
-
-            //ComboBoxItem hour_11 = new ComboBoxItem();
-            //hour_11.Content = "11:00";
-            //hourComboBox.Items.Add(hour_11);
-
-            //ComboBoxItem hour_12 = new ComboBoxItem();
-            //hour_12.Content = "12:00";
-            //hourComboBox.Items.Add(hour_12);
-
-            //ComboBoxItem hour_13 = new ComboBoxItem();
-            //hour_13.Content = "13:00";
-            //hourComboBox.Items.Add(hour_13);
-
-            //ComboBoxItem hour_14 = new ComboBoxItem();
-            //hour_14.Content = "14:00";
-            //hourComboBox.Items.Add(hour_14);
-            hourComboBox.IsEnabled = false;
             cb_traineeChoosing.DataContext = (from i in bl.getAllTrainees() //if the trainee end his test, cant be posible to regist him again
                                               where !bl.isPassed(i.Id)
                                               select i).ToList();
             Date_DatePicker.IsEnabled = false;
-            cb_testerChoosing.IsEnabled =  false;
-         //   cb_testerChoosing.DataContext = bl.getAllTester();    //if you change it after the selection of the date, you dont need it now
-
+            cb_testerChoosing.IsEnabled = false;
 
         }
 
+        public UpdateTestWindow(Test test)
+        {
+            InitializeComponent();
+            DataContext = test;
+            var allTraineeList = (from i in bl.getAllTrainees() //if the trainee end his test, cant be posible to regist him again
+                                  where !bl.isPassed(i.Id)
+                                  select i).ToList();
+            var trainee = allTraineeList.Find(i => i.Id == test.TraineeId);
+            cb_traineeChoosing.ItemsSource = allTraineeList;
+            cb_traineeChoosing.SelectedItem = trainee;
+            houseNumberTextBox.Text = test.Address.houseNumber.ToString();
+            streetTextBox.Text = test.Address.street;
+            city.Text = test.Address.city;
+            Date_DatePicker.SelectedDate = test.Date;
+            var lis = bl.testersAvailableAtDateBySpecializationAndAddress((DateTime)Date_DatePicker.SelectedDate, ((Trainee)cb_traineeChoosing.SelectedItem).CarType, ((Trainee)cb_traineeChoosing.SelectedItem).GearBox, test.Address);
+            for (int i = 0; i < 6; i++)
+            {
+                if (lis.Find(item => item.WorkHour[(int)((DateTime)Date_DatePicker.SelectedDate).DayOfWeek][i]) != null)
+                {
+                    switch (i)
+                    {
+                        case 0:
+                            ComboBoxItem hour_9 = new ComboBoxItem();
+                            hour_9.Content = "09:00";
+                            hourComboBox.Items.Add(hour_9);
+                            if (test.Date.Hour == 9)
+                                hourComboBox.SelectedItem = hour_9;
+                            break;
+                        case 1:
 
-
-        
+                            ComboBoxItem hour_10 = new ComboBoxItem();
+                            hour_10.Content = "10:00";
+                            hourComboBox.Items.Add(hour_10);
+                            if (test.Date.Hour == 10)
+                                hourComboBox.SelectedItem = hour_10;
+                            break;
+                        case 2:
+                            ComboBoxItem hour_11 = new ComboBoxItem();
+                            hour_11.Content = "11:00";
+                            hourComboBox.Items.Add(hour_11);
+                            if (test.Date.Hour == 11)
+                                hourComboBox.SelectedItem = hour_11;
+                            break;
+                        case 3:
+                            ComboBoxItem hour_12 = new ComboBoxItem();
+                            hour_12.Content = "12:00";
+                            hourComboBox.Items.Add(hour_12);
+                            if (test.Date.Hour == 12)
+                                hourComboBox.SelectedItem = hour_12;
+                            break;
+                        case 4:
+                            ComboBoxItem hour_13 = new ComboBoxItem();
+                            hour_13.Content = "13:00";
+                            hourComboBox.Items.Add(hour_13);
+                            if (test.Date.Hour == 13)
+                                hourComboBox.SelectedItem = hour_13;
+                            break;
+                        case 5:
+                            ComboBoxItem hour_14 = new ComboBoxItem();
+                            hour_14.Content = "14:00";
+                            hourComboBox.Items.Add(hour_14);
+                            if (test.Date.Hour == 14)
+                                hourComboBox.SelectedItem = hour_14;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+            cb_testerChoosing.DataContext = bl.testersAvailableAtDateAndHourBySpecializationAndAddress(test.Date, cb_traineeChoosing.SelectedItem as Trainee, test.Address);
+            cb_testerChoosing.SelectedItem = bl.findTester(test.TesterId);
+        }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -71,7 +113,7 @@ namespace PL
 
         private void Window_Loaded_1(object sender, RoutedEventArgs e)
         {
-            
+
 
 
             System.Windows.Data.CollectionViewSource testViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("testViewSource")));
@@ -90,15 +132,16 @@ namespace PL
                 try
                 {
                     DateAndHour = new DateTime(Date_DatePicker.SelectedDate.Value.Year,
-                                     Date_DatePicker.SelectedDate.Value.Month,
-                                     Date_DatePicker.SelectedDate.Value.Day,
-                                     int.Parse(((ComboBoxItem) hourComboBox.SelectedValue).Content.ToString().Substring(0,2)), 0, 0);
+                                       Date_DatePicker.SelectedDate.Value.Month,
+                                       Date_DatePicker.SelectedDate.Value.Day,
+                                       int.Parse(((ComboBoxItem)hourComboBox.SelectedValue).Content.ToString().Substring(0, 2)), 0, 0);
 
 
 
+              
                     Trainee trainee = cb_traineeChoosing.SelectedItem as Trainee;
                     Tester tester = cb_testerChoosing.SelectedItem as Tester;
-                    bl.AddTest(new Test(tester.Id, trainee.Id, DateAndHour, new Address(streetTextBox.Text, int.Parse(houseNumberTextBox.Text), city.Text),trainee.GearBox, trainee.CarType ));
+                    bl.AddTest(new Test(tester.Id, trainee.Id, DateAndHour, new Address(streetTextBox.Text, int.Parse(houseNumberTextBox.Text), city.Text), trainee.GearBox, trainee.CarType));
                     Close();
                 }
                 catch (Exception msg)
@@ -108,7 +151,7 @@ namespace PL
                 }
 
 
-                
+
 
 
             }
@@ -120,8 +163,8 @@ namespace PL
             long temp = 0;
             bool flag = false;
 
-           
-            if (cb_traineeChoosing.SelectedItem == null )
+
+            if (cb_traineeChoosing.SelectedItem == null)
             {
                 msg += "--you need to chose a trainee\n";
                 labelTraineeCho.Foreground = Brushes.Red;
@@ -132,7 +175,7 @@ namespace PL
                 labelTraineeCho.Foreground = Brushes.Black;
             }
 
-            if (Date_DatePicker.SelectedDate== null)
+            if (Date_DatePicker.SelectedDate == null)
             {
                 msg += "--you need to chose a date\n";
                 labelDate.Foreground = Brushes.Red;
@@ -176,7 +219,7 @@ namespace PL
                 labelhouseNumber.Foreground = Brushes.Black;
             }
 
-            if (streetTextBox.Text== "")
+            if (streetTextBox.Text == "")
             {
                 msg += "--you need to enter a street\n";
                 labelStreet.Foreground = Brushes.Red;
@@ -209,27 +252,40 @@ namespace PL
 
         private void Date_DatePicker_Loaded(object sender, RoutedEventArgs e)
         {
-            DatePicker picker = sender as DatePicker;
-            DateTime start = bl.NearestOpenDate();
-            DateTime end = start.AddMonths(3);
-            picker.DisplayDateStart = start;
-            picker.DisplayDateEnd = end;
-            picker.BlackoutDates.Clear();
-            var x = from item in bl.allTheTestAtRange(start, end) select item.Date;
-            //the loop check every date in the 3 month from the first open date if day availble, if not disable them
-            while (end >= start)
+            try
             {
-                if (x.Contains(start))
+                
+                DatePicker picker = Date_DatePicker;
+                Address address = new Address(streetTextBox.Text, int.Parse(houseNumberTextBox.Text), city.Text);
+                Trainee trainee = cb_traineeChoosing.SelectedItem as Trainee;
+                DateTime start = bl.NearestOpenDateBySpecializationAndAddress(trainee.CarType, trainee.GearBox, null, address);
+                DateTime end = start.AddMonths(3);
+                picker.DisplayDateStart = start;
+                picker.DisplayDateEnd = end;
+                picker.BlackoutDates.Clear();
+                //the loop check every date in the 3 month from the first open date if day availble, if not disable them
+
+                while (end >= start)
                 {
-                    picker.BlackoutDates.Add(new CalendarDateRange(start));
+                    if (Date_DatePicker.SelectedDate!=start&& (start.DayOfWeek == DayOfWeek.Friday || start.DayOfWeek == DayOfWeek.Saturday
+                        || bl.testersAvailableAtDateBySpecializationAndAddress(start, trainee.CarType, trainee.GearBox, address).Count == 0))
+                    {
+                        picker.BlackoutDates.Add(new CalendarDateRange(start));
+                    }
+                    start = start.AddDays(1);
                 }
-                start = start.AddDays(1);
+            }
+            catch (Exception msg)
+            {
+
+                MessageBox.Show(msg.Message);
+                Date_DatePicker.IsEnabled = false;
             }
         }
 
         private void Date_DatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            
+
 
             if (e.AddedItems.Count > 0)
             {
@@ -238,11 +294,11 @@ namespace PL
                 {
                     MessageBox.Show("this day unavailbale");
                     ((DatePicker)sender).SelectedDate = null;
-                   
+
                 }
             }
 
-            if ( Date_DatePicker.SelectedDate == null)
+            if (Date_DatePicker.SelectedDate == null)
             {
                 cb_testerChoosing.DataContext = null;
                 tb_testerName.Text = "(the tester name)";
@@ -252,17 +308,17 @@ namespace PL
             //if there is a empty slot at this date
             hourComboBox.IsEnabled = true;
             //reset the hour combo box
-           
-                hourComboBox.Items.Clear();
+
+            hourComboBox.Items.Clear();
             int houseNum;
-            if(int.TryParse(houseNumberTextBox.Text,out houseNum)==false)
+            if (int.TryParse(houseNumberTextBox.Text, out houseNum) == false)
             {
                 MessageBox.Show("the house number need to contain only digits!");
                 return;
             }
             Address address = new Address(streetTextBox.Text, houseNum, city.Text);
             //insert the empty hour at this day for this trainee
-            var lis = bl.testersAvailableAtDateBySpecializationAndAddress((DateTime)Date_DatePicker.SelectedDate, ((Trainee)cb_traineeChoosing.SelectedItem).CarType, ((Trainee)cb_traineeChoosing.SelectedItem).GearBox,address);
+            var lis = bl.testersAvailableAtDateBySpecializationAndAddress((DateTime)Date_DatePicker.SelectedDate, ((Trainee)cb_traineeChoosing.SelectedItem).CarType, ((Trainee)cb_traineeChoosing.SelectedItem).GearBox, address);
             for (int i = 0; i < 6; i++)
             {
                 if (lis.Find(item => item.WorkHour[(int)((DateTime)Date_DatePicker.SelectedDate).DayOfWeek][i]) != null)
@@ -372,7 +428,7 @@ namespace PL
             hourComboBox.Items.Clear();
 
             hourComboBox.IsEnabled = false;
-         //   cb_testerChoosing.ItemsSource=null;
+            //   cb_testerChoosing.ItemsSource=null;
             cb_testerChoosing.IsEnabled = false;
         }
 
@@ -397,7 +453,7 @@ namespace PL
                 return;
             }
             int houseNum;
-            if(int.TryParse(houseNumberTextBox.Text,out houseNum)==false)
+            if (int.TryParse(houseNumberTextBox.Text, out houseNum) == false)
             {
                 MessageBox.Show("the house number need to contain only digits!");
                 return;
@@ -406,9 +462,9 @@ namespace PL
             dateAndHour = new DateTime(Date_DatePicker.SelectedDate.Value.Year,
                                      Date_DatePicker.SelectedDate.Value.Month,
                                      Date_DatePicker.SelectedDate.Value.Day,
-                                     int.Parse(((string)(((ComboBoxItem)hourComboBox.SelectedValue).Content)).Substring(0,2)) , 0, 0);
+                                     int.Parse(((string)(((ComboBoxItem)hourComboBox.SelectedValue).Content)).Substring(0, 2)), 0, 0);
             cb_testerChoosing.IsEnabled = true;
-            cb_testerChoosing.DataContext = bl.testersAvailableAtDateAndHourBySpecializationAndAddress(dateAndHour, cb_traineeChoosing.SelectedItem as Trainee,new Address(streetTextBox.Text,houseNum,city.Text));
+            cb_testerChoosing.DataContext = bl.testersAvailableAtDateAndHourBySpecializationAndAddress(dateAndHour, cb_traineeChoosing.SelectedItem as Trainee, new Address(streetTextBox.Text, houseNum, city.Text));
             tb_testerName.Text = "(the tester name)";
 
         }
@@ -435,7 +491,7 @@ namespace PL
             originalHouseNum = houseNumberTextBox.Text;
 
         }
-        private string originalStreet ="";
+        private string originalStreet = "";
         private void streetTextBox_LostFocus(object sender, RoutedEventArgs e)
         {
             //if (houseNumberTextBox.Text != "" && int.TryParse(houseNumberTextBox.Text, out int temp) == false)
@@ -446,7 +502,7 @@ namespace PL
             //    cb_testerChoosing.IsEnabled = false;
             //    return;
             //}
-            if (originalStreet!=streetTextBox.Text && Date_DatePicker.IsEnabled == true)
+            if (originalStreet != streetTextBox.Text && Date_DatePicker.IsEnabled == true)
             {
                 originalStreet = streetTextBox.Text;
                 resetDate();
@@ -468,7 +524,7 @@ namespace PL
             //        cb_testerChoosing.IsEnabled = false;
             //        return;
             //    }
-            if (originalCity != city.Text&&Date_DatePicker.IsEnabled==true) //if the address change
+            if (originalCity != city.Text && Date_DatePicker.IsEnabled == true) //if the address change
             {
                 originalCity = city.Text;
                 resetDate();
@@ -481,7 +537,7 @@ namespace PL
         private string originalHouseNum = "";
         private void houseNumberTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (houseNumberTextBox.Text!=""&& int.TryParse(houseNumberTextBox.Text, out int temp) == false)
+            if (houseNumberTextBox.Text != "" && int.TryParse(houseNumberTextBox.Text, out int temp) == false)
             {
                 houseNumberTextBox.Text = originalHouseNum;
             }
@@ -489,68 +545,5 @@ namespace PL
                 originalHouseNum = houseNumberTextBox.Text;
         }
 
-        //private void TesterIdTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        //{
-        //    //set tester name according to the id that entered.
-        //    var the_tester= bl.getAllTester().Find(item => item.Id == TesterIdTextBox.Text);
-        //    if (the_tester != null)
-        //    {
-        //        string names = the_tester.FirstName +" "+ the_tester.LastName;
-        //        tb_testerName.Text = names;
-        //    }
-        //    else
-        //        tb_testerName.Text = "(name of tester)";
-
-
-        //    hourComboBox.SelectedItem = null;
-
-        //    //set each combox item enabled only if the tester work in this hour  
-        //    if (bl.isAvailableAtDate(TesterIdTextBox.Text, Date_DatePicker.DisplayDate))
-        //    {
-
-
-        //        DayOfWeek day = Date_DatePicker.DisplayDate.DayOfWeek;
-        //        Tester temp = bl.getAllTester().Find(tester => tester.Id == TesterIdTextBox.Text);
-        //        for (int i = 0; i < 6; i++)
-        //            (hourComboBox.Items[i] as ComboBoxItem).IsEnabled = (temp.WorkHour[(int)day][i]);
-        //    }
-        //    else
-        //    {
-
-        //        for (int i = 0; i < 6; i++)
-        //            (hourComboBox.Items[i] as ComboBoxItem).IsEnabled = false;
-
-        //    }
-        //}
-
-        //private void Tb_traineeName_TextChanged(object sender, TextChangedEventArgs e)
-        //{
-        //    //set trainee name according to the id that entered.
-        //    var the_trainee = bl.getAllTrainees().Find(item => item.Id == TraineeIdTextBox.Text);
-        //    if (the_trainee != null)
-        //    {
-        //        string names = the_trainee.FirstName + " " + the_trainee.LastName;
-        //        tb_traineeName.Text = names;
-        //    }
-        //    else
-        //        tb_traineeName.Text = "(name of trainee)";
-        //}
-
-        //private void Pb_chooseTrainee_Click(object sender, RoutedEventArgs e)
-        //{
-        //    searchAndChooseTrainee_Window searchAndChooseTrainee = new searchAndChooseTrainee_Window(this);
-        //    searchAndChooseTrainee.Show();
-
-        //}
-
-        //private void Pb_chooseTester_Click(object sender, RoutedEventArgs e)
-        //{
-        //    searchAndChooseTester_Window searchAndChooseTester = new searchAndChooseTester_Window(this);
-        //    searchAndChooseTester.Show();
-
-        //}
     }
 }
-
-
-    

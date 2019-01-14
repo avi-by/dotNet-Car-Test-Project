@@ -41,6 +41,7 @@ namespace BL
         /// </summary>
         /// <param name="test"></param>
         void completedTest(Test test);
+        Trainee findTraine(string traineeId);
 
         /// <summary>
         /// return list of all the test in the input day
@@ -158,6 +159,7 @@ namespace BL
         /// </summary>
         /// <returns></returns>
         int getMinimumAgeOfTester();
+        Tester findTester(string testerId);
 
 
 
