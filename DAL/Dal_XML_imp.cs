@@ -63,7 +63,7 @@ namespace DAL
         public static void AddTest_PartialDetails(Test test)
         {
             Tests_xml();
-            XElement ID = new XElement("id", Dal_XML_imp.ID_FromConfigXML());
+            XElement ID = new XElement("id", Dal_XML_imp.ID_FromConfigXML().ToString("00000000"));
             Dal_XML_imp.configXML_advancingID(); //call to function that adavances id
 
             XElement testerId = new XElement("testerID", test.TesterId);

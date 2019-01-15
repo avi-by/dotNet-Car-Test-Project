@@ -46,7 +46,10 @@ namespace PL
             houseNumberTextBox.Text = test.Address.houseNumber.ToString();
             streetTextBox.Text = test.Address.street;
             city.Text = test.Address.city;
+            Date_DatePicker.IsEnabled = true;
+
             Date_DatePicker.SelectedDate = test.Date;
+            hourComboBox.Items.Clear();
             var lis = bl.testersAvailableAtDateBySpecializationAndAddress((DateTime)Date_DatePicker.SelectedDate, ((Trainee)cb_traineeChoosing.SelectedItem).CarType, ((Trainee)cb_traineeChoosing.SelectedItem).GearBox, test.Address);
             for (int i = 0; i < 6; i++)
             {
@@ -102,8 +105,14 @@ namespace PL
                     }
                 }
             }
-            cb_testerChoosing.DataContext = bl.testersAvailableAtDateAndHourBySpecializationAndAddress(test.Date, cb_traineeChoosing.SelectedItem as Trainee, test.Address);
-            cb_testerChoosing.SelectedItem = bl.findTester(test.TesterId);
+            var allTesterAvailable = bl.testersAvailableAtDateAndHourBySpecializationAndAddress(test.Date, cb_traineeChoosing.SelectedItem as Trainee, test.Address);
+            var tester = bl.getAllTester().Find(i => i.Id == test.TesterId);
+            allTesterAvailable.Add(tester);
+            cb_testerChoosing.DataContext = allTesterAvailable;
+            cb_testerChoosing.SelectedItem = tester;
+            originalHouseNum = test.Address.houseNumber.ToString();
+            originalStreet = test.Address.street;
+            originalCity = test.Address.city;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -279,7 +288,7 @@ namespace PL
             {
 
                 MessageBox.Show(msg.Message);
-                Date_DatePicker.IsEnabled = false;
+//                Date_DatePicker.IsEnabled = false;
             }
         }
 

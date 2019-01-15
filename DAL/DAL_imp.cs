@@ -257,15 +257,15 @@ namespace DAL
 
         public void AddTest(Test test)
         {
-            test.Id = Configuration.test_id.ToString();
+            test.Id = Dal_XML_imp.ID_FromConfigXML().ToString("00000000");
 
-            //add 0 at the start of the id antil there is 8 digits
-            StringBuilder builder = new StringBuilder();
-            for (int i = test.Id.Length; i < 8; i++)
-                builder.Append(0);
-            builder.Append(test.Id);
-            test.Id = builder.ToString();
-            Configuration.test_id++;
+            ////add 0 at the start of the id antil there is 8 digits
+            //StringBuilder builder = new StringBuilder();
+            //for (int i = test.Id.Length; i < 8; i++)
+            //    builder.Append(0);
+            //builder.Append(test.Id);
+            //test.Id = builder.ToString();
+            //Configuration.test_id++;
             DataSource.tests.Add(test);
 
             Dal_XML_imp.AddTest_PartialDetails(test);

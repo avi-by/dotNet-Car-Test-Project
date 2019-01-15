@@ -98,6 +98,7 @@ namespace PL
 
                     Trainee trainee = cb_traineeChoosing.SelectedItem as Trainee;
                     Tester tester = cb_testerChoosing.SelectedItem as Tester;
+
                     bl.AddTest(new Test(tester.Id, trainee.Id, DateAndHour, new Address(streetTextBox.Text, int.Parse(houseNumberTextBox.Text), city.Text),trainee.GearBox, trainee.CarType ));
                     Close();
                 }

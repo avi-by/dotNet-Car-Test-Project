@@ -27,10 +27,10 @@
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="addressColumn" Binding="{Binding Address}" Header="Address" Width="auto" IsReadOnly="True"/>
                 <DataGridTextColumn x:Name="carColumn" Binding="{Binding Car}" Header="Car" Width="auto" IsReadOnly="True"/>
-                <DataGridTemplateColumn x:Name="dateColumn" Header="Date" Width="auto" IsReadOnly="True">
+                <DataGridTemplateColumn x:Name="dateColumn" Header="Date" Width="auto" IsReadOnly="True" >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <DatePicker SelectedDate="{Binding Date, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                            <DatePicker SelectedDate="{Binding Date, Mode=OneWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" IsEnabled="False"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
