@@ -105,7 +105,7 @@ namespace BL
         /// <returns></returns>
         public bool isAvailableAtDate(string testerId, DateTime date)
         {
-            return testersAvailableAtDate(date).Find(item => item.Id == testerId) != null;
+            return testersAvailableAtDateAndHour(date).Find(item => item.Id == testerId) != null;
         }
 
         public bool atAvailbleDistance(string testerId, Address address)
@@ -218,7 +218,7 @@ namespace BL
                 throw new Exception("cant regist, the tester not exist at the data base");
             }
 
-            if (MyDal.GetTestList(item => item.Date == test.Date && item.TraineeId == test.TraineeId).Count != 0)//if their id another test of this trainee at the same time
+            if (MyDal.GetTestList(item => item.Date == test.Date && item.TraineeId == test.TraineeId).Count != 0)//if there is another test of this trainee at the same time
                 throw new Exception("cant regist, the traniee do another test at the same time");
 
             if (!isAvailableAtDate(test.TesterId, test.Date))
@@ -259,6 +259,8 @@ namespace BL
                 throw new Exception("cant pass the test with grade of " + 100 * test.Grade + " the min grade is: " + Configuration.minGradeForPassTest);
             }
         }
+
+      
 
         public void DeleteTest(Test test)
         {
@@ -460,8 +462,18 @@ namespace BL
                 throw new Exception("cant update test that done, for insert test result use the right function");
             if (test.Test1_ReverseParking != null || test.Test2_KeepingSafeDistance != null || test.Test3_UsingMirrors != null || test.Test4_UsingTurnSignals != null || test.Test5_LegalSpeed != null)
                 throw new Exception("cant insert the result of any of the test check before finished");
-            checkIfValidTest(test);
-            MyDal.UpdateTest(test);
+            Test orginalTest = MyDal.findTest(test);
+            DeleteTest(orginalTest); //to update just remove the last one and try to insert new one' if its work good, else return the old one and throw exeption 
+            try
+            {
+                AddTest(test);
+            }
+            catch (Exception msg)
+            {
+                AddTest(orginalTest);
+                throw msg;
+            }
+         //   MyDal.UpdateTest(test);
         }
 
         /// <summary>

@@ -48,7 +48,7 @@ namespace DAL
         List<Test> GetTestList(Func<Test, bool> p);
         event EventHandler<EventArgs> TestEvent;
 
-        object findTest(Test test);
+        Test findTest(Test test);
 
         #endregion
     }

@@ -249,7 +249,7 @@ namespace PL
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (testDataGrid.SelectedItem == null) return;
+            if (testDataGrid.SelectedItem == null||(testDataGrid.SelectedItem as Test).Succeeded!=null) return;
             UpdateTestWindow updateTest = new UpdateTestWindow(testDataGrid.SelectedItem as Test);
             updateTest.ShowDialog();
         }

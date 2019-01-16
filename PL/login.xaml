@@ -45,7 +45,7 @@
                 <Label Content="User Name:"   Margin="0,0,0.333,0.667"  Grid.Row="2"/>
                 <TextBox Name="tbUserName"  FontSize="18" Grid.Row="3"/>
                 <Label Content="Password"  Margin="0,0,0.333,0.667"  Grid.Row="4"/>
-                <TextBox Name="tbPassword"  FontSize="18" Grid.Row="5"/>
+                <PasswordBox Name="tbPassword"  FontSize="18" Grid.Row="5"/>
                 <Button Content="Submit" Name="pbSubmit" Margin="60,10"   FontSize="18" Grid.Row="6"/>
                 <TextBlock Height="27" HorizontalAlignment="Left"  Name="textBlockHeading"  FontSize="12" FontStyle="Italic" Padding="5"  Width="203" TextWrapping="WrapWithOverflow" Grid.Row="7">
            new user? please

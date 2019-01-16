@@ -52,7 +52,7 @@ namespace PL
                 bl.completedTest(testResult);
                 Close();
             }
-            catch (Exception msg)
+                catch (Exception msg)
             {
 
                 MessageBox.Show(msg.Message, "Exception", MessageBoxButton.OK, MessageBoxImage.Error);

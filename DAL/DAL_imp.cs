@@ -61,6 +61,7 @@ namespace DAL
         {
             if (DataSource.testers.RemoveAll(item => item.Id == tester.Id) == 0)
                 throw new Exception("failed to remove, tester with the same ID not found");
+            Dal_XML_imp.DeleteTester(tester);
             testerEvent(this, null);
         }
 
@@ -83,6 +84,7 @@ namespace DAL
                 if (item.Id == tester.Id)
                 {
                     DataSource.testers[index] = tester;
+                    Dal_XML_imp.SaveToXML<List<Tester>>(DataSource.testers, Dal_XML_imp.TesterPath);
                     testerEvent(this, null);
                                       return;
                 }
@@ -136,6 +138,7 @@ namespace DAL
                 if (item.Id == id)
                 {
                     DataSource.testers[index] = tester;
+                    Dal_XML_imp.SaveToXML<List<Tester>>(DataSource.testers, Dal_XML_imp.TesterPath);
                     testerEvent(this, null);
                     return;
                 }
@@ -164,6 +167,7 @@ namespace DAL
         {
             if (DataSource.trainees.RemoveAll(item => item.Id == trainee.Id) == 0)
                 throw new Exception("failed to remove, trainee with the same ID not found");
+            Dal_XML_imp.DeleteTrainee(trainee);
             traineeEvent(this, null);
 
         }
@@ -176,6 +180,7 @@ namespace DAL
                 if (item.Id == trainee.Id)
                 {
                     DataSource.trainees[index] = trainee;
+                    Dal_XML_imp.SaveToXML<List<Trainee>>(DataSource.trainees, Dal_XML_imp.TraineePath);
                     traineeEvent(this, null);
                     return;
                 }
@@ -192,6 +197,7 @@ namespace DAL
                 if (item.Id == id)
                 {
                     DataSource.trainees[index] = trainee;
+                    Dal_XML_imp.SaveToXML<List<Trainee>>(DataSource.trainees, Dal_XML_imp.TraineePath);
                     traineeEvent(this, null);
                     return;
                 }
@@ -280,10 +286,12 @@ namespace DAL
                 if (item.Id == test.Id)
                 {
                     DataSource.tests.Remove(item);
-                    
+                    Dal_XML_imp.DeleteTest(item);
                     testEvent(this, null);
                     return;
                 }
+
+               
 
             }
             throw new Exception("failed to remove, test with the same ID not found");
@@ -302,6 +310,7 @@ namespace DAL
                 if (item.Id == test.Id)
                 {
                     DataSource.tests[index] = test;
+                    Dal_XML_imp.UpdateTest(test);
                     testEvent(this, null);
                     return;
                 }
@@ -318,7 +327,7 @@ namespace DAL
 
        
 
-        public object findTest(Test test)
+        public Test findTest(Test test)
         {
             return DataSource.tests.Find(i => i.Id == test.Id);
         }

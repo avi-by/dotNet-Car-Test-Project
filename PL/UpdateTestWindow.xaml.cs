@@ -21,7 +21,7 @@ namespace PL
     public partial class UpdateTestWindow : Window
     {
         private IBL bl = FactoryBL.GetBL(Configuration.BLType);
-
+        Test orginaltest;
         public UpdateTestWindow()
         {
             InitializeComponent();
@@ -37,6 +37,7 @@ namespace PL
         {
             InitializeComponent();
             DataContext = test;
+            orginaltest = test;
             var allTraineeList = (from i in bl.getAllTrainees() //if the trainee end his test, cant be posible to regist him again
                                   where !bl.isPassed(i.Id)
                                   select i).ToList();
@@ -150,7 +151,14 @@ namespace PL
               
                     Trainee trainee = cb_traineeChoosing.SelectedItem as Trainee;
                     Tester tester = cb_testerChoosing.SelectedItem as Tester;
-                    bl.AddTest(new Test(tester.Id, trainee.Id, DateAndHour, new Address(streetTextBox.Text, int.Parse(houseNumberTextBox.Text), city.Text), trainee.GearBox, trainee.CarType));
+                    orginaltest.TesterId = tester.Id;
+                    orginaltest.TraineeId = trainee.Id;
+                    orginaltest.Date = DateAndHour;
+                    orginaltest.Address = new Address(streetTextBox.Text, int.Parse(houseNumberTextBox.Text), city.Text);
+                    orginaltest.GearBox = trainee.GearBox;
+                    orginaltest.Car = trainee.CarType;
+
+                    bl.updateTest(orginaltest);
                     Close();
                 }
                 catch (Exception msg)

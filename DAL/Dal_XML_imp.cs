@@ -8,6 +8,7 @@ using System.Xml.Linq;
 using System.Xml.Serialization;
 using BE;
 using System.Xml;
+using System.Reflection;
 
 namespace DAL
 {
@@ -60,35 +61,49 @@ namespace DAL
             }
         }
 
+        internal static void DeleteTester(Tester tester)
+        {
+
+            XElement testerRoot = XElement.Load(TesterPath);
+            var x = (from i in testerRoot.Elements()
+                     where i.Element("Id").Value == tester.Id
+                     select i).FirstOrDefault();
+            if (x == null)
+                throw new Exception("the tester not found at the xml");
+            x.Remove();
+            testerRoot.Save(TesterPath);
+
+        }
+
         public static void AddTest_PartialDetails(Test test)
         {
             Tests_xml();
-            XElement ID = new XElement("id", Dal_XML_imp.ID_FromConfigXML().ToString("00000000"));
+            XElement ID = new XElement("Id", Dal_XML_imp.ID_FromConfigXML().ToString("00000000"));
             Dal_XML_imp.configXML_advancingID(); //call to function that adavances id
 
-            XElement testerId = new XElement("testerID", test.TesterId);
-            XElement traineeId = new XElement("traineeID", test.TraineeId);
+            XElement testerId = new XElement("TesterId", test.TesterId);
+            XElement traineeId = new XElement("TraineeId", test.TraineeId);
 
             //XElement year = new XElement("year", test.Date.Year);
             //XElement month = new XElement("month", test.Date.Month);
             //XElement day = new XElement("day", test.Date.Day);
             //XElement hour = new XElement("hour", test.Date.Hour);
-            XElement date = new XElement("date", XmlConvert.ToString( test.Date, "yyyy-MM-ddTHH:mm:ss"));
+            XElement date = new XElement("Date", XmlConvert.ToString( test.Date, "yyyy-MM-ddTHH:mm:ss"));
 
             XElement houseNumber = new XElement("houseNumber", test.Address.houseNumber);
             XElement street = new XElement("street", test.Address.street);
             XElement city = new XElement("city", test.Address.city);
-            XElement address = new XElement("address", houseNumber, street, city);
+            XElement address = new XElement("Address", houseNumber, street, city);
 
             XElement GearBox = new XElement("GearBox",  (int)(test.GearBox));
-            XElement carType = new XElement("CarType", (int)test.Car);
-            XElement test1_ReverseParking = new XElement("test1_ReverseParking");
-            XElement test2_KeepingSafeDistance = new XElement("test2_KeepingSafeDistance");
-            XElement test3_UsingMirrors = new XElement("test3_UsingMirrors");
-            XElement test4_UsingTurnSignals = new XElement("test4_UsingTurnSignals");
-            XElement test5_LegalSpeed = new XElement("test5_LegalSpeed");
-            XElement succeeded = new XElement("succeeded");
-            XElement notes = new XElement("notes");
+            XElement carType = new XElement("Car", (int)test.Car);
+            XElement test1_ReverseParking = new XElement("Test1_ReverseParking");
+            XElement test2_KeepingSafeDistance = new XElement("Test2_KeepingSafeDistance");
+            XElement test3_UsingMirrors = new XElement("Test3_UsingMirrors");
+            XElement test4_UsingTurnSignals = new XElement("Test4_UsingTurnSignals");
+            XElement test5_LegalSpeed = new XElement("Test5_LegalSpeed");
+            XElement succeeded = new XElement("Succeeded");
+            XElement notes = new XElement("Notes");
 
             XElement Test = new XElement("test", ID, testerId, traineeId, date, address, GearBox,carType,test1_ReverseParking,test2_KeepingSafeDistance,test3_UsingMirrors,test4_UsingTurnSignals,test5_LegalSpeed,succeeded,notes);
 
@@ -96,6 +111,77 @@ namespace DAL
 
             test_root.Add(Test);
             test_root.Save(TestPath);
+        }
+
+        //internal static void UpdateTester(string id, Tester tester)
+        //{
+        //    XElement testerRoot = XElement.Load(TestPath);
+        //    var x = (from i in testerRoot.Elements()
+        //             where i.Element("Id").Value == id
+        //             select i).FirstOrDefault();
+        //    if (x == null)
+        //        throw new Exception("the tester not found at the xml");
+        //    foreach (PropertyInfo item in typeof(Tester).GetProperties())
+        //        x.Element(item.Name).SetValue(item.GetValue(tester).ToString());
+        //    XmlSerializer xmlSerializer = new XmlSerializer(typeof(Tester));
+        //    xmlSerializer.
+        //    testerRoot.Save(TesterPath);
+        //}
+
+        internal static void UpdateTester(Tester tester)
+        {
+            XElement testerRoot = XElement.Load(TesterPath);
+            var x = (from i in testerRoot.Elements()
+                     where i.Element("Id").Value == tester.Id
+                     select i).FirstOrDefault();
+            if (x == null)
+                throw new Exception("the tester not found at the xml");
+            foreach (PropertyInfo item in typeof(Tester).GetProperties())
+                x.Element(item.Name).SetValue(item.GetValue(tester).ToString());
+
+            testerRoot.Save(TesterPath);
+        }
+
+        internal static void DeleteTrainee(Trainee trainee)
+        {
+
+            XElement traineeRoot = XElement.Load(TraineePath);
+            var x = (from i in traineeRoot.Elements()
+                     where i.Element("Id").Value == trainee.Id
+                     select i).FirstOrDefault();
+            if (x == null)
+                throw new Exception("the trainee not found at the xml");
+            x.Remove();
+            traineeRoot.Save(TraineePath);
+
+        }
+
+        internal static void UpdateTrainee(Trainee trainee)
+        {
+            XElement traineeRoot = XElement.Load(TraineePath);
+            var x = (from i in traineeRoot.Elements()
+                     where i.Element("Id").Value == trainee.Id
+                     select i).FirstOrDefault();
+            if (x == null)
+                throw new Exception("the trainee not found at the xml");
+            foreach (PropertyInfo item in typeof(Trainee).GetProperties())
+                x.Element(item.Name).SetValue(item.GetValue(trainee).ToString());
+
+            traineeRoot.Save(TraineePath);
+        }
+
+        internal static void UpdateTrainee(string id, Trainee trainee)
+        {
+            XElement traineeRoot = XElement.Load(TraineePath);
+            var x = (from i in traineeRoot.Elements()
+                     where i.Element("Id").Value == id
+                     select i).FirstOrDefault();
+            if (x == null)
+                throw new Exception("the trainee not found at the xml");
+            foreach (PropertyInfo item in typeof(Trainee).GetProperties())
+                x.Element(item.Name).SetValue(item.GetValue(trainee).ToString());
+
+            traineeRoot.Save(TraineePath);
         }
 
         public List<Test> GetAllTests()
@@ -110,22 +196,22 @@ namespace DAL
                 tests = (from test in TestsRoot.Elements()
                          select new Test()
                          {
-                             Id = test.Element("id").Value,
-                             TesterId = test.Element("testerID").Value,
-                             TraineeId = test.Element("traineeID").Value,
-                             Date = Convert.ToDateTime(test.Element("date").Value),
-                             Address = new Address(test.Element("address").Element("street").Value,
-                           int.Parse(test.Element("address").Element("houseNumber").Value),
-                             test.Element("address").Element("city").Value),
+                             Id = test.Element("Id").Value,
+                             TesterId = test.Element("TesterId").Value,
+                             TraineeId = test.Element("TraineeId").Value,
+                             Date = Convert.ToDateTime(test.Element("Date").Value),
+                             Address = new Address(test.Element("Address").Element("street").Value,
+                           int.Parse(test.Element("Address").Element("houseNumber").Value),
+                             test.Element("Address").Element("city").Value),
                              GearBox = (GearBox)(int.Parse(test.Element("GearBox").Value)),
-                             Car = (CarType)(int.Parse(test.Element("CarType").Value)),
-                             Test1_ReverseParking = test.Element("test1_ReverseParking").Value == "" ? (bool?)null : (bool.Parse(test.Element("test1_ReverseParking").Value)),
-                             Test2_KeepingSafeDistance = test.Element("test2_KeepingSafeDistance").Value == "" ? (bool?)null : (bool.Parse(test.Element("test2_KeepingSafeDistance").Value)),
-                             Test3_UsingMirrors = test.Element("test3_UsingMirrors").Value == "" ? (bool?)null : (bool.Parse(test.Element("test3_UsingMirrors").Value)),
-                             Test4_UsingTurnSignals = test.Element("test4_UsingTurnSignals").Value == "" ? (bool?)null : (bool.Parse(test.Element("test4_UsingTurnSignals").Value)),
-                             Test5_LegalSpeed = test.Element("test5_LegalSpeed").Value == "" ? (bool?)null : (bool.Parse(test.Element("test5_LegalSpeed").Value)),
-                             Succeeded = test.Element("succeeded").Value == "" ? (bool?)null : (bool.Parse(test.Element("succeeded").Value)),
-                             Notes = test.Element("notes").Value
+                             Car = (CarType)(int.Parse(test.Element("Car").Value)),
+                             Test1_ReverseParking = test.Element("Test1_ReverseParking").Value == "" ? (bool?)null : (bool.Parse(test.Element("Test1_ReverseParking").Value)),
+                             Test2_KeepingSafeDistance = test.Element("Test2_KeepingSafeDistance").Value == "" ? (bool?)null : (bool.Parse(test.Element("Test2_KeepingSafeDistance").Value)),
+                             Test3_UsingMirrors = test.Element("Test3_UsingMirrors").Value == "" ? (bool?)null : (bool.Parse(test.Element("Test3_UsingMirrors").Value)),
+                             Test4_UsingTurnSignals = test.Element("Test4_UsingTurnSignals").Value == "" ? (bool?)null : (bool.Parse(test.Element("Test4_UsingTurnSignals").Value)),
+                             Test5_LegalSpeed = test.Element("Test5_LegalSpeed").Value == "" ? (bool?)null : (bool.Parse(test.Element("Test5_LegalSpeed").Value)),
+                             Succeeded = test.Element("Succeeded").Value == "" ? (bool?)null : (bool.Parse(test.Element("Succeeded").Value)),
+                             Notes = test.Element("Notes").Value
                          }).ToList().Clone();
             }
             catch
@@ -179,5 +265,55 @@ namespace DAL
             catch { throw new Exception("File upload problem, cannot advance id"); }
         }
 
+        internal static void DeleteTest(Test item)
+        {
+             XElement testRoot = XElement.Load(TestPath);
+            var x = (from i in testRoot.Elements()
+                    where i.Element("Id").Value == item.Id
+                    select i).FirstOrDefault();
+            if (x == null)
+                throw new Exception("the test not found at the xml");
+            x.Remove();
+            testRoot.Save(TestPath);
+
+        }
+
+        internal static void UpdateTest(Test test)
+        {
+            XElement testRoot = XElement.Load(TestPath);
+            var x = (from i in testRoot.Elements()
+                     where i.Element("Id").Value == test.Id
+                     select i).FirstOrDefault();
+            if (x == null)
+                throw new Exception("the test not found at the xml");
+            foreach (PropertyInfo item in typeof(BE.Test).GetProperties())
+                    switch (item.Name)
+                    {
+                    case "Date":
+                        x.Element("Date").SetValue(XmlConvert.ToString(test.Date, "yyyy-MM-ddTHH:mm:ss"));
+                        break;
+                    case "Grade":
+                        break;
+                    case "Address":
+                        x.Element("Address").Element("street").SetValue(test.Address.street);
+                        x.Element("Address").Element("houseNumber").SetValue(test.Address.houseNumber);
+                        x.Element("Address").Element("city").SetValue(test.Address.city);
+                        break;
+                    case "GearBox":
+                        x.Element("GearBox").SetValue((int)test.GearBox);
+                        break;
+                    case "Car":
+                        x.Element("Car").SetValue((int)test.Car);
+                        break;
+                    case "Notes":
+                        x.Element("Notes").SetValue(test.Notes);
+                        break;
+                    default:
+                        x.Element(item.Name).SetValue((item.GetValue(test)).ToString().ToLower());
+                        break;
+                }
+         
+            testRoot.Save(TestPath);
+        }
     }
 }
