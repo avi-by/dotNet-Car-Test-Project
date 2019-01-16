@@ -27,10 +27,10 @@
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="addressColumn" Binding="{Binding Address}" Header="Address" Width="auto" IsReadOnly="True"/>
                 <DataGridTextColumn x:Name="carColumn" Binding="{Binding Car}" Header="Car" Width="auto" IsReadOnly="True"/>
-                <DataGridTemplateColumn x:Name="dateColumn" Header="Date" Width="auto" IsReadOnly="True">
+                <DataGridTemplateColumn x:Name="dateColumn" Header="Date" Width="auto" IsReadOnly="True" >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <DatePicker SelectedDate="{Binding Date, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                            <DatePicker SelectedDate="{Binding Date, Mode=OneWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" IsEnabled="False"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -64,7 +64,7 @@
                 </ItemsPanelTemplate>
             </ComboBox.ItemsPanel>
         </ComboBox>
-        <Grid x:Name="grid2" HorizontalAlignment="Left" Margin="239,25,0,0" VerticalAlignment="Top">
+        <Grid x:Name="grid2" HorizontalAlignment="Left" Margin="420,52,0,0" VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
@@ -76,5 +76,6 @@
             <TextBox x:Name="TextBoxSearch" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="" VerticalAlignment="Center" Width="120" TextChanged="TextBoxSearch_TextChanged"/>
         </Grid>
         <CheckBox x:Name="checkBoxFinishTestShow" Content="show finished tests" HorizontalAlignment="Left" Margin="30,63,0,0" VerticalAlignment="Top" IsChecked="True" Checked="checkBoxFinishTestShow_Checked" Unchecked="checkBoxFinishTestShow_Unchecked"/>
+        <Button Content="update Test" HorizontalAlignment="Left" Margin="250,31,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
     </Grid>
 </UserControl>

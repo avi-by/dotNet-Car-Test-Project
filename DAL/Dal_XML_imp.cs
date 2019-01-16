@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 using BE;
+using System.Xml;
 
 namespace DAL
 {
@@ -62,7 +63,7 @@ namespace DAL
         public static void AddTest_PartialDetails(Test test)
         {
             Tests_xml();
-            XElement ID = new XElement("id", Dal_XML_imp.ID_FromConfigXML());
+            XElement ID = new XElement("id", Dal_XML_imp.ID_FromConfigXML().ToString("00000000"));
             Dal_XML_imp.configXML_advancingID(); //call to function that adavances id
 
             XElement testerId = new XElement("testerID", test.TesterId);
@@ -72,7 +73,7 @@ namespace DAL
             //XElement month = new XElement("month", test.Date.Month);
             //XElement day = new XElement("day", test.Date.Day);
             //XElement hour = new XElement("hour", test.Date.Hour);
-            XElement date = new XElement("date", test.Date.ToShortDateString());
+            XElement date = new XElement("date", XmlConvert.ToString( test.Date, "yyyy-MM-ddTHH:mm:ss"));
 
             XElement houseNumber = new XElement("houseNumber", test.Address.houseNumber);
             XElement street = new XElement("street", test.Address.street);
@@ -129,7 +130,7 @@ namespace DAL
             }
             catch
             {
-                tests = null;
+                tests = new List<Test>();
             }
             return tests;
         }

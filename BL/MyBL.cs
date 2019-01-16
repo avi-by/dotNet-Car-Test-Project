@@ -32,7 +32,6 @@ namespace BL
 
         static IDAL MyDal;
 
-
         #region Constructor
 
         private MyBL() { }
@@ -43,11 +42,8 @@ namespace BL
         }
 
         #endregion
-        public int getMinimumAge()
-        {
-
-            return Configuration.MinAgeTrainee;
-        }
+      
+        #region Tester
 
         public int getMinimumAgeOfTester()
         {
@@ -62,8 +58,6 @@ namespace BL
         }
 
 
-
-        #region Tester
         public void addTester(Tester tester)
         {
             if (tester.Age < BE.Configuration.MinAgeTrainee)
@@ -120,9 +114,23 @@ namespace BL
             return distanceFromAddress(tester.Address, address) <= tester.Distance;
         }
 
+
+        public Tester findTester(string testerId)
+        {
+            return MyDal.findTester(testerId);
+        }
+
+
         #endregion
 
         #region trainee
+
+        public int getMinimumAge()
+        {
+
+            return Configuration.MinAgeTrainee;
+        }
+
         public void addTrainee(Trainee trainee)
         {
             checkTrainee(trainee);
@@ -175,6 +183,11 @@ namespace BL
                 throw new Exception("cannot update, the trainee too young");
         }
 
+        public Trainee findTraine(string traineeId)
+        {
+            return MyDal.findTrainee(traineeId);
+        }
+
         #endregion trainee
 
         #region test
@@ -182,7 +195,7 @@ namespace BL
         {
             Trainee trainee = MyDal.findTrainee(test.TraineeId); //in update test and finish test its always false, then check it only in add test
             var temp = MyDal.GetTestList(item => item.TraineeId == trainee.Id && item.GearBox == trainee.GearBox && item.Car == trainee.CarType);
-            if (temp.Count > 0 && (temp.Max(item => item.Date) - test.Date).Days < Configuration.IntervalBetweenTest.Days) //get all the test of this trainee on this gearbox and select the test with the later date and check if past enough days from this test (first check if there are any test records and after search in them, max cant work on empty list) 
+            if (temp.Count > 0 && Math.Abs((temp.Max(item => item.Date) - test.Date).Days) < Configuration.IntervalBetweenTest.Days) //get all the test of this trainee on this gearbox and select the test with the later date and check if past enough days from this test (first check if there are any test records and after search in them, max cant work on empty list) 
             {
                 throw new Exception("cant regist, the trainee did his last test not long ago");
             }
@@ -274,7 +287,7 @@ namespace BL
         private double distanceFromAddress(Address addressSource, Address addressDestination)
         {
             Random random = new Random();
-            double e = random.Next() % 8;
+            double e = random.Next() % 5;
             return e;
         }
 
@@ -570,6 +583,8 @@ namespace BL
             x = (from i in x where atAvailbleDistance(i.Id, address) select i).ToList();
             return x;
         }
+
+       
 
 
         #endregion

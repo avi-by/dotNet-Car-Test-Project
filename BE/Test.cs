@@ -86,7 +86,7 @@ namespace BE
         {
             Test temp = (Test)MemberwiseClone();
             temp.Address = new Address(address.street, address.houseNumber, address.city);
-            temp.Date = new DateTime(Date.Year, Date.Month, Date.Day);
+            temp.Date = new DateTime(Date.Year, Date.Month, Date.Day,Date.Hour,Date.Minute,Date.Second);
             return temp;
         }
 
