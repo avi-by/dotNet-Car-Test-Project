@@ -44,6 +44,7 @@
     <Compile Include="DALTools.cs" />
     <Compile Include="DAL_imp.cs" />
     <Compile Include="Dal_XML_imp.cs" />
+    <Compile Include="distance_calculation.cs" />
     <Compile Include="FactoryDAL.cs" />
     <Compile Include="Idal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
