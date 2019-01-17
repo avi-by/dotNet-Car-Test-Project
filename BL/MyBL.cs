@@ -7,6 +7,7 @@ using System.Configuration;
 using BE;
 using DAL;
 using System.Collections.Specialized;
+using System.Threading;
 
 namespace BL
 {
@@ -288,9 +289,17 @@ namespace BL
 
         private double distanceFromAddress(Address addressSource, Address addressDestination)
         {
-            Random random = new Random();
-            double e = random.Next() % 5;
-            return e;
+            double value=1;
+            var thread= new Thread(() =>
+            {
+               value= (DAL.distance_calculation.distanceCalculation(addressSource, addressDestination));
+            });
+            thread.Start();
+            thread.Join();
+            return value;
+           // Random random = new Random();
+            //double e = random.Next() % 5;
+            //return e;
         }
 
         /// <summary>

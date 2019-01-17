@@ -6,21 +6,26 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Net;
 using System.Xml;
+using BE;
 
 namespace DAL
 {
     public class distance_calculation
     {
-        distance_calculation(string  trainee_Adress, string tester_Adress)
+        
+        public static double distanceCalculation(Address trainee_Adress, Address tester_Adress)
         {
+            
+            string traineeAddress = trainee_Adress.street +" "+ trainee_Adress.houseNumber +" "+ trainee_Adress.city;
+            string testerAddress = tester_Adress.street + " " + tester_Adress.houseNumber + " " + tester_Adress.city;
 
-            string origin = "pisga 45 st. jerusalem";//or "תקווה פתח 100 העם אחד "etc.
-            string destination = "gilgal 78 st. ramat-gan";//or "גן רמת 10 בוטינסקי'ז "etc.
+            //string origin = "pisga 45 st. jerusalem";//or "תקווה פתח 100 העם אחד "etc.
+            //string destination = "gilgal 78 st. ramat-gan";//or "גן רמת 10 בוטינסקי'ז "etc.
             string KEY = @"qJohA5KvfKXcnOlya1sL0tGCyDwArh2A";
             string url = @"https://www.mapquestapi.com/directions/v2/route" +
              @"?key=" + KEY +
-             @"&from=" + origin +
-             @"&to=" + destination +
+             @"&from=" + testerAddress +
+             @"&to=" + traineeAddress +
              @"&outFormat=xml" +
              @"&ambiguities=ignore&routeType=fastest&doReverseGeocode=false" +
              @"&enhancedNarrative=false&avoidTimedConditions=false";
@@ -40,20 +45,28 @@ namespace DAL
                 //display the returned distance
                 XmlNodeList distance = xmldoc.GetElementsByTagName("distance");
                 double distInMiles = Convert.ToDouble(distance[0].ChildNodes[0].InnerText);
-                Console.WriteLine("Distance In KM: " + distInMiles * 1.609344);
+                //Console.WriteLine("Distance In KM: " + distInMiles * 1.609344);
                 //display the returned driving time
                 XmlNodeList formattedTime = xmldoc.GetElementsByTagName("formattedTime");
                 string fTime = formattedTime[0].ChildNodes[0].InnerText;
-                Console.WriteLine("Driving Time: " + fTime);
+
+                return distInMiles * 1.609344;
+                //return Convert.ToDouble(fTime);
+                //return fTime;
+                //Console.WriteLine("Driving Time: " + fTime);
             }
             else if (xmldoc.GetElementsByTagName("statusCode")[0].ChildNodes[0].InnerText == "402")
             //we have an answer that an error occurred, one of the addresses is not found
             {
-                Console.WriteLine("an error occurred, one of the addresses is not found. try again.");
+                return -1;
+              //  return "an error occurred, one of the addresses is not found. try again.";
+                //Console.WriteLine("an error occurred, one of the addresses is not found. try again.");
             }
             else //busy network or other error...
             {
-                Console.WriteLine("We have'nt got an answer, maybe the net is busy...");
+                return distanceCalculation(trainee_Adress, tester_Adress);
+               // return "We have'nt got an answer, maybe the net is busy...";
+                //Console.WriteLine("We have'nt got an answer, maybe the net is busy...");
             }
 
         }
