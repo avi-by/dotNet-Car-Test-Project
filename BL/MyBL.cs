@@ -406,7 +406,9 @@ namespace BL
                                  into tests //list of all the test that was done
                                  group tests by tests.TesterId
                                 into groupTesters //group to gruops that every gruop contain the tester id and his tests
-                                 select new { tester_ID = groupTesters.Key, p = ((double)groupTesters.Count(x => x.Succeeded == true) / groupTesters.Count()).ToString("0.0%") };//return anonymous element that comtain the tester id and the percentage of successes in his tests in sting fotmat of percentage
+                                from i in MyDal.getAllTesters()
+                                where i.Id == groupTesters.Key
+                                 select new { tester_ID = groupTesters.Key,name = i.FirstName+" "+i.LastName ,p = ((double)groupTesters.Count(x => x.Succeeded == true) / groupTesters.Count()).ToString("0.0%") };//return anonymous element that comtain the tester id and the percentage of successes in his tests in sting fotmat of percentage
 
                     return tester.ToList();
                 //return list of elements that contain schools name and percentage of successes in tests of its trainee
@@ -581,10 +583,11 @@ namespace BL
 
         public DateTime NearestOpenDateBySpecializationAndAddress(CarType carType, GearBox gearBox, DateTime? inputDate, Address address)
         {
+            //if there are no relevant tester at all, there is no meaning in check the date, and the loop continue forever
             if (MyDal.getAllTesters().Find(i => i.CarType == carType && i.GearBox == gearBox) == null)
                 throw new Exception("there are no tester for this type of car and gearbox");
-            if (MyDal.getAllTesters().Find(i =>distanceFromAddress( i.Address,address)<=i.Distance) == null)
-                throw new Exception("there are no tester available at this address");
+            if (MyDal.getAllTesters().Find(i => i.CarType == carType && i.GearBox == gearBox&&distanceFromAddress( i.Address,address)<=i.Distance) == null) //to minimalize the number of the cull to the web, check only for relevant tester 
+                throw new Exception("there are no tester with this type of car and gearbox available at this address");
 
             DateTime date;
             if (inputDate == null)

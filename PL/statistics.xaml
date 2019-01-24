@@ -23,6 +23,7 @@
         <DataGrid x:Name="testerDataGrid" AutoGenerateColumns="False" HorizontalAlignment="Center" Height="auto" Margin="20,0,0,0" Grid.Column="1" VerticalAlignment="Top" Width="auto">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding tester_ID}" Header="tester ID" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding name}" Header="name" IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding p}" Header="percentage" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>

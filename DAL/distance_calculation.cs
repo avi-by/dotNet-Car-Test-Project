@@ -46,9 +46,10 @@ namespace DAL
                 XmlNodeList distance = xmldoc.GetElementsByTagName("distance");
                 double distInMiles = Convert.ToDouble(distance[0].ChildNodes[0].InnerText);
                 //Console.WriteLine("Distance In KM: " + distInMiles * 1.609344);
-                //display the returned driving time
-                XmlNodeList formattedTime = xmldoc.GetElementsByTagName("formattedTime");
-                string fTime = formattedTime[0].ChildNodes[0].InnerText;
+                //display the returned driving time 
+                //there is no use in the drive time
+                //XmlNodeList formattedTime = xmldoc.GetElementsByTagName("formattedTime");
+                //string fTime = formattedTime[0].ChildNodes[0].InnerText;
 
                 return distInMiles * 1.609344;
                 //return Convert.ToDouble(fTime);
@@ -64,8 +65,10 @@ namespace DAL
             }
             else //busy network or other error...
             {
-                return distanceCalculation(trainee_Adress, tester_Adress);
-               // return "We have'nt got an answer, maybe the net is busy...";
+                //at the Instructions they say that if there are any problem with the return value use defult value so:
+                return 13;
+                //   return distanceCalculation(trainee_Adress, tester_Adress);
+                // return "We have'nt got an answer, maybe the net is busy...";
                 //Console.WriteLine("We have'nt got an answer, maybe the net is busy...");
             }
 

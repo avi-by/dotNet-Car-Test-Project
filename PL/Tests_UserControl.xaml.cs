@@ -104,13 +104,13 @@ namespace PL
  
         private void PbAdd_Test_Click(object sender, RoutedEventArgs e)
         {
-            AddTestWindow addTestWindow = new AddTestWindow();
+            AddTestComboboxAddress addTestWindow = new AddTestComboboxAddress();
             addTestWindow.ShowDialog();
         }
 
         private void MenuItem_add_Click(object sender, RoutedEventArgs e)
         {
-            AddTestWindow addTestWindow = new AddTestWindow();
+            AddTestComboboxAddress addTestWindow = new AddTestComboboxAddress();
             addTestWindow.ShowDialog();
         }
 
@@ -250,7 +250,8 @@ namespace PL
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             if (testDataGrid.SelectedItem == null||(testDataGrid.SelectedItem as Test).Succeeded!=null) return;
-            UpdateTestWindow updateTest = new UpdateTestWindow(testDataGrid.SelectedItem as Test);
+            //      new UpdateTestComboboxAddress(testDataGrid.SelectedItem as Test).ShowDialog();
+            UpdateTestComboboxAddress updateTest = new UpdateTestComboboxAddress(testDataGrid.SelectedItem as Test);
             updateTest.ShowDialog();
         }
     }

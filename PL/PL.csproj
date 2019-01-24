@@ -71,6 +71,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddTestComboboxAddress.xaml.cs">
+      <DependentUpon>AddTestComboboxAddress.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AddTestWindow.xaml.cs">
       <DependentUpon>AddTestWindow.xaml</DependentUpon>
     </Compile>
@@ -109,6 +112,9 @@
     <Compile Include="Trainees_UserControl.xaml.cs">
       <DependentUpon>Trainees_UserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UpdateTestComboboxAddress.xaml.cs">
+      <DependentUpon>UpdateTestComboboxAddress.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UpdateTesterWindow.xaml.cs">
       <DependentUpon>UpdateTesterWindow.xaml</DependentUpon>
     </Compile>
@@ -118,6 +124,10 @@
     <Compile Include="UpdateTestWindow.xaml.cs">
       <DependentUpon>UpdateTestWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="AddTestComboboxAddress.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AddTesterWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -184,6 +194,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Trainees_UserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UpdateTestComboboxAddress.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -267,6 +281,21 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="icons\571px-Lamed_sign.svg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="dataXML\cityList.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="dataXML\streetXML.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="dataXML\streetWithoutSynonimXML.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

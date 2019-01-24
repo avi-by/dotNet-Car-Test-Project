@@ -56,7 +56,7 @@ namespace PL
                 {
                     teastr.Add(lstr[random.Next() % lstr.Count] + " " + fnstr[random.Next() % fnstr.Count]);
                 }
-                    XElement streetName = XElement.Load(@"download.xml");
+                    XElement streetName = XElement.Load(@"dataXML\streetXML.xml");
                 for (int i = 0; i < 1000; i++)
                 {
                     fName = fnstr[random.Next() % fnstr.Count];
