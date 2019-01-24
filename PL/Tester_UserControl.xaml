@@ -61,7 +61,6 @@
 
             </DataGrid.Columns>
         </DataGrid>
-        <local:UserControl1  x:Name="matrix1" Grid.Column="1" HorizontalAlignment="Left" Margin="4,27,0,196" Grid.Row="1" Grid.ColumnSpan="2"/>
         <TextBlock Name="tbOfHours" Grid.Column="1" HorizontalAlignment="Left" Margin="4,4,0,0" TextWrapping="Wrap" Text="work hours (of the selected tester):" VerticalAlignment="Top" Height="30" Width="207" FontWeight="Bold" Grid.Row="1" Grid.ColumnSpan="2"/>
         <Button Name="pbUpdateTester" Content="Update selected tester" Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Left"  Width="135" Click="PbUpdateTester_Click" Margin="111,13,0,0" />
         <Label Name="labelSortBy" Content="sort by:" Grid.Column="0"  Margin="280,0,0,0" Grid.Row="0" VerticalAlignment="Bottom"/>
@@ -74,7 +73,16 @@
         </ComboBox>
         <TextBox x:Name="TextBoxSearch" Grid.Column="2" Grid.Row="0" Height="23" HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="" VerticalAlignment="Bottom" TextChanged="TextBoxSearch_TextChanged" Grid.ColumnSpan="2"/>
         <Label x:Name="LabelSearch" Content="search:" HorizontalAlignment="Left"  VerticalAlignment="Bottom" Grid.Column="01" Grid.Row="0" Grid.ColumnSpan="2"/>
-        <local:FiltersPanel x:Name="filtersControl" HorizontalAlignment="Right"  Width="309" Grid.Row="1" Grid.ColumnSpan="3" VerticalAlignment="Bottom"/>
+        <Grid Grid.ColumnSpan="2" Grid.Column="1" Margin="0,27,10,66" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <local:UserControl1  x:Name="matrix1" HorizontalAlignment="Left" Margin="4,0,0,130" Grid.Row="0" Grid.RowSpan="2"/>
+            <local:FiltersPanel x:Name="filtersControl" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,-300" Grid.Row="1" Width="309" Height="246"/>
+
+
+        </Grid>
 
 
     </Grid>

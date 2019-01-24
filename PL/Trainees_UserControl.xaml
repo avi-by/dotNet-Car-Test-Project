@@ -12,6 +12,10 @@
         <CollectionViewSource x:Key="testViewSource" d:DesignSource="{d:DesignInstance {x:Type BE:Test}, CreateList=True}"/>
     </UserControl.Resources>
     <Grid DataContext="{StaticResource traineeViewSource}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
         <Grid x:Name="grid1" HorizontalAlignment="Left" Margin="300,13,0,0" VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
@@ -29,40 +33,8 @@
                 </ComboBox.ItemsPanel>
             </ComboBox>
         </Grid>
-        <DataGrid x:Name="traineeDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="10,46,338,81" RowDetailsVisibilityMode="VisibleWhenSelected" IsReadOnly="True">
-            <DataGrid.ContextMenu>
-                <ContextMenu>
-                    <MenuItem Header="edit" Click="MenuItem_Click_edit" />
-                    <MenuItem Header="delete" Click="MenuItem_Click_delete"/>
-                    <MenuItem Header="add" Click="MenuItem_Click_add"/>
-                </ContextMenu>
-            </DataGrid.ContextMenu>
-            <DataGrid.Columns>
-
-                <DataGridTextColumn x:Name="firstNameColumn" Binding="{Binding FirstName}" Header="First Name" IsReadOnly="True" />
-                <DataGridTextColumn x:Name="lastNameColumn" Binding="{Binding LastName}" Header="Last Name" IsReadOnly="True" />
-                <DataGridTextColumn x:Name="idColumn" Binding="{Binding Id}" Header="Id" IsReadOnly="True" />
-                <DataGridTextColumn x:Name="genderColumn" Binding="{Binding Gender}" Header="Gender" IsReadOnly="True"/>
-                <DataGridTextColumn x:Name="ageColumn" Binding="{Binding Age}" Header="Age" IsReadOnly="True" />
-                <DataGridTextColumn x:Name="phoneNumberColumn" Binding="{Binding PhoneNumber}" Header="Phone Number" IsReadOnly="True" />
-
-                <DataGridTextColumn x:Name="addressColumn" Binding="{Binding Address}" Header="Address" IsReadOnly="True" />
-                <DataGridTemplateColumn x:Name="birthDateColumn" Header="Birth Date" IsReadOnly="True" >
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <DatePicker SelectedDate="{Binding BirthDate, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" IsEnabled="False"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTextColumn x:Name="carTypeColumn" Binding="{Binding CarType}" Header="Car Type" IsReadOnly="True" />
-                <DataGridTextColumn x:Name="gearBoxColumn" Binding="{Binding GearBox}" Header="Gear Box" IsReadOnly="True" />
-                <DataGridTextColumn x:Name="numberOfLessonColumn" Binding="{Binding NumberOfLesson}" Header="Number Of Lesson" IsReadOnly="True" />
-                <DataGridTextColumn x:Name="schoolNameColumn" Binding="{Binding SchoolName}" Header="School Name" IsReadOnly="True" />
-                <DataGridTextColumn x:Name="teacherNameColumn" Binding="{Binding TeacherName}" Header="Teacher Name" IsReadOnly="True" />
-            </DataGrid.Columns>
-        </DataGrid>
-        <Button x:Name="pbUpdateTrainee" Content="Update selected trainee" HorizontalAlignment="Left" VerticalAlignment="Top" Width="136" Margin="147,15,0,0" Click="PbUpdateTrainee_Click"  />
-        <Button x:Name="pbTrainee" Content="Add Trainee" HorizontalAlignment="Left" Margin="55,15,0,0" VerticalAlignment="Top" Width="auto"  Height="29" Click="PbAddTrainee_Click">
+        <Button x:Name="pbUpdateTrainee" Content="Update selected trainee" HorizontalAlignment="Left" VerticalAlignment="Top" Width="136" Margin="147,18,0,0" Click="PbUpdateTrainee_Click"  />
+        <Button x:Name="pbTrainee" Content="Add Trainee" HorizontalAlignment="Left" Margin="55,12,0,0" VerticalAlignment="Top" Width="auto"  Height="29" Click="PbAddTrainee_Click">
             <Button.Template>
                 <ControlTemplate>
                     <Image Source="icons/plus_add_green_61658 (1).png" />
@@ -80,6 +52,44 @@
             <Label Content="search:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
             <TextBox x:Name="TextBoxSearch" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="" VerticalAlignment="Center" Width="120" TextChanged="TextBoxSearch_TextChanged"/>
         </Grid>
-        <local:FiltersPanel x:Name="FilterPanel1" HorizontalAlignment="Left" Height="260" Margin="478,52,0,0" VerticalAlignment="Top" Width="312"/>
+        <Grid Margin="10,1,10,81" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <DataGrid x:Name="traineeDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="0,0,13,0" RowDetailsVisibilityMode="VisibleWhenSelected" IsReadOnly="True">
+                <DataGrid.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="edit" Click="MenuItem_Click_edit" />
+                        <MenuItem Header="delete" Click="MenuItem_Click_delete"/>
+                        <MenuItem Header="add" Click="MenuItem_Click_add"/>
+                    </ContextMenu>
+                </DataGrid.ContextMenu>
+                <DataGrid.Columns>
+
+                    <DataGridTextColumn x:Name="firstNameColumn" Binding="{Binding FirstName}" Header="First Name" IsReadOnly="True" />
+                    <DataGridTextColumn x:Name="lastNameColumn" Binding="{Binding LastName}" Header="Last Name" IsReadOnly="True" />
+                    <DataGridTextColumn x:Name="idColumn" Binding="{Binding Id}" Header="Id" IsReadOnly="True" />
+                    <DataGridTextColumn x:Name="genderColumn" Binding="{Binding Gender}" Header="Gender" IsReadOnly="True"/>
+                    <DataGridTextColumn x:Name="ageColumn" Binding="{Binding Age}" Header="Age" IsReadOnly="True" />
+                    <DataGridTextColumn x:Name="phoneNumberColumn" Binding="{Binding PhoneNumber}" Header="Phone Number" IsReadOnly="True" />
+
+                    <DataGridTextColumn x:Name="addressColumn" Binding="{Binding Address}" Header="Address" IsReadOnly="True" />
+                    <DataGridTemplateColumn x:Name="birthDateColumn" Header="Birth Date" IsReadOnly="True" >
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <DatePicker SelectedDate="{Binding BirthDate, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" IsEnabled="False"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn x:Name="carTypeColumn" Binding="{Binding CarType}" Header="Car Type" IsReadOnly="True" />
+                    <DataGridTextColumn x:Name="gearBoxColumn" Binding="{Binding GearBox}" Header="Gear Box" IsReadOnly="True" />
+                    <DataGridTextColumn x:Name="numberOfLessonColumn" Binding="{Binding NumberOfLesson}" Header="Number Of Lesson" IsReadOnly="True" />
+                    <DataGridTextColumn x:Name="schoolNameColumn" Binding="{Binding SchoolName}" Header="School Name" IsReadOnly="True" />
+                    <DataGridTextColumn x:Name="teacherNameColumn" Binding="{Binding TeacherName}" Header="Teacher Name" IsReadOnly="True" />
+                </DataGrid.Columns>
+            </DataGrid>
+            <local:FiltersPanel x:Name="FilterPanel1" HorizontalAlignment="Left" Height="260" Margin="3,6,0,0" VerticalAlignment="Top" Width="312" Grid.Column="1"/>
+        </Grid>
     </Grid>
 </UserControl>

@@ -12,7 +12,7 @@
         xmlns:BE="clr-namespace:BE;assembly=BE"  x:Class="PL.MainWindow"
  
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Icon="icons/571px-Lamed_sign.svg.png" >
+        Title="MainWindow" Height="450" Width="850" Icon="icons/571px-Lamed_sign.svg.png" >
     
     <Window.Resources>
         <CollectionViewSource x:Key="testViewSource" d:DesignSource="{d:DesignInstance {x:Type BE:Tester}, CreateList=True}"/>
@@ -48,9 +48,7 @@
                     <local:Tests_UserControl />
                 </TabItem>
 
-                <TabItem Header="media">
-                    <local:media_element Margin="158,55,209.333,93.667"/>
-                </TabItem>
+               
 
                 <TabItem Header="statistics">
                     <local:statistics/>

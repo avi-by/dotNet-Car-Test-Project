@@ -28,80 +28,7 @@ namespace PL
         {
             InitializeComponent();
             orginaltest = test;
-            var allTraineeList = (from i in bl.getAllTrainees() //if the trainee end his test, cant be posible to regist him again
-                                  where !bl.isPassed(i.Id)
-                                  select i).ToList();
-            var trainee = allTraineeList.Find(i => i.Id == test.TraineeId);
-            cb_traineeChoosing.ItemsSource = allTraineeList;
-            cb_traineeChoosing.SelectedItem = trainee;
-            houseNumberTextBox.Text = test.Address.houseNumber.ToString();
-            comboBoxCity.ItemsSource= Configuration.city;
-            comboBoxCity.SelectedItem= Configuration.city.Find(i=>i== test.Address.city);
-            comboBoxStreet.ItemsSource = Configuration.street[test.Address.city];
-            comboBoxStreet.SelectedItem = Configuration.street[test.Address.city].Find(I => I == test.Address.street);
-            Date_DatePicker.SelectedDate = test.Date;
-            hourComboBox.Items.Clear();
-            var lis = bl.testersAvailableAtDateBySpecialization((DateTime)Date_DatePicker.SelectedDate, ((Trainee)cb_traineeChoosing.SelectedItem).CarType, ((Trainee)cb_traineeChoosing.SelectedItem).GearBox);
-            for (int i = 0; i < 6; i++)
-            {
-                if (lis.Find(item => item.WorkHour[(int)((DateTime)Date_DatePicker.SelectedDate).DayOfWeek][i]) != null)
-                {
-                    switch (i)
-                    {
-                        case 0:
-                            ComboBoxItem hour_9 = new ComboBoxItem();
-                            hour_9.Content = "09:00";
-                            hourComboBox.Items.Add(hour_9);
-                            if (test.Date.Hour == 9)
-                                hourComboBox.SelectedItem = hour_9;
-                            break;
-                        case 1:
-
-                            ComboBoxItem hour_10 = new ComboBoxItem();
-                            hour_10.Content = "10:00";
-                            hourComboBox.Items.Add(hour_10);
-                            if (test.Date.Hour == 10)
-                                hourComboBox.SelectedItem = hour_10;
-                            break;
-                        case 2:
-                            ComboBoxItem hour_11 = new ComboBoxItem();
-                            hour_11.Content = "11:00";
-                            hourComboBox.Items.Add(hour_11);
-                            if (test.Date.Hour == 11)
-                                hourComboBox.SelectedItem = hour_11;
-                            break;
-                        case 3:
-                            ComboBoxItem hour_12 = new ComboBoxItem();
-                            hour_12.Content = "12:00";
-                            hourComboBox.Items.Add(hour_12);
-                            if (test.Date.Hour == 12)
-                                hourComboBox.SelectedItem = hour_12;
-                            break;
-                        case 4:
-                            ComboBoxItem hour_13 = new ComboBoxItem();
-                            hour_13.Content = "13:00";
-                            hourComboBox.Items.Add(hour_13);
-                            if (test.Date.Hour == 13)
-                                hourComboBox.SelectedItem = hour_13;
-                            break;
-                        case 5:
-                            ComboBoxItem hour_14 = new ComboBoxItem();
-                            hour_14.Content = "14:00";
-                            hourComboBox.Items.Add(hour_14);
-                            if (test.Date.Hour == 14)
-                                hourComboBox.SelectedItem = hour_14;
-                            break;
-                        default:
-                            break;
-                    }
-                }
-            }
-            var allTesterAvailable = bl.testersAvailableAtDateAndHourBySpecialization(test.Date, cb_traineeChoosing.SelectedItem as Trainee);
-            var tester = bl.getAllTester().Find(i => i.Id == test.TesterId);
-            allTesterAvailable.Add(tester);
-            cb_testerChoosing.DataContext = allTesterAvailable;
-            cb_testerChoosing.SelectedItem = tester;
-            cb_testerChoosing.IsEnabled = true;
+           
         }
 
 
@@ -112,10 +39,13 @@ namespace PL
         /// <param name="e"></param>
         private void Cb_traineeChoosing_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            string first_name = (cb_traineeChoosing.SelectedItem as Trainee).FirstName;
-            string last_name = (cb_traineeChoosing.SelectedItem as Trainee).LastName;
-            tb_traineeName.Text = first_name + " " + last_name;
-            resetDate();
+            if (cb_traineeChoosing.SelectedItem != null)
+            {
+                string first_name = (cb_traineeChoosing.SelectedItem as Trainee).FirstName;
+                string last_name = (cb_traineeChoosing.SelectedItem as Trainee).LastName;
+                tb_traineeName.Text = first_name + " " + last_name;
+                resetDate();
+            }
         }
         #region date
         /// <summary>
@@ -417,6 +347,86 @@ namespace PL
         {
             comboBoxStreet.IsEnabled = true;
             comboBoxStreet.ItemsSource = Configuration.street[comboBoxCity.SelectedItem as string];
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            Test test = orginaltest;
+            var allTraineeList = (from i in bl.getAllTrainees() //if the trainee end his test, cant be posible to regist him again
+                                  where !bl.isPassed(i.Id)
+                                  select i).ToList();
+            var trainee = allTraineeList.Find(i => i.Id == test.TraineeId);
+            cb_traineeChoosing.ItemsSource = allTraineeList;
+            cb_traineeChoosing.SelectedItem = trainee;
+            houseNumberTextBox.Text = test.Address.houseNumber.ToString();
+            comboBoxCity.ItemsSource = Configuration.city;
+            comboBoxCity.SelectedItem = Configuration.city.Find(i => i == test.Address.city);
+            comboBoxStreet.ItemsSource = Configuration.street[test.Address.city];
+            comboBoxStreet.SelectedItem = Configuration.street[test.Address.city].Find(I => I == test.Address.street);
+            Date_DatePicker.SelectedDate = test.Date;
+            hourComboBox.Items.Clear();
+            var lis = bl.testersAvailableAtDateBySpecialization((DateTime)Date_DatePicker.SelectedDate, ((Trainee)cb_traineeChoosing.SelectedItem).CarType, ((Trainee)cb_traineeChoosing.SelectedItem).GearBox);
+            for (int i = 0; i < 6; i++)
+            {
+                if (lis.Find(item => item.WorkHour[(int)((DateTime)Date_DatePicker.SelectedDate).DayOfWeek][i]) != null)
+                {
+                    switch (i)
+                    {
+                        case 0:
+                            ComboBoxItem hour_9 = new ComboBoxItem();
+                            hour_9.Content = "09:00";
+                            hourComboBox.Items.Add(hour_9);
+                            if (test.Date.Hour == 9)
+                                hourComboBox.SelectedItem = hour_9;
+                            break;
+                        case 1:
+
+                            ComboBoxItem hour_10 = new ComboBoxItem();
+                            hour_10.Content = "10:00";
+                            hourComboBox.Items.Add(hour_10);
+                            if (test.Date.Hour == 10)
+                                hourComboBox.SelectedItem = hour_10;
+                            break;
+                        case 2:
+                            ComboBoxItem hour_11 = new ComboBoxItem();
+                            hour_11.Content = "11:00";
+                            hourComboBox.Items.Add(hour_11);
+                            if (test.Date.Hour == 11)
+                                hourComboBox.SelectedItem = hour_11;
+                            break;
+                        case 3:
+                            ComboBoxItem hour_12 = new ComboBoxItem();
+                            hour_12.Content = "12:00";
+                            hourComboBox.Items.Add(hour_12);
+                            if (test.Date.Hour == 12)
+                                hourComboBox.SelectedItem = hour_12;
+                            break;
+                        case 4:
+                            ComboBoxItem hour_13 = new ComboBoxItem();
+                            hour_13.Content = "13:00";
+                            hourComboBox.Items.Add(hour_13);
+                            if (test.Date.Hour == 13)
+                                hourComboBox.SelectedItem = hour_13;
+                            break;
+                        case 5:
+                            ComboBoxItem hour_14 = new ComboBoxItem();
+                            hour_14.Content = "14:00";
+                            hourComboBox.Items.Add(hour_14);
+                            if (test.Date.Hour == 14)
+                                hourComboBox.SelectedItem = hour_14;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+            var allTesterAvailable = bl.testersAvailableAtDateAndHourBySpecialization(test.Date, cb_traineeChoosing.SelectedItem as Trainee);
+            var tester = bl.getAllTester().Find(i => i.Id == test.TesterId);
+            allTesterAvailable.Add(tester);
+            cb_testerChoosing.DataContext = allTesterAvailable;
+            cb_testerChoosing.SelectedItem = tester;
+            cb_testerChoosing.IsEnabled = true;
+
         }
     }
 

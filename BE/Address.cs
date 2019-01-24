@@ -35,7 +35,7 @@ namespace BE
                 var street = values[1];
                 var city = values[2];
                 string a = "";
-                a += houseNumber + " " + street + " " + city;
+                a += houseNumber + " " + city + " " + street;
                 return a;
             }
             else
@@ -50,7 +50,7 @@ namespace BE
 
         public override string ToString()
         {
-            return houseNumber + " " + street + " " + city;
+            return houseNumber + " " + city + " " + street;
         }
     }
 }
