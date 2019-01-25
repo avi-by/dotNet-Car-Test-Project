@@ -92,11 +92,11 @@
         <Button Content="update tester" Name="UpdateTester" Grid.Row="
                 13" Grid.Column="1"  RenderTransformOrigin="0.501,0.5" Click="UpdateTester_Click" Margin="170,0,-0.333,0"/>
 
-        <TextBox x:Name="streetTextBox" Grid.Column="1" HorizontalAlignment="Left"  Height="23"  Grid.Row="11"  VerticalAlignment="Center" Width="53" Margin="99.333,9.333,0,9.667" />
-        <TextBox x:Name="city" Grid.Column="1" HorizontalAlignment="Left"  Height="23"  Grid.Row="11"  VerticalAlignment="Center" Width="76" Margin="180.333,9.333,0,9.667" />
+        <ComboBox x:Name="streetComboBox" Grid.Column="1" HorizontalAlignment="Left" ItemsSource="{Binding}"  Height="23"  Grid.Row="11"  VerticalAlignment="Center" Width="93" Margin="99.333,9.333,0,9.667" />
+        <ComboBox x:Name="city" Grid.Column="1" HorizontalAlignment="Left"  Height="23" ItemsSource="{Binding}"  Grid.Row="11"  VerticalAlignment="Center" Width="116" Margin="220.333,9.333,0,9.667" SelectionChanged="city_SelectionChanged"/>
         <Label x:Name="labelhouseNumber" Content="num." Grid.Column="0" HorizontalAlignment="Left"  Grid.Row="11" VerticalAlignment="Center" Height="26" Margin="104,10,0,7" Width="33" Grid.ColumnSpan="2"/>
         <Label x:Name="labelStreet" Content="street" Grid.Column="1" HorizontalAlignment="Left"  Grid.Row="11" VerticalAlignment="Center" Height="26" Margin="59.333,8.333,0,7.667" Width="41" RenderTransformOrigin="1.283,0.5"/>
-        <Label x:Name="labelCity" Content="city" Grid.Column="1" HorizontalAlignment="Left"  Grid.Row="11" VerticalAlignment="Center" Height="26" Margin="152.333,8.333,0,7.667" Width="41" RenderTransformOrigin="1.283,0.5"/>
+        <Label x:Name="labelCity" Content="city" Grid.Column="1" HorizontalAlignment="Left"  Grid.Row="11" VerticalAlignment="Center" Height="26" Margin="193,9,0,8" Width="41" RenderTransformOrigin="1.283,0.5"/>
         <Label x:Name="labelAddress" Content="address:" Grid.Column="0" HorizontalAlignment="Left"  Grid.Row="11" VerticalAlignment="Center" Height="26" Margin="0,8.333,0,7.667" Width="47" />
         <TextBox x:Name="houseNumberTextBox" Grid.Column="1" HorizontalAlignment="Left"  Height="23"  Grid.Row="11"  VerticalAlignment="Center" Width="29" Margin="29.333,9.333,0,9.667" />
 

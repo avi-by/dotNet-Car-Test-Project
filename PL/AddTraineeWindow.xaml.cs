@@ -33,7 +33,8 @@ namespace PL
             birthdayDatePicker.DisplayDateStart = DateTime.Now.AddYears(-bl.getMaximumAge());
             birthdayDatePicker.DisplayDateEnd = DateTime.Now.AddYears(-bl.getMinimumAgeOfTester());
 
-
+            city.ItemsSource = Configuration.city;
+            streetComboBox.IsEnabled = false;
         }
 
         private void Add_UpdateTrainee_Click(object sender, RoutedEventArgs e)
@@ -46,7 +47,7 @@ namespace PL
 
                 try
                 {
-                    bl.addTrainee(new Trainee(ID.Text, firstNameTextBox.Text, lastNameTextBox.Text, birthdayDatePicker.SelectedDate.Value, tbSchoolName.Text, tb_teachername.Text, int.Parse(tbNumberOfLesson.Text), phoneNumberTextBox.Text, new Address(streetTextBox.Text, int.Parse(houseNumberTextBox.Text), city.Text), (BE.Gender)genderComboBox.SelectedValue, (BE.CarType)carTypeComboBox.SelectedValue, (BE.GearBox)gearBoxComboBox.SelectedValue));
+                    bl.addTrainee(new Trainee(ID.Text, firstNameTextBox.Text, lastNameTextBox.Text, birthdayDatePicker.SelectedDate.Value, tbSchoolName.Text, tb_teachername.Text, int.Parse(tbNumberOfLesson.Text), phoneNumberTextBox.Text, new Address(streetComboBox.Text, int.Parse(houseNumberTextBox.Text), city.Text), (BE.Gender)genderComboBox.SelectedValue, (BE.CarType)carTypeComboBox.SelectedValue, (BE.GearBox)gearBoxComboBox.SelectedValue));
                     this.Close();
                 }
                 catch (Exception msg)
@@ -90,7 +91,7 @@ namespace PL
                 labelhouseNumber.Foreground = Brushes.Black;
             }
 
-            if (streetTextBox.Text == "")
+            if (streetComboBox.SelectedItem==null)
             {
                 msg += "--need street\n";
                 labelStreet.Foreground = Brushes.Red;
@@ -101,10 +102,10 @@ namespace PL
                 labelStreet.Foreground = Brushes.Black;
             }
 
-            if (city.Text == "")
+            if (city.SelectedItem==null)
             {
                 msg += "--need city\n";
-                city.Foreground = Brushes.Red;
+                labelCity.Foreground = Brushes.Red;
                 flag = true;
             }
             else
@@ -156,7 +157,7 @@ namespace PL
                 labelLastName.Foreground = Brushes.Black;
             }
 
-            if (gearBoxComboBox.SelectedItem==null)
+            if (genderComboBox.SelectedItem==null)
             {
                 msg += "--need gender\n";
                 labelGender.Foreground = Brushes.Red;
@@ -170,7 +171,7 @@ namespace PL
             if (carTypeComboBox.SelectedItem == null)
             {
                 msg += "--need car type\n";
-                carTypeComboBox.Foreground = Brushes.Red;
+                labelCarType.Foreground = Brushes.Red;
                 flag = true;
             }
             else
@@ -233,6 +234,13 @@ namespace PL
                 return false;
             }
             return true;
+        }
+
+        private void city_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            streetComboBox.IsEnabled = true;
+            streetComboBox.ItemsSource = Configuration.street[city.SelectedItem as string];
+
         }
     }
 }

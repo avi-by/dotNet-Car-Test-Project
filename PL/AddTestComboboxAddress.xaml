@@ -59,7 +59,7 @@
                                     <TextBlock Margin="5" Grid.Column="0" Text="{Binding Id}"/>
                                     <TextBlock Margin="5" Grid.Column="1" Text="{Binding FirstName}"/>
                                     <TextBlock Margin="0,5,5,5" Grid.Column="2" Text="{Binding LastName}"/>
-                                    <TextBlock Margin="1" Grid.Column="3" Text="{Binding Address}"/>
+                                    <TextBlock Margin="5" Grid.Column="3" Text="{Binding Address}"/>
                                 </Grid>
                             </ControlTemplate>
                         </Setter.Value>
@@ -98,11 +98,11 @@
             </ComboBox.ItemContainerStyle>
         </ComboBox>
         <TextBox x:Name="tb_traineeName" Grid.Column="1"  HorizontalAlignment="Left" Height="23"  Grid.Row="0"  VerticalAlignment="Center" Width="120"  IsReadOnly="True" Text="(the trainee name)" Margin="120,0,0,0" Background="#FFE5E5E5" />
-        <ComboBox x:Name="comboBoxStreet" Grid.Column="1" HorizontalAlignment="Left"  Height="23"  Grid.Row="4" ItemsSource="{Binding}"  VerticalAlignment="Center" Width="53" Margin="99.333,9.333,0,9.667" />
-        <ComboBox x:Name="comboBoxCity" Grid.Column="1" HorizontalAlignment="Left" ItemsSource="{Binding}" Height="23"  Grid.Row="4"  VerticalAlignment="Center" Width="76" Margin="180.333,9.333,0,9.667" SelectionChanged="comboBoxCity_SelectionChanged"/>
+        <ComboBox x:Name="comboBoxStreet" Grid.Column="1" HorizontalAlignment="Left"  Height="23"  Grid.Row="4" ItemsSource="{Binding}"  VerticalAlignment="Center" Width="93" Margin="99.333,9.333,0,9.667" />
+        <ComboBox x:Name="comboBoxCity" Grid.Column="1" HorizontalAlignment="Left" ItemsSource="{Binding}" Height="23"  Grid.Row="4"  VerticalAlignment="Center" Width="116" Margin="220.333,9.333,0,9.667" SelectionChanged="comboBoxCity_SelectionChanged"/>
         <Label x:Name="labelhouseNumber" Content="num." HorizontalAlignment="Left"  Grid.Row="4" VerticalAlignment="Center" Height="26" Margin="0,0,0,0" Width="60" RenderTransformOrigin="0.174,0.409" Grid.Column="1"/>
         <Label x:Name="labelStreet" Content="street" Grid.Column="1" HorizontalAlignment="Left"  Grid.Row="4" VerticalAlignment="Center" Height="26" Margin="59.333,8.333,0,7.667" Width="41" RenderTransformOrigin="1.283,0.5"/>
-        <Label x:Name="labelCity" Content="city" Grid.Column="1" HorizontalAlignment="Left"  Grid.Row="4" VerticalAlignment="Center" Height="26" Margin="153,9,0,8" Width="41" RenderTransformOrigin="1.283,0.5"/>
+        <Label x:Name="labelCity" Content="city" Grid.Column="1" HorizontalAlignment="Left"  Grid.Row="4" VerticalAlignment="Center" Height="26" Margin="193,9,0,8" Width="41" RenderTransformOrigin="1.283,0.5"/>
         <Label x:Name="labelAddress" Content="address:" Grid.Column="0" HorizontalAlignment="Left"  Grid.Row="4" VerticalAlignment="Center" Height="26" Margin="0,10,0,8" Width="47" />
         <TextBox x:Name="houseNumberTextBox" Grid.Column="1" HorizontalAlignment="Left"  Height="23"  Grid.Row="4"  VerticalAlignment="Center" Width="29" Margin="30.333,0,0,0"/>
         <Button Content="add test" x:Name="pb_AddTest" Grid.Row="15" Grid.Column="1" Margin="30.333,10.333,10,-10" Click="Add_Test_Click" Height="21" VerticalAlignment="Top"   />

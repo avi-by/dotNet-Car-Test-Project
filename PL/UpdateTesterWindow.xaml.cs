@@ -56,8 +56,10 @@ namespace PL
             this.DataContext = selectedPerson;
 
             houseNumberTextBox.Text = selectedPerson.Address.houseNumber.ToString();
-            streetTextBox.Text= selectedPerson.Address.street.ToString();
-            city.Text = selectedPerson.Address.city.ToString();
+            city.ItemsSource = Configuration.city;
+            city.SelectedItem = Configuration.city.Find(i => i == selectedPerson.Address.city);
+            streetComboBox.ItemsSource = Configuration.street[selectedPerson.Address.city];
+            streetComboBox.SelectedItem = Configuration.street[selectedPerson.Address.city].Find(I => I == selectedPerson.Address.street);
 
             matrix.cb_sun_9.IsChecked = (selectedPerson.WorkHour[0][0]) ? true : false;
             matrix.cb_sun_10.IsChecked = (selectedPerson.WorkHour[0][1]) ? true : false;
@@ -156,13 +158,13 @@ namespace PL
 
                     if (ID.Text== orginalTester.Id)
                     {
-                        bl.updateTester(new Tester(ID.Text, firstNameTextBox.Text, lastNameTextBox.Text, birthdayDatePicker.SelectedDate.Value, new Address(streetTextBox.Text, int.Parse(houseNumberTextBox.Text), city.Text), (BE.Gender)genderComboBox.SelectedValue, phoneNumberTextBox.Text, int.Parse(expYearsTextBox.Text), int.Parse(maxTestInWeekTextBox.Text), (BE.CarType)carTypeComboBox.SelectedValue, (BE.GearBox)gearBoxComboBox.SelectedValue, temp_workHour, double.Parse(distanceTexBox.Text)));
+                        bl.updateTester(new Tester(ID.Text, firstNameTextBox.Text, lastNameTextBox.Text, birthdayDatePicker.SelectedDate.Value, new Address(streetComboBox.Text, int.Parse(houseNumberTextBox.Text), city.Text), (BE.Gender)genderComboBox.SelectedValue, phoneNumberTextBox.Text, int.Parse(expYearsTextBox.Text), int.Parse(maxTestInWeekTextBox.Text), (BE.CarType)carTypeComboBox.SelectedValue, (BE.GearBox)gearBoxComboBox.SelectedValue, temp_workHour, double.Parse(distanceTexBox.Text)));
                         this.Close();
                     }
                     else
                     {
                         
-                       bl.updateTester(new Tester(ID.Text, firstNameTextBox.Text, lastNameTextBox.Text, birthdayDatePicker.SelectedDate.Value, new Address(streetTextBox.Text, int.Parse(houseNumberTextBox.Text), city.Text), (BE.Gender)genderComboBox.SelectedValue, phoneNumberTextBox.Text, int.Parse(expYearsTextBox.Text), int.Parse(maxTestInWeekTextBox.Text), (BE.CarType)carTypeComboBox.SelectedValue, (BE.GearBox)gearBoxComboBox.SelectedValue, temp_workHour, double.Parse(distanceTexBox.Text)), orginalTester.Id);
+                       bl.updateTester(new Tester(ID.Text, firstNameTextBox.Text, lastNameTextBox.Text, birthdayDatePicker.SelectedDate.Value, new Address(streetComboBox.Text, int.Parse(houseNumberTextBox.Text), city.Text), (BE.Gender)genderComboBox.SelectedValue, phoneNumberTextBox.Text, int.Parse(expYearsTextBox.Text), int.Parse(maxTestInWeekTextBox.Text), (BE.CarType)carTypeComboBox.SelectedValue, (BE.GearBox)gearBoxComboBox.SelectedValue, temp_workHour, double.Parse(distanceTexBox.Text)), orginalTester.Id);
                         this.Close();
                     }
                    
@@ -204,7 +206,7 @@ namespace PL
                 labelhouseNumber.Foreground = Brushes.Black;
             }
 
-            if (streetTextBox.Text == "")
+            if (streetComboBox.SelectedItem==null)
             {
                 msg += "--need street\n";
                 labelStreet.Foreground = Brushes.Red;
@@ -215,7 +217,7 @@ namespace PL
                 labelStreet.Foreground = Brushes.Black;
             }
 
-            if (city.Text == "")
+            if (city.SelectedItem==null)
             {
                 msg += "--need city\n";
                 labelCity.Foreground = Brushes.Red;
@@ -373,6 +375,12 @@ namespace PL
         {
             //if(orginalTester==null) 
             //orginalTester = (Tester)((Tester)this.DataContext).Clone();//save the orginal data
+        }
+
+        private void city_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            streetComboBox.IsEnabled = true;
+            streetComboBox.ItemsSource = Configuration.street[city.SelectedItem as string];
         }
     }
 }

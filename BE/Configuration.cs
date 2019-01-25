@@ -30,9 +30,18 @@ namespace BE
             XElement cityXml = XElement.Load(@"dataXML\cityList.xml");
             city = (from i in cityXml.Elements()
                     let iElement = i.Element("שם_ישוב").Value.Trim()
-                    where !iElement.Contains("שבט(")
+                    where !iElement.Contains("שבט(") && !iElement.Contains("איחוד(") && !iElement.Contains("מאוחד(")
                     select iElement).ToList();
-
+            List<string> temp = new List<string>();
+            foreach (var item in city)
+            {
+                if (!street.ContainsKey(item))
+                    temp.Add(item);
+            }
+            foreach (var item in temp)
+            {
+                city.Remove(item);
+            }
         }
     }
     //check
