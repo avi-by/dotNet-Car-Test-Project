@@ -42,7 +42,7 @@
         <Label x:Name="hour" VerticalAlignment="Center" Grid.Row="2" HorizontalAlignment="Left" Grid.Column="0" Content="hour:" Height="26" Margin="0,1,0,1.667" Width="57"/>
         <ComboBox x:Name="hourComboBox" Grid.Column="1" HorizontalAlignment="Left" Height="23"  Grid.Row="2" SelectedItem="{Binding hour, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" Margin="0.333,2.667,0,3" SelectionChanged="HourComboBox_SelectionChanged"/>
         <Label x:Name="labelTesterChoosing" Content="choose tester:" Grid.Column="0" HorizontalAlignment="Left"  Grid.Row="3" VerticalAlignment="Center" Height="26" Margin="0,1,0,3" />
-        <ComboBox Name="cb_testerChoosing" SelectedValuePath="Id" DisplayMemberPath="Id" Height="23" ItemsSource="{Binding}" Grid.Column="1" Grid.Row="3" Margin="0.333,0,137,0.333" SelectionChanged="Cb_testerChoosing_SelectionChanged" >
+        <ComboBox Name="cb_testerChoosing" SelectedValuePath="Id" DisplayMemberPath="Id" Height="23" ItemsSource="{Binding}" Grid.Column="1" Grid.Row="3" Margin="0,4,217,4" SelectionChanged="Cb_testerChoosing_SelectionChanged" >
             <ComboBox.ItemContainerStyle>
                 <Style TargetType="{x:Type ComboBoxItem}">
                     <Setter Property="Template">
@@ -75,7 +75,7 @@
 
 
         <Label x:Name="labelTraineeCho" Content="choose trainee:" Grid.Column="0" HorizontalAlignment="Left" Grid.Row="0" VerticalAlignment="Center" Height="26" Margin="0,2" />
-        <ComboBox Name="cb_traineeChoosing"  SelectedValuePath="Id" DisplayMemberPath="Id" Height="23" ItemsSource="{Binding}" Grid.Column="1" Margin="0.333,0,137,0.333" SelectionChanged="Cb_traineeChoosing_SelectionChanged" >
+        <ComboBox Name="cb_traineeChoosing"  SelectedValuePath="Id" DisplayMemberPath="Id" Height="23" ItemsSource="{Binding}" Grid.Column="1" Margin="0,4,217,4" SelectionChanged="Cb_traineeChoosing_SelectionChanged" >
             <ComboBox.ItemContainerStyle>
                 <Style TargetType="{x:Type ComboBoxItem}">
                     <Setter Property="Template">

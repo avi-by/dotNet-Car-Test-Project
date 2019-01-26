@@ -44,9 +44,11 @@ namespace PL
             
 
             houseNumberTextBox.Text = selectedPerson.Address.houseNumber.ToString();
-            streetTextBox.Text = selectedPerson.Address.street.ToString();
-            city.Text = selectedPerson.Address.city.ToString();
-            if (bl.getAllTests().Find(i => i.TraineeId == selectedPerson.Id) != null)
+            city.ItemsSource = Configuration.city;
+            city.SelectedItem = Configuration.city.Find(i => i == selectedPerson.Address.city);
+            streetComboBox.ItemsSource = Configuration.street[selectedPerson.Address.city];
+            streetComboBox.SelectedItem = Configuration.street[selectedPerson.Address.city].Find(I => I == selectedPerson.Address.street);
+            if (bl.getAllTests().Find(i => i.TraineeId == selectedPerson.Id) != null) //if the trainee do a test or at least regist to a test - cat change his id 
             {
                 labelID.Visibility = Visibility.Collapsed;
                 ID.Visibility = Visibility.Collapsed;
@@ -72,12 +74,12 @@ namespace PL
 
                     if (ID.Text == orginalTrainee.Id)
                     {
-                       bl.updateTrainee(new Trainee(ID.Text, firstNameTextBox.Text, lastNameTextBox.Text, birthdayDatePicker.SelectedDate.Value, tbSchoolName.Text, tb_teachername.Text, int.Parse(tbNumberOfLesson.Text), phoneNumberTextBox.Text, new Address(streetTextBox.Text, int.Parse(houseNumberTextBox.Text), city.Text), (BE.Gender)genderComboBox.SelectedValue, (BE.CarType)carTypeComboBox.SelectedValue, (BE.GearBox)gearBoxComboBox.SelectedValue));
+                       bl.updateTrainee(new Trainee(ID.Text, firstNameTextBox.Text, lastNameTextBox.Text, birthdayDatePicker.SelectedDate.Value, tbSchoolName.Text, tb_teachername.Text, int.Parse(tbNumberOfLesson.Text), phoneNumberTextBox.Text, new Address(streetComboBox.Text, int.Parse(houseNumberTextBox.Text), city.Text), (BE.Gender)genderComboBox.SelectedValue, (BE.CarType)carTypeComboBox.SelectedValue, (BE.GearBox)gearBoxComboBox.SelectedValue));
                         this.Close();
                     }
                     else
                     {
-                       bl.updateTrainee(new Trainee(ID.Text, firstNameTextBox.Text, lastNameTextBox.Text, birthdayDatePicker.SelectedDate.Value, tbSchoolName.Text, tb_teachername.Text, int.Parse(tbNumberOfLesson.Text), phoneNumberTextBox.Text, new Address(streetTextBox.Text, int.Parse(houseNumberTextBox.Text), city.Text), (BE.Gender)genderComboBox.SelectedValue, (BE.CarType)carTypeComboBox.SelectedValue, (BE.GearBox)gearBoxComboBox.SelectedValue), orginalTrainee.Id);
+                       bl.updateTrainee(new Trainee(ID.Text, firstNameTextBox.Text, lastNameTextBox.Text, birthdayDatePicker.SelectedDate.Value, tbSchoolName.Text, tb_teachername.Text, int.Parse(tbNumberOfLesson.Text), phoneNumberTextBox.Text, new Address(streetComboBox.Text, int.Parse(houseNumberTextBox.Text), city.Text), (BE.Gender)genderComboBox.SelectedValue, (BE.CarType)carTypeComboBox.SelectedValue, (BE.GearBox)gearBoxComboBox.SelectedValue), orginalTrainee.Id);
                         this.Close();
                     }
                    
@@ -94,7 +96,6 @@ namespace PL
         {
             string msg = "problems:\n";
             long temp = 0;
-            
             bool flag = false;
 
             if (ID.Text.Length < 8 || !long.TryParse(ID.Text, out temp)) //the id need at least 8 digits and only digits so it can be convert to int
@@ -119,6 +120,50 @@ namespace PL
                 labelhouseNumber.Foreground = Brushes.Black;
             }
 
+            if (streetComboBox.SelectedItem == null)
+            {
+                msg += "--need street\n";
+                labelStreet.Foreground = Brushes.Red;
+                flag = true;
+            }
+            else
+            {
+                labelStreet.Foreground = Brushes.Black;
+            }
+
+            if (city.SelectedItem == null)
+            {
+                msg += "--need city\n";
+                labelCity.Foreground = Brushes.Red;
+                flag = true;
+            }
+            else
+            {
+                labelCity.Foreground = Brushes.Black;
+            }
+
+            if (tbSchoolName.Text == "")
+            {
+                msg += "--need school name\n";
+                labelSchoolName.Foreground = Brushes.Red;
+                flag = true;
+            }
+            else
+            {
+                labelSchoolName.Foreground = Brushes.Black;
+            }
+
+            if (tb_teachername.Text == "")
+            {
+                msg += "--need teacher name\n";
+                labelTeacherName.Foreground = Brushes.Red;
+                flag = true;
+            }
+            else
+            {
+                labelTeacherName.Foreground = Brushes.Black;
+            }
+
             if (firstNameTextBox.Text == "")
             {
                 msg += "--need first name\n";
@@ -141,6 +186,39 @@ namespace PL
                 labelLastName.Foreground = Brushes.Black;
             }
 
+            if (genderComboBox.SelectedItem == null)
+            {
+                msg += "--need gender\n";
+                labelGender.Foreground = Brushes.Red;
+                flag = true;
+            }
+            else
+            {
+                labelGender.Foreground = Brushes.Black;
+            }
+
+            if (carTypeComboBox.SelectedItem == null)
+            {
+                msg += "--need car type\n";
+                labelCarType.Foreground = Brushes.Red;
+                flag = true;
+            }
+            else
+            {
+                labelCarType.Foreground = Brushes.Black;
+            }
+
+
+            if (gearBoxComboBox.SelectedItem == null)
+            {
+                msg += "--need gearbox\n";
+                labelGearBox.Foreground = Brushes.Red;
+                flag = true;
+            }
+            else
+            {
+                labelGearBox.Foreground = Brushes.Black;
+            }
 
             if (birthdayDatePicker.SelectedDate.HasValue == false)
             {
@@ -177,16 +255,6 @@ namespace PL
             }
 
 
-            //if (addressTexBox.Text == "" || !int.TryParse(address[2], out int temp3)||temp3<1) //address [2] is the house number and he need to be more then 0
-            //{
-            //    msg += "--need address, city street house number separated by a comma, house number must be a digit and bigger then 0 \n";
-            //    labelAddress.Foreground = Brushes.Red;
-            //    flag = true;
-            //}
-            //else
-            //{
-            //    labelAddress.Foreground = Brushes.Black;
-            //}
 
             if (flag)
             {
@@ -195,6 +263,13 @@ namespace PL
                 return false;
             }
             return true;
+        }
+
+        private void city_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            streetComboBox.IsEnabled = true;
+            streetComboBox.ItemsSource = Configuration.street[city.SelectedItem as string];
+
         }
     }
 }

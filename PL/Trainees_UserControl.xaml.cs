@@ -50,24 +50,23 @@ namespace PL
                 List<string> teastr = new List<string>();
                 List<string> lstr = new List<string> { "נאור","כהן", "לוי", "מזרחי", "פרץ", "ביטון", "דהן", "פרידמן", "מלכה", "אזולאי", "כץ", "יוסף", "דוד", "עמר", "אוחיון", "חדד", "גבאי", "בן דוד", "אדרי", "לוין", "טל", "קליין", "חן", "שפירא", "חזן", "משה", "אשכנזי", "אוחנה", "סגל", "גולן", "יצחק", "בר", "מור", "דיין", "אלבז", "בכר", "סויסה", "שמש", "רוזנברג", "לביא", "אטיאס", "נחום", "שרעבי", "שטרן", "ממן", "שחר", "אלון", "שורץ", "ששון", "עובדיה", "גרינברג", "בן חמו", "וקנין", "אסולין", "מימון", "מאיר", "פלדמן", "גולדשטיין", "ברוך", "וייס", "אמסלם", "רובין", "עזרא", "סבג", "גולדברג", "אברמוב", "קדוש", "הראל", "צור", "שוורץ", "רבינוביץ", "אהרוני", "מילר", "קפלן", "שושן", "הרוש", "סולומון", "הרשקוביץ", "רוזן", "ברקוביץ", "גרוס", "נגר", "חיון", "מלול", "סלע", "פלד", "בן שושן", "צרפתי", "אסרף", "שטרית", "גוטמן", "עאמר", "פרנקל", "זוהר", "מויאל", "אלפסי", "ברגר", "פישר" };
                 List<string> fnstr = new List<string> { "מלתיאל","אליה", "אליהב", "אליהו", "גבריאל", "גלעד", "גד", "עידן", "מיכאל", "מנשה", "ירון", "ראם", "רז", "רפאל", "רביד", "שהם", "שחר", "שי", "תמיר", "דב", "דביר", "דניאל", "דורון", "דרור", "דולב", "הראל", "הלל", "זיו", "חזקיה", "חנניה", "יאיר", "ירדן", "ישי", "ינון", "ישורון", "ישראל", "יונה", "כפיר", "לביא", "לוי", "מאיר", "מתתיהו", "מרדכי", "נחמן", "עדו", "ערן", "גרשון", "זאב", "אליעזר", "אליקים", "אלישיב", "אלישע", "זבולון", "אלמוג", "יחזקאל", "יהושע", "נריה", "גדעון", "שמואל", "שגיא", "בועז", "שמשון", "ישעיהו", "ירמיה", "עובדיה", "קהת", "נחשון", "משה", "אברהם", "יעקב", "יצחק", "יהונתן", "שאול", "דוד", "שלמה", "יוסף", "יששכר", "יהודה", "לוי", "שמעון", "ראובן", "ציון", "אלנתן", "אלעד", "אלעזר", "אלקנה", "פרץ", "פסח", "צבי", "צדוק", "צפניה", "צפריר", "פנחס", "זכריה", "אלרואי", "אמית", "אמיתי", "אמנון", "אמציה", "אסי", "נאור", "נבו", "נדב", "נהוראי", "נוה", "נעם", "נח", "נחום", "נחמיה", "נחמן", "נחשון", "ניב", "ניסים", "ניסן", "ניצן", "חביב", "חגי", "חובב", "חי", "חיים", "חן", "חנוך", "חנן", "חננאל" };
-                List<string> cstr = new List<string> { "אבן יהודה", "אופקים", "אור הנר", "אור יהודה", "אזור", "אילת", "אמירים", "אפרת", "אריאל", "אשדוד", "אשקלון", "באר יעקב", "באר שבע", "בית דגן", "בית שאן", "בית שמש", "בית שערים", "בני ברק", "בנימינה", "בת ים", "גבעת סביון", "גבעת שמואל", "גבעתיים", "גדרה", "גלעד", "גן יבנה", "גני תקוה", "הוד השרון", "הרצליה", "זכרון יעקב", "חדרה", "חולון", "חיפה", "חצור הגלילית", "טבעון", "טבריה", "טירת הכרמל", "יבנה", "יהוד", "יפו", "יקנעם עילית", "ירוחם", "ירושלים", "כוכב יאיר", "כפר אזר", "כפר ורדים", "כפר סבא", "כפר שמריהו", "כפר תבור", "כרכור", "כרמיאל", "לוד", "לפיד", "מבשרת ציון", "מגדל", "מגדל העמק", "מודיעין", "מטולה", "מכבים", "מכמורת", "מפלסים", "מצפה רמון", "מקווה ישראל", "נהריה", "נווה אור", "נווה איתן", "נס ציונה", "נען", "נצרת", "נצרת עילית", "נתניה", "סביון", "עכו", "עפולה", "ערד", "עתלית", "פרדס חנה", "פתח-תקוה", "צור הדסה", "צורעה", "צפת", "קדימה", "קיבוץ אורטל", "קיבוץ נחל עוז", "קיבוץ עלומים", "קיסריה", "קצרין", "קרית אונו", "קרית אתא", "קרית ביאליק", "קרית גת", "קרית מוצקין", "קרית שמונה", "ראש העין", "ראש פינה", "ראשון לציון", "רחובות", "רמלה", "רמת אפעל", "רמת השרון", "רמת ישי", "רמת רזיאל", "רמת-גן", "רעננה", "שדרות", "שוהם", "שילה", "תל-אביב" };
+            //    List<string> cstr = new List<string> { "אבן יהודה", "אופקים", "אור הנר", "אור יהודה", "אזור", "אילת", "אמירים", "אפרת", "אריאל", "אשדוד", "אשקלון", "באר יעקב", "באר שבע", "בית דגן", "בית שאן", "בית שמש", "בית שערים", "בני ברק", "בנימינה", "בת ים", "גבעת סביון", "גבעת שמואל", "גבעתיים", "גדרה", "גלעד", "גן יבנה", "גני תקוה", "הוד השרון", "הרצליה", "זכרון יעקב", "חדרה", "חולון", "חיפה", "חצור הגלילית", "טבעון", "טבריה", "טירת הכרמל", "יבנה", "יהוד", "יפו", "יקנעם עילית", "ירוחם", "ירושלים", "כוכב יאיר", "כפר אזר", "כפר ורדים", "כפר סבא", "כפר שמריהו", "כפר תבור", "כרכור", "כרמיאל", "לוד", "לפיד", "מבשרת ציון", "מגדל", "מגדל העמק", "מודיעין", "מטולה", "מכבים", "מכמורת", "מפלסים", "מצפה רמון", "מקווה ישראל", "נהריה", "נווה אור", "נווה איתן", "נס ציונה", "נען", "נצרת", "נצרת עילית", "נתניה", "סביון", "עכו", "עפולה", "ערד", "עתלית", "פרדס חנה", "פתח-תקוה", "צור הדסה", "צורעה", "צפת", "קדימה", "קיבוץ אורטל", "קיבוץ נחל עוז", "קיבוץ עלומים", "קיסריה", "קצרין", "קרית אונו", "קרית אתא", "קרית ביאליק", "קרית גת", "קרית מוצקין", "קרית שמונה", "ראש העין", "ראש פינה", "ראשון לציון", "רחובות", "רמלה", "רמת אפעל", "רמת השרון", "רמת ישי", "רמת רזיאל", "רמת-גן", "רעננה", "שדרות", "שוהם", "שילה", "תל-אביב" };
                 List<string> x;
                 for (int i = 0; i < schstr.Count*3; i++)
                 {
                     teastr.Add(lstr[random.Next() % lstr.Count] + " " + fnstr[random.Next() % fnstr.Count]);
                 }
-                    XElement streetName = XElement.Load(@"dataXML\streetXML.xml");
+      //              XElement streetName = XElement.Load(@"dataXML\streetXML.xml");
                 for (int i = 0; i < 1000; i++)
                 {
                     fName = fnstr[random.Next() % fnstr.Count];
                     lName = lstr[random.Next() % lstr.Count];
-                    do
-                    {
-                        cityName = cstr[random.Next() % cstr.Count];
-                        x = (from stre in streetName.Elements()
-                             where stre.Element("city_name").Value.Contains(cityName)
-                             select stre.Element("street_name").Value).ToList();
-                    } while (x.Count == 0);
+                    cityName = Configuration.city[random.Next() % Configuration.city.Count];
+                    x = Configuration.street[cityName];
+                    //to make every teacher at school with only one kind of car and one kind of gearbox and make sure that every teacher belong to only one school and the trainee learn at the right teacher to their car and gerabox - 
+                    //because of the %2 and the max function at the end there are 3 state: manual and motorcycle (sum is 0), manual and privet car (sum is 1), auto and privet car (sum is 2)
+                    //the teacher order by the order of the schools and the first is teach manual and motorcycle the secound teach manual and privet car and the last teach auto and privet car
+                    //the teacher of trainee is: the number of the school * 3 plus the sum of the int value of his gear box and car kind
                     int num = random.Next(1979, 2001);
                     int temp1 = (random.Next() % 2);
                     int temp2 = (random.Next() % 2);
@@ -79,11 +78,6 @@ namespace PL
                         BE.Gender.MALE,
                         (BE.CarType)carnum, (BE.GearBox)gearnum));
                 }
-                //    bl.addTrainee(new Trainee("12345670", "yosef", "machanaim", new DateTime(1980, 1, 1), "normal_Gaz_School", "eliyahu", 28, "99999999", new Address("shahal", 7, "jerusalem "), Gender.MALE, CarType.PrivetCar, GearBox.Manual));
-                //bl.addTrainee(new Trainee("12345671", "hagai", "sugerman", new DateTime(1980, 1, 1), "normal_Gaz_School", "eliyahu", 25, "99999999", new Address("yehosua", 11, "jerusalem "), Gender.MALE, CarType.PrivetCar, GearBox.Manual));
-                //bl.addTrainee(new Trainee("12345672", "moshe", "shauli", new DateTime(1980, 1, 1), "normal_Gaz_School", "eliyahu", 30, "99999999", new Address("shahal", 7, "jerusalem "), Gender.MALE, CarType.PrivetCar, GearBox.Manual));
-                //bl.addTrainee(new Trainee("12345673", "david", "bar-hai", new DateTime(1980, 1, 1), "normal_Gaz_School", "eliyahu", 28, "99999999", new Address("shahal", 7, "jerusalem "), Gender.MALE, CarType.PrivetCar, GearBox.Manual));
-                //bl.addTrainee(new Trainee("12345674", "yehonatan", "yosef", new DateTime(1980, 1, 1), "normal_Gaz_School", "eliyahu", 28, "99999999", new Address("shahal", 7, "jerusalem "), Gender.MALE, CarType.PrivetCar, GearBox.Manual));
             }
             FilterPanel1.radioButtonAscending.Checked += RadioButtonAscending_Checked;
             FilterPanel1.radioButtonDescending.Checked += RadioButtonDescending_Checked;
@@ -326,6 +320,15 @@ namespace PL
                                   where (i.FirstName.Contains(TextBoxSearch.Text) || i.LastName.Contains(TextBoxSearch.Text) || i.Id.Contains(TextBoxSearch.Text))&&carTypeFilter(i)
                                   select i).ToList();
             sortContaxDataByComboBox();
+        }
+
+        private void traineeDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (traineeDataGrid.SelectedItem == null) return;
+            var selectedPerson = (traineeDataGrid.SelectedItem) as Trainee;
+
+            UpdateTraineeWindow updateTraineeWindow = new UpdateTraineeWindow(selectedPerson);
+            updateTraineeWindow.ShowDialog();
         }
     }
 }

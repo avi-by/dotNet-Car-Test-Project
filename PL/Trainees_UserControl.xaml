@@ -57,7 +57,7 @@
                 <ColumnDefinition/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <DataGrid x:Name="traineeDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="0,0,13,0" RowDetailsVisibilityMode="VisibleWhenSelected" IsReadOnly="True">
+            <DataGrid x:Name="traineeDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="0,0,13,0" MouseDoubleClick="traineeDataGrid_MouseDoubleClick" RowDetailsVisibilityMode="VisibleWhenSelected" IsReadOnly="True">
                 <DataGrid.ContextMenu>
                     <ContextMenu>
                         <MenuItem Header="edit" Click="MenuItem_Click_edit" />

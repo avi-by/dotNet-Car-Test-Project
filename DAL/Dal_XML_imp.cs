@@ -27,7 +27,12 @@ namespace DAL
         public static string configPath = @"config.xml";
 
 
-
+        /// <summary>
+        /// save the source as xml document at the xml file in the path
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="source"></param>
+        /// <param name="path"></param>
         public static void SaveToXML<T>(T source, string path)
         {
             FileStream file = new FileStream(path, FileMode.Create);
@@ -36,6 +41,12 @@ namespace DAL
             file.Close();
         }
 
+        /// <summary>
+        /// load data from xml document in the path
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="path"></param>
+        /// <returns></returns>
         public static T LoadFromXML<T>(string path)
         {
             FileStream file = new FileStream(path, FileMode.Open);
@@ -45,7 +56,10 @@ namespace DAL
             return result;
         }
 
-        public static void Tests_xml()
+        /// <summary>
+        /// make sure that the test xml file exist, if not creat it.
+        /// </summary>
+        private static void Tests_xml()
         {
             XElement TestsRoot;
 
@@ -61,6 +75,10 @@ namespace DAL
             }
         }
 
+        /// <summary>
+        /// delete one tester from the tester xml file at "testerPath"
+        /// </summary>
+        /// <param name="tester"></param>
         internal static void DeleteTester(Tester tester)
         {
 
@@ -75,6 +93,10 @@ namespace DAL
 
         }
 
+        /// <summary>
+        /// add test to the xml file of test in test path. only new test without grade and result
+        /// </summary>
+        /// <param name="test"></param>
         public static void AddTest_PartialDetails(Test test)
         {
             Tests_xml();
@@ -84,11 +106,7 @@ namespace DAL
             XElement testerId = new XElement("TesterId", test.TesterId);
             XElement traineeId = new XElement("TraineeId", test.TraineeId);
 
-            //XElement year = new XElement("year", test.Date.Year);
-            //XElement month = new XElement("month", test.Date.Month);
-            //XElement day = new XElement("day", test.Date.Day);
-            //XElement hour = new XElement("hour", test.Date.Hour);
-            XElement date = new XElement("Date", XmlConvert.ToString( test.Date, "yyyy-MM-ddTHH:mm:ss"));
+           XElement date = new XElement("Date", XmlConvert.ToString( test.Date, "yyyy-MM-ddTHH:mm:ss"));
 
             XElement houseNumber = new XElement("houseNumber", test.Address.houseNumber);
             XElement street = new XElement("street", test.Address.street);
@@ -113,35 +131,11 @@ namespace DAL
             test_root.Save(TestPath);
         }
 
-        //internal static void UpdateTester(string id, Tester tester)
-        //{
-        //    XElement testerRoot = XElement.Load(TestPath);
-        //    var x = (from i in testerRoot.Elements()
-        //             where i.Element("Id").Value == id
-        //             select i).FirstOrDefault();
-        //    if (x == null)
-        //        throw new Exception("the tester not found at the xml");
-        //    foreach (PropertyInfo item in typeof(Tester).GetProperties())
-        //        x.Element(item.Name).SetValue(item.GetValue(tester).ToString());
-        //    XmlSerializer xmlSerializer = new XmlSerializer(typeof(Tester));
-        //    xmlSerializer.
-        //    testerRoot.Save(TesterPath);
-        //}
-
-        internal static void UpdateTester(Tester tester)
-        {
-            XElement testerRoot = XElement.Load(TesterPath);
-            var x = (from i in testerRoot.Elements()
-                     where i.Element("Id").Value == tester.Id
-                     select i).FirstOrDefault();
-            if (x == null)
-                throw new Exception("the tester not found at the xml");
-            foreach (PropertyInfo item in typeof(Tester).GetProperties())
-                x.Element(item.Name).SetValue(item.GetValue(tester).ToString());
-
-            testerRoot.Save(TesterPath);
-        }
-
+       
+        /// <summary>
+        /// delete trainee from the xml file at trainee path
+        /// </summary>
+        /// <param name="trainee"></param>
         internal static void DeleteTrainee(Trainee trainee)
         {
 
@@ -156,34 +150,10 @@ namespace DAL
 
         }
 
-        internal static void UpdateTrainee(Trainee trainee)
-        {
-            XElement traineeRoot = XElement.Load(TraineePath);
-            var x = (from i in traineeRoot.Elements()
-                     where i.Element("Id").Value == trainee.Id
-                     select i).FirstOrDefault();
-            if (x == null)
-                throw new Exception("the trainee not found at the xml");
-            foreach (PropertyInfo item in typeof(Trainee).GetProperties())
-                x.Element(item.Name).SetValue(item.GetValue(trainee).ToString());
-
-            traineeRoot.Save(TraineePath);
-        }
-
-        internal static void UpdateTrainee(string id, Trainee trainee)
-        {
-            XElement traineeRoot = XElement.Load(TraineePath);
-            var x = (from i in traineeRoot.Elements()
-                     where i.Element("Id").Value == id
-                     select i).FirstOrDefault();
-            if (x == null)
-                throw new Exception("the trainee not found at the xml");
-            foreach (PropertyInfo item in typeof(Trainee).GetProperties())
-                x.Element(item.Name).SetValue(item.GetValue(trainee).ToString());
-
-            traineeRoot.Save(TraineePath);
-        }
-
+        /// <summary>
+        /// return all the test at the xml file in xml path
+        /// </summary>
+        /// <returns></returns>
         public List<Test> GetAllTests()
         {
             XElement TestsRoot;
@@ -214,13 +184,17 @@ namespace DAL
                              Notes = test.Element("Notes").Value
                          }).ToList().Clone();
             }
-            catch
+            catch //if the load faild
             {
                 tests = new List<Test>();
             }
             return tests;
         }
 
+        /// <summary>
+        /// retun the id for the new test from the xml
+        /// </summary>
+        /// <returns></returns>
         public static int ID_FromConfigXML()
         {
             XElement config_root;
@@ -265,6 +239,10 @@ namespace DAL
             catch { throw new Exception("File upload problem, cannot advance id"); }
         }
 
+        /// <summary>
+        /// delete one test fro the xml file at test path
+        /// </summary>
+        /// <param name="item"></param>
         internal static void DeleteTest(Test item)
         {
              XElement testRoot = XElement.Load(TestPath);
@@ -278,6 +256,10 @@ namespace DAL
 
         }
 
+        /// <summary>
+        /// update the test in the xml file at test path. use it to update the result of the test
+        /// </summary>
+        /// <param name="test"></param>
         internal static void UpdateTest(Test test)
         {
             XElement testRoot = XElement.Load(TestPath);
@@ -309,7 +291,7 @@ namespace DAL
                         x.Element("Notes").SetValue(test.Notes);
                         break;
                     default:
-                        x.Element(item.Name).SetValue((item.GetValue(test)).ToString().ToLower());
+                        x.Element(item.Name).SetValue((item.GetValue(test)).ToString().ToLower()); //true and false need lower letter for bool.parse
                         break;
                 }
          

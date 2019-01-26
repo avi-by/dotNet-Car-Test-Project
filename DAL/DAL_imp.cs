@@ -15,6 +15,7 @@ namespace DAL
 
     public class DAL_imp : IDAL  
     {
+#region Event
         private EventHandler<EventArgs> testerEvent = delegate { }; //to prevent exeption of null event 
         public event EventHandler<EventArgs> TesterEvent { add { testerEvent += value; } remove { testerEvent -= value; } }
 
@@ -23,7 +24,7 @@ namespace DAL
 
         private EventHandler<EventArgs> testEvent = delegate { };
         public event EventHandler<EventArgs> TestEvent { add { testEvent += value; } remove { testEvent -= value; } }
-
+#endregion
 
 
         #region Singleton
@@ -57,6 +58,10 @@ namespace DAL
 
         #region Tester
 
+        /// <summary>
+        /// delete one tester
+        /// </summary>
+        /// <param name="tester"></param>
         public void DeleteTester(Tester tester)
         {
             if (DataSource.testers.RemoveAll(item => item.Id == tester.Id) == 0)
@@ -65,6 +70,11 @@ namespace DAL
             testerEvent(this, null);
         }
 
+        /// <summary>
+        /// return all the tester by the prdicate
+        /// </summary>
+        /// <param name="p"></param>
+        /// <returns></returns>
         public List<Tester> GetTestersList(Predicate<Tester> p)
         {
             var x = from item in DataSource.testers
@@ -75,6 +85,10 @@ namespace DAL
             return (y.Clone().ToList());
         }
 
+        /// <summary>
+        /// update one tester
+        /// </summary>
+        /// <param name="tester"></param>
         public void UpdateTester(Tester tester)
         {
 
@@ -94,7 +108,10 @@ namespace DAL
         }
 
 
-
+        /// <summary>
+        /// add one tester
+        /// </summary>
+        /// <param name="tester"></param>
         public void AddTester(Tester tester)
         {
             if (DataSource.testers.Find(item => item.Id == tester.Id) != null)
@@ -110,32 +127,19 @@ namespace DAL
             return DataSource.testers.Clone().ToList();
         }
 
-        public IEnumerable<object> testerGrouping(string property)
-        {
-            IEnumerable<object> groupOfTesters = null;
-            List<Tester> listOfTesters = null;
-            switch (property)
-            {
-                case "carType":
 
-                    groupOfTesters = from tester in DataSource.testers
-                                     group tester by tester.CarType;
-                    listOfTesters = (groupOfTesters as List<Tester>).Clone();
-                    break;
-
-
-
-            }
-            return listOfTesters;
-
-        }
-
-        public void UpdateTester(Tester tester, string id)
+      
+        /// <summary>
+        /// update one tester, include id update
+        /// </summary>
+        /// <param name="tester">the new tester</param>
+        /// <param name="oldId">the old id</param>
+        public void UpdateTester(Tester tester, string oldId)
         {
             int index = 0;
             foreach (Tester item in DataSource.testers)
             {
-                if (item.Id == id)
+                if (item.Id == oldId)
                 {
                     DataSource.testers[index] = tester;
                     Dal_XML_imp.SaveToXML<List<Tester>>(DataSource.testers, Dal_XML_imp.TesterPath);
@@ -148,12 +152,21 @@ namespace DAL
 
         }
 
+        /// <summary>
+        /// return the tester with this id
+        /// </summary>
+        /// <param name="testerId"></param>
+        /// <returns></returns>
         public Tester findTester(string testerId) => DataSource.testers.Find(item => item.Id == testerId);
 
 
         #endregion
 
         #region trainee
+        /// <summary>
+        /// add one trainee
+        /// </summary>
+        /// <param name="trainee"></param>
         public void AddTrainee(Trainee trainee)
         {
             if (DataSource.trainees.Find(item => item.Id == trainee.Id) != null)
@@ -163,6 +176,10 @@ namespace DAL
             traineeEvent(this, null);
         }
 
+        /// <summary>
+        /// delete one trainee
+        /// </summary>
+        /// <param name="trainee"></param>
         public void DeleteTrainee(Trainee trainee)
         {
             if (DataSource.trainees.RemoveAll(item => item.Id == trainee.Id) == 0)
@@ -172,6 +189,10 @@ namespace DAL
 
         }
 
+        /// <summary>
+        /// update one trainee.
+        /// </summary>
+        /// <param name="trainee"></param>
         public void UpdateTrainee(Trainee trainee)
         {
             int index = 0; ;
@@ -189,12 +210,17 @@ namespace DAL
             throw new Exception("failed to update, trainee with the same ID not found");
         }
 
-        public void UpdateTrainee(Trainee trainee, string id)
+        /// <summary>
+        /// update on trainee, include id update
+        /// </summary>
+        /// <param name="trainee"></param>
+        /// <param name="old_ID"></param>
+        public void UpdateTrainee(Trainee trainee, string old_ID)
         {
             int index = 0; ;
             foreach (Trainee item in DataSource.trainees)
             {
-                if (item.Id == id)
+                if (item.Id == old_ID)
                 {
                     DataSource.trainees[index] = trainee;
                     Dal_XML_imp.SaveToXML<List<Trainee>>(DataSource.trainees, Dal_XML_imp.TraineePath);
@@ -207,6 +233,10 @@ namespace DAL
 
         }
 
+        /// <summary>
+        /// return list of all the trainee
+        /// </summary>
+        /// <returns></returns>
         public List<Trainee> getAllTrainees()
         {
             if (DataSource.trainees == null) return null;
@@ -243,6 +273,11 @@ namespace DAL
 
         }
 
+        /// <summary>
+        /// return the trainee with this id
+        /// </summary>
+        /// <param name="traineeId"></param>
+        /// <returns></returns>
         public Trainee findTrainee(string traineeId) => DataSource.trainees.Find(item => item.Id == traineeId);
 
 
@@ -251,6 +286,11 @@ namespace DAL
 
         #region test
 
+        /// <summary>
+        /// return all the test by the predicate
+        /// </summary>
+        /// <param name="p"></param>
+        /// <returns></returns>
         public List<Test> GetTestList(Func<Test, bool> p)
         {
             var x = from item in DataSource.tests
@@ -261,6 +301,10 @@ namespace DAL
             return (y.Clone().ToList());
         }
 
+        /// <summary>
+        /// add new test. it also give the test new id
+        /// </summary>
+        /// <param name="test"></param>
         public void AddTest(Test test)
         {
             test.Id = Dal_XML_imp.ID_FromConfigXML().ToString("00000000");
@@ -279,6 +323,10 @@ namespace DAL
           
         }
 
+        /// <summary>
+        /// delete one test
+        /// </summary>
+        /// <param name="test"></param>
         public void DeleteTest(Test test)
         {
             foreach (Test item in DataSource.tests)
@@ -298,6 +346,10 @@ namespace DAL
 
         }
 
+        /// <summary>
+        /// update one test. test id mustn't change
+        /// </summary>
+        /// <param name="test"></param>
         public void UpdateTest(Test test)
         {
             if (test.Id == null)
@@ -319,6 +371,10 @@ namespace DAL
             throw new Exception("failed to update, test with the same ID not found");
         }
 
+        /// <summary>
+        /// return list of all the tests
+        /// </summary>
+        /// <returns></returns>
         public List<Test> getAllTests()
         {
             if (DataSource.tests == null) return null;
@@ -326,10 +382,14 @@ namespace DAL
         }
 
        
-
+        /// <summary>
+        /// return the test with the same id from the data source
+        /// </summary>
+        /// <param name="test"></param>
+        /// <returns></returns>
         public Test findTest(Test test)
         {
-            return DataSource.tests.Find(i => i.Id == test.Id);
+            return (Test)DataSource.tests.Find(i => i.Id == test.Id).Clone();
         }
 
 

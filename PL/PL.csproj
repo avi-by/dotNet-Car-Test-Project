@@ -108,7 +108,6 @@
     <Compile Include="Tests_UserControl.xaml.cs">
       <DependentUpon>Tests_UserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Tools.cs" />
     <Compile Include="Trainees_UserControl.xaml.cs">
       <DependentUpon>Trainees_UserControl.xaml</DependentUpon>
     </Compile>
