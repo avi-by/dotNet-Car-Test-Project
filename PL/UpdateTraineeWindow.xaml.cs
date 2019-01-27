@@ -39,7 +39,6 @@ namespace PL
             carTypeComboBox.ItemsSource = Enum.GetValues(typeof(CarType));
 
             birthdayDatePicker.DisplayDateStart = DateTime.Now.AddYears(-bl.getMaximumAge());
-            birthdayDatePicker.DisplayDateEnd = DateTime.Now.AddYears(-bl.getMinimumAgeOfTester());
 
             
 
