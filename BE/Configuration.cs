@@ -32,6 +32,35 @@ namespace BE
                     let iElement = i.Element("שם_ישוב").Value.Trim()
                     where !iElement.Contains("שבט(") && !iElement.Contains("איחוד(") && !iElement.Contains("מאוחד(")
                     select iElement).ToList();
+
+            for (int i=0; i<city.Count(); i++)
+                if (city[i].Contains('('))
+                {
+                    int j = 0;
+                    var size= city[i].ToString().Length;
+                    for (int k=0; k<size; k++)
+                    //while (city[i][j]!='\n')
+                    {
+                        if (city[i][j] == '(')
+                        {
+                            StringBuilder sb = new StringBuilder(city[i]);
+                            sb[j] = ')';
+                            city[i] = sb.ToString();
+                        }
+                        else if (city[i][j] == ')')
+                        {
+                            StringBuilder sb = new StringBuilder(city[i]);
+                            sb[j] = '(';
+                            city[i] = sb.ToString();
+                        }
+                        j++;
+                    }
+
+                }
+
+
+
+
             List<string> temp = new List<string>();
             foreach (var item in city)
             {
